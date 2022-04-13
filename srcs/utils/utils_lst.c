@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:20:00 by mberthet          #+#    #+#             */
-/*   Updated: 2022/04/13 16:59:51 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/04/13 18:05:50 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_maillon	*new_maillon(char *line)
 	new->next = (void *)0;
 	return (new);
 }
-		write(1, "pouet\n", 6);
+
 
 int	ft_lstclear_empty(t_maillon *lst)
 {

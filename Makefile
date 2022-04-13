@@ -31,12 +31,14 @@ OBJECTS =	$(SOURCES:.c=.o)
 all :		$(NAME)
 
 $(NAME):	$(OBJECTS)
-		@$(CC) $(CFLAGS) $(OBJECTS) -o $(NAME) && make clean
+		$(MAKE) -C ./libft
+		@$(CC) $(CFLAGS) $(OBJECTS) ./libft/libft.a -o $(NAME) && make clean
 #ajouter $(INCLUDE) pour la mlx
 		@echo "[\033[32m$(NAME) ready to use\033[0m]"
 
 
 clean:
+	$(MAKE) -C ./libft fclean
 	@$(RM) $(OBJECTS)
 	
 fclean: clean

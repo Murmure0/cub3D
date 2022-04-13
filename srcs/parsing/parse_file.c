@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:20:58 by mberthet          #+#    #+#             */
-/*   Updated: 2022/04/13 16:59:45 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/04/13 18:02:54 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,12 @@ int parse_file(t_file *file, int ac, char **av)
 	if (check_file(ac, av))
 		return (1);
 	fd = open(av[1], O_RDONLY);
-	lst_gnl_map = get_map(fd);
-	if (!lst_gnl_map)
-	{
-		close(fd);
-		return (1);
-	}
+	// lst_gnl_map = get_map(fd); //segfault D:
+	// if (!lst_gnl_map)
+	// {
+	// 	close(fd);
+	// 	return (1);
+	// }
 	close (fd);
 	return (0);
 }

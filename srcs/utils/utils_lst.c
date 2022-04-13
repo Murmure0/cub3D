@@ -66,4 +66,4 @@ int	ft_lstsize(t_maillon *lst)
 	}
 	return (i);
 }
-*/
+

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 //Test avec mon gnl, permet de renvoyer une ligne read sans le /n normalement
-
 /*
 #include "../../include/cub.h"
 

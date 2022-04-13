@@ -37,10 +37,6 @@ static int check_file(int ac, char **av)
 	close (fd);
 	return (0);
 }
-
-
-
-
 /*
 static void	init(t_maillon *tmp, t_maillon *first, char *line)
 {
@@ -184,6 +180,7 @@ int parse_file(t_file *file, int ac, char **av)
 	if (check_file(ac, av))
 		return (1);
 	fd = open(av[1], O_RDONLY);
+
 	if (fd < 0)
 		return (perror("Open"), 1);
 	if (read_file(fd, file)) //Liste chainee de toutes les lignes du file
@@ -207,7 +204,6 @@ int parse_file(t_file *file, int ac, char **av)
 	// 	close(fd);
 	// 	return (1);
 	// }
-	
 	close (fd);
 	return (0);
 }

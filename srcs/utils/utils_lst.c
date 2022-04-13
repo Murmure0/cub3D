@@ -12,6 +12,7 @@
 
 #include "../../include/cub.h"
 
+/* == FT_LSTNEW de la libft
 t_maillon	*new_maillon(char *line)
 {
 	t_maillon	*new;
@@ -23,11 +24,12 @@ t_maillon	*new_maillon(char *line)
 	new->next = (void *)0;
 	return (new);
 }
+*/
 
 
-int	ft_lstclear_empty(t_maillon *lst)
+int	ft_lstclear_empty_3d(t_list *lst)
 {
-	t_maillon	*tmp;
+	t_list	*tmp;
 
 	while (lst)
 	{
@@ -39,9 +41,9 @@ int	ft_lstclear_empty(t_maillon *lst)
 	return (1);
 }
 
-void	ft_lstclear(t_maillon *lst)
+void	ft_lstclear_3d(t_list *lst)
 {
-	t_maillon	*tmp;
+	t_list	*tmp;
 
 	while (lst)
 	{
@@ -51,6 +53,7 @@ void	ft_lstclear(t_maillon *lst)
 	}
 }
 
+/* libft doublon
 int	ft_lstsize(t_maillon *lst)
 {
 	int	i;

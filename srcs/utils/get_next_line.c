@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+//Test avec mon gnl, permet de renvoyer une ligne read sans le /n normalement
+/*
 #include "../../include/cub.h"
 
 static char	*add_c(char *line, char *new, char c)
@@ -73,3 +75,4 @@ char	*get_next_line(int fd)
 	}
 	return (line);
 }
+*/

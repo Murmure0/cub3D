@@ -18,10 +18,6 @@
 
 # define FD_MAX 1024
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
-
 char		*get_next_line(int fd);
 size_t		ft_strlen(const char *s);
 char		*ft_strdup(const char *s1);

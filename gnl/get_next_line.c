@@ -24,7 +24,10 @@ static char	*save_line(int fd, char **s, int i)
 	char	*tmp;
 	char	*line;
 
-	line = ft_substr(s[fd], 0, i + 1);
+	if (s[fd][i] == 'n')
+		i++;
+//	line = ft_substr(s[fd], 0, i + 1);
+	line = ft_substr(s[fd], 0, i); //Does not return /n from read line
 	tmp = ft_strdup(&s[fd][i + 1]);
 	free(s[fd]);
 	s[fd] = 0;

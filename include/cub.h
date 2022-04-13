@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
 #ifndef CUB_H
 # define CUB_H
 
+# include "../libft/libft.h"
+# include "../gnl/get_next_line.h"
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdio.h>
@@ -24,31 +24,40 @@
 # include <math.h>
 //# include Minilibx lib
 
-typedef struct s_wall_texture
+typedef struct s_params
 {
 	char	*no;
 	char	*so;
 	char	*we;
 	char	*ea;
-}	t_wall_t;
-
-typedef struct s_input
-{
-	char		**map;
-
-	int			ceiling; //maybe struct aswell
-	int			floor;
-	
-	t_wall_t 	wall_texture;
-}	t_input;
+	int		ceiling;
+	int		floor;
+}				t_params;
 
 typedef struct s_file
 {
-	t_input	input;
-}	t_file;
+	t_list	*map; //Liste chainee pour parser la map + struct de la libft
+	t_params param;
+}				t_file;
 
 /* --- Parsing --- */
 
 int parse_file(t_file *file, int ac, char **av);
+
+
+/* --- UTILS ---*/
+/* --- UTILS_STR ---*/
+//LIBFT
+// int 		ft_strlen(char *str);
+// int			ft_strncmp(const char *str1, const char *str2, size_t n);
+
+// --- UTILS_LST ---
+
+// t_maillon	*new_maillon(char *line);
+// int			ft_lstclear_empty(t_maillon *lst);
+// void		ft_lstclear(t_maillon *lst);
+// int			ft_lstsize(t_maillon *lst);
+
+char		*get_next_line(int fd);
 
 # endif

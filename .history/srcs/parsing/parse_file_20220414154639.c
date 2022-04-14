@@ -28,7 +28,8 @@ static int check_file(int ac, char **av)
 	return (0);
 }
 
-int	not_walled_in(t_list *map)
+/*
+int	not_walled_in()
 {
 	check_first_line();
 	check_first_and_last_char();
@@ -37,6 +38,8 @@ int	not_walled_in(t_list *map)
 		return (1);
 	return (0);
 }
+
+*/
 
 int	forbidden_char_found(t_list *map)
 {
@@ -50,8 +53,7 @@ int	forbidden_char_found(t_list *map)
 		while (tmp[++i])
 		{
 			if (tmp[i] != '0' && tmp[i] != '1' && tmp[i] != 'N'
-				&& tmp[i] != 'S' && tmp[i] != 'E'
-				&& tmp[i] != 'W' && tmp[i] != ' ')
+				&& tmp[i] != 'S' && tmp[i] != 'E' && tmp[i] != 'W')
 				return (1);
 		}
 		tmp = tmp->next;
@@ -62,9 +64,13 @@ int	forbidden_char_found(t_list *map)
 int	check_map(t_list *map)
 {
 	if (forbidden_char_found(map))
-		return (write(2, "Error\nForbidden char in map\n", 29), 1);
-	if (not_walled_in(map))
-		return (write(2, "Error\nMap not walled in\n", 25), 1);
+		return ()
+		// Eventuellement check if plus de 1 player starting position, a discuter (soit on error, soit on en garde 1 et le reste = floor)
+		//error, free, etc...
+	if (not_walled_in()) //verif les walls
+		//error
+	if (error)
+		return (1);
 	return (0);
 }
 
@@ -225,9 +231,8 @@ int parse_file(t_file *file, int ac, char **av)
  	if (read_file(fd, file))
  		return (1);
 	if (check_params(file))
-		return (1);
- 	if (check_map(file->map))
-	 	return (1);
+		return (1)
+ 	check_map(file->map);
 
 // //	map is ok
 // 	init_minilibx()

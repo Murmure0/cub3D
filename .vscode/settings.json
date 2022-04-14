@@ -1,7 +1,9 @@
 {
 	"files.associations": {
 		"locale": "c",
-		"errno.h": "c"
+		"errno.h": "c",
+		"math.h": "c",
+		"mlx.h": "c"
 	},
 	"C_Cpp.errorSquiggles": "Disabled"
 }

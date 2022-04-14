@@ -24,6 +24,7 @@
 # include <string.h>
 # include <math.h>
 # include "mlx.h"
+# include "sf s es.h"
 
 typedef struct s_params
 {

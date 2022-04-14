@@ -37,6 +37,7 @@ typedef struct s_params
 typedef struct s_file
 {
 	t_list	*map;
+	char	**scene;
 	t_params param[1];
 }				t_file;
 

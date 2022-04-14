@@ -6,7 +6,7 @@
 #    By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 11:55:53 by mberthet          #+#    #+#              #
-#    Updated: 2022/04/13 16:53:46 by mberthet         ###   ########.fr        #
+#    Updated: 2022/04/14 17:45:55 by mberthet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,13 @@ RM = rm -rf
 
 CFLAGS =	-Wall -Wextra -Werror -g -I mlx
 
-# CFLAGS += -fsanitize=address -static-libsan -g
+CFLAGS += -fsanitize=address -static-libsan -g
 
 INCLUDE =	-L. -lmlx -framework OpenGL -framework AppKit
 
 SOURCES =	srcs/main.c	\
 			srcs/parsing/parse_file.c	\
+			srcs/mlx/init.c	\
 			srcs/utils/utils_lst.c	\
 			srcs/utils/get_next_line.c	\
 			gnl/get_next_line.c
@@ -34,14 +35,13 @@ OBJECTS =	$(addprefix $(OBJ_DIR)/,$(SOURCES:.c=.o))
 all :		$(NAME)
 
 $(NAME):	$(OBJECTS)
-		$(MAKE) -C ./libft
-		@$(CC) $(CFLAGS) $(OBJECTS) ./libft/libft.a -o $(NAME)
-#ajouter $(INCLUDE) pour la mlx
+		@$(MAKE) -C ./libft
+		@$(CC) $(INCLUDE) $(CFLAGS) $(OBJECTS) ./libft/libft.a -o $(NAME)
 
 		@echo "[\033[32m$(NAME) ready to use\033[0m]"
 
 $(OBJ_DIR)/%.o : %.c
-	mkdir -p $(OBJ_DIR) $(OBJ_DIR)/srcs $(OBJ_DIR)/srcs/utils $(OBJ_DIR)/srcs/parsing $(OBJ_DIR)/gnl
+	mkdir -p $(OBJ_DIR) $(OBJ_DIR)/srcs $(OBJ_DIR)/srcs/utils $(OBJ_DIR)/srcs/parsing $(OBJ_DIR)/gnl $(OBJ_DIR)/srcs/mlx
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

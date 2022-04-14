@@ -10,10 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
+<<<<<<<<<<< main
 #ifndef CUB_H
 # define CUB_H
-
+============
+<<<<<<<<<<commit
+#ifndef CUB_E
+# define CUB_E
+============commit
 # include "../libft/libft.h"
 # include "../gnl/get_next_line.h"
 # include <fcntl.h>
@@ -23,7 +27,7 @@
 # include <errno.h>
 # include <string.h>
 # include <math.h>
-# include "mlx.h"
+//# include Minilibx lib
 
 typedef struct s_params
 {

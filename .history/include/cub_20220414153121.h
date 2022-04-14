@@ -23,7 +23,7 @@
 # include <errno.h>
 # include <string.h>
 # include <math.h>
-# include "mlx.h"
+# include Minilibx lib
 
 typedef struct s_params
 {

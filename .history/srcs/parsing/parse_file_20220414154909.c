@@ -28,7 +28,7 @@ static int check_file(int ac, char **av)
 	return (0);
 }
 
-int	not_walled_in(t_list *map)
+int	not_walled_in()
 {
 	check_first_line();
 	check_first_and_last_char();

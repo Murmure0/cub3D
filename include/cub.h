@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef CUB_H
 # define CUB_H
 
@@ -23,7 +22,7 @@
 # include <errno.h>
 # include <string.h>
 # include <math.h>
-# include "mlx.h"
+// # include "mlx.h"
 
 typedef struct s_params
 {
@@ -45,4 +44,4 @@ typedef struct s_file
 
 int 		parse_file(t_file *file, int ac, char **av);
 
-# endif
+#endif

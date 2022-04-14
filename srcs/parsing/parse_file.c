@@ -27,7 +27,7 @@ static int check_file(int ac, char **av)
 	close (fd);
 	return (0);
 }
-
+/*
 int	not_walled_in(t_list *map)
 {
 	check_first_line();
@@ -67,7 +67,7 @@ int	check_map(t_list *map)
 		return (write(2, "Error\nMap not walled in\n", 25), 1);
 	return (0);
 }
-
+*/
 int	parse_spaces(char *str)
 {
 	int i;
@@ -112,7 +112,11 @@ void fill_color(char *str, int *color)
 
 void fill_texture(char *str, char **texture)
 {
-	*texture = ft_strdup(str);
+	int i;
+
+	i = 2;
+	i += parse_spaces(str + 2);
+	*texture = ft_substr(str, i, ft_strlen(str));
 }
 
 int param_id_found(t_list *tmp, int i, t_file *file)
@@ -137,13 +141,11 @@ int param_id_found(t_list *tmp, int i, t_file *file)
 
 int	missing_param(t_params *param)
 {
-	//NOT OK
+	// FOR TESTING PURPOSES, TO DEL
 	printf("%s\n", param->no);
 	printf("%s\n", param->so);
 	printf("%s\n", param->we);
-	printf("%s\n", param->ea);
-	
-	//OK
+	printf("%s\n", param->ea);	
 	printf("%d\n", param->ceiling);
 	printf("%d\n", param->floor);
 
@@ -161,6 +163,7 @@ int	check_params(t_file *file)
 	tmp = file->map;
 	while (tmp)
 	{
+		printf("%s\n", (char *)tmp->content);
 		i = 0;
 		i += parse_spaces(tmp->content);
 		if (((char *)tmp->content)[i] == '\n')
@@ -226,10 +229,9 @@ int parse_file(t_file *file, int ac, char **av)
  		return (1);
 	if (check_params(file))
 		return (1);
- 	if (check_map(file->map))
-	 	return (1);
+ 	// if (check_map(file->map))
+	//  	return (1);
 
-// //	map is ok
 // 	init_minilibx()
 	//On retape so_long pour la minilibx pour commencer
 	//Events handler pour quiter et se deplacer sont identiques

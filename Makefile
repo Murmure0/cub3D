@@ -24,8 +24,6 @@ INCLUDE =	-L. -lmlx -framework OpenGL -framework AppKit
 
 SOURCES =	srcs/main.c	\
 			srcs/parsing/parse_file.c	\
-			srcs/utils/utils_lst.c	\
-			srcs/utils/get_next_line.c	\
 			gnl/get_next_line.c
 
 OBJ_DIR =	obj

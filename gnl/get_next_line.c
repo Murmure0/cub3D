@@ -27,7 +27,7 @@ static char	*save_line(int fd, char **s, int i)
 	if (s[fd][i] != '\n' || s[fd][0] == '\n')
 		i++;
 //	line = ft_substr(s[fd], 0, i + 1);
-	line = ft_substr(s[fd], 0, i); //Does not return /n from read line
+	line = ft_substr(s[fd], 0, i);
 	tmp = ft_strdup(&s[fd][i + 1]);
 	free(s[fd]);
 	s[fd] = 0;

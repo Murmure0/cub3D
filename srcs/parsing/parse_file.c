@@ -6,10 +6,11 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 15:15:53 by cwastche          #+#    #+#             */
-/*   Updated: 2022/04/15 14:04:51 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/04/15 15:56:32 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../include/cub.h"
 
 static int check_file(int ac, char **av)
 {
@@ -272,13 +273,6 @@ int parse_file(t_file *file, int ac, char **av)
 	//WIP pour la 3D et tourner le apt de vue
 	
 
-
-	//segfault D:
-	// if (!lst_gnl_map)
-	// {
-	// 	close(fd);
-	// 	return (1);
-	// }
-	// close (fd);
 	return (0);
 }
+

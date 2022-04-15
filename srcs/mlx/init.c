@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 17:37:44 by mberthet          #+#    #+#             */
-/*   Updated: 2022/04/14 18:07:25 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/04/15 15:44:21 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
 
 void put_ceiling_floor(t_mlx *mlx, t_file *file)
 {
-
+	(void)mlx;
+	(void)file;
 }
 
 int init_mlx(t_mlx *mlx, t_file *file)

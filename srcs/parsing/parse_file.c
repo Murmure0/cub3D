@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 15:15:53 by cwastche          #+#    #+#             */
-/*   Updated: 2022/04/15 15:56:32 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/04/15 18:52:33 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,7 +212,7 @@ int	check_params(t_file *file)
 			return(write(2, "Error\nFile not acceptable\n", 27), 1);
 	}
 	if (missing_param(file->param))
-		return(write(2, "Error\nMissing parameter\n", 27), 1); 
+		return(write(2, "Error\nMissing parameter\n", 25), 1); 
 	return (0);
 }
 
@@ -262,8 +262,8 @@ int parse_file(t_file *file, int ac, char **av)
  		return (1);
 	if (check_params(file))
 		return (1);
- 	if (check_map(file))
-		return (1);
+ 	// if (check_map(file)) //abort ici
+	// 	return (1);
 
 // 	init_minilibx()
 	//On retape so_long pour la minilibx pour commencer
@@ -275,4 +275,3 @@ int parse_file(t_file *file, int ac, char **av)
 
 	return (0);
 }
-

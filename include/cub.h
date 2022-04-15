@@ -6,12 +6,15 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:20:00 by mberthet          #+#    #+#             */
-/*   Updated: 2022/04/15 13:58:31 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/04/15 18:48:47 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
 # define CUB_H
+
+# define WIN_H 1080
+# define WIN_W 1920
 
 # include "../libft/libft.h"
 # include "../gnl/get_next_line.h"
@@ -57,9 +60,13 @@ typedef struct s_mlx
 int 		parse_file(t_file *file, int ac, char **av);
 
 /* --- MLX --- */
-
+/* -- init.c -- */
+int launch_mlx(t_mlx *mlx, t_file *file);
 int init_mlx(t_mlx *mlx, t_file *file);
 int	deal_key(int keycode, t_mlx *mlx, t_file *file);
-int	close_win(t_mlx *mlx);
+int	close_win(t_mlx *mlx, t_file *file);
+
+/* -- put_img.c -- */
+void creat_image(t_mlx *mlx, t_file *file);
 
 # endif

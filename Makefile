@@ -6,7 +6,7 @@
 #    By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 11:55:53 by mberthet          #+#    #+#              #
-#    Updated: 2022/04/15 15:44:46 by mberthet         ###   ########.fr        #
+#    Updated: 2022/04/15 18:48:48 by mberthet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ INCLUDE =	-L. -lmlx -framework OpenGL -framework AppKit
 SOURCES =	srcs/main.c	\
 			srcs/parsing/parse_file.c	\
 			srcs/mlx/init.c	\
+			srcs/mlx/put_img.c	\
 			gnl/get_next_line.c
 
 OBJ_DIR =	obj

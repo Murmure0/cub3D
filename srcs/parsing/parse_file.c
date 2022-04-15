@@ -3,15 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwastche <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 15:15:53 by cwastche          #+#    #+#             */
-/*   Updated: 2022/04/14 15:15:54 by cwastche         ###   ########.fr       */
+/*   Updated: 2022/04/15 14:04:51 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "../../include/cub.h"
 
 static int check_file(int ac, char **av)
 {
@@ -28,30 +26,62 @@ static int check_file(int ac, char **av)
 	return (0);
 }
 
-int	not_walled_in(t_list *map)
+int horizontal_wall_is_closed(char	*wall)
 {
-	check_first_line();
-	check_first_and_last_char();
-	check_last_line();
-	if (error)
+	(void)wall;
+	return (0);
+}
+
+void	convert_list_to_array(t_file *file)
+{
+	int		i;
+	int		j;
+	t_list	*tmp;
+
+	i = 0;
+	tmp = file->map;
+	while (tmp)
+	{
+		j = -1;
+		while (((char *)tmp->content)[++j])
+			file->scene[i][j] = ((char *)tmp->content)[j];
+		tmp = tmp->next;
+		i++;
+	}
+	file->scene[i] = 0;
+}
+
+int	not_walled_in(t_file *file)
+{
+	file->scene = malloc(sizeof(char *) * (ft_lstsize(file->map) + 1));
+	if (!file->scene)
+		//Malloc error
+	convert_list_to_array(file);
+	if (horizontal_wall_is_closed(file->scene[0]))
 		return (1);
+	if (horizontal_wall_is_closed(file->scene[ft_lstsize(file->map)]))
+		return (1);
+	// check_first_and_last_char(); //Too simple
+	
 	return (0);
 }
 
 int	forbidden_char_found(t_list *map)
 {
 	t_list	*tmp;
+	char	*str;
 	int		i;
 
 	tmp = map;
 	while (tmp)
 	{
 		i = -1;
-		while (tmp[++i])
+		str = (char *)tmp->content;
+		while (str[++i])
 		{
-			if (tmp[i] != '0' && tmp[i] != '1' && tmp[i] != 'N'
-				&& tmp[i] != 'S' && tmp[i] != 'E'
-				&& tmp[i] != 'W' && tmp[i] != ' ')
+			if (str[i] != '0' && str[i] != '1' && str[i] != 'N'
+				&& str[i] != 'S' && str[i] != 'E'
+				&& str[i] != 'W' && str[i] != ' ')
 				return (1);
 		}
 		tmp = tmp->next;
@@ -59,11 +89,12 @@ int	forbidden_char_found(t_list *map)
 	return (0);
 }
 
-int	check_map(t_list *map)
+int	check_map(t_file *file)
 {
-	if (forbidden_char_found(map))
+
+	if (forbidden_char_found(file->map))
 		return (write(2, "Error\nForbidden char in map\n", 29), 1);
-	if (not_walled_in(map))
+	if (not_walled_in(file))
 		return (write(2, "Error\nMap not walled in\n", 25), 1);
 	return (0);
 }
@@ -112,7 +143,13 @@ void fill_color(char *str, int *color)
 
 void fill_texture(char *str, char **texture)
 {
-	*texture = ft_strdup(str);
+	int i;
+
+	i = 2;
+	i += parse_spaces(str + 2);
+	*texture = ft_substr(str, i, ft_strlen(str));
+	// if (ft_strncmp(".xpm", *texture[ft_strlen(*texture) - 4], 4))
+	// 	return (write(2, "Error\nWrong texture extension.\n", 32), 1);
 }
 
 int param_id_found(t_list *tmp, int i, t_file *file)
@@ -137,16 +174,13 @@ int param_id_found(t_list *tmp, int i, t_file *file)
 
 int	missing_param(t_params *param)
 {
-	//NOT OK
-	printf("%s\n", param->no);
-	printf("%s\n", param->so);
-	printf("%s\n", param->we);
-	printf("%s\n", param->ea);
-	
-	//OK
-	printf("%d\n", param->ceiling);
-	printf("%d\n", param->floor);
-
+	// FOR TESTING PURPOSES, TO DEL
+	// printf("%s\n", param->no);
+	// printf("%s\n", param->so);
+	// printf("%s\n", param->we);
+	// printf("%s\n", param->ea);	
+	// printf("%d\n", param->ceiling);
+	// printf("%d\n", param->floor);
 	if (!param->no || !param->so || !param->we || !param->ea
 		|| !param->ceiling || !param->floor)
 		return (1);
@@ -161,6 +195,7 @@ int	check_params(t_file *file)
 	tmp = file->map;
 	while (tmp)
 	{
+		printf("%s\n", (char *)tmp->content);
 		i = 0;
 		i += parse_spaces(tmp->content);
 		if (((char *)tmp->content)[i] == '\n')
@@ -226,10 +261,9 @@ int parse_file(t_file *file, int ac, char **av)
  		return (1);
 	if (check_params(file))
 		return (1);
- 	if (check_map(file->map))
-	 	return (1);
+ 	if (check_map(file))
+		return (1);
 
-// //	map is ok
 // 	init_minilibx()
 	//On retape so_long pour la minilibx pour commencer
 	//Events handler pour quiter et se deplacer sont identiques

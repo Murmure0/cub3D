@@ -6,10 +6,9 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:20:00 by mberthet          #+#    #+#             */
-/*   Updated: 2022/04/14 17:53:00 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/04/15 13:58:31 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef CUB_H
 # define CUB_H
@@ -38,6 +37,7 @@ typedef struct s_params
 typedef struct s_file
 {
 	t_list	*map;
+	char	**scene;
 	t_params param[1];
 }				t_file;
 

@@ -58,6 +58,11 @@ void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
+void put_ceiling_floor(t_mlx *mlx, t_file *file)
+{
+
+}
+
 int init_mlx(t_mlx *mlx, t_file *file)
 {
 	(void)file;
@@ -67,9 +72,13 @@ int init_mlx(t_mlx *mlx, t_file *file)
 	mlx->win = mlx_new_window(mlx->init_ptr, 1920, 1080, "Cub3D");
 	if (mlx->win == NULL)
 			return (write(2, "Error\nMlx: new window init. failed.\n", 36), 1);
+
+	put_ceiling_floor(mlx, file);
 	mlx->img = mlx_new_image(mlx->init_ptr, 1920, 1080);
+
 	mlx->addr_img = mlx_get_data_addr(mlx->img, &mlx->bits_per_pixel, &mlx->line_length, &mlx->endian);
-	my_mlx_pixel_put(mlx, 5, 5, 0x00FF0000);
+
+	my_mlx_pixel_put(mlx, 0, 0, 0x00FF0000);
 	mlx_put_image_to_window(mlx->init_ptr, mlx->win, mlx->img, 0, 0);
 	mlx_hook(mlx->win, 2, 1L << 0, deal_key, mlx);
 	mlx_hook(mlx->win, 17, 1L << 17, close_win, mlx);

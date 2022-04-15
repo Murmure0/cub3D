@@ -28,7 +28,7 @@ static int check_file(int ac, char **av)
 	return (0);
 }
 
-int	not_walled_in(t_list *map)
+int	not_walled_in()
 {
 	check_first_line();
 	check_first_and_last_char();
@@ -64,7 +64,7 @@ int	check_map(t_list *map)
 	if (forbidden_char_found(map))
 		return (write(2, "Error\nForbidden char in map\n", 29), 1);
 	if (not_walled_in(map))
-		return (write(2, "Error\nMap not walled in\n", 25), 1);
+		return (write(2, "Error\nForbidden char in map\n", 29), 1);
 	return (0);
 }
 

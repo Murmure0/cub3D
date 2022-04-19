@@ -71,7 +71,21 @@ int	convert_list_to_array(t_file *file)
 
 
 
-
+int	not_walled_in(t_file *file)
+{
+	file->scene = malloc(sizeof(char *) * (ft_lstsize(file->map) + 1));
+	if (!file->scene)
+		return (write(2, "Error\nMalloc failed.\n", 22), 1);
+	if (convert_list_to_array(file))
+		return (1);
+	if (check_first_line(file->scene)
+		|| check_last_line(file->scene, ft_lstsize(file->map) - 1))
+		return (1);
+	 if (check_middle_lines(file->scene, ft_lstsize(file->map) - 1))
+	 	return (1);
+	
+	return (0);
+}
 
 int	forbidden_char_found(t_list *map)
 {

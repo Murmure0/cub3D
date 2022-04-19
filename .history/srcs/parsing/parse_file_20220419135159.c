@@ -27,18 +27,42 @@ static int check_file(int ac, char **av)
 	return (0);
 }
 
-
-
-int	check_for_newline(t_list *map)
+int check_first_line(char **wall)
 {
-	t_list *tmp;
+	int j;
 
-	tmp = map;
-	while (tmp)
+	j = -1;
+	while (wall[0][++j])
 	{
-		if (tmp->content == '\n')
+		printf("%d\n", j);
+		if (wall[0][j] == ' ')
+		{
+			printf("IN HERE\n");
+			if ((wall[0][j + 1] != '1' && wall[0][j + 1] != ' ')
+			|| (wall[1][j] != '1' && wall[1][j] != ' '))
+				return (1);
+		}
+		else if (wall[0][j] != '1')
 			return (1);
-		tmp = tmp->next;
+	}
+	return (0);
+}
+
+int check_last_line(char **wall, int i)
+{
+	int j;
+
+	j = -1;
+	while (wall[i][++j])
+	{
+		if (wall[i][j] == ' ')
+		{
+			if ((wall[i][j + 1] != '1' && wall[i][j + 1] != ' ')
+				|| (wall[i - 1][j] != '1' && wall[i - 1][j] != ' '))
+				return (1);
+		}
+		else if (wall[i][j] != '1')
+			return (1);
 	}
 	return (0);
 }
@@ -49,8 +73,7 @@ int	convert_list_to_array(t_file *file)
 	int		j;
 	t_list	*tmp;
 
-	if (check_for_newline(file->map))
-		return (1);
+	//CHECK FOR \n IN MAP
 	i = 0;
 	tmp = file->map;
 	while (tmp)
@@ -69,9 +92,58 @@ int	convert_list_to_array(t_file *file)
 	return (0);
 }
 
+int	check_around_space(char **wall, int i, int j)
+{
+	if (j > 0)
+		if ((wall[i][j - 1] != '1' && wall[i][j - 1] != ' ') //LEFT
+			return (1);
+	else if ((wall[i][j + 1] != '1' && wall[i][j + 1] != ' ') //RIGHT
+		return (1);
+	else if (wall[i + 1][j] != '1' && wall[i + 1][j] != ' ')) //DOWN
+		return (1);
+	else if (wall[i - 1][j] != '1' && wall[i - 1][j] != ' ')) //UP
+		return (1);
+	return (0);
+}
 
+int	check_middle_lines(char **wall, int max_size)
+{
+	int i;
+	int j;
+	int	l_wall;
 
+	i = 0;
+	l_wall = 0;
+	while (wall[++i] && i < max_size)
+	{
+		j = -1;
+		while (wall[i][++j])
+		{
+			if (wall[i][j] == ' ')
+				if (check_around_space(wall, i, j))
+					return (1);
+			else if (wall[i][j] != '1' && l_wall == 0)
+				return (1);
+			else if ()
+		}
+	}
+}
 
+//SPACE == EMPTY, MUST BE CLOSED BY WALLS
+int	not_walled_in(t_file *file)
+{
+	file->scene = malloc(sizeof(char *) * (ft_lstsize(file->map) + 1));
+	if (!file->scene)
+		return (write(2, "Error\nMalloc failed.\n", 22), 1);
+	convert_list_to_array(file);
+	if (check_first_line(file->scene)
+		|| check_last_line(file->scene, ft_lstsize(file->map) - 1))
+		return (1);
+	// if (check_middle_lines(file->scene, ft_lstsize(file->map) - 1))
+	// 	//error
+	
+	return (0);
+}
 
 int	forbidden_char_found(t_list *map)
 {
@@ -99,8 +171,8 @@ int	forbidden_char_found(t_list *map)
 int	check_map(t_file *file)
 {
 
-	if (ft_lstsize(file->map) < 3)
-		return (write(2, "Error\nMap too small\n", 21), 1);
+	//ADD: IF LESS THAN 3 LINES OF MAP
+	// ERROR MAP TOO SMALL
 	if (forbidden_char_found(file->map))
 		return (write(2, "Error\nForbidden char in map\n", 29), 1);
 	if (not_walled_in(file))
@@ -157,8 +229,8 @@ void fill_texture(char *str, char **texture)
 	i = 2;
 	i += parse_spaces(str + 2);
 	*texture = ft_substr(str, i, ft_strlen(str));
-	if (ft_strncmp(".xpm", *texture[ft_strlen(*texture) - 4], 4))
-		return (write(2, "Error\nWrong texture extension.\n", 32), 1);
+	// if (ft_strncmp(".xpm", *texture[ft_strlen(*texture) - 4], 4))
+	// 	return (write(2, "Error\nWrong texture extension.\n", 32), 1);
 }
 
 int param_id_found(t_list *tmp, int i, t_file *file)
@@ -183,6 +255,13 @@ int param_id_found(t_list *tmp, int i, t_file *file)
 
 int	missing_param(t_params *param)
 {
+	// FOR TESTING PURPOSES, TO DEL
+	// printf("%s\n", param->no);
+	// printf("%s\n", param->so);
+	// printf("%s\n", param->we);
+	// printf("%s\n", param->ea);	
+	// printf("%d\n", param->ceiling);
+	// printf("%d\n", param->floor);
 	if (!param->no || !param->so || !param->we || !param->ea
 		|| !param->ceiling || !param->floor)
 		return (1);
@@ -240,6 +319,12 @@ int	read_file(int fd, t_file *file)
 		}
 		ft_lstadd_back(&file->map, chain);
 	}
+	//FOR TESTING PURPOSES, TO DEL
+	// while (file->map)
+	// {
+	// 	printf("%s", file->map->content);
+	// 	file->map = file->map->next;
+	// }
 	return (0);
 }
 
@@ -256,7 +341,14 @@ int parse_file(t_file *file, int ac, char **av)
  		return (1);
 	if (check_params(file))
 		return (1);
- 	 if (check_map(file))
+ 	 if (check_map(file)) //abort ici
 	 	return (1);
+
+// 	init_minilibx()
+	//On retape so_long pour la minilibx pour commencer
+	//Events handler pour quiter et se deplacer sont identiques
+
+	//Je crois que floor + ceiling seront des pixels colores, donc utiliser put_pixel
+	//WIP pour la 3D et tourner le apt de vue
 	return (0);
 }

@@ -1,0 +1,7 @@
+LIST OF FUNCTIONS/FILES THAT HAVE BEEN TESTED
+
+parse_file.c OK, EXCEPT not_walled_in
+check_params
+
+
+ERRORS FOUND

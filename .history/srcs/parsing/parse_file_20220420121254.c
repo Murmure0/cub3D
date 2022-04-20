@@ -73,8 +73,10 @@ static int	read_file(int fd, t_file *file)
 	return (0);
 }
 
-static int	check_file(int ac, char **av)
+static int check_file(int ac, char **av)
 {
+	int	fd;
+
 	if (ac != 2)
 		return (write(2, "Error\nArgument invalid.\n", 24), 1);
 	if (ft_strncmp(".cub", &av[1][ft_strlen(av[1]) - 4], 4))
@@ -82,20 +84,20 @@ static int	check_file(int ac, char **av)
 	return (0);
 }
 
-int	parse_file(t_file *file, int ac, char **av)
+int parse_file(t_file *file, int ac, char **av)
 {
 	int	fd;
 
 	if (check_file(ac, av))
 		return (1);
-	fd = open(av[1], O_RDONLY);
-	if (fd < 0)
-		return (perror("Error\nOpen"), 1);
-	if (read_file(fd, file))
-		return (1);
+ 	fd = open(av[1], O_RDONLY);
+ 	if (fd < 0)
+ 		return (perror("Error\nOpen"), 1);
+ 	if (read_file(fd, file))
+ 		return (1);
 	if (check_params(file))
 		return (1);
-	if (check_map(file))
-		return (1);
+ 	 if (check_map(file))
+	 	return (1);
 	return (0);
 }

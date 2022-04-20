@@ -84,9 +84,9 @@ int	check_params(t_file *file)
 		else if (param_id_found(tmp, i, file))
 			tmp = tmp->next;
 		else
-			return (write(2, "Error\nFile not acceptable\n", 27), 1);
+			return(write(2, "Error\nFile not acceptable\n", 27), 1);
 	}
 	if (missing_param(file->param))
-		return (write(2, "Error\nMissing parameter\n", 25), 1);
+		return(write(2, "Error\nMissing parameter\n", 25), 1); 
 	return (0);
 }

@@ -37,6 +37,7 @@ static int	forbidden_char_found(t_list *map)
 
 static int	check_map(t_file *file)
 {
+
 	if (ft_lstsize(file->map) < 3)
 		return (write(2, "Error\nMap too small\n", 21), 1);
 	if (forbidden_char_found(file->map))
@@ -52,12 +53,12 @@ static int	read_file(int fd, t_file *file)
 	char	*line;
 
 	line = get_next_line(fd);
-	if (!line)
+	if(!line)
 		return (write(2, "Error\nEmpty file.\n", 18), 1);
 	file->map = ft_lstnew(line);
 	if (!file->map)
 		return (write(2, "Error\nMalloc failed.\n", 22), 1);
-	while (1)
+	while(1)
 	{
 		line = get_next_line(fd);
 		if (!line)
@@ -73,29 +74,36 @@ static int	read_file(int fd, t_file *file)
 	return (0);
 }
 
-static int	check_file(int ac, char **av)
+
+static int check_file(int ac, char **av)
 {
+	int	fd;
+
 	if (ac != 2)
 		return (write(2, "Error\nArgument invalid.\n", 24), 1);
 	if (ft_strncmp(".cub", &av[1][ft_strlen(av[1]) - 4], 4))
 		return (write(2, "Error\nWrong extension file.\n", 28), 1);
+	fd = open(av[1], O_RDONLY);
+	if (fd < 0)
+		return (perror("Error\nOpen"), 1);
+	close (fd);
 	return (0);
 }
 
-int	parse_file(t_file *file, int ac, char **av)
+int parse_file(t_file *file, int ac, char **av)
 {
 	int	fd;
 
 	if (check_file(ac, av))
 		return (1);
-	fd = open(av[1], O_RDONLY);
-	if (fd < 0)
-		return (perror("Error\nOpen"), 1);
-	if (read_file(fd, file))
-		return (1);
+ 	fd = open(av[1], O_RDONLY);
+ 	if (fd < 0)
+ 		return (perror("Error\nOpen"), 1);
+ 	if (read_file(fd, file))
+ 		return (1);
 	if (check_params(file))
 		return (1);
-	if (check_map(file))
-		return (1);
+ 	 if (check_map(file))
+	 	return (1);
 	return (0);
 }

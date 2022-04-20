@@ -75,6 +75,8 @@ static int	read_file(int fd, t_file *file)
 
 static int	check_file(int ac, char **av)
 {
+	int	fd;
+
 	if (ac != 2)
 		return (write(2, "Error\nArgument invalid.\n", 24), 1);
 	if (ft_strncmp(".cub", &av[1][ft_strlen(av[1]) - 4], 4))
@@ -95,7 +97,7 @@ int	parse_file(t_file *file, int ac, char **av)
 		return (1);
 	if (check_params(file))
 		return (1);
-	if (check_map(file))
+		if (check_map(file))
 		return (1);
 	return (0);
 }

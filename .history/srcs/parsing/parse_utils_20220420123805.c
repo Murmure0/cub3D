@@ -72,7 +72,7 @@ int	missing_param(t_params *param)
 
 void	free_param_chains(t_file *f, t_list *head)
 {
-	t_list	*tmp;
+	t_list *tmp;
 
 	while (f->map != head)
 	{

@@ -77,7 +77,7 @@ static int	check_around_space(char **wall, int i, int j)
 }
 
 //TOO LONG
-//OVERFLOW WHEN ONLY WALLS
+//
 static int	check_middle_lines(char **wall, int max_size)
 {
 	int i;

@@ -21,7 +21,7 @@ static void	fill_color(char *str, int *color)
 
 static void	fill_texture(char *str, char **texture)
 {
-	int	i;
+	int i;
 
 	i = 2;
 	i += parse_spaces(str + 2);
@@ -31,9 +31,9 @@ static void	fill_texture(char *str, char **texture)
 	// 	return (write(2, "Error\nWrong texture extension.\n", 32), 1);
 }
 
-static int	param_id_found(t_list *tmp, int i, t_file *file)
+static int param_id_found(t_list *tmp, int i, t_file *file)
 {
-	char	*str;
+	char *str;
 
 	str = (char *)tmp->content;
 	if (str[i] == 'C')
@@ -53,8 +53,8 @@ static int	param_id_found(t_list *tmp, int i, t_file *file)
 
 static int	map_is_found(t_file *file, t_list *tmp, int i)
 {
-	char	c;
-	char	d;
+	char c;
+	char d;
 
 	c = ((char *)tmp->content)[i];
 	d = ((char *)tmp->content)[i + 1];
@@ -68,7 +68,7 @@ int	check_params(t_file *file)
 {
 	t_list	*tmp;
 	int		i;
-
+	
 	tmp = file->map;
 	while (tmp)
 	{
@@ -84,9 +84,9 @@ int	check_params(t_file *file)
 		else if (param_id_found(tmp, i, file))
 			tmp = tmp->next;
 		else
-			return (write(2, "Error\nFile not acceptable\n", 27), 1);
+			return(write(2, "Error\nFile not acceptable\n", 27), 1);
 	}
 	if (missing_param(file->param))
-		return (write(2, "Error\nMissing parameter\n", 25), 1);
+		return(write(2, "Error\nMissing parameter\n", 25), 1); 
 	return (0);
 }

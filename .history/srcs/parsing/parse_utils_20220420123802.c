@@ -54,7 +54,7 @@ int	check_for_newline(t_list *map)
 
 int	parse_spaces(char *str)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (str[i] == 9 || (str[i] >= 11 && str[i] <= 13) || str[i] == ' ')
@@ -72,7 +72,7 @@ int	missing_param(t_params *param)
 
 void	free_param_chains(t_file *f, t_list *head)
 {
-	t_list	*tmp;
+	t_list *tmp;
 
 	while (f->map != head)
 	{

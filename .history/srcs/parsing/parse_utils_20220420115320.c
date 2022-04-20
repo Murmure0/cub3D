@@ -1,0 +1,53 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cwastche <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/20 11:52:10 by cwastche          #+#    #+#             */
+/*   Updated: 2022/04/20 11:52:12 by cwastche         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub3d.h"
+
+int	convert_list_to_array(t_file *file)
+{
+	int		i;
+	int		j;
+	t_list	*tmp;
+
+	if (check_for_newline(file->map))
+		return (1);
+	i = 0;
+	tmp = file->map;
+	while (tmp)
+	{
+		file->scene[i] = malloc(sizeof(char) * (ft_strlen(tmp->content) + 1));
+		if (!file->scene[i])
+			return (write(2, "Error\nMalloc failed.\n", 22), 1);
+		j = -1;
+		while (((char *)tmp->content)[++j])
+			file->scene[i][j] = ((char *)tmp->content)[j];
+		file->scene[i][j] = 0;
+		tmp = tmp->next;
+		i++;
+	}
+	file->scene[i] = 0;
+	return (0);
+}
+
+int	check_for_newline(t_list *map)
+{
+	t_list *tmp;
+
+	tmp = map;
+	while (tmp)
+	{
+		if (((char)tmp->content) == '\n')
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
+}

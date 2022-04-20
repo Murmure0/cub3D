@@ -56,9 +56,8 @@ typedef struct s_mlx
 
 }	t_mlx;
 /* --- PARSING --- */
-
+int	check_params(t_file *file)
 int parse_file(t_file *file, int ac, char **av);
-int	check_params(t_file *file);
 
 // check_walls
 int	not_walled_in(t_file *file);

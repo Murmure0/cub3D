@@ -27,7 +27,7 @@ static int check_file(int ac, char **av)
 	return (0);
 }
 
-static int	forbidden_char_found(t_list *map)
+int	forbidden_char_found(t_list *map)
 {
 	t_list	*tmp;
 	char	*str;
@@ -50,7 +50,7 @@ static int	forbidden_char_found(t_list *map)
 	return (0);
 }
 
-static int	check_map(t_file *file)
+int	check_map(t_file *file)
 {
 
 	if (ft_lstsize(file->map) < 3)
@@ -62,7 +62,32 @@ static int	check_map(t_file *file)
 	return (0);
 }
 
-static int	read_file(int fd, t_file *file)
+
+
+//CHECK COLOR && TEXTURE VALUES, RETURN ERROR IF BAD
+void fill_color(char *str, int *color)
+{
+	(void)str;
+	*color = 1;
+}
+
+void fill_texture(char *str, char **texture)
+{
+	int i;
+
+	i = 2;
+	i += parse_spaces(str + 2);
+	*texture = ft_substr(str, i, ft_strlen(str));
+	//Maybe ?
+	// if (ft_strncmp(".xpm", (const char)*texture[ft_strlen(*texture) - 4], 4))
+	// 	return (write(2, "Error\nWrong texture extension.\n", 32), 1);
+}
+
+
+
+
+
+int	read_file(int fd, t_file *file)
 {
 	t_list	*chain;
 	char	*line;

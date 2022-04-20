@@ -58,17 +58,13 @@ typedef struct s_mlx
 /* --- PARSING --- */
 
 int parse_file(t_file *file, int ac, char **av);
-int	check_params(t_file *file);
 
 // check_walls
 int	not_walled_in(t_file *file);
 
 // parse_utils
-int		convert_list_to_array(t_file *file);
-int		check_for_newline(t_list *map);
-int		parse_spaces(char *str);
-int		missing_param(t_params *param);
-void	free_param_chains(t_file *f, t_list *head);
+int	convert_list_to_array(t_file *file);
+
 
 /* --- MLX --- */
 /* -- init.c -- */

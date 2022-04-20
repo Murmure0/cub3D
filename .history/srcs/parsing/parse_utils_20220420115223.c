@@ -1,28 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
+/*   By: cwastche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/13 11:18:49 by mberthet          #+#    #+#             */
-/*   Updated: 2022/04/15 17:33:00 by mberthet         ###   ########.fr       */
+/*   Created: 2022/04/20 11:52:10 by cwastche          #+#    #+#             */
+/*   Updated: 2022/04/20 11:52:12 by cwastche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
-
-int	main (int ac, char **av)
-{
-	t_file file;
-	t_mlx mlx;
-
-	if (parse_file(&file, ac, av))
-		return(1);
-	if(launch_mlx(&mlx, &file))
-		return (1);
-	mlx_loop(mlx.init_ptr);
-	printf("coucou\n");
-	//system("leaks cub3d");
-	return (0);
-}

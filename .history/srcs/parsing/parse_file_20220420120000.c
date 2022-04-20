@@ -12,7 +12,7 @@
 
 #include "cub.h"
 
-static int check_file(int ac, char **av)
+static static int check_file(int ac, char **av)
 {
 	int	fd;
 

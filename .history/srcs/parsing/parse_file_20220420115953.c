@@ -27,7 +27,7 @@ static int check_file(int ac, char **av)
 	return (0);
 }
 
-static int	forbidden_char_found(t_list *map)
+int	forbidden_char_found(t_list *map)
 {
 	t_list	*tmp;
 	char	*str;

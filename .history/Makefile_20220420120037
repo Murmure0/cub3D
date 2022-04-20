@@ -28,7 +28,7 @@ SOURCES =	srcs/main.c	\
 			srcs/parsing/parse_file.c	\
 			srcs/parsing/check_walls.c \
 			srcs/parsing/check_params.c \
-			srcs/parsing/parse_utils.c \
+			srcs/parsing/parse
 			srcs/mlx/init.c	\
 			srcs/mlx/put_img.c	\
 			gnl/get_next_line.c

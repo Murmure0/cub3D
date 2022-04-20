@@ -27,7 +27,7 @@ static int check_file(int ac, char **av)
 	return (0);
 }
 
-static int	forbidden_char_found(t_list *map)
+int	forbidden_char_found(t_list *map)
 {
 	t_list	*tmp;
 	char	*str;
@@ -50,7 +50,7 @@ static int	forbidden_char_found(t_list *map)
 	return (0);
 }
 
-static int	check_map(t_file *file)
+int	check_map(t_file *file)
 {
 
 	if (ft_lstsize(file->map) < 3)
@@ -62,7 +62,17 @@ static int	check_map(t_file *file)
 	return (0);
 }
 
-static int	read_file(int fd, t_file *file)
+
+
+
+
+
+
+
+
+
+
+int	read_file(int fd, t_file *file)
 {
 	t_list	*chain;
 	char	*line;

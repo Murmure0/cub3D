@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:20:00 by mberthet          #+#    #+#             */
-/*   Updated: 2022/04/15 18:48:47 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/04/21 17:25:59 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define WIN_H 1080
 # define WIN_W 1920
+# define SCALE_MAP 16
 
 # include "../libft/libft.h"
 # include "../gnl/get_next_line.h"
@@ -44,6 +45,18 @@ typedef struct s_file
 	t_params param[1];
 }				t_file;
 
+typedef struct s_img {
+	void	*no;
+	void	*so;
+	void	*we;
+	void	*ea;
+}			t_img;
+
+typedef struct s_player{
+	int	x_pos;
+	int	y_pos;
+}	t_player;
+
 typedef struct s_mlx
 {
 	void	*init_ptr;
@@ -53,8 +66,12 @@ typedef struct s_mlx
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-
+	t_img	*img_xpm;
+	t_file	*file;
+	t_player	player[1];
 }	t_mlx;
+
+
 /* --- PARSING --- */
 
 int parse_file(t_file *file, int ac, char **av);
@@ -72,12 +89,17 @@ void	free_param_chains(t_file *f, t_list *head);
 
 /* --- MLX --- */
 /* -- init.c -- */
-int launch_mlx(t_mlx *mlx, t_file *file);
-int init_mlx(t_mlx *mlx, t_file *file);
-int	deal_key(int keycode, t_mlx *mlx, t_file *file);
-int	close_win(t_mlx *mlx, t_file *file);
+void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
+int		launch_mlx(t_mlx *mlx, t_file *file, t_img *img);
+int		init_mlx(t_mlx *mlx, t_file *file, t_img *img_xpm);
+int		close_win(t_mlx *mlx, t_file *file);
+void	free_all(t_file *file, t_mlx *mlx);
 
 /* -- put_img.c -- */
-void creat_image(t_mlx *mlx, t_file *file);
+void	creat_image(t_mlx *mlx, t_file *file, t_img *img_xpm);
+void	creat_minimap(t_mlx *mlx, t_file *file);
+
+/* -- move.c -- */
+int		deal_key(int keycode, t_mlx *mlx);
 
 # endif

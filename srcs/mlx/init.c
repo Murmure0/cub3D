@@ -6,12 +6,13 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 17:37:44 by mberthet          #+#    #+#             */
-/*   Updated: 2022/04/21 17:24:41 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/04/22 14:09:23 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
+/*WIP : ajouter ici tout ce qui doit etre free avant de quitter le programme*/
 void free_all(t_file *file, t_mlx *mlx)
 {
 	(void)file;
@@ -23,7 +24,6 @@ int	close_win(t_mlx *mlx, t_file *file)
 {
 	(void)file;
 
-	//mlx_destroy_image(mlx->init_ptr, mlx->img);
 	mlx_destroy_window(mlx->init_ptr, mlx->win);
 	free_all(file, mlx);
 	exit(0);
@@ -47,7 +47,7 @@ void	init_img(t_mlx *mlx, t_file *file, t_img *img_xpm)
 			&img_width, &img_height);
 }
 
-/*initialise la position du player dans sa structure*/
+/*Initialise la position du player dans sa structure*/
 void	init_player(t_mlx *mlx, t_file *file)
 {
 	int	x;
@@ -63,13 +63,18 @@ void	init_player(t_mlx *mlx, t_file *file)
 			file->scene[y][x] == 'W' || file->scene[y][x] == 'S')
 			{
 				mlx->player->x_pos = x;
+				mlx->player->dx_pos = (double)x;
 				mlx->player->y_pos = y;
+				mlx->player->dy_pos = (double)y;
 			}
 		}
 	}
 }
 
-/*Initialisation du pointeur mlx, de la fenetre, des xpm, de la position du player et mise en place des keyhook*/
+/*
+Initialisation du pointeur mlx, de la fenetre, des xpm, de la position du player
+et mise en place des keyhook
+*/
 int init_mlx(t_mlx *mlx, t_file *file, t_img *img_xpm)
 {
 	(void)file;
@@ -83,15 +88,28 @@ int init_mlx(t_mlx *mlx, t_file *file, t_img *img_xpm)
 	mlx->img = img_xpm;
 	init_player(mlx, file);
 	mlx->file = file;
-	mlx_hook(mlx->win, 2, 1L << 0, deal_key, mlx);
-	mlx_hook(mlx->win, 17, 1L << 17, close_win, mlx);
+
 	return (0);
 }
 
+/*Lancement de la mlx :
+Initialisation des parametres issus de la map
+
+mlx_hook permet de reperer lorsqu'un event arrive :
+- "2, 1L << 0" qd on appuit sur une touche
+- "3, 1L << 1" qd on relache une touche
+- "17, 1L << 17" qd on clique sur la croix rouge pour detruire la fenetre
+
+mlx_loop_hook permet d'actualiser l'image en temps reel en fonction des events qui ont eu lieu
+*/
 int launch_mlx(t_mlx *mlx, t_file *file, t_img *img_xpm)
 {
 	if(init_mlx(mlx, file, img_xpm))
 		return (1);
 	creat_image(mlx, file, img_xpm); //wip : voir put_img.c
+	mlx_hook(mlx->win, 2, 1L << 0, deal_press_key, mlx);
+	mlx_hook(mlx->win, 3, 1L << 1, deal_release_key, mlx);
+	mlx_hook(mlx->win, 17, 1L << 17, close_win, mlx);
+	mlx_loop_hook(mlx->init_ptr, render_next_frame, mlx);
 	return (0);
 }

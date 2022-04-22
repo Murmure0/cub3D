@@ -6,14 +6,17 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 18:44:30 by mberthet          #+#    #+#             */
-/*   Updated: 2022/04/21 17:25:02 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/04/22 14:09:47 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-/*Positionne les pixel au bon endroit x/y. Note : 0/0 en haut a gauche
-my_mlx_pixel_put(mlx, 0, 0, 0x00FF0000);*/
+/*
+Positionne les pixel au bon endroit x/y sur l'image transmise par l'adresse de l'image mlx->addr_img. 
+Note : 0/0 en haut a gauche
+my_mlx_pixel_put(mlx, 0, 0, 0x00FF0000);
+*/
 void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
 {
 	char	*dst;
@@ -42,6 +45,7 @@ int put_floor_ceiling(t_mlx *mlx, t_file *file)
 		}
 		i++;
 	}
+	//inclure la zone de mur ici
 	i = 0;
 	while (i < WIN_W)
 	{
@@ -53,11 +57,12 @@ int put_floor_ceiling(t_mlx *mlx, t_file *file)
 		}
 		i++;
 	}
-	mlx_put_image_to_window(mlx->init_ptr, mlx->win, mlx->img, 0, 0);
 	return (0);
 }
 
-/*imprime chaque carré de la minimap de taille SCALE_MAP = 16*/
+/*
+Imprime chaque carré de la minimap de taille SCALE_MAP = 16 pixel de coté
+*/
 void	print_minimap_square(t_mlx *mlx, int x, int y, int color)
 {
 	int	i;
@@ -92,20 +97,17 @@ void	creat_minimap(t_mlx *mlx, t_file *file)
 		while (file->scene[y][++x])
 		{
 			if (file->scene[y][x] == '1')
-				print_minimap_square(mlx, x, y, 0xAA000000);
+				print_minimap_square(mlx, x, y, 0x00000000);
 			else if (file->scene[y][x] == '0' || file->scene[y][x] == 'N' ||
 					file->scene[y][x] == 'E' || file->scene[y][x] == 'W' ||
 					file->scene[y][x] == 'S')
-				print_minimap_square(mlx, x, y, 0xAAFFFFFF);
+				print_minimap_square(mlx, x, y, 0x00FFFFFF);
 		}
 	}
-	my_mlx_pixel_put(mlx, mlx->player->x_pos * SCALE_MAP, mlx->player->y_pos * SCALE_MAP, 0xB22222);
-	mlx_put_image_to_window(mlx->init_ptr, mlx->win, mlx->img, 20, 20);
+	my_mlx_pixel_put(mlx, mlx->player->dx_pos * SCALE_MAP, mlx->player->dy_pos * SCALE_MAP, 0xB22222);
 }
 
-/*WIP : 
-- placer la minimap sur le fond decale une partie de l'image finale
-- trouver comment faire bouger le player dans une case entiere
+/*WIP :
 - creer un vecteur allant du player dans la direction où il doit regarder
 - creer un fuseau de vecteur qui vont evaluer tout ce qui est afficher dans notre ecran, FOV = 60 degré
 - calcul de la distance des murs avec DDA or "Digital Differential Analysis" => leur hauteur
@@ -127,4 +129,17 @@ void creat_image(t_mlx *mlx, t_file *file, t_img *img_xpm)
 
 	put_floor_ceiling(mlx, file); //wip : affichage du sol et du ciel
 	creat_minimap(mlx, file); //wip : affichage de la minimap + player
+	mlx_put_image_to_window(mlx->init_ptr, mlx->win, mlx->img, 0, 0);
+}
+
+
+/*
+lors d'un event va calculer et push la nouvelle image dans la fenetre
+*/
+int	render_next_frame(t_mlx *mlx)
+{
+	put_floor_ceiling(mlx, mlx->file); //wip : affichage du sol et du ciel
+	creat_minimap(mlx, mlx->file); //wip : affichage de la minimap + player
+	mlx_put_image_to_window(mlx->init_ptr, mlx->win, mlx->img, 0, 0);
+	return (0);
 }

@@ -6,13 +6,15 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:32:20 by mberthet          #+#    #+#             */
-/*   Updated: 2022/04/22 14:09:25 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/04/22 18:04:25 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
 /*
+Les move devront certainement etre modifiés plus tard 
+car on devra pouvoir se deplacer selon la direction du joueur
 Deplacement sur la minimap en fractionnant les carrés (de 16x16pxl) par SPEED = 0.05
 
 Deux positions pour le joueur : 
@@ -39,7 +41,7 @@ void	press_move_down(t_mlx *mlx)
 {
 	if (mlx->file->scene[(int)(mlx->player->dy_pos + SPEED)][(int)(mlx->player->dx_pos)] != '1')
 	{
-		mlx->player->up_press = 1;
+		mlx->player->down_press = 1;
 		mlx->player->dy_pos += SPEED;
 		mlx->player->y_pos = (int)mlx->player->dy_pos;
 	}
@@ -49,7 +51,7 @@ void	press_move_left(t_mlx *mlx)
 {
 	if (mlx->file->scene[(int)(mlx->player->dy_pos)][(int)(mlx->player->dx_pos - SPEED)] != '1')
 	{
-		mlx->player->up_press = 1;
+		mlx->player->left_press = 1;
 		mlx->player->dx_pos -= SPEED;
 		mlx->player->x_pos = (int)mlx->player->dx_pos;
 	}
@@ -59,7 +61,7 @@ void	press_move_right(t_mlx *mlx)
 {
 	if (mlx->file->scene[(int)(mlx->player->dy_pos)][(int)(mlx->player->dx_pos + SPEED)] != '1')
 	{
-		mlx->player->up_press = 1;
+		mlx->player->right_press = 1;
 		mlx->player->dx_pos += SPEED;
 		mlx->player->x_pos = (int)mlx->player->dx_pos;
 	}
@@ -72,6 +74,7 @@ int	deal_press_key(int keycode, t_mlx *mlx)
 	{
 		mlx_destroy_window(mlx->init_ptr, mlx->win);
 		free_all(mlx->file, mlx);
+		//system("leaks cub3d");
 		exit(0);
 	}
 	else if (keycode == 13)

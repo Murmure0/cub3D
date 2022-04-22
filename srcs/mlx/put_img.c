@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 18:44:30 by mberthet          #+#    #+#             */
-/*   Updated: 2022/04/22 14:09:47 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/04/22 17:41:09 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int put_floor_ceiling(t_mlx *mlx, t_file *file)
 		}
 		i++;
 	}
-	//inclure la zone de mur ici
+	//inclure la zone de mur ici : faire s'arreter le ciel en haut du mur et debuter le sol en bas du mur
 	i = 0;
 	while (i < WIN_W)
 	{
@@ -107,12 +107,6 @@ void	creat_minimap(t_mlx *mlx, t_file *file)
 	my_mlx_pixel_put(mlx, mlx->player->dx_pos * SCALE_MAP, mlx->player->dy_pos * SCALE_MAP, 0xB22222);
 }
 
-/*WIP :
-- creer un vecteur allant du player dans la direction où il doit regarder
-- creer un fuseau de vecteur qui vont evaluer tout ce qui est afficher dans notre ecran, FOV = 60 degré
-- calcul de la distance des murs avec DDA or "Digital Differential Analysis" => leur hauteur
-*/
-
 /*Fonctions importantes :
 	int	mlx_put_image_to_window(mlx->init_ptr, mlx->win, mlx->img, 20, 20);
 		envoie l'image dans la fenetre
@@ -132,9 +126,8 @@ void creat_image(t_mlx *mlx, t_file *file, t_img *img_xpm)
 	mlx_put_image_to_window(mlx->init_ptr, mlx->win, mlx->img, 0, 0);
 }
 
-
 /*
-lors d'un event va calculer et push la nouvelle image dans la fenetre
+Lors d'un event : va calculer et push la nouvelle image dans la fenetre
 */
 int	render_next_frame(t_mlx *mlx)
 {

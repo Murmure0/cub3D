@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:20:00 by mberthet          #+#    #+#             */
-/*   Updated: 2022/04/22 14:09:49 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/04/22 17:40:01 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@
 
 # define WIN_H 1080
 # define WIN_W 1920
-# define SCALE_MAP 16
-# define SPEED 0.05
-# define FOV 60
-# define PI 3.14159265358
+# define SCALE_MAP 16 //coté en pixel des carrés de la minimap
+# define SPEED 0.05 //deplacement sur la minimop
+# define FOV 66 //field of view : angle sur lequel on capte les infos en jeu
+
 
 typedef struct s_params
 {
@@ -48,7 +48,7 @@ typedef struct s_file
 	t_params	param[1];
 }				t_file;
 
-/*Textures initialisées par/pour la mlx*/
+/*Textures initialisées par/pour la mlx : voir init.c*/
 typedef struct s_img {
 	void		*no;
 	void		*so;
@@ -56,32 +56,60 @@ typedef struct s_img {
 	void		*ea;
 }				t_img;
 
-/*Coordonnées du joueur & etat pressé/relaché des touches (1/0)*/
+/*WIP CAMERA : reprise exacte des variables utilisees dans le tuto, surement certaines useless ou deja existantes*/
+typedef struct s_cam
+{
+	double		planeX; //plane X & planeY : the camera plane of the player
+	double		planeY;
+
+	double		cameraX; //x-coordinate in camera space
+	double		rayDirX;
+	double		rayDirY;
+	int			mapX; //which box of the map we're in
+	int			mapY;
+	double		sideDistX; //length of ray from current position to next x or y-side
+	double		sideDistY;
+	double		deltaDistX;
+	double		deltaDistY;
+	double		perpWallDist;
+	int			stepX; //what direction to step in x or y-direction (either +1 or -1)
+	int			stepY;
+	int			hit; //was there a wall hit?
+	int			side; //was a NS or a EW wall hit?
+
+	double		time; //time of current frame
+	double		oldTime; //time of previous frame
+}				t_cam;
+
+/*Coordonnées du joueur & etat pressé/relaché des touches (1/0) : voir move.c*/
 typedef struct s_player{
 	int			x_pos;
 	int			y_pos;
-	double		dx_pos;
+	double		dx_pos; //dx_pos & dy_pos : the position vector of the player
 	double		dy_pos;
+	double		dirX; //dirX & dirY : the direction of the player
+	double		dirY;
 	int			up_press;
-	int			dowm_press;
+	int			down_press;
 	int			left_press;
 	int			right_press;
 }				t_player;
 
 /*Dans de nb fonctions de la mlx on ne peut passer qu'une variable en parametre : 
-je passe dont t_mlx *mlx avec ses nombreux liens vers d'autres structures*/
+je passe donc t_mlx *mlx avec ses nombreux liens vers d'autres structures*/
 typedef struct s_mlx
 {
 	void		*init_ptr; //pointeur d'initialisation de la mlx
 	void		*win; //pointeur identifiant la fenetre dans laquelle on bosse
-	void		*img; //pointeur de l'image sur laquelle on va bosser
+	void		*img; //pointeur sur l'image sur laquelle on a/va bosser
 	char		*addr_img; // + utile : l'adresse de l'image, permet des modifications en temps reel
-	int			bits_per_pixel; //init par la mlx
-	int			line_length; //init par la mlx
-	int			endian; // = 0, init par la mlx
+	int			bits_per_pixel; //init par la mlx par mlx_get_data_addr
+	int			line_length; //idem
+	int			endian; // = 0, idem (+info : voir big-endian et little-endian)
 	t_img		*img_xpm;
 	t_file		*file;
-	t_player	player[1];
+	t_player	*player;
+	t_cam		*cam;
 }				t_mlx;
 
 
@@ -116,5 +144,8 @@ int		render_next_frame(t_mlx *mlx);
 /* -- move.c -- */
 int		deal_press_key(int keycode, t_mlx *mlx);
 int		deal_release_key(int keycode, t_mlx *mlx);
+
+/* -- camera.c -- */
+int		init_cam(t_mlx *mlx, t_file *file);
 
 # endif

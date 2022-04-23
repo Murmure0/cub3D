@@ -17,6 +17,13 @@
 static void	fill_color(char *str, int *color)  //TODO
 {
 	//COLOR RANGE: 0-255, LESS OR MORE = EXIT + CHECK IF ISDIGIT + GIVEN PARAM > max int ?
+	
+	//++str //skip C or F
+	//parse_spaces()
+	//split str, ','
+	//if != 3 -> error
+	//if values not 0-255 -> error
+	//assign value
 	(void)str;
 	*color = 1;
 }

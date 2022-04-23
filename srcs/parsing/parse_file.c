@@ -12,26 +12,35 @@
 
 #include "cub.h"
 
-static int	forbidden_char_found(t_list *map)
+static int	check_chars_used(t_list *map)
 {
 	t_list	*tmp;
 	char	*str;
 	int		i;
+	int		player_count;
 
 	tmp = map;
+	player_count = 0;
 	while (tmp)
 	{
 		i = -1;
 		str = (char *)tmp->content;
 		while (str[++i])
 		{
-			if (str[i] != '0' && str[i] != '1' && str[i] != 'N'
-				&& str[i] != 'S' && str[i] != 'E'
-				&& str[i] != 'W' && str[i] != ' ' && str[i] != '\n')
-				return (1);
+			if (str[i] == 'N' || str[i] == 'S'
+				|| str[i] == 'E' || str[i] == 'W')
+				player_count++;
+			if (str[i] != '0' && str[i] != '1' && str[i] != 'N' && str[i] != 'S'
+				&& str[i] != 'E' && str[i] != 'W'
+				&& str[i] != ' ' && str[i] != '\n')
+				return (write(2, "Error\nForbidden char in map\n", 29), 1);
 		}
 		tmp = tmp->next;
 	}
+	if (player_count > 1)
+		return (write(2, "Error\nMore than 1 player detected\n", 34), 1);
+	else if (player_count < 1)
+		return (write(2, "Error\nMissing player\n", 21), 1);
 	return (0);
 }
 
@@ -39,8 +48,8 @@ static int	check_map(t_file *file)
 {
 	if (ft_lstsize(file->map) < 3)
 		return (write(2, "Error\nMap too small\n", 21), 1);
-	if (forbidden_char_found(file->map))
-		return (write(2, "Error\nForbidden char in map\n", 29), 1);
+	if (check_chars_used(file->map))
+		return (1);
 	if (not_walled_in(file))
 		return (1);
 	return (0);

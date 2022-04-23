@@ -1,9 +1,0 @@
-LIST OF FUNCTIONS/FILES THAT HAVE BEEN TESTED
-
-parse_file.c OK, EXCEPT not_walled_in
-check_params.c OK, EXCEPT TEXTURE + COLOR FILL
-
-
-ERRORS FOUND
-
-* Multiple starting pos not c

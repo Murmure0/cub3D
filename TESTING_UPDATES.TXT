@@ -1,9 +1,9 @@
 LIST OF FUNCTIONS/FILES THAT HAVE BEEN TESTED
 
-parse_file.c OK, EXCEPT not_walled_in
+-- PARSING --
+parse_file.c OK
 check_params.c OK, EXCEPT TEXTURE + COLOR FILL
-
+check_walls.c OK - (Not walled in needs more testing)
+parse_file.c OK
 
 ERRORS FOUND
-
-* Multiple starting pos not checked

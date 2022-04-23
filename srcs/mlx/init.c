@@ -129,7 +129,7 @@ int init_mlx(t_mlx *mlx, t_file *file, t_img *img_xpm)
 	init_img(mlx, file, img_xpm);
 	mlx->img = img_xpm;
 	init_player(mlx, file);
-	init_cam(mlx, file);
+//	init_cam(mlx, file);
 	mlx->file = file;
 	return (0);
 }

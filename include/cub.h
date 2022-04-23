@@ -31,6 +31,17 @@
 # define FOV 66 //field of view : angle sur lequel on capte les infos en jeu
 
 
+typedef struct param_nb
+{
+	int		no;
+	int		so;
+	int		we;
+	int		ea;
+	int		c;
+	int		f;
+	
+}				t_p_nb;
+
 typedef struct s_params
 {
 	char		*no;
@@ -125,7 +136,7 @@ int		not_walled_in(t_file *file);
 int		convert_list_to_array(t_file *file);
 int		check_for_newline(t_list *map);
 int		parse_spaces(char *str);
-int		missing_param(t_params *param);
+int		missing_param(t_p_nb p_nb);
 void	free_param_chains(t_file *f, t_list *head);
 
 /* --- MLX --- */

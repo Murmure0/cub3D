@@ -32,8 +32,8 @@ SOURCES =	srcs/main.c	\
 			srcs/mlx/init.c	\
 			srcs/mlx/put_img.c	\
 			srcs/mlx/move.c	\
-			srcs/mlx/camera.c	\
 			gnl/get_next_line.c
+#			srcs/mlx/camera.c	\
 
 OBJ_DIR =	obj
 OBJECTS =	$(addprefix $(OBJ_DIR)/,$(SOURCES:.c=.o))

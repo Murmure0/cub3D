@@ -22,11 +22,13 @@ static int	check_around_space(char **wall, int i, int j)
 		if (wall[i][j - 1] != '1' && wall[i][j - 1] != ' ')
 			return (1);
 	len = ft_strlen(wall[i + 1]);
-	if (len >= j)
+	if (len > j)
+	{
 		if (wall[i + 1][j] != '1' && wall[i + 1][j] != ' ' && wall[i][j + 1] != 0 && wall[i][j + 1] != EOF)
 			return (1);
+	}
 	len = ft_strlen(wall[i - 1]);
-	if (len >= j)
+	if (len > j)
 		if (wall[i - 1][j] != '1' && wall[i - 1][j] != ' ' && wall[i][j + 1] != 0 && wall[i][j + 1] != EOF)
 			return (1);
 	return (0);
@@ -41,7 +43,7 @@ int	check_left_wall(char *str)
 	i = parse_spaces(str);
 	while (str[i])
 	{
-		if (str[i] != '1' && wall == 0) //&& str[i] != 0 && str[i] != '\n'
+		if (str[i] != '1' && wall == 0)
 			return (1);
 		else
 			wall = 1;
@@ -152,6 +154,5 @@ int	not_walled_in(t_file *file)
 		return (write(2, "Error\nMap not walled in\n", 25), 1);
 	 if (check_middle_lines(file->scene, ft_lstsize(file->map) - 1))
 	 	return (write(2, "Error\nMap not walled in\n", 25), 1);
-	
 	return (0);
 }

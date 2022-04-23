@@ -65,11 +65,15 @@ int	parse_spaces(char *str)
 	return (i);
 }
 
-int	missing_param(t_params *param)
+int	missing_param(t_p_nb p_nb)
 {
-	if (!param->no || !param->so || !param->we || !param->ea
-		|| !param->ceiling || !param->floor)
-		return (1);
+	int	param_count;
+
+	param_count = p_nb.c + p_nb.f + p_nb.ea + p_nb.no + p_nb.so + p_nb.we;
+	if (param_count < 6)
+		return (write(2, "Error\nMissing parameter\n", 25), 1);
+	if (param_count > 6)
+		return (write(2, "Error\nExcess parameters given\n", 25), 1);
 	return (0);
 }
 

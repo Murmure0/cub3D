@@ -14,21 +14,47 @@
 
 //CHECK COLOR && TEXTURE VALUES, RETURN ERROR IF BAD
 //RETURN INT PROB FOR ERROR MANAGEMENT, + change parsing to return errors...
-static void	fill_color(char *str, int *color)  //TODO
+
+int	check_value(char c)
 {
-	//COLOR RANGE: 0-255, LESS OR MORE = EXIT + CHECK IF ISDIGIT + GIVEN PARAM > max int ?
-	
-	//++str //skip C or F
-	//parse_spaces()
-	//split str, ','
-	//if != 3 -> error
-	//if values not 0-255 -> error
-	//assign value
-	(void)str;
-	*color = 1;
+
 }
 
-static void	fill_texture(char *str, char **texture) //TODO
+static int	fill_color(char *str, int *color)  //TODO
+{
+	int	i;
+	int	j;
+	char **tmp;
+	//COLOR RANGE: 0-255, LESS OR MORE = EXIT + CHECK IF ISDIGIT + GIVEN PARAM > max int ?
+	
+	str++;
+	i = parse_spaces(str);
+	tmp = ft_split(str + i, ',');
+	if (!tmp)
+		//return () malloc error
+	i = 0;
+	while (tmp[i])
+		i++;
+	if (i != 3)
+		// return () wrong input
+	i = -1;
+	while (tmp[++i])
+	{
+		j = -1;
+		while (tmp[i][++j])
+			if (!ft_isdigit(tmp[i][j]))
+				// error not digits
+		if (j != 3)
+			// error
+		if (ft_atoi(tmp[i] < 0 || ft_atoi(tmp[i]) > 255))
+			//error value
+	}
+	//assign value
+	// *color = 1;
+	return (0);
+}
+
+static int	fill_texture(char *str, char **texture) //TODO
 {
 	int	i;
 
@@ -37,7 +63,8 @@ static void	fill_texture(char *str, char **texture) //TODO
 	*texture = ft_substr(str, i, ft_strlen(str));
 	//Maybe ?
 	if (ft_strncmp(".xpm", &texture[0][ft_strlen(texture[0]) - 4], 4))
-		write(2, "Error\nWrong texture extension.\n", 32);
+		return (write(2, "Error\nWrong texture extension.\n", 32), 1);
+	return (0);
 }
 
 static int	param_id_found(t_list *tmp, int i, t_file *file, t_p_nb *p_nb)
@@ -104,7 +131,7 @@ int	check_params(t_file *file)
 		}
 		if (map_is_found(file, tmp, i))
 			break ;
-		else if (param_id_found(tmp, i, file, &p_nb))
+		else if (param_id_found(tmp, i, file, &p_nb)) // return to change
 			tmp = tmp->next;
 		else
 			return (write(2, "Error\nFile not acceptable\n", 27), 1);

@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:20:00 by mberthet          #+#    #+#             */
-/*   Updated: 2022/04/22 17:40:01 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/04/25 19:39:26 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ typedef struct s_player{
 	int			y_pos;
 	double		dx_pos; //dx_pos & dy_pos : the position vector of the player
 	double		dy_pos;
+	double		player_dir;
 	double		dirX; //dirX & dirY : the direction of the player
 	double		dirY;
 	int			up_press;

@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 17:37:44 by mberthet          #+#    #+#             */
-/*   Updated: 2022/04/22 17:45:55 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/04/25 19:42:24 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,23 +54,24 @@ void	init_img(t_mlx *mlx, t_file *file, t_img *img_xpm)
 }
 
 
-void init_dir(t_mlx *mlx, int x, int y)
+void init_dir(t_mlx *mlx, int x, int y, double player_dir)
 {
 	mlx->player->dirX = x;
 	mlx->player->dirY = y;
+	mlx->player->player_dir = player_dir;
 }
 
 /*Initialise la direction du player en fontion de la lettre N/S/E/W*/
 void	init_dir_player(t_mlx *mlx, t_file *file, int x, int y)
 {
 	if (file->scene[y][x] == 'N')
-		init_dir(mlx, 0, -1);
+		init_dir(mlx, 0, -1, (M_PI/2));
 	else if(file->scene[y][x] == 'E')
-		init_dir(mlx, 1, 0);
+		init_dir(mlx, 1, 0, 0);
 	else if(file->scene[y][x] == 'W')
-		init_dir(mlx, -1, 0);
+		init_dir(mlx, -1, 0, M_PI);
 	else if(file->scene[y][x] == 'S')
-		init_dir(mlx, 0, 1);
+		init_dir(mlx, 0, 1, (3 * M_PI/2));
 }
 
 /*Initialise la position du player dans sa structure*/

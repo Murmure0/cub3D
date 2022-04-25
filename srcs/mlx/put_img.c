@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 18:44:30 by mberthet          #+#    #+#             */
-/*   Updated: 2022/04/22 17:41:09 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/04/25 19:59:17 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,15 @@ void	creat_minimap(t_mlx *mlx, t_file *file)
 				print_minimap_square(mlx, x, y, 0x00FFFFFF);
 		}
 	}
+	printf("dir : %f",mlx->player->player_dir );
+	double deltaX = mlx->player->dx_pos + sin(mlx->player->player_dir) -1;
+	double deltaY = mlx->player->dy_pos + cos(mlx->player->player_dir) + 1;
+	while(file->scene[(int)(deltaY + SPEED)][(int)(deltaX + SPEED)] != '1')
+	{
+		my_mlx_pixel_put(mlx, deltaX * SCALE_MAP, deltaY * SCALE_MAP, 0x84DBF0);
+		deltaX += SPEED;
+		deltaY += SPEED;
+    }
 	my_mlx_pixel_put(mlx, mlx->player->dx_pos * SCALE_MAP, mlx->player->dy_pos * SCALE_MAP, 0xB22222);
 }
 

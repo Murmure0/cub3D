@@ -40,9 +40,10 @@ static int	fill_color(char *str, int *color)  //TODO
 				return (write(2, "Error\nForbidden char detected\n", 30), 1);
 		if (j != 3)
 			return (write(2, "Error\nWrong nb of colors\n", 25), 1);
-		if (ft_atoi(tmp[i] < 0 || ft_atoi(tmp[i]) > 255))
+		if (ft_atoi(tmp[i]) < 0 || ft_atoi(tmp[i]) > 255))
 			return (write(2, "Error\nWrong color value\n", 24), 1);
 	}
+	(void)color;
 	//assign value
 	// *color = 1;
 	return (0);

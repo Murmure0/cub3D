@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 18:44:30 by mberthet          #+#    #+#             */
-/*   Updated: 2022/04/25 19:59:17 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/04/26 11:53:40 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,73 @@ void	print_minimap_square(t_mlx *mlx, int x, int y, int color)
 	}
 }
 
+int put_ray(t_file *file, t_mlx *mlx, t_player *player)
+{
+	(void)mlx;
+	double deltaX = player->dx_pos + cos(player->player_dir);
+	//double deltaX = player->dx_pos - sin(player->player_dir);
+	double deltaY = player->dy_pos - sin(player->player_dir);
+	// double deltaY = player->dy_pos + cos(player->player_dir) + 1;
+	// while (file->scene[(int)(deltaY)][(int)(deltaX + SPEED)] != '1')
+	// {
+	// 	my_mlx_pixel_put(mlx, deltaX * SCALE_MAP, deltaY * SCALE_MAP, 0x000000);
+	// 	deltaX += SPEED;
+	// }
+
+	//printf("valeur de cos(dir) : %f, valeur de sin(dir) : %f\n", cos(player->player_dir), sin(player->player_dir));
+	if (cos(player->player_dir) < 0.000000 && sin(player->player_dir) >= 0.000000) //ouest
+	{
+		printf("bouya");
+		deltaX += 1;
+		while(file->scene[(int)deltaY][(int)(deltaX - SPEED)] != '1')
+		{
+			my_mlx_pixel_put(mlx, (deltaX) * SCALE_MAP, deltaY * SCALE_MAP, 0x84DBF0);
+			deltaX -= SPEED; // WIP : remplacer par le DDA a cet endroit
+			// deltaY -= SPEED;
+		}
+	}
+	
+	if (cos(player->player_dir) >= 0.000000 && sin(player->player_dir) <= 0.000000) //est
+	{
+		printf("bo");
+		deltaX -= 1;
+		while(file->scene[(int)deltaY][(int)(deltaX + SPEED)] != '1')
+		{
+			my_mlx_pixel_put(mlx, deltaX * SCALE_MAP, deltaY * SCALE_MAP, 0x84DBF0);
+			deltaX += SPEED; // WIP : remplacer par le DDA a cet endroit
+			// deltaY += SPEED;
+		}
+	}	
+
+	if (cos(player->player_dir) <= 0.000000 && sin(player->player_dir) < 0.000000) //sud
+	{
+		printf("bou");
+		deltaY -= 1;
+		while(file->scene[(int)(deltaY + SPEED)][(int)(deltaX)] != '1')
+		{
+			my_mlx_pixel_put(mlx, deltaX * SCALE_MAP, deltaY * SCALE_MAP, 0x84DBF0);
+			//deltaX -= SPEED; // WIP : remplacer par le DDA a cet endroit
+			deltaY += SPEED;
+		}
+	}
+
+	if (cos(player->player_dir) >= 0 && sin(player->player_dir) > 0) //nord
+	{
+		printf("bouy");
+		deltaY += 1;
+		while(file->scene[(int)(deltaY - SPEED)][(int)(deltaX)] != '1')
+		{
+			my_mlx_pixel_put(mlx, deltaX * SCALE_MAP, deltaY * SCALE_MAP, 0x84DBF0);
+			//deltaX += SPEED; // WIP : remplacer par le DDA a cet endroit
+			deltaY -= SPEED;
+		}
+	}
+
+
+	
+	return (0);
+}
+
 /*Parcourt la map parsée dans scene, imprime la minimap en fct des 1 et des 0*/
 void	creat_minimap(t_mlx *mlx, t_file *file)
 {
@@ -104,16 +171,9 @@ void	creat_minimap(t_mlx *mlx, t_file *file)
 				print_minimap_square(mlx, x, y, 0x00FFFFFF);
 		}
 	}
-	printf("dir : %f",mlx->player->player_dir );
-	double deltaX = mlx->player->dx_pos + sin(mlx->player->player_dir) -1;
-	double deltaY = mlx->player->dy_pos + cos(mlx->player->player_dir) + 1;
-	while(file->scene[(int)(deltaY + SPEED)][(int)(deltaX + SPEED)] != '1')
-	{
-		my_mlx_pixel_put(mlx, deltaX * SCALE_MAP, deltaY * SCALE_MAP, 0x84DBF0);
-		deltaX += SPEED;
-		deltaY += SPEED;
-    }
-	my_mlx_pixel_put(mlx, mlx->player->dx_pos * SCALE_MAP, mlx->player->dy_pos * SCALE_MAP, 0xB22222);
+	put_ray(file, mlx, mlx->player);
+	
+	my_mlx_pixel_put(mlx, mlx->player->dx_pos * SCALE_MAP, mlx->player->dy_pos * SCALE_MAP, 0xB22222); //joueur
 }
 
 /*Fonctions importantes :

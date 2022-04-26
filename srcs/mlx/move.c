@@ -6,15 +6,15 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:32:20 by mberthet          #+#    #+#             */
-/*   Updated: 2022/04/22 18:04:25 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/04/26 17:36:51 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
 /*
-Les move devront certainement etre modifiés plus tard 
-car on devra pouvoir se deplacer selon la direction du joueur
+Les move seront a modifier en fonction de la direction vers lequel le player regarde
+
 Deplacement sur la minimap en fractionnant les carrés (de 16x16pxl) par SPEED = 0.05
 
 Deux positions pour le joueur : 
@@ -22,52 +22,100 @@ Deux positions pour le joueur :
 - une en double (dy_pos/dx_pos) pour se deplacer dans le carré de la minimap : sinon on saute de carré en carré
 Le cast en int donne toujours un arrondis vers le bas & permet de passer les valeurs dans le tableau
 
-Rappel : x/y à 0/0 en haut a gauche de la fenetre
-Axe x : droite : + valeur // gauche : - valeur
-Axe y : descendre : + valeur // monter : - valeur 
+Rappel :
+ x/y à 0/0 en haut a gauche de la fenetre
+Axe x /cos : droite (est): + valeur // gauche (ouest): - valeur
+Axe y /sin: descendre (sud): + valeur // monter (nord): - valeur 
 */
-
 void	press_move_up(t_mlx *mlx)
 {
-	if (mlx->file->scene[(int)(mlx->player->dy_pos - SPEED)][(int)(mlx->player->dx_pos)] != '1')
+
+	double	dirY;
+	double	dirX;
+	double	new_dx_pos;
+	double	new_dy_pos;
+
+	dirX = cos(mlx->player->player_dir);
+	dirY = sin(mlx->player->player_dir);
+	new_dx_pos = mlx->player->dx_pos + dirX * SPEED;
+	new_dy_pos = mlx->player->dy_pos - dirY * SPEED;
+	if (mlx->file->scene[(int)(new_dy_pos - SPEED)][(int)(new_dx_pos + SPEED)] != '1')
 	{
-		mlx->player->up_press = 1;
-		mlx->player->dy_pos -= SPEED;
-		mlx->player->y_pos = (int)mlx->player->dy_pos;
+		mlx->player->dx_pos = new_dx_pos;
+		mlx->player->dy_pos = new_dy_pos;
 	}
 }
 
 void	press_move_down(t_mlx *mlx)
 {
-	if (mlx->file->scene[(int)(mlx->player->dy_pos + SPEED)][(int)(mlx->player->dx_pos)] != '1')
+	double	dirY;
+	double	dirX;
+	double	new_dx_pos;
+	double	new_dy_pos;
+
+	dirX = cos(mlx->player->player_dir);
+	dirY = sin(mlx->player->player_dir);
+	new_dx_pos = mlx->player->dx_pos - dirX * SPEED;
+	new_dy_pos = mlx->player->dy_pos + dirY * SPEED;
+	if (mlx->file->scene[(int)(new_dy_pos + SPEED)][(int)(new_dx_pos + SPEED)] != '1')
 	{
-		mlx->player->down_press = 1;
-		mlx->player->dy_pos += SPEED;
-		mlx->player->y_pos = (int)mlx->player->dy_pos;
+		mlx->player->dx_pos = new_dx_pos;
+		mlx->player->dy_pos = new_dy_pos;
 	}
 }
 
 void	press_move_left(t_mlx *mlx)
 {
-	if (mlx->file->scene[(int)(mlx->player->dy_pos)][(int)(mlx->player->dx_pos - SPEED)] != '1')
+	double	dirY;
+	double	dirX;
+	double	new_dx_pos;
+	double	new_dy_pos;
+
+	dirX = cos(mlx->player->player_dir + (M_PI/2));
+	dirY = sin(mlx->player->player_dir - (M_PI/2));
+	new_dx_pos = mlx->player->dx_pos + dirX * SPEED;
+	new_dy_pos = mlx->player->dy_pos + dirY * SPEED;
+	if (mlx->file->scene[(int)(new_dy_pos + SPEED)][(int)(new_dx_pos - SPEED)] != '1')
 	{
-		mlx->player->left_press = 1;
-		mlx->player->dx_pos -= SPEED;
-		mlx->player->x_pos = (int)mlx->player->dx_pos;
+		mlx->player->dx_pos = new_dx_pos;
+		mlx->player->dy_pos = new_dy_pos;
 	}
 }
 
 void	press_move_right(t_mlx *mlx)
 {
-	if (mlx->file->scene[(int)(mlx->player->dy_pos)][(int)(mlx->player->dx_pos + SPEED)] != '1')
+	double	dirY;
+	double	dirX;
+	double	new_dx_pos;
+	double	new_dy_pos;
+
+	dirX = cos(mlx->player->player_dir - (M_PI/2)) ;
+	dirY = sin(mlx->player->player_dir + (M_PI/2)) ;
+	new_dx_pos = mlx->player->dx_pos + dirX * SPEED;
+	new_dy_pos = mlx->player->dy_pos + dirY * SPEED;
+	if (mlx->file->scene[(int)(new_dy_pos + SPEED)][(int)(new_dx_pos + SPEED)] != '1')
 	{
-		mlx->player->right_press = 1;
-		mlx->player->dx_pos += SPEED;
-		mlx->player->x_pos = (int)mlx->player->dx_pos;
+		mlx->player->dx_pos = new_dx_pos;
+		mlx->player->dy_pos = new_dy_pos;
 	}
 }
 
-/*WIP : trouver comment prendre en compte l'angle de vu et comment tourner*/
+void	press_turn_left(t_mlx *mlx)
+{
+	mlx->player->player_dir += SPEED;
+	if (mlx->player->player_dir < 0) // on reinitialise la position apres un tour complet
+		mlx->player->player_dir += 2 * M_PI;
+}
+
+void	press_turn_right(t_mlx *mlx)
+{
+	mlx->player->player_dir -= SPEED;
+	if (mlx->player->player_dir > 2 * M_PI) //idem
+		mlx->player->player_dir -= 2 * M_PI;
+}
+
+/*WIP : trouver comment prendre en compte l'appuyage de la touche pour que ce soit plus smooth dans les deplacements
+WIP : pivoter le personnage*/
 int	deal_press_key(int keycode, t_mlx *mlx)
 {
 	if (keycode == 53)
@@ -85,10 +133,10 @@ int	deal_press_key(int keycode, t_mlx *mlx)
 		press_move_down(mlx);
 	else if (keycode == 2)
 		press_move_right(mlx);
-	// else if (keycode == 123)
-	// 	press_turn_left(mlx, file);
-	// else if (keycode == 124)
-	// 	press_turn_right(mlx, file);
+	else if (keycode == 123)
+		press_turn_left(mlx);
+	else if (keycode == 124)
+		press_turn_right(mlx);
 	return (0);
 }
 
@@ -96,8 +144,6 @@ int	deal_press_key(int keycode, t_mlx *mlx)
 Actualise la variable mlx->player->(direction)_press, qui indique si on est en train de presser une touche : 
 au moment de relacher la touche la variable est remise a 0,
 elle passe à 1 dans la fonction deal_press_key lorsque la touche est pressée
-
-WIP : va permettre d'evaluer le temps où la touche a ete pressée pour des calculs futurs de distance/d'angle parcouru
 */
 int	deal_release_key(int keycode, t_mlx *mlx)
 {

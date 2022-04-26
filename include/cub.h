@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:20:00 by mberthet          #+#    #+#             */
-/*   Updated: 2022/04/25 19:39:26 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/04/26 14:12:55 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ int		render_next_frame(t_mlx *mlx);
 
 /* -- move.c -- */
 int		deal_press_key(int keycode, t_mlx *mlx);
+
 int		deal_release_key(int keycode, t_mlx *mlx);
 
 /* -- camera.c -- */

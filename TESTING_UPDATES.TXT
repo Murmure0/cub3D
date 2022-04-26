@@ -6,4 +6,6 @@ check_params.c OK, EXCEPT TEXTURE + COLOR FILL
 check_walls.c OK - (Not walled in needs more testing)
 parse_file.c OK
 
+- les tabs en dehors de la map (qd elle est fermée) sont detectees comme des caracteres forbiden : c'est ok ?
+
 ERRORS FOUND

@@ -12,10 +12,12 @@
 
 #include "cub.h"
 
-//CHECK COLOR && TEXTURE VALUES, RETURN ERROR IF BAD
-//RETURN INT PROB FOR ERROR MANAGEMENT, + change parsing to return errors...
+int	create_trgb(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
+}
 
-static int	fill_color(char *str, int *color)  //TODO
+static int	fill_color(char *str, int *color)
 {
 	int	i;
 	int	j;
@@ -29,9 +31,8 @@ static int	fill_color(char *str, int *color)  //TODO
 	i = 0;
 	while (tmp[i])
 		i++;
-	// if (i != 3)
-	if (!i || i > 3) //modif : une couleur peut etre identifiée par - de 3 digit
-		return (write(2, "Error\nWrong color input\n", 24), 1);
+	if (i != 3)
+		return (write(2, "Error\nWrong nb of colors\n", 25), 1);
 	i = -1;
 	while (tmp[++i])
 	{
@@ -39,15 +40,12 @@ static int	fill_color(char *str, int *color)  //TODO
 		while (tmp[i][++j])
 			if (!ft_isdigit(tmp[i][j]))
 				return (write(2, "Error\nForbidden char detected\n", 30), 1);
-		// if (j !=  3)
-		if (!j || j > 3) //modif
-			return (write(2, "Error\nWrong nb of colors\n", 25), 1);
 		if (ft_atoi(tmp[i]) < 0 || ft_atoi(tmp[i]) > 255)
 			return (write(2, "Error\nWrong color value\n", 24), 1);
 	}
 	(void)color;
-	//assign value
-	// *color = 1;
+	*color = create_trgb(0, ft_atoi(tmp[0]), ft_atoi(tmp[1]), ft_atoi(tmp[2]));
+	free(tmp);
 	return (0);
 }
 
@@ -69,8 +67,7 @@ static int	param_id_found(t_list *tmp, int i, t_file *file, t_p_nb *p_nb)
 	char	*str;
 
 	str = (char *)tmp->content;
-	line = tmp->content; // modif pour transmettre la bonne ligne dans fill_color et fill_texture
-	// line = (char *)file->map->content;
+	line = tmp->content;
 	if (str[i] == 'C')
 		return (p_nb->c++, fill_color(line, &file->param->ceiling));
 	else if (str[i] == 'F')
@@ -128,8 +125,7 @@ int	check_params(t_file *file)
 		}
 		else if (map_is_found(file, tmp, i))
 			break ;
-		//else if (param_id_found(tmp, i, file, &p_nb)) // return to change
-		else if (!param_id_found(tmp, i, file, &p_nb)) // modif
+		else if (!param_id_found(tmp, i, file, &p_nb))
 			tmp = tmp->next;
 		else
 			return (1);

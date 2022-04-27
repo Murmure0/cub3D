@@ -12,24 +12,31 @@
 
 #include "cub.h"
 
+int	is_space(char c)
+{
+	if (c == 9 || (c >= 11 && c <= 13) || c == ' ')
+		return (1);
+	return (0);
+}
+
 static int	check_around_space(char **wall, int i, int j)
 {
 	int len;
 
-	if (wall[i][j + 1] != '1' && wall[i][j + 1] != ' ' && wall[i][j + 1] != 0 && wall[i][j + 1] != EOF)
+	if (wall[i][j + 1] != '1' && !is_space(wall[i][j + 1]) && wall[i][j + 1] != 0 && wall[i][j + 1] != EOF)
 		return (1);
 	if (j > 0)
-		if (wall[i][j - 1] != '1' && wall[i][j - 1] != ' ')
+		if (wall[i][j - 1] != '1' && !is_space(wall[i][j - 1]))
 			return (1);
 	len = ft_strlen(wall[i + 1]);
 	if (len > j)
 	{
-		if (wall[i + 1][j] != '1' && wall[i + 1][j] != ' ' && wall[i][j + 1] != 0 && wall[i][j + 1] != EOF)
+		if (wall[i + 1][j] != '1' && !is_space(wall[i + 1][j]) && wall[i][j + 1] != 0 && wall[i][j + 1] != EOF)
 			return (1);
 	}
 	len = ft_strlen(wall[i - 1]);
 	if (len > j)
-		if (wall[i - 1][j] != '1' && wall[i - 1][j] != ' ' && wall[i][j + 1] != 0 && wall[i][j + 1] != EOF)
+		if (wall[i - 1][j] != '1' && !is_space(wall[i - 1][j]) && wall[i][j + 1] != 0 && wall[i][j + 1] != EOF)
 			return (1);
 	return (0);
 }
@@ -103,11 +110,11 @@ static int check_last_line(char **wall, int i)
 	{
 		if (wall[i][j] == ' ')
 		{
-			if (wall[i][j + 1] != '1' && wall[i][j + 1] != ' '
+			if (wall[i][j + 1] != '1' && !is_space(wall[i][j + 1])
 				&& wall[i][j + 1] != 0 && wall[i][j + 1] != EOF)
 				return (1);
 			if (len >=j)
-				if 	(wall[i - 1][j] != '1' && wall[i - 1][j] != ' '
+				if 	(wall[i - 1][j] != '1' && !is_space(wall[i - 1][j])
 					&& wall[i - 1][j] != 0 && wall[i - 1][j] != EOF)
 					return (1);
 		}
@@ -128,11 +135,11 @@ static int check_first_line(char **wall)
 	{
 		if (wall[0][j] == ' ')
 		{
-			if (wall[0][j + 1] != '1' && wall[0][j + 1] != ' '
+			if (wall[0][j + 1] != '1' && !is_space(wall[0][j + 1])
 				&& wall[0][j + 1] != 0 && wall[0][j + 1] != EOF)
 				return (1);
 			if (len >= j)
-				if (wall[1][j] != '1' && wall[1][j] != ' '
+				if (wall[1][j] != '1' && !is_space(wall[1][j])
 					&& wall[1][j] != 0 && wall[1][j] != EOF)
 					return (1);
 		}

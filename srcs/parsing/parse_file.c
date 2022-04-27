@@ -32,7 +32,7 @@ static int	check_chars_used(t_list *map)
 				player_count++;
 			if (str[i] != '0' && str[i] != '1' && str[i] != 'N' && str[i] != 'S'
 				&& str[i] != 'E' && str[i] != 'W'
-				&& str[i] != ' ' && str[i] != '\n')
+				&& !is_space(str[i]) && str[i] != '\n')
 				return (write(2, "Error\nForbidden char in map\n", 29), 1);
 		}
 		tmp = tmp->next;

@@ -131,6 +131,7 @@ int		parse_file(t_file *file, int ac, char **av);
 int		check_params(t_file *file);
 
 int	is_space(char c);
+int	trim_spaces(char **str);
 
 // check_walls
 int		not_walled_in(t_file *file);

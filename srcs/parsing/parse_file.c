@@ -91,6 +91,120 @@ static int	check_file(int ac, char **av)
 	return (0);
 }
 
+char	*trim(char *str)
+{
+	char	*cpy;
+	size_t	len;
+	size_t	i;
+	size_t	j;
+
+	if (str == NULL)
+		return (NULL);
+	j = 0;
+	while (str[j] && is_space(str[j]))
+		j++;
+	len = ft_strlen(str);
+	while (is_space(str[len - 1]) && len > j)
+		len--;
+	cpy = malloc(sizeof(*str) * (len - j + 1));
+	if (!cpy)
+		return (cpy);
+	i = 0;
+	while (j < len)
+		cpy[i++] = str[j++];
+	cpy[i] = 0;
+	return (cpy);
+}
+
+int	check_for_colors(t_list *head)
+{
+	int		i;
+	int		ret;
+	char	*str;
+	char	**tmp;
+
+	i = 0;
+	ret = 0;
+	// str = head->content;
+	// i += parse_spaces(str);
+	str = trim(head->content);
+	printf("str = %s\n", str);
+	if (str[i] == 'C' || str[i] == 'F')
+	{
+		// tmp = ft_split(str + i, ',');
+		tmp = ft_split(str, ',');
+		// trim_spaces(tmp);
+		i = 0;
+		while (tmp[i])
+			i++;
+		printf("i = %d\n", i);
+		if (i < 3)
+			ret = 1;
+		while (*tmp)
+			free(*tmp++);
+		// free(tmp);
+	}
+	return (ret);
+}
+
+void	param_join(t_file *file)
+{
+	t_list	*tmp;
+	t_list	*head;
+	char	*str;
+	char	*cpy;
+	int		i;
+
+	tmp = file->map;
+	while (tmp)
+	{
+		i = 0;
+		str = tmp->content;
+		i += parse_spaces(str);
+		if (str[i] == '\n')
+		{
+			tmp = tmp->next;
+			continue ;
+		}
+		else if (((str[i] == '0' || str[i] == '1') && !check_for_colors(head)) || (str[i] == 'N' && str[i + 1] != 'O') 
+			|| (str[i] == 'S' && str[i + 1] != 'O') || (str[i] == 'E' && str[i + 1] != 'A') 
+			|| (str[i] == 'W' && str[i + 1] != 'E'))
+		{
+			head = tmp;
+			tmp = tmp->next;
+		}
+		else if (str[i] == 'C'|| str[i] == 'F' || (str[i] == 'N' && str[i + 1] == 'O')
+			|| (str[i] == 'S' && str[i + 1] == 'O') || (str[i] == 'E' && str[i + 1] == 'A')
+			|| (str[i] == 'W' && str[i + 1] == 'E'))
+		{
+			head = tmp;
+			tmp = tmp->next;
+		}
+		else
+		{
+			cpy = ft_strjoin(head->content, tmp->content);
+			free(head->content);
+			head->content = cpy;
+			head->next = tmp->next; // if \n in between lost memory
+			ft_lstdelone(tmp, free);
+			tmp = head->next;
+			// printf("LAST HEAD: %s\n", head->content);
+		}
+	}
+}
+
+void	print_map(t_list *map) //TODEL
+{
+	t_list *tmp;
+
+	tmp = map;
+	while (tmp)
+	{
+		printf("%s\n", tmp->content);
+		tmp = tmp->next;
+	}
+}
+
 int	parse_file(t_file *file, int ac, char **av)
 {
 	int	fd;
@@ -102,6 +216,8 @@ int	parse_file(t_file *file, int ac, char **av)
 		return (perror("Error\nOpen"), 1);
 	if (read_file(fd, file))
 		return (1);
+	param_join(file);
+	print_map(file->map); //TODEL
 	if (check_params(file))
 		return (1);
 	if (check_map(file))

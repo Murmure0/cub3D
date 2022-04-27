@@ -17,6 +17,34 @@ int	create_trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
+int	trim_spaces(char **str)
+{
+	int		i;
+	int		j;
+	int		k;
+	int		len;
+	char	*tmp;
+
+	i = -1;
+	while (str[++i])
+	{
+		j = parse_spaces(str[i]);
+		len = ft_strlen(str[i]);
+		while (len && is_space(str[i][len - 1]))
+			len--;
+		tmp = malloc(sizeof(char) * (len - j + 1));
+		if (!tmp)
+			return (write(2, "Error\nMalloc failed\n", 20), 1);
+		k = 0;
+		while (j < len)
+			tmp[k++] = str[i][j++];
+		tmp[k] = 0;
+		free(str[i]);
+		str[i] = tmp;
+	}
+	return (0);
+}
+
 static int	fill_color(char *str, int *color)
 {
 	int	i;
@@ -28,6 +56,8 @@ static int	fill_color(char *str, int *color)
 	tmp = ft_split(str + i, ',');
 	if (!tmp)
 		return (write(2, "Error\nMalloc failed\n", 20), 1);
+	if (trim_spaces(tmp))
+			return (1);
 	i = 0;
 	while (tmp[i])
 		i++;

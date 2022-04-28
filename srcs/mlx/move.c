@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:32:20 by mberthet          #+#    #+#             */
-/*   Updated: 2022/04/26 17:36:51 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/04/27 13:19:30 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,7 @@ void	press_turn_right(t_mlx *mlx)
 		mlx->player->player_dir -= 2 * M_PI;
 }
 
-/*WIP : trouver comment prendre en compte l'appuyage de la touche pour que ce soit plus smooth dans les deplacements
-WIP : pivoter le personnage*/
+/*WIP : trouver comment prendre en compte l'appuyage de la touche pour que ce soit plus smooth dans les deplacements*/
 int	deal_press_key(int keycode, t_mlx *mlx)
 {
 	if (keycode == 53)
@@ -141,7 +140,7 @@ int	deal_press_key(int keycode, t_mlx *mlx)
 }
 
 /*
-Actualise la variable mlx->player->(direction)_press, qui indique si on est en train de presser une touche : 
+WIP : Actualise la variable mlx->player->(direction)_press, qui indique si on est en train de presser une touche : 
 au moment de relacher la touche la variable est remise a 0,
 elle passe à 1 dans la fonction deal_press_key lorsque la touche est pressée
 */

@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:20:00 by mberthet          #+#    #+#             */
-/*   Updated: 2022/04/26 14:12:55 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/04/27 14:49:46 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,31 +67,6 @@ typedef struct s_img {
 	void		*ea;
 }				t_img;
 
-/*WIP CAMERA : reprise exacte des variables utilisees dans le tuto, surement certaines useless ou deja existantes*/
-typedef struct s_cam
-{
-	double		planeX; //plane X & planeY : the camera plane of the player
-	double		planeY;
-
-	double		cameraX; //x-coordinate in camera space
-	double		rayDirX;
-	double		rayDirY;
-	int			mapX; //which box of the map we're in
-	int			mapY;
-	double		sideDistX; //length of ray from current position to next x or y-side
-	double		sideDistY;
-	double		deltaDistX;
-	double		deltaDistY;
-	double		perpWallDist;
-	int			stepX; //what direction to step in x or y-direction (either +1 or -1)
-	int			stepY;
-	int			hit; //was there a wall hit?
-	int			side; //was a NS or a EW wall hit?
-
-	double		time; //time of current frame
-	double		oldTime; //time of previous frame
-}				t_cam;
-
 /*Coordonnées du joueur & etat pressé/relaché des touches (1/0) : voir move.c*/
 typedef struct s_player{
 	int			x_pos;
@@ -121,7 +96,6 @@ typedef struct s_mlx
 	t_img		*img_xpm;
 	t_file		*file;
 	t_player	*player;
-	t_cam		*cam;
 }				t_mlx;
 
 
@@ -130,7 +104,7 @@ typedef struct s_mlx
 int		parse_file(t_file *file, int ac, char **av);
 int		check_params(t_file *file);
 
-int	is_space(char c);
+int		is_space(char c);
 
 // check_walls
 int		not_walled_in(t_file *file);
@@ -153,14 +127,13 @@ void	free_all(t_file *file, t_mlx *mlx);
 /* -- put_img.c -- */
 void	creat_image(t_mlx *mlx, t_file *file, t_img *img_xpm);
 void	creat_minimap(t_mlx *mlx, t_file *file);
-int		render_next_frame(t_mlx *mlx);
+int		render_next_frame(void *mlx);
 
 /* -- move.c -- */
 int		deal_press_key(int keycode, t_mlx *mlx);
-
 int		deal_release_key(int keycode, t_mlx *mlx);
 
-/* -- camera.c -- */
-int		init_cam(t_mlx *mlx, t_file *file);
+/* -- raytracing.c -- */
+int		put_ray(t_file *file, t_mlx *mlx, t_player *player);
 
 # endif

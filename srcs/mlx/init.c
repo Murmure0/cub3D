@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 17:37:44 by mberthet          #+#    #+#             */
-/*   Updated: 2022/04/26 16:58:41 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/04/28 10:24:07 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void free_all(t_file *file, t_mlx *mlx)
 		free(mlx->init_ptr);
 	if (mlx->player)
 		free(mlx->player);
-	if (mlx->cam)
-		free(mlx->cam);
 }
 
 int	close_win(t_mlx *mlx, t_file *file)
@@ -106,9 +104,6 @@ et des param de la camera (voir camera.c)
 */
 int init_mlx(t_mlx *mlx, t_file *file, t_img *img_xpm)
 {
-	mlx->cam = malloc((sizeof(t_cam)));
-	if (!mlx->cam)
-		return (1);
 	mlx->player = malloc(sizeof(t_player));
 	if (!mlx->player)
 	{
@@ -158,7 +153,6 @@ int launch_mlx(t_mlx *mlx, t_file *file, t_img *img_xpm)
 }
 
 /*WIP :
-- creer un vecteur partant du player dans la direction où il doit regarder
 - creer un fuseau de vecteur qui vont evaluer tout ce qui est afficher dans notre ecran, FOV = 60 degré
 - calcul de la distance des murs avec DDA or "Digital Differential Analysis" => leur hauteur
 */

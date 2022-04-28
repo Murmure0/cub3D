@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 18:44:30 by mberthet          #+#    #+#             */
-/*   Updated: 2022/04/26 17:36:53 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/04/28 10:23:19 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int put_floor_ceiling(t_mlx *mlx, t_file *file)
 		j = 0;
 		while (j < WIN_H/2)
 		{
-			my_mlx_pixel_put(mlx, i, j, 0x00C0BBFF);
+			my_mlx_pixel_put(mlx, i, j, file->param->ceiling);
 			j++;
 		}
 		i++;
@@ -52,7 +52,7 @@ int put_floor_ceiling(t_mlx *mlx, t_file *file)
 		j = WIN_H/2;
 		while (j < WIN_H)
 		{
-			my_mlx_pixel_put(mlx, i, j, 0x00EEDDCE);
+			my_mlx_pixel_put(mlx, i, j, file->param->floor);
 			j++;
 		}
 		i++;
@@ -84,60 +84,7 @@ void	print_minimap_square(t_mlx *mlx, int x, int y, int color)
 	}
 }
 
-/*Place le vecteur dans la direction initiale du joueur
-WIP : ne sait pas encore s'adapter a la rotation du joueur
-HARDCODE : prevoir une opti*/
 
-int put_ray(t_file *file, t_mlx *mlx, t_player *player) 
-{
-	(void)mlx;
-	double dirX = cos(player->player_dir);
-	double dirY = sin(player->player_dir);
-	double deltaX = player->dx_pos + dirX;
-	double deltaY = player->dy_pos - dirY;
-
-	//printf("valeur de cos(dir) : %f, valeur de sin(dir) : %f\n", cos(player->player_dir), sin(player->player_dir));
-	if (cos(player->player_dir) < 0.000000 && sin(player->player_dir) >= 0.000000) //ouest
-	{
-		deltaX += 1; //pour que ça commence bien a partir du player
-		while(file->scene[(int)deltaY][(int)(deltaX - SPEED)] != '1')
-		{
-			my_mlx_pixel_put(mlx, (deltaX) * SCALE_MAP, deltaY * SCALE_MAP, 0x84DBF0);
-			deltaX -= SPEED; // WIP : remplacer cette etape par le DDA ici
-		}
-	}
-
-	if (cos(player->player_dir) >= 0.000000 && sin(player->player_dir) <= 0.000000) //est
-	{
-		deltaX -= 1;
-		while(file->scene[(int)deltaY][(int)(deltaX + SPEED)] != '1')
-		{
-			my_mlx_pixel_put(mlx, deltaX * SCALE_MAP, deltaY * SCALE_MAP, 0x84DBF0);
-			deltaX += SPEED;// WIP : et ici
-		}
-	}
-	
-	if (cos(player->player_dir) <= 0.000000 && sin(player->player_dir) < 0.000000) //sud
-	{
-		deltaY -= 1;
-		while(file->scene[(int)(deltaY + SPEED)][(int)(deltaX)] != '1')
-		{
-			my_mlx_pixel_put(mlx, deltaX * SCALE_MAP, deltaY * SCALE_MAP, 0x84DBF0);
-			deltaY += SPEED;// WIP : et la
-		}
-	}
-
-	if (cos(player->player_dir) >= 0 && sin(player->player_dir) > 0) //nord
-	{
-		deltaY += 1;
-		while(file->scene[(int)(deltaY - SPEED)][(int)(deltaX)] != '1')
-		{
-			my_mlx_pixel_put(mlx, deltaX * SCALE_MAP, deltaY * SCALE_MAP, 0x84DBF0);
-			deltaY -= SPEED; // WIP : mais bon on peut pe opti tout ça
-		}
-	}
-	return (0);
-}
 
 /*Parcourt la map parsée dans scene, imprime la minimap en fct des 1 et des 0*/
 void	creat_minimap(t_mlx *mlx, t_file *file)
@@ -161,6 +108,7 @@ void	creat_minimap(t_mlx *mlx, t_file *file)
 	}
 	put_ray(file, mlx, mlx->player);
 	
+	//gen_mini_player(mlx, player);
 	my_mlx_pixel_put(mlx, mlx->player->dx_pos * SCALE_MAP + 1, mlx->player->dy_pos * SCALE_MAP + 1, 0xB22222); //FAIS CA MIEUX joueur
 	my_mlx_pixel_put(mlx, mlx->player->dx_pos * SCALE_MAP, mlx->player->dy_pos * SCALE_MAP, 0x000000);
 	my_mlx_pixel_put(mlx, mlx->player->dx_pos * SCALE_MAP + 1, mlx->player->dy_pos * SCALE_MAP, 0xB22222);
@@ -194,8 +142,12 @@ void creat_image(t_mlx *mlx, t_file *file, t_img *img_xpm)
 /*
 Lors d'un event : va calculer et push la nouvelle image dans la fenetre
 */
-int	render_next_frame(t_mlx *mlx)
+int	render_next_frame(void *mlxb)
 {
+	t_mlx *mlx;
+
+	mlx = (t_mlx *)mlxb;
+	//mettre l'actualisation de la position du joueur ici plutot que dans la minimap
 	put_floor_ceiling(mlx, mlx->file); //wip : affichage des murs en plus du sol et du ciel
 	creat_minimap(mlx, mlx->file); //wip : afficher les ray issus du player
 	mlx_put_image_to_window(mlx->init_ptr, mlx->win, mlx->img, 0, 0);

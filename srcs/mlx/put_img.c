@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 18:44:30 by mberthet          #+#    #+#             */
-/*   Updated: 2022/04/28 10:23:19 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/04/28 15:28:51 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,21 @@ void	print_minimap_square(t_mlx *mlx, int x, int y, int color)
 	}
 }
 
+void	gen_mini_player(t_mlx *mlx,t_player *player)
+{
+	int	i;
+	int	j;
 
+	i = -1;
+	while (++i < 3)
+	{
+		j = -2;
+		while (j++ < 1)
+		{
+			my_mlx_pixel_put(mlx, (player->dx_pos) * SCALE_MAP - 1 + i, (player->dy_pos ) * SCALE_MAP + j, 0xB22222);
+		}
+	}
+}
 
 /*Parcourt la map parsée dans scene, imprime la minimap en fct des 1 et des 0*/
 void	creat_minimap(t_mlx *mlx, t_file *file)
@@ -106,18 +120,10 @@ void	creat_minimap(t_mlx *mlx, t_file *file)
 				print_minimap_square(mlx, x, y, 0x00FFFFFF);
 		}
 	}
-	put_ray(file, mlx, mlx->player);
+	//put_ray(file, mlx, mlx->player);
+	put_first_ray(file, mlx, mlx->player, mlx->ray);
+	gen_mini_player(mlx, mlx->player);
 	
-	//gen_mini_player(mlx, player);
-	my_mlx_pixel_put(mlx, mlx->player->dx_pos * SCALE_MAP + 1, mlx->player->dy_pos * SCALE_MAP + 1, 0xB22222); //FAIS CA MIEUX joueur
-	my_mlx_pixel_put(mlx, mlx->player->dx_pos * SCALE_MAP, mlx->player->dy_pos * SCALE_MAP, 0x000000);
-	my_mlx_pixel_put(mlx, mlx->player->dx_pos * SCALE_MAP + 1, mlx->player->dy_pos * SCALE_MAP, 0xB22222);
-	my_mlx_pixel_put(mlx, mlx->player->dx_pos * SCALE_MAP, mlx->player->dy_pos * SCALE_MAP + 1, 0xB22222);
-	my_mlx_pixel_put(mlx, mlx->player->dx_pos * SCALE_MAP - 1, mlx->player->dy_pos * SCALE_MAP, 0xB22222);
-	my_mlx_pixel_put(mlx, mlx->player->dx_pos * SCALE_MAP - 1, mlx->player->dy_pos * SCALE_MAP - 1, 0xB22222);
-	my_mlx_pixel_put(mlx, mlx->player->dx_pos * SCALE_MAP, mlx->player->dy_pos * SCALE_MAP - 1, 0xB22222);
-	my_mlx_pixel_put(mlx, mlx->player->dx_pos * SCALE_MAP - 1, mlx->player->dy_pos * SCALE_MAP + 1, 0xB22222);
-	my_mlx_pixel_put(mlx, mlx->player->dx_pos * SCALE_MAP + 1, mlx->player->dy_pos * SCALE_MAP - 1, 0xB22222);
 }
 
 /*Fonctions importantes :

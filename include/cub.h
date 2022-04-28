@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:20:00 by mberthet          #+#    #+#             */
-/*   Updated: 2022/04/28 10:29:57 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/04/28 16:05:02 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,48 @@ typedef struct s_player{
 	double		dx_pos; //dx_pos & dy_pos : the position vector of the player
 	double		dy_pos;
 	double		player_dir;
-	double		dirX; //dirX & dirY : the direction of the player
+	double		dirX; //dirX(cos(player_dir)) & dirY(sin(player_dir)) : the direction of the player
 	double		dirY;
 	int			up_press;
 	int			down_press;
 	int			left_press;
 	int			right_press;
 }				t_player;
+
+/*DDA/raytracing :
+reprends une partie des var de t_player pour pouvoir eventuellement 
+les modifier lors des calculs du raytracing*/
+typedef struct s_ray
+{
+	int			r_x_pos; //vPlayer : position du player au debut en int (tab de la map)
+	int			r_y_pos; //vPlayer : position du player au debut en int (tab de la map)
+
+	double		r_dx_pos; //vRaystart : position du player au debut en double (map)
+	double		r_dy_pos; //vRaystart : position du player au debut en double (map)
+
+	double		r_player_dir; //vRaydir  : dir dans laquelle le joueur regarde, en radian
+
+	double		r_dirX; //dirX(cos(player_dir)) : the direction of the player on x axe
+	double		r_dirY; // dirY(sin(player_dir)) : the direction of the player on y axe
+
+	double		r_ray_unit_step_side_x; //position du rayon sur x durant le calcul
+	double		r_ray_unit_step_side_y; //position du rayon sur y durant le calcul
+
+	int			r_map_check_x; // reprend la pos du player/rayon initiale en int sur x (tab de la map)
+	int			r_map_check_y; // reprend la pos du player/rayon initiale en int sur y (tab de la map)
+
+	double		r_raylength_x; //stock la position actulle temporaire du rayon sur x (map)
+	double		r_raylength_y; //stock la position actulle temporaire du rayon sur y (map)
+	
+	int			r_step_x; //stock la position actulle temporaire du rayon sur x en int (tab de la map)
+	int			r_step_y; //stock la position actulle temporaire du rayon sur y en int (tab de la map)
+
+	double		r_dist_x;
+	double		r_dist_y;
+
+	double		hit_x;
+	double		hit_y;
+}	t_ray;
 
 /*Dans de nb fonctions de la mlx on ne peut passer qu'une variable en parametre : 
 je passe donc t_mlx *mlx avec ses nombreux liens vers d'autres structures*/
@@ -96,6 +131,7 @@ typedef struct s_mlx
 	t_img		*img_xpm;
 	t_file		*file;
 	t_player	*player;
+	t_ray		*ray;
 }				t_mlx;
 
 
@@ -136,5 +172,6 @@ int		deal_release_key(int keycode, t_mlx *mlx);
 
 /* -- raytracing.c -- */
 int		put_ray(t_file *file, t_mlx *mlx, t_player *player);
+void	put_first_ray(t_file *file, t_mlx *mlx, t_player *player, t_ray *ray);
 
 # endif

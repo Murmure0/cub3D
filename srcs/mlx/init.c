@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 17:37:44 by mberthet          #+#    #+#             */
-/*   Updated: 2022/04/28 10:24:07 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/04/28 11:33:48 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ void free_all(t_file *file, t_mlx *mlx)
 		free(mlx->init_ptr);
 	if (mlx->player)
 		free(mlx->player);
+	// if(mlx->win)
+	// 	free(mlx->win); //NE PAS FREE : double free avec mlx_destroy_window
+	if (mlx->ray)
+		free(mlx->ray);
 }
 
 int	close_win(t_mlx *mlx, t_file *file)
@@ -122,10 +126,15 @@ int init_mlx(t_mlx *mlx, t_file *file, t_img *img_xpm)
 		free_all(file, mlx);
 		return (write(2, "Error\nMlx: new window init. failed.\n", 36), 1);
 	}
+	mlx->ray = malloc(sizeof(t_ray));
+	if (!mlx->ray)
+	{
+		free_all(file, mlx);
+		return (write(2, "Error\nInit. ray failed.\n", 36), 1);
+	}
 	init_img(mlx, file, img_xpm);
 	mlx->img = img_xpm;
 	init_player(mlx, file);
-//	init_cam(mlx, file);
 	mlx->file = file;
 	return (0);
 }

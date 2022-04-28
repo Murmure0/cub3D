@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:20:00 by mberthet          #+#    #+#             */
-/*   Updated: 2022/04/27 14:49:46 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/04/28 10:29:57 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,8 @@ typedef struct s_mlx
 int		parse_file(t_file *file, int ac, char **av);
 int		check_params(t_file *file);
 
-int		is_space(char c);
+int	is_space(char c);
+int	trim_spaces(char **str);
 
 // check_walls
 int		not_walled_in(t_file *file);

@@ -16,6 +16,7 @@ int	convert_list_to_array(t_file *file)
 {
 	int		i;
 	int		j;
+	int		k;
 	t_list	*tmp;
 
 	if (check_for_newline(file->map))
@@ -29,7 +30,16 @@ int	convert_list_to_array(t_file *file)
 			return (write(2, "Error\nMalloc failed.\n", 22), 1);
 		j = -1;
 		while (((char *)tmp->content)[++j])
-			file->scene[i][j] = ((char *)tmp->content)[j];
+		{
+			if ((char *)tmp->content)[j] == '\t')
+			{
+				k = 0;
+				while (k < 4)
+					file->scene[i][j++] = ' ';
+			}
+			else
+				file->scene[i][j] = ((char *)tmp->content)[j];
+		}
 		file->scene[i][j] = 0;
 		tmp = tmp->next;
 		i++;

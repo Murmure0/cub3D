@@ -115,10 +115,12 @@ static int check_last_line(char **wall, int i)
 			if (wall[i][j + 1] != '1' && !is_space(wall[i][j + 1])
 				&& wall[i][j + 1] != 0 && wall[i][j + 1] != EOF)
 				return (1);
-			if (len >=j)
+			if (len >= j)
 				if 	(wall[i - 1][j] != '1' && !is_space(wall[i - 1][j])
 					&& wall[i - 1][j] != 0 && wall[i - 1][j] != EOF)
 					return (1);
+			else if (wall[i][j] == '0')
+				return (1);
 		}
 		else if (wall[i][j] != '1')
 			return (1);
@@ -130,14 +132,10 @@ static int check_first_line(char **wall)
 {
 	int x;
 	int	i;
-	int	xcmp;
 	int	len;
 
 	x = -1;
-	xcmp = 0;
 	len = ft_strlen(wall[1]);
-	printf("1: %s\n", wall[0]);
-	printf("2: %s\n", wall[1]);
 	while (wall[0][++x])
 	{
 		if (is_space(wall[0][x]))
@@ -146,25 +144,9 @@ static int check_first_line(char **wall)
 				&& wall[0][x + 1] != 0 && wall[0][x + 1] != EOF)
 				return (1);
 			if (len >= x)
-			{
-				if (wall[0][x] == '\t')
-				{
-					i = 0;
-					while (i < 3)
-					{
-						if (wall[1][xcmp] != '1' && !is_space(wall[1][xcmp])
-							&& wall[1][xcmp] != 0 && wall[1][xcmp] != EOF)
-							return (1);
-						xcmp++;
-					}
-				}
-				else if (wall[1][x] != '1' && !is_space(wall[1][x])
+				if (wall[1][x] != '1' && !is_space(wall[1][x])
 					&& wall[1][x] != 0 && wall[1][x] != EOF)
-				{
-					xcmp++;
 					return (1);
-				}
-			}
 		}
 		else if (wall[0][x] != '1')
 			return (1);

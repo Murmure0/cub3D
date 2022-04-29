@@ -119,8 +119,9 @@ static int check_last_line(char **wall, int i)
 				if 	(wall[i - 1][j] != '1' && !is_space(wall[i - 1][j])
 					&& wall[i - 1][j] != 0 && wall[i - 1][j] != EOF)
 					return (1);
-			else if (wall[i][j] == '0')
-				return (1);
+			else
+				if (wall[i][j] == '0')
+					return (1);
 		}
 		else if (wall[i][j] != '1')
 			return (1);
@@ -131,7 +132,6 @@ static int check_last_line(char **wall, int i)
 static int check_first_line(char **wall)
 {
 	int x;
-	int	i;
 	int	len;
 
 	x = -1;

@@ -31,7 +31,7 @@ int	convert_list_to_array(t_file *file)
 		j = -1;
 		while (((char *)tmp->content)[++j])
 		{
-			if ((char *)tmp->content)[j] == '\t')
+			if (((char *)tmp->content)[j] == '\t')
 			{
 				k = 0;
 				while (k < 4)

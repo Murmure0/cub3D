@@ -50,7 +50,10 @@ int	convert_list_to_array(t_file *file)
 			{
 				k = 0;
 				while (k < 4)
+				{
 					file->scene[i][j++] = ' ';
+					k++;
+				}
 			}
 			else
 				file->scene[i][j] = ((char *)tmp->content)[j];

@@ -37,6 +37,8 @@ int	close_win(t_mlx *mlx, t_file *file)
 	exit(0);
 }
 
+
+//CHECK MXL_XPM FOR ERROR. ON ERROR, FCT RETURNS NULL
 void	init_img(t_mlx *mlx, t_file *file, t_img *img_xpm)
 {
 	int img_width;
@@ -55,7 +57,7 @@ void	init_img(t_mlx *mlx, t_file *file, t_img *img_xpm)
 			&img_width, &img_height);
 }
 
-
+//MOST LIKELY UNUSED
 void init_dir(t_mlx *mlx, int x, int y, double player_dir)
 {
 	mlx->player->dirX = x;

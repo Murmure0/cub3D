@@ -98,8 +98,8 @@ typedef struct s_ray
 	double		r_dirX; //dirX(cos(player_dir)) : the direction of the player on x axe
 	double		r_dirY; // dirY(sin(player_dir)) : the direction of the player on y axe
 
-	double		r_ray_unit_step_side_x; //position du rayon sur x durant le calcul
-	double		r_ray_unit_step_side_y; //position du rayon sur y durant le calcul
+	double		r_ray_unit_step_size_x; //position du rayon sur x durant le calcul
+	double		r_ray_unit_step_size_y; //position du rayon sur y durant le calcul
 
 	int			r_map_check_x; // reprend la pos du player/rayon initiale en int sur x (tab de la map)
 	int			r_map_check_y; // reprend la pos du player/rayon initiale en int sur y (tab de la map)
@@ -173,5 +173,9 @@ int		deal_release_key(int keycode, t_mlx *mlx);
 /* -- raytracing.c -- */
 int		put_ray(t_file *file, t_mlx *mlx, t_player *player);
 void	put_first_ray(t_file *file, t_mlx *mlx, t_player *player, t_ray *ray);
+
+
+//TESTING FCT
+void	raytracing(t_player *player, t_file *file, t_mlx *mlx);
 
 # endif

@@ -121,7 +121,8 @@ void	creat_minimap(t_mlx *mlx, t_file *file)
 		}
 	}
 	//put_ray(file, mlx, mlx->player);
-	put_first_ray(file, mlx, mlx->player, mlx->ray);
+	//put_first_ray(file, mlx, mlx->player, mlx->ray);
+	raytracing(mlx->player, file, mlx);
 	gen_mini_player(mlx, mlx->player);
 	
 }

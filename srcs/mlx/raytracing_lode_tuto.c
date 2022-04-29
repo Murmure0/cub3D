@@ -12,12 +12,164 @@
 
 # include "cub.h"
 
+
+void	raytracing(t_player *player, t_file *file, t_mlx *mlx)
+{
+	double posX = player->x_pos;
+	double posY = player->y_pos;
+	double dirX = cos(player->player_dir);
+	double dirY = sin(player->player_dir);
+	double planeX = 0;
+	double planeY = 0.66;
+
+	int x = -1;
+	while (++x < 34) //map width = len of longest string in map
+	{
+		double cameraX = 2 * x / 34.0 - 1;
+		double rayDirX = dirX + planeX * cameraX;
+		double rayDirY = dirY + planeY * cameraX;
+
+		int mapX = (int)posX;
+		int mapY = (int)posY;
+
+		double sideDistX;
+		double sideDistY;
+
+		double deltaDistX = sqrt(pow((1 / rayDirX), 2.0));
+		double deltaDistY = sqrt(pow((1 / rayDirY), 2.0));
+		double perpWallDist;
+
+		int stepX;
+		int stepY;
+
+		int hit = 0;
+		int side;
+
+		if (rayDirX < 0)
+		{
+			stepX = -1;
+			sideDistX = (posX - mapX) * deltaDistX;
+		}
+		 else
+		{
+			stepX = 1;
+			sideDistX = (mapX + 1.0 - posX) * deltaDistX;
+		}
+		if (rayDirY < 0)
+		{
+			stepY = -1;
+			sideDistY = (posY - mapY) * deltaDistY;
+		}
+		else
+		{
+			stepY = 1;
+			sideDistY = (mapY + 1.0 - posY) * deltaDistY;
+		}
+
+		while (hit == 0)
+		{
+			if (sideDistX < sideDistY)
+			{
+				sideDistX += deltaDistX;
+				mapX += stepX;
+				side = 0;
+			}
+			else
+			{
+				sideDistY += deltaDistY;
+				mapY += stepY;
+				side = 1;
+			}
+			printf("MAP COORDS x %c\n, x%d, y%d\n", file->scene[0][0], mapX, mapY);
+			if (file->scene[mapY][mapX] == '1') 
+				hit = 1;
+		}
+
+		if (side == 0)
+			perpWallDist = (sideDistX - deltaDistX);
+      	else
+			perpWallDist = (sideDistY - deltaDistY);
+		my_mlx_pixel_put(mlx, mapX * SCALE_MAP, mapY * SCALE_MAP, 0xB22222);
+		
+		// //h == screen height
+		// int lineHeight = (int)(h / perpWallDist);
+
+		// //calculate lowest and highest pixel to fill in current stripe
+		// int drawStart = -lineHeight / 2 + h / 2;
+		// if (drawStart < 0)
+		// 	drawStart = 0;
+		// int drawEnd = lineHeight / 2 + h / 2;
+		// if (drawEnd >= h)
+		// 	drawEnd = h - 1;
+
+		// NOT USEFUL, SIDE VAR NEITHER 	
+		//    //choose wall color
+		// ColorRGB color;
+		// switch(worldMap[mapX][mapY])
+		// {
+		// case 1:  color = RGB_Red;  break; //red
+		// case 2:  color = RGB_Green;  break; //green
+		// case 3:  color = RGB_Blue;   break; //blue
+		// case 4:  color = RGB_White;  break; //white
+		// default: color = RGB_Yellow; break; //yellow
+		// }
+
+		// //give x and y sides different brightness
+		// if (side == 1) {color = color / 2;}
+
+		// //draw the pixels of the stripe as a vertical line
+		// verLine(x, drawStart, drawEnd, color);
+
+
+		//HOW TO MOVE
+		// readKeys();
+		// //move forward if no wall in front of you
+		// if (keyDown(SDLK_UP))
+		// {
+		// if(worldMap[int(posX + dirX * moveSpeed)][int(posY)] == false) posX += dirX * moveSpeed;
+		// if(worldMap[int(posX)][int(posY + dirY * moveSpeed)] == false) posY += dirY * moveSpeed;
+		// }
+		// //move backwards if no wall behind you
+		// if (keyDown(SDLK_DOWN))
+		// {
+		// if(worldMap[int(posX - dirX * moveSpeed)][int(posY)] == false) posX -= dirX * moveSpeed;
+		// if(worldMap[int(posX)][int(posY - dirY * moveSpeed)] == false) posY -= dirY * moveSpeed;
+		// }
+		// //rotate to the right
+		// if (keyDown(SDLK_RIGHT))
+		// {
+		// //both camera direction and camera plane must be rotated
+		// double oldDirX = dirX;
+		// dirX = dirX * cos(-rotSpeed) - dirY * sin(-rotSpeed);
+		// dirY = oldDirX * sin(-rotSpeed) + dirY * cos(-rotSpeed);
+		// double oldPlaneX = planeX;
+		// planeX = planeX * cos(-rotSpeed) - planeY * sin(-rotSpeed);
+		// planeY = oldPlaneX * sin(-rotSpeed) + planeY * cos(-rotSpeed);
+		// }
+		// //rotate to the left
+		// if (keyDown(SDLK_LEFT))
+		// {
+		// //both camera direction and camera plane must be rotated
+		// double oldDirX = dirX;
+		// dirX = dirX * cos(rotSpeed) - dirY * sin(rotSpeed);
+		// dirY = oldDirX * sin(rotSpeed) + dirY * cos(rotSpeed);
+		// double oldPlaneX = planeX;
+		// planeX = planeX * cos(rotSpeed) - planeY * sin(rotSpeed);
+		// planeY = oldPlaneX * sin(rotSpeed) + planeY * cos(rotSpeed);
+		// }
+	}
+}
+
+
+
+
 /*WIP : 
 - print_ray : adapter le theoreme de Bresenham pour savoir tracer les vecteurs  point par point, 
 		en fonction du point d'arriver et de depart + la pente
 - put_first_ray : s'assurer que le point final arrive bien là où il doit, semble devier sur l'axe X
 */
 
+/*
 void	init_ray(t_ray *ray, t_player *player)
 {
 	ray->r_x_pos = player->x_pos; //int
@@ -89,6 +241,8 @@ void	gen_mini_hit(t_mlx *mlx,t_player *player)
 	}
 }
 
+
+
 void	put_first_ray(t_file *file, t_mlx *mlx, t_player *player, t_ray *ray) //tracer de ray
 {
 	(void)file;
@@ -102,7 +256,7 @@ void	put_first_ray(t_file *file, t_mlx *mlx, t_player *player, t_ray *ray) //tra
 	// printf("OUOU : raylenghtX : %f, rayunitstepsize x : %f\n",ray->r_raylength_x, ray->r_ray_unit_step_size_x);
 	// printf("OUOU : playerdir : %f, r_dirX : %f,r_dirXY : %f\n",ray->r_player_dir, ray->r_dirX,ray->r_dirY);
 
-	/*Savoir sur quel axe on commence a se deplacer*/
+	//Savoir sur quel axe on commence a se deplacer
 	if (ray->r_dirX < 0)
 	{
 		ray->r_step_x = -1;
@@ -126,7 +280,7 @@ void	put_first_ray(t_file *file, t_mlx *mlx, t_player *player, t_ray *ray) //tra
 	} // check sur y si cest + ou - pour monter et descendre
 	// printf("RayL y: %f\n", ray->r_raylength_y);
 
-	/*Tant qu'on a pas atteint de mur on avance sur les deux axes alternativements*/
+	//Tant qu'on a pas atteint de mur on avance sur les deux axes alternativements
 	while (!hit)
 	{
 		if (ray->r_raylength_x < ray->r_raylength_y)
@@ -141,7 +295,7 @@ void	put_first_ray(t_file *file, t_mlx *mlx, t_player *player, t_ray *ray) //tra
 			ray->r_dist_y = ray->r_raylength_y;
 			ray->r_raylength_y += ray->r_ray_unit_step_size_y;
 		}
-		// my_mlx_pixel_put(mlx, ray->r_map_check_x * SCALE_MAP, ray->r_map_check_y * SCALE_MAP, 0xB22222); /*trace sur les points d'intersections*/
+		// my_mlx_pixel_put(mlx, ray->r_map_check_x * SCALE_MAP, ray->r_map_check_y * SCALE_MAP, 0xB22222); //trace sur les points d'intersections
 		if (ray->r_map_check_y >= 0 && ray->r_map_check_y < tab_height
 				&& ray->r_map_check_x >= 0 && (size_t)ray->r_map_check_x < (ft_strlen(file->scene[ray->r_map_check_y - 1]))) //on ne veut pas sortir de la map
 		{
@@ -171,6 +325,8 @@ void	put_first_ray(t_file *file, t_mlx *mlx, t_player *player, t_ray *ray) //tra
 	//print_ray(ray, player, mlx);
 	//put_ray(file, mlx, player, ray)
 }
+
+*/
 
 /*Ancienne ft pour tracer des vecteurs en ligne droite selon N/S/O/E*/
 // int put_ray(t_file *file, t_mlx *mlx, t_player *player)
@@ -224,4 +380,5 @@ void	put_first_ray(t_file *file, t_mlx *mlx, t_player *player, t_ray *ray) //tra
 // 	return (0);
 
 // }
+
 

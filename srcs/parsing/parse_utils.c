@@ -12,6 +12,21 @@
 
 #include "cub.h"
 
+int	spacedstrlen(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\t')
+			i += 4;
+		else
+			i++;
+	}
+	return (i);
+} 
+
 int	convert_list_to_array(t_file *file)
 {
 	int		i;
@@ -25,7 +40,7 @@ int	convert_list_to_array(t_file *file)
 	tmp = file->map;
 	while (tmp)
 	{
-		file->scene[i] = malloc(sizeof(char) * (ft_strlen(tmp->content) + 1));
+		file->scene[i] = malloc(sizeof(char) * (spacedstrlen(tmp->content) + 1));
 		if (!file->scene[i])
 			return (write(2, "Error\nMalloc failed.\n", 22), 1);
 		j = -1;

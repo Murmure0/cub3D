@@ -12,55 +12,19 @@
 
 #include "cub.h"
 
-int	create_trgb(int t, int r, int g, int b)
-{
-	return (t << 24 | r << 16 | g << 8 | b);
-}
-
-int	trim_spaces(char **str)
-{
-	int		i;
-	int		j;
-	int		k;
-	int		len;
-	char	*tmp;
-
-	i = -1;
-	while (str[++i])
-	{
-		j = parse_spaces(str[i]);
-		len = ft_strlen(str[i]);
-		while (len && is_space(str[i][len - 1]))
-			len--;
-		tmp = malloc(sizeof(char) * (len - j + 1));
-		if (!tmp)
-			return (write(2, "Error\nMalloc failed\n", 20), 1);
-		k = 0;
-		while (j < len)
-			tmp[k++] = str[i][j++];
-		tmp[k] = 0;
-		free(str[i]);
-		str[i] = tmp;
-	}
-	return (0);
-}
-
 static int	fill_color(char *str, int *color)
 {
 	int	i;
 	int	j;
 	char **tmp;
 	
-	str++;
 	i = parse_spaces(str);
 	tmp = ft_split(str + i, ',');
 	if (!tmp)
 		return (write(2, "Error\nMalloc failed\n", 20), 1);
 	if (trim_spaces(tmp))
-			return (1);
-	i = 0;
-	while (tmp[i])
-		i++;
+		return (1);
+	i = arraylen(tmp);
 	if (i != 3)
 		return (write(2, "Error\nWrong nb of colors\n", 25), 1);
 	i = -1;
@@ -73,7 +37,6 @@ static int	fill_color(char *str, int *color)
 		if (ft_atoi(tmp[i]) < 0 || ft_atoi(tmp[i]) > 255)
 			return (write(2, "Error\nWrong color value\n", 24), 1);
 	}
-	(void)color;
 	*color = create_trgb(0, ft_atoi(tmp[0]), ft_atoi(tmp[1]), ft_atoi(tmp[2]));
 	free(tmp);
 	return (0);
@@ -87,7 +50,7 @@ static int	fill_texture(char *str, char **texture)
 	i += parse_spaces(str + 2);
 	*texture = ft_substr(str, i, ft_strlen(str));
 	if (ft_strncmp(".xpm", &texture[0][ft_strlen(texture[0]) - 4], 4))
-		return (write(2, "Error\nWrong texture extension.\n", 32), 1);
+		return (write(2, "Error\nWrong texture extension.\n", 31), 1);
 	return (0);
 }
 
@@ -99,9 +62,9 @@ static int	param_id_found(t_list *tmp, int i, t_file *file, t_p_nb *p_nb)
 	str = (char *)tmp->content;
 	line = tmp->content;
 	if (str[i] == 'C')
-		return (p_nb->c++, fill_color(line, &file->param->ceiling));
+		return (p_nb->c++, fill_color(line++, &file->param->ceiling));
 	else if (str[i] == 'F')
-		return (p_nb->f++, fill_color(line, &file->param->floor));
+		return (p_nb->f++, fill_color(line++, &file->param->floor));
 	else if (str[i] == 'N' && str[i + 1] == 'O')
 		return (p_nb->no++, fill_texture(line, &file->param->no));
 	else if (str[i] == 'S' && str[i + 1] == 'O')
@@ -110,7 +73,7 @@ static int	param_id_found(t_list *tmp, int i, t_file *file, t_p_nb *p_nb)
 		return (p_nb->ea++, fill_texture(line, &file->param->ea));
 	else if (str[i] == 'W' && str[i + 1] == 'E')
 		return (p_nb->we++, fill_texture(line, &file->param->we));
-	return (write(2, "Error\nFile not acceptable\n", 27), 0);
+	return (write(2, "Error\nFile not acceptable\n", 26), 0);
 }
 
 static int	map_is_found(t_file *file, t_list *tmp, int i)
@@ -126,16 +89,6 @@ static int	map_is_found(t_file *file, t_list *tmp, int i)
 	return (0);
 }
 
-void	param_count_init(t_p_nb *p_nb)
-{
-	p_nb->c = 0;
-	p_nb->f = 0;
-	p_nb->no = 0;
-	p_nb->so = 0;
-	p_nb->we = 0;
-	p_nb->ea = 0;
-}
-
 int	check_params(t_file *file)
 {
 	t_list	*tmp;
@@ -149,10 +102,7 @@ int	check_params(t_file *file)
 		i = 0;
 		i += parse_spaces(tmp->content);
 		if (((char *)tmp->content)[i] == '\n')
-		{
 			tmp = tmp->next;
-			continue ;
-		}
 		else if (map_is_found(file, tmp, i))
 			break ;
 		else if (!param_id_found(tmp, i, file, &p_nb))

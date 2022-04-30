@@ -84,8 +84,6 @@ static int	check_for_newline(t_list *map)
 int	convert_list_to_array(t_file *file)
 {
 	int		i;
-	int		j;
-	int		k;
 	t_list	*tmp;
 
 	if (check_for_newline(file->map))

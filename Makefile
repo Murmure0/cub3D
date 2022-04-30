@@ -25,10 +25,17 @@ INC		= 	-I./include/
 INCLUDE =	-L. -lmlx -framework OpenGL -framework AppKit
 
 SOURCES =	srcs/main.c	\
-			srcs/parsing/parse_file.c	\
-			srcs/parsing/check_walls.c \
+#			srcs/parsing
+			srcs/parsing/check_params_utils.c \
 			srcs/parsing/check_params.c \
-			srcs/parsing/parse_utils.c \
+			srcs/parsing/check_walls_utils.c \
+			srcs/parsing/check_walls.c \
+			srcs/parsing/convert_list_to_array.c \
+			srcs/join_split_params.c \
+			srcs/parsing/parse_file.c	\
+			srcs/parsing/parse_utils.c	\
+			
+#			srcs/mlx
 			srcs/mlx/init.c	\
 			srcs/mlx/put_img.c	\
 			srcs/mlx/move.c	\

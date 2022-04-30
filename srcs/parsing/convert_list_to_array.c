@@ -2,7 +2,7 @@
 
 static int	spacedstrlen(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -13,11 +13,11 @@ static int	spacedstrlen(char *str)
 			i++;
 	}
 	return (i);
-} 
+}
 
 static int	fill_str_with_spaces(t_file *file, int i, int j)
 {
-	int k;
+	int	k;
 
 	k = 0;
 	while (k < 4)

@@ -10,7 +10,7 @@ int	is_space(char c)
 int	check_left_wall(char *str)
 {
 	int	wall;
-	int i;
+	int	i;
 
 	wall = 0;
 	i = parse_spaces(str);
@@ -28,7 +28,7 @@ int	check_left_wall(char *str)
 int	check_right_wall(char *str)
 {
 	int	wall;
-	int i;
+	int	i;
 
 	i = ft_strlen(str);
 	wall = 0;

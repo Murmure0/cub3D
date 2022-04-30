@@ -49,17 +49,17 @@ static int	check_for_colors(t_list *head)
 	return (ret);
 }
 
-static int map_id_found(t_list **head, int i, t_list *tmp)
+static int	map_id_found(t_list **head, int i, t_list *tmp)
 {
 	int		ret;
 	char	*str;
 
 	str = tmp->content;
 	ret = 0;
-	if ((str[i] == '0' || str[i] == '1') && !check_for_colors(head)) 
+	if ((str[i] == '0' || str[i] == '1') && !check_for_colors(head))
 		ret = 1;
 	else if (str[i] == 'N' && str[i + 1] != 'O')
-		ret = 1; 
+		ret = 1;
 	else if (str[i] == 'S' && str[i + 1] != 'O')
 		ret = 1;
 	else if (str[i] == 'E' && str[i + 1] != 'A')
@@ -71,17 +71,17 @@ static int map_id_found(t_list **head, int i, t_list *tmp)
 	return (ret);
 }
 
-static int param_id_found(t_list **head, int i, t_list *tmp)
+static int	param_id_found(t_list **head, int i, t_list *tmp)
 {
 	int		ret;
 	char	*str;
 
 	str = tmp->content;
 	ret = 0;
-	if (str[i] == 'C' || str[i] == 'F') 
+	if (str[i] == 'C' || str[i] == 'F')
 		ret = 1;
 	else if (str[i] == 'N' && str[i + 1] == 'O')
-		ret = 1; 
+		ret = 1;
 	else if (str[i] == 'S' && str[i + 1] == 'O')
 		ret = 1;
 	else if (str[i] == 'E' && str[i + 1] == 'A')
@@ -98,18 +98,17 @@ void	join_split_params(t_file *file)
 	t_list	*tmp;
 	t_list	*head;
 	char	*cpy;
-	int		i;
+	char	*str;
 
 	tmp = file->map;
 	while (tmp)
 	{
-		i = 0;
-		i += parse_spaces(((char)tmp->content)[i]);
-		if (((char)tmp->content)[i] == '\n')
+		str = tmp->content;
+		if (str[parse_spaces(str)] == '\n')
 			tmp = tmp->next;
-		else if (map_id_found(&head, i, tmp))
-			tmp = tmp->next;
-		else if (param_id_found(&head, i, tmp))
+		else if (map_id_found(&head, parse_spaces(str), tmp))
+			tmp = tmp->next;	
+		else if (param_id_found(&head, parse_spaces(str), tmp))
 			tmp = tmp->next;
 		else
 		{

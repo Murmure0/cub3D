@@ -19,7 +19,7 @@ int	main (int ac, char **av)
 	t_img img_xpm;
 
 	if (parse_file(&file, ac, av))
-		return(1);
+		return(1); //Use exit for mallocs :)s
 
 	if(launch_mlx(&mlx, &file, &img_xpm))
 		return (1);

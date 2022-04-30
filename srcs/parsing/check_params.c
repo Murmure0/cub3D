@@ -14,10 +14,10 @@
 
 static int	fill_color(char *str, int *color)
 {
-	int	i;
-	int	j;
-	char **tmp;
-	
+	int		i;
+	int		j;
+	char	**tmp;
+
 	i = parse_spaces(str);
 	tmp = ft_split(str + i, ',');
 	if (!tmp)
@@ -38,7 +38,6 @@ static int	fill_color(char *str, int *color)
 			return (write(2, "Error\nWrong color value\n", 24), 1);
 	}
 	*color = create_trgb(0, ft_atoi(tmp[0]), ft_atoi(tmp[1]), ft_atoi(tmp[2]));
-	free(tmp);
 	return (0);
 }
 

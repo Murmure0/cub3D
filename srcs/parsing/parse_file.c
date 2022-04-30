@@ -15,7 +15,7 @@
 static int	check_chars_used(t_list *map)
 {
 	t_list	*tmp;
-	char	*str;
+	char	*s;
 	int		i;
 	int		player_count;
 
@@ -23,16 +23,15 @@ static int	check_chars_used(t_list *map)
 	player_count = 0;
 	while (tmp)
 	{
-		str = tmp->content;
+		s = tmp->content;
 		i = -1;
-		while (str[++i])
+		while (s[++i])
 		{
-			if (str[i] == 'N' || str[i] == 'S'
-				|| str[i] == 'E' || str[i] == 'W')
+			if (s[i] == 'N' || s[i] == 'S' || s[i] == 'E' || s[i] == 'W')
 				player_count++;
-			if (str[i] != '0' && str[i] != '1' && str[i] != 'N' && str[i] != 'S'
-				&& str[i] != 'E' && str[i] != 'W'
-				&& !is_space(str[i]) && str[i] != '\n')
+			if (s[i] != '0' && s[i] != '1' && s[i] != 'N' && s[i] != 'S' 
+				&& s[i] != 'E' && s[i] != 'W'
+				&& !is_space(s[i]) && s[i] != '\n')
 				return (write(2, "Error\nForbidden char in map\n", 28), 1);
 		}
 		tmp = tmp->next;

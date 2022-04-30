@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   join_split_params.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cwastche </var/mail/cwastche>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/30 14:48:02 by cwastche          #+#    #+#             */
+/*   Updated: 2022/04/30 14:48:07 by cwastche         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub.h"
 
 static char	*trim(char *str)
@@ -107,7 +119,7 @@ void	join_split_params(t_file *file)
 		if (str[parse_spaces(str)] == '\n')
 			tmp = tmp->next;
 		else if (map_id_found(&head, parse_spaces(str), tmp))
-			tmp = tmp->next;	
+			tmp = tmp->next;
 		else if (param_id_found(&head, parse_spaces(str), tmp))
 			tmp = tmp->next;
 		else

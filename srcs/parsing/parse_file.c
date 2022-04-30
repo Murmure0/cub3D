@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 15:15:53 by cwastche          #+#    #+#             */
-/*   Updated: 2022/04/15 18:52:33 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/04/30 14:47:26 by cwastche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	check_chars_used(t_list *map)
 		{
 			if (s[i] == 'N' || s[i] == 'S' || s[i] == 'E' || s[i] == 'W')
 				player_count++;
-			if (s[i] != '0' && s[i] != '1' && s[i] != 'N' && s[i] != 'S' 
+			if (s[i] != '0' && s[i] != '1' && s[i] != 'N' && s[i] != 'S'
 				&& s[i] != 'E' && s[i] != 'W'
 				&& !is_space(s[i]) && s[i] != '\n')
 				return (write(2, "Error\nForbidden char in map\n", 28), 1);

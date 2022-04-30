@@ -30,7 +30,7 @@ SOURCES =	srcs/main.c	\
 			srcs/parsing/check_walls_utils.c \
 			srcs/parsing/check_walls.c \
 			srcs/parsing/convert_list_to_array.c \
-			srcs/join_split_params.c \
+			srcs/parsing/join_split_params.c \
 			srcs/parsing/parse_file.c	\
 			srcs/parsing/parse_utils.c	\
 			srcs/mlx/init.c	\

@@ -12,13 +12,6 @@
 
 #include "cub.h"
 
-int	is_space(char c)
-{
-	if (c == 9 || (c >= 11 && c <= 13) || c == ' ')
-		return (1);
-	return (0);
-}
-
 static int	check_around_space(char **wall, int i, int j)
 {
 	int len;
@@ -38,43 +31,6 @@ static int	check_around_space(char **wall, int i, int j)
 	if (len > j)
 		if (wall[i - 1][j] != '1' && !is_space(wall[i - 1][j]) && wall[i][j + 1] != 0 && wall[i][j + 1] != EOF)
 			return (1);
-	return (0);
-}
-
-int	check_left_wall(char *str)
-{
-	int	wall;
-	int i;
-
-	wall = 0;
-	i = parse_spaces(str);
-	while (str[i])
-	{
-		if (str[i] != '1' && wall == 0)
-			return (1);
-		else
-			wall = 1;
-		i++;
-	}
-	return (0);
-}
-
-int	check_right_wall(char *str)
-{
-	int	wall;
-	int i;
-
-	i = ft_strlen(str);
-	wall = 0;
-	while (--i >= 0)
-	{
-		if (str[i] == ' ')
-			continue ;
-		if (str[i] != '1' && wall == 0)
-			return (1);
-		else
-			wall = 1;
-	}
 	return (0);
 }
 
@@ -99,8 +55,6 @@ static int	check_middle_lines(char **wall, int max_size)
 	return (0);
 }
 
-
-//IF len last line < len penult line, check penult AFTER last line len
 static int check_last_line(char **wall, int i)
 {
 	int j;
@@ -153,7 +107,7 @@ static int check_first_line(char **wall)
 	return (0);
 }
 
-int	not_walled_in(t_file *file)
+int	check_walls(t_file *file)
 {
 	file->scene = malloc(sizeof(char *) * (ft_lstsize(file->map) + 1));
 	if (!file->scene)

@@ -158,8 +158,8 @@ int		missing_param(t_p_nb p_nb);
 
 // Check_walls
 int		is_space(char c);
-int		check_left_wall(char *str)
-int		check_right_wall(char *str)
+int		check_left_wall(char *str);
+int		check_right_wall(char *str);
 
 /* --- MLX --- */
 /* -- init.c -- */

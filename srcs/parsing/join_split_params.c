@@ -68,7 +68,7 @@ static int	map_id_found(t_list **head, int i, t_list *tmp)
 
 	str = tmp->content;
 	ret = 0;
-	if ((str[i] == '0' || str[i] == '1') && !check_for_colors(head))
+	if ((str[i] == '0' || str[i] == '1') && !check_for_colors(*head))
 		ret = 1;
 	else if (str[i] == 'N' && str[i + 1] != 'O')
 		ret = 1;

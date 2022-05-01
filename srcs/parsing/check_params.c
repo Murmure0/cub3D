@@ -61,9 +61,9 @@ static int	param_id_found(t_list *tmp, int i, t_file *file, t_p_nb *p_nb)
 	str = (char *)tmp->content;
 	line = tmp->content;
 	if (str[i] == 'C')
-		return (p_nb->c++, fill_color(line++, &file->param->ceiling));
+		return (p_nb->c++, fill_color(++line, &file->param->ceiling));
 	else if (str[i] == 'F')
-		return (p_nb->f++, fill_color(line++, &file->param->floor));
+		return (p_nb->f++, fill_color(++line, &file->param->floor));
 	else if (str[i] == 'N' && str[i + 1] == 'O')
 		return (p_nb->no++, fill_texture(line, &file->param->no));
 	else if (str[i] == 'S' && str[i + 1] == 'O')

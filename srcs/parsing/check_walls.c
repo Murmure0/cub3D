@@ -12,6 +12,9 @@
 
 #include "cub.h"
 
+// 212  Only checking 1 pos at the moment around spaces.
+// 1 1  Might need to check 2 pos aswell ?
+// 212
 static int	check_around_space(char **wall, int i, int j)
 {
 	int	len;

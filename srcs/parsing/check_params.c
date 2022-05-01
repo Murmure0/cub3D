@@ -22,7 +22,7 @@ static int	fill_color(char *str, int *color)
 	tmp = ft_split(str + i, ',');
 	if (!tmp)
 		return (write(2, "Error\nMalloc failed\n", 20), 1);
-	if (trim_spaces(tmp)) //Before or after tab to spaces conversion ??
+	if (trim_spaces(tmp))
 		return (1);
 	i = arraylen(tmp);
 	if (i != 3)
@@ -33,7 +33,7 @@ static int	fill_color(char *str, int *color)
 		j = -1;
 		while (tmp[i][++j])
 			if (!ft_isdigit(tmp[i][j]))
-				return (printf("char: %c, i: %d, j: %d\n", tmp[i][j], i, j), write(2, "Error\nForbidden char detected\n", 30), 1); //PROBLEM HERE I THINK
+				return (printf("char: %c, i: %d, j: %d\n", tmp[i][j], i, j), write(2, "Error\nForbidden char detected\n", 30), 1);
 		if (ft_atoi(tmp[i]) < 0 || ft_atoi(tmp[i]) > 255)
 			return (write(2, "Error\nWrong color value\n", 24), 1);
 	}

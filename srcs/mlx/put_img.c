@@ -63,6 +63,7 @@ int put_floor_ceiling(t_mlx *mlx, t_file *file)
 /*
 Imprime chaque carré de la minimap de taille SCALE_MAP = 16 pixel de coté
 */
+//print "space" as another color ?
 void	print_minimap_square(t_mlx *mlx, int x, int y, int color)
 {
 	int	i;

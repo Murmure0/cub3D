@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 15:58:45 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/02 13:47:46 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/02 15:38:38 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,19 +140,22 @@ void	raytracing(t_player *player, t_file *file, t_mlx *mlx)
 		// if (side == 1) {color = color / 2;}
 
 		// //draw the pixels of the stripe as a vertical line
-		int k = drawStart;
-
+		int k;
 		double wall_pixel_size = WIN_W / array_x_len;
-		int l = -1;
+		double l = -1;
 		while (++l < wall_pixel_size)
 		{
 			k = drawStart;
 			while (k < drawEnd)
 			{
-				if (side == 0)
-					my_mlx_pixel_put(mlx, l + (wall_pixel_size * x), k, 0xFF22FF);
-				else
-					my_mlx_pixel_put(mlx, l + (wall_pixel_size * x), k, 0xB222FF);
+				if (side == 0 && rayDirX < 0) //ouest 
+					my_mlx_pixel_put(mlx, l + (wall_pixel_size * x ), k, 0x0003a3);
+				else if (side == 0 && rayDirX > 0) //est
+					my_mlx_pixel_put(mlx, l + (wall_pixel_size * x ), k, 0xa30000);
+				else if (side == 1 && rayDirY < 0) // sud
+					my_mlx_pixel_put(mlx, l + (wall_pixel_size * x ), k, 0xf0b54f);
+				else if (side == 1 && rayDirY > 0) // nord
+					my_mlx_pixel_put(mlx, l + (wall_pixel_size * x ), k, 0x4ff0c0);
 				k++;
 			}
 		}

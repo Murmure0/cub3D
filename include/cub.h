@@ -23,6 +23,7 @@
 # include <string.h>
 # include <math.h>
 # include "mlx.h"
+# include <limits.h>
 
 # define WIN_H 1080
 # define WIN_W 1920
@@ -142,6 +143,7 @@ void	join_split_params(t_file *file);
 int		check_params(t_file *file);
 int		convert_list_to_array(t_file *file);
 int		check_walls(t_file *file);
+int		trim_map_into_shape(t_file *file);
 
 /* --- PARSING UTILS --- */
 
@@ -152,9 +154,10 @@ int		create_trgb(int t, int r, int g, int b);
 int		trim_spaces(char **str);
 int		arraylen(char **array);
 
-// Parse
+// Parsing
 int		parse_spaces(char *str);
 int		missing_param(t_p_nb p_nb);
+void	convert_space_to_wall(char **map);
 
 // Check_walls
 int		is_space(char c);

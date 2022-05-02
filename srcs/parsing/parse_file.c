@@ -88,6 +88,16 @@ static int	read_file(int fd, t_file *file)
 	return (0);
 }
 
+//TODEL
+void	print_map(char **map)
+{
+	int i;
+
+	i = -1;
+	while (map[++i])
+		printf("%s\n", map[i]);
+}
+
 int	parse_file(t_file *file, int ac, char **av)
 {
 	int	fd;
@@ -104,5 +114,10 @@ int	parse_file(t_file *file, int ac, char **av)
 		return (1);
 	if (check_map(file))
 		return (1);
+	convert_space_to_wall(file->scene);
+	//trim_map_into_shape(file); PROBLEM, NOT CONSIDERING SMALLER OR LONGER LINES
+	print_map(file->scene); //to Delete
 	return (0);
 }
+
+

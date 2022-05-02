@@ -34,6 +34,23 @@ int	missing_param(t_p_nb p_nb)
 	return (0);
 }
 
+void	convert_space_to_wall(char **map)
+{
+	int	x;
+	int	y;
+
+	y = -1;
+	while (map[++y])
+	{
+		x = -1;
+		while (map[y][++x])
+		{
+			if (is_space(map[y][x]))
+				map[y][x] = '1';
+		}
+	}
+}
+
 // void	trim_map_into_shape(t_file *file)
 // {
 // 	int		i;

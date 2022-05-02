@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:32:20 by mberthet          #+#    #+#             */
-/*   Updated: 2022/04/27 13:19:30 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/02 18:25:10 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,13 @@ void	press_turn_left(t_mlx *mlx)
 	mlx->player->player_dir += SPEED;
 	if (mlx->player->player_dir < 0) // on reinitialise la position apres un tour complet
 		mlx->player->player_dir += 2 * M_PI;
+
+	double oldDirX = mlx->player->dirX;
+	mlx->player->dirX = mlx->player->dirX * cos(SPEED) - mlx->player->dirY * sin(SPEED);
+	mlx->player->dirY = oldDirX * sin(SPEED) + mlx->player->dirY * cos(SPEED);
+	double oldPlaneX = mlx->player->planeX;
+	mlx->player->planeX = mlx->player->planeX * cos(SPEED) - mlx->player->planeY * sin(SPEED);
+	mlx->player->planeY = oldPlaneX * sin(SPEED) + mlx->player->planeY * cos(SPEED);
 }
 
 void	press_turn_right(t_mlx *mlx)
@@ -112,6 +119,13 @@ void	press_turn_right(t_mlx *mlx)
 	mlx->player->player_dir -= SPEED;
 	if (mlx->player->player_dir > 2 * M_PI) //idem
 		mlx->player->player_dir -= 2 * M_PI;
+
+	double oldDirX = mlx->player->dirX;
+	mlx->player->dirX = mlx->player->dirX * cos(-SPEED) - mlx->player->dirY * sin(-SPEED);
+	mlx->player->dirY = oldDirX * sin(-SPEED) + mlx->player->dirY * cos(-SPEED);
+	double oldPlaneX = mlx->player->planeX;
+	mlx->player->planeX = mlx->player->planeX * cos(-SPEED) - mlx->player->planeY * sin(-SPEED);
+	mlx->player->planeY = oldPlaneX * sin(-SPEED) + mlx->player->planeY * cos(-SPEED);
 }
 
 /*WIP : trouver comment prendre en compte l'appuyage de la touche pour que ce soit plus smooth dans les deplacements*/

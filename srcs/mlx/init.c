@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 17:37:44 by mberthet          #+#    #+#             */
-/*   Updated: 2022/04/28 11:33:48 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/02 16:47:29 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void init_dir(t_mlx *mlx, int x, int y, double player_dir)
 	mlx->player->dirX = x;
 	mlx->player->dirY = y;
 	mlx->player->player_dir = player_dir;
+	mlx->player->planeX = 0;
+	mlx->player->planeY = 0.66;
 }
 
 /*Initialise la direction du player en fontion de la lettre N/S/E/W*/

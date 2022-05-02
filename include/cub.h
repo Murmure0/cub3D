@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:20:00 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/02 11:41:41 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/02 18:21:47 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ typedef struct s_player{
 	double		player_dir;
 	double		dirX; //dirX(cos(player_dir)) & dirY(sin(player_dir)) : the direction of the player
 	double		dirY;
+	double		planeX;
+	double		planeY;
 	int			up_press;
 	int			down_press;
 	int			left_press;
@@ -176,6 +178,8 @@ void	free_all(t_file *file, t_mlx *mlx);
 void	creat_image(t_mlx *mlx, t_file *file, t_img *img_xpm);
 void	creat_minimap(t_mlx *mlx, t_file *file);
 int		render_next_frame(void *mlx);
+int put_floor(t_mlx *mlx, t_file *file, int k, double l);
+int put_ceiling(t_mlx *mlx, t_file *file, int k, double l);
 
 /* -- move.c -- */
 int		deal_press_key(int keycode, t_mlx *mlx);

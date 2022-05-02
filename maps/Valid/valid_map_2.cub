@@ -1,5 +1,5 @@
-NO1./textures/north.xpm
-SO1./textures/south.xpm
+NO ./textures/north.xpm
+SO ./textures/south.xpm
 WE ./textures/west.xpm
 EA ./textures/east.xpm
 

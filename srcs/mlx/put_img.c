@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 18:44:30 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/02 11:02:53 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/02 18:26:15 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,33 @@ void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
 	dst = mlx->addr_img + (y * mlx->line_length + x * (mlx->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
+
+int put_floor(t_mlx *mlx, t_file *file, int k, double l)
+{
+	int i;
+	i = k + 1;
+
+	while(i < WIN_H)
+	{
+		my_mlx_pixel_put(mlx, l, i, file->param->floor);
+		i++;
+	}
+	return (0);
+}
+
+int put_ceiling(t_mlx *mlx, t_file *file, int k, double l)
+{
+	int i;
+	i = 0;
+
+	while (i < k)
+	{
+		my_mlx_pixel_put(mlx, l, i, file->param->ceiling);
+		i++;
+	}
+	return (0);
+}
+
 
 /*WIP pour test l'affichage sol/ciel : modifier la methode qd on aura les murs
  Colo ciel : file->param->ceiling
@@ -45,6 +72,7 @@ int put_floor_ceiling(t_mlx *mlx, t_file *file)
 		}
 		i++;
 	}
+	//raytracing(mlx->player, file, mlx);
 	//inclure la zone de mur ici : faire s'arreter le ciel en haut du mur et debuter le sol en bas du mur
 	i = 0;
 	while (i < WIN_W)
@@ -107,6 +135,7 @@ void	creat_minimap(t_mlx *mlx, t_file *file)
 	int	x;
 	int	y;
 
+	raytracing(mlx->player, file, mlx);
 	y = -1;
 	while (file->scene[++y])
 	{
@@ -124,8 +153,6 @@ void	creat_minimap(t_mlx *mlx, t_file *file)
 	//put_ray(file, mlx, mlx->player); /*fct basic pour les ray N/S/E/O*/
 	
 	// put_first_ray(file, mlx, mlx->player, mlx->ray);
-	raytracing(mlx->player, file, mlx);
-	
 	gen_mini_player(mlx, mlx->player);
 	
 }
@@ -145,6 +172,7 @@ void creat_image(t_mlx *mlx, t_file *file, t_img *img_xpm)
 	mlx->addr_img = mlx_get_data_addr(mlx->img, &mlx->bits_per_pixel, &mlx->line_length, &mlx->endian);
 
 	put_floor_ceiling(mlx, file); //wip : affichage du sol et du ciel
+	//raytracing(mlx->player, file, mlx);
 	creat_minimap(mlx, file); //wip : affichage de la minimap + player
 	mlx_put_image_to_window(mlx->init_ptr, mlx->win, mlx->img, 0, 0);
 }

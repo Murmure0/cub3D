@@ -96,19 +96,20 @@ static int	check_last_line(char **wall, int i)
 			if (wall[i][j + 1] != '1' && !is_space(wall[i][j + 1])
 				&& wall[i][j + 1] != 0 && wall[i][j + 1] != EOF)
 				return (1);
-			// if (len >= j)
-			// 	if (wall[i - 1][j] != '1' && !is_space(wall[i - 1][j])
-			// 		&& wall[i - 1][j] != 0 && wall[i - 1][j] != EOF)
-			// 		return (1);
-			// if (len < j && wall[i][j] == '0')
-			// 	return (1);
+			if (len >= j)
+				if (wall[i - 1][j] != '1' && !is_space(wall[i - 1][j])
+					&& wall[i - 1][j] != 0 && wall[i - 1][j] != EOF)
+					return (1);
+			if (len < j && wall[i][j] == '0')
+				return (1);
 		}
 		else if (wall[i][j] != '1')
 			return (1);
 		else if (len > j)
 		{
-			if (wall[i - i][j] != '1')
-				return (1);
+			while (wall[i][j])
+				if (wall[i - i][j] != '1')
+					return (1);
 			j++;
 		}
 	}

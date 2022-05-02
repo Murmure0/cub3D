@@ -109,7 +109,6 @@ static int	check_last_line(char **wall, int i)
 		k = j;
 		if (len > k)
 		{
-			printf("INSIDE\n");
 			while (wall[i - 1][k])
 			{
 				if (wall[i - i][k] != '1')

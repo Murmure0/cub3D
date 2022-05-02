@@ -44,21 +44,23 @@ static int	fill_str_with_spaces(t_file *file, int i, int j)
 static int	fill_scene(t_file *file, t_list *tmp, int i)
 {
 	int		j;
+	int		k;
 	char	*str;
 
 	str = tmp->content;
 	file->scene[i] = malloc(sizeof(char) * (spacedstrlen(str) + 1));
 	if (!file->scene[i])
 		return (write(2, "Error\nMalloc failed.\n", 20), 1);
-	j = 0;
-	while (str[j])
+	j = -1;
+	k = 0;
+	while (str[++j])
 	{
 		if (str[j] == '\t')
-			j += fill_str_with_spaces(file, i, j);
+			k += fill_str_with_spaces(file, i, j);
 		else
 		{
-			file->scene[i][j] = str[j];
-			j++;
+			file->scene[i][k] = str[j];
+			k++;
 		}
 	}
 	file->scene[i][j] = 0;

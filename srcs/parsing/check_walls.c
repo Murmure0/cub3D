@@ -41,8 +41,8 @@ static int	check_around_space(char **wall, int i, int j)
 			&& wall[i][j + 1] != 0 && wall[i][j + 1] != EOF)
 			return (1);
 	else
-	if (wall[i][j] != '1' && !is_space(wall[i][j]))
-		return (1);
+		if (wall[i][j] != '1' && !is_space(wall[i][j]))
+			return (1);
 	return (0);
 }
 

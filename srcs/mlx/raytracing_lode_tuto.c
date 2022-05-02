@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 15:58:45 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/02 12:07:01 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/02 13:47:46 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,20 @@
 
 void	raytracing(t_player *player, t_file *file, t_mlx *mlx)
 {
-	double posX = player->x_pos;
-	double posY = player->y_pos;
-	double dirX = cos(player->player_dir);
-	double dirY = sin(player->player_dir);
 	double planeX = 0;
 	double planeY = 0.66;
 
 	int x = -1;
-	while (++x < 34) //map width = len of longest string in map
+	int array_x_len = 10;
+
+	while (++x < array_x_len) //map width = len of longest string in map
 	{
-		double cameraX = 2 * x / 34.0 - 1;
+		double posX = player->dx_pos;
+		double posY = player->dy_pos;
+		double dirX = cos(player->player_dir);
+		double dirY = sin(player->player_dir);
+		
+		double cameraX = 2 * x / (double)array_x_len - 1;
 		double rayDirX = dirX + planeX * cameraX;
 		double rayDirY = dirY + planeY * cameraX;
 
@@ -81,13 +84,13 @@ void	raytracing(t_player *player, t_file *file, t_mlx *mlx)
 				mapY += stepY;
 				side = 1;
 			}
-			
+			//check 
 			if (file->scene[mapY][mapX] == '1')
 			{
 				hit = 1;
 			}
 		}
-				printf("MAP COORDS x %c\n, x%d, y%d\n", file->scene[mapY][mapX], mapX, mapY);
+				//printf("MAP COORDS x %c\n, x%d, y%d\n", file->scene[mapY][mapX], mapX, mapY);
 
 		if (side == 0)
 			perpWallDist = (sideDistX - deltaDistX);
@@ -96,7 +99,7 @@ void	raytracing(t_player *player, t_file *file, t_mlx *mlx)
 
 		
 		// mapX++;
-		// mapY++;
+		// mapY--;
 	
 		double xdbl = mapX;
 		double ydbl = mapY;
@@ -109,13 +112,7 @@ void	raytracing(t_player *player, t_file *file, t_mlx *mlx)
 				my_mlx_pixel_put(mlx, xdbl * SCALE_MAP - 1.0 + i, ydbl * SCALE_MAP + j, 0x60f542);
 			}
 		}
-		
-		// my_mlx_pixel_put(mlx, ((double)(mapX-1.0)) * SCALE_MAP, mapY * SCALE_MAP, 0xB222FF);
-		// my_mlx_pixel_put(mlx, mapX * SCALE_MAP, mapY * SCALE_MAP, 0xB222FF);
-		// my_mlx_pixel_put(mlx, ((double)(mapX+1.0)) * SCALE_MAP, mapY * SCALE_MAP, 0xB222FF);
-		// my_mlx_pixel_put(mlx, mapX * SCALE_MAP, ((double)(mapY-1.0)) * SCALE_MAP, 0xB222FF);
-		// my_mlx_pixel_put(mlx, mapX * SCALE_MAP, ((double)(mapY+1.0)) * SCALE_MAP, 0xB222FF);
-		
+
 		int h = WIN_H;
 		int lineHeight = (int)(h / perpWallDist);
 
@@ -144,20 +141,20 @@ void	raytracing(t_player *player, t_file *file, t_mlx *mlx)
 
 		// //draw the pixels of the stripe as a vertical line
 		int k = drawStart;
-		int l = 0;
 
-		while (l < WIN_W)
+		double wall_pixel_size = WIN_W / array_x_len;
+		int l = -1;
+		while (++l < wall_pixel_size)
 		{
 			k = drawStart;
 			while (k < drawEnd)
 			{
 				if (side == 0)
-					my_mlx_pixel_put(mlx, l, k, 0xFF22FF);
+					my_mlx_pixel_put(mlx, l + (wall_pixel_size * x), k, 0xFF22FF);
 				else
-					my_mlx_pixel_put(mlx, l, k, 0xB222FF);
+					my_mlx_pixel_put(mlx, l + (wall_pixel_size * x), k, 0xB222FF);
 				k++;
 			}
-			l++;
 		}
 
 

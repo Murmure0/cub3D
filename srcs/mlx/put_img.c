@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 18:44:30 by mberthet          #+#    #+#             */
-/*   Updated: 2022/04/28 15:28:51 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/02 11:02:53 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,9 +121,11 @@ void	creat_minimap(t_mlx *mlx, t_file *file)
 				print_minimap_square(mlx, x, y, 0x00FFFFFF);
 		}
 	}
-	//put_ray(file, mlx, mlx->player);
-	put_first_ray(file, mlx, mlx->player, mlx->ray);
-	// raytracing(mlx->player, file, mlx);
+	//put_ray(file, mlx, mlx->player); /*fct basic pour les ray N/S/E/O*/
+	
+	// put_first_ray(file, mlx, mlx->player, mlx->ray);
+	raytracing(mlx->player, file, mlx);
+	
 	gen_mini_player(mlx, mlx->player);
 	
 }

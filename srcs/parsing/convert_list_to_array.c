@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_list_to_array.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwastche </var/mail/cwastche>              +#+  +:+       +#+        */
+/*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 14:46:36 by cwastche          #+#    #+#             */
-/*   Updated: 2022/04/30 14:46:38 by cwastche         ###   ########.fr       */
+/*   Updated: 2022/05/02 12:02:11 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	spacedstrlen(char *str)
 		else
 			i++;
 	}
-	return (i);
+	return (i); //+ nb of \t *3
 }
 
 static int	fill_str_with_spaces(t_file *file, int i, int j)

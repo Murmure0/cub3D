@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:18:49 by mberthet          #+#    #+#             */
-/*   Updated: 2022/04/21 17:24:47 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/02 11:01:18 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main (int ac, char **av)
 	t_img img_xpm;
 
 	if (parse_file(&file, ac, av))
-		return(1); //Use exit for mallocs :)s
+		return(1); //Use exit for mallocs :)
 
 	if(launch_mlx(&mlx, &file, &img_xpm))
 		return (1);

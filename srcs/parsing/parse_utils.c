@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwastche <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 11:52:10 by cwastche          #+#    #+#             */
-/*   Updated: 2022/04/20 11:52:12 by cwastche         ###   ########.fr       */
+/*   Updated: 2022/05/02 10:06:07 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,28 @@ int	missing_param(t_p_nb p_nb)
 	return (0);
 }
 
-void	trim_map_into_shape(t_file *file)
-{
-	int		i;
-	int		start;
-	int		end;
-	int		new_len;
-	char	**new_scene;
+// void	trim_map_into_shape(t_file *file)
+// {
+// 	int		i;
+// 	int		j;
+// 	int		start;
+// 	int		end;
+// 	int		new_len;
+// 	char	**new_scene;
 
-	start = trim_start();
-	end = trim_end();
-	i = -1;
-	while (file->scene[++i])
-	{
-		j = 0;
-		new_len = ft_strlen(file->scene[i] - start - end;
-		new_scene[i] = malloc(sizeof(char) * (new_len + 1))
-		while (j < new_len)
-			new_scene[i][j] = file->scene[i][j + start];
-		new_scene[i][j] = 0;
-		free(file->scene[i]);
-	}
-	file->scene = new_scene;
-}
+// 	//start = trim_start();
+// 	//end = trim_end();
+
+// 	i = -1;
+// 	while (file->scene[++i])
+// 	{
+// 		j = 0;
+// 		new_len = ft_strlen(file->scene[i] - start - end);
+// 		new_scene[i] = malloc(sizeof(char) * (new_len + 1));
+// 		while (j < new_len)
+// 			new_scene[i][j] = file->scene[i][j + start];
+// 		new_scene[i][j] = 0;
+// 		free(file->scene[i]);
+// 	}
+// 	file->scene = new_scene;
+// }

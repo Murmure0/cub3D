@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 15:58:45 by mberthet          #+#    #+#             */
-/*   Updated: 2022/04/28 18:21:52 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/02 10:37:58 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,9 @@ void	put_first_ray(t_file *file, t_mlx *mlx, t_player *player, t_ray *ray) //tra
 	int	hit;
 	int tab_height;
 
-	tab_height = check_tab_height(file); //height ? Hauteur ?
+	tab_height = check_tab_height(file);
 	hit = 0;
 	init_ray(ray, player);
-	// printf("OUOU : raylenghtX : %f, rayunitstepsize x : %f\n",ray->r_raylength_x, ray->r_ray_unit_step_size_x);
-	// printf("OUOU : playerdir : %f, r_dirX : %f,r_dirXY : %f\n",ray->r_player_dir, ray->r_dirX,ray->r_dirY);
-
 	/*Savoir sur quel axe on commence a se deplacer*/
 	if (ray->r_dirX < 0)
 	{
@@ -141,11 +138,13 @@ void	put_first_ray(t_file *file, t_mlx *mlx, t_player *player, t_ray *ray) //tra
 			ray->r_dist_y = ray->r_raylength_y;
 			ray->r_raylength_y += ray->r_ray_unit_step_size_y;
 		}
-		// my_mlx_pixel_put(mlx, ray->r_map_check_x * SCALE_MAP, ray->r_map_check_y * SCALE_MAP, 0xB22222); /*trace sur les points d'intersections*/
+		my_mlx_pixel_put(mlx, ray->r_map_check_x * SCALE_MAP, ray->r_map_check_y * SCALE_MAP, 0xB22222); /*trace sur les points d'intersections*/
+		//my_mlx_pixel_put(mlx, ray->r_raylength_x * SCALE_MAP, ray->r_raylength_y * SCALE_MAP, 0xB22222); /*trace sur les points d'intersections*/
 		if (ray->r_map_check_y >= 0 && ray->r_map_check_y < tab_height
 				&& ray->r_map_check_x >= 0 && (size_t)ray->r_map_check_x < (ft_strlen(file->scene[ray->r_map_check_y - 1]))) //on ne veut pas sortir de la map
 		{
-			if (file->scene[ray->r_map_check_y][(ray->r_map_check_x + ray->r_step_x)] == '1' || file->scene[(ray->r_map_check_y + ray->r_step_y)][ray->r_map_check_x] == '1') //on a trouvé un mur 
+			if (file->scene[ray->r_map_check_y][(ray->r_map_check_x + ray->r_step_x)] == '1'
+				|| file->scene[(ray->r_map_check_y + ray->r_step_y)][ray->r_map_check_x] == '1') //on a trouvé un mur 
 			{
 				hit = 1;
 				break ;
@@ -167,7 +166,7 @@ void	put_first_ray(t_file *file, t_mlx *mlx, t_player *player, t_ray *ray) //tra
 
 	
 	//my_mlx_pixel_put(mlx, (ray->r_dx_pos + ray->r_raylength_x) * SCALE_MAP, (ray->r_dy_pos - ray->r_raylength_y) * SCALE_MAP, 0xB22222);
-	my_mlx_pixel_put(mlx, ray->r_map_check_x * SCALE_MAP, ray->r_map_check_y * SCALE_MAP, 0xB22222);
+	my_mlx_pixel_put(mlx, ray->r_map_check_x * SCALE_MAP, ray->r_map_check_y * SCALE_MAP, 0xB222FF);
 	//print_ray(ray, player, mlx);
 	//put_ray(file, mlx, player, ray)
 }

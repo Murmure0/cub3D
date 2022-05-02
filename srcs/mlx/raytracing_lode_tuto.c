@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raytracing.c                                       :+:      :+:    :+:   */
+/*   raytracing_lode_tuto.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 15:58:45 by mberthet          #+#    #+#             */
-/*   Updated: 2022/04/28 18:21:52 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/02 12:07:01 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,15 @@ void	raytracing(t_player *player, t_file *file, t_mlx *mlx)
 		}
 		if (rayDirY < 0)
 		{
-			stepY = -1;
-			sideDistY = (posY - mapY) * deltaDistY;
-		}
-		else
-		{
 			stepY = 1;
 			sideDistY = (mapY + 1.0 - posY) * deltaDistY;
 		}
+		else
+		{
+			stepY = -1;
+			sideDistY = (posY - mapY) * deltaDistY;
+		}
+		
 
 		while (hit == 0)
 		{
@@ -80,27 +81,51 @@ void	raytracing(t_player *player, t_file *file, t_mlx *mlx)
 				mapY += stepY;
 				side = 1;
 			}
-			printf("MAP COORDS x %c\n, x%d, y%d\n", file->scene[0][0], mapX, mapY);
-			if (file->scene[mapY][mapX] == '1') 
+			
+			if (file->scene[mapY][mapX] == '1')
+			{
 				hit = 1;
+			}
 		}
+				printf("MAP COORDS x %c\n, x%d, y%d\n", file->scene[mapY][mapX], mapX, mapY);
 
 		if (side == 0)
 			perpWallDist = (sideDistX - deltaDistX);
       	else
 			perpWallDist = (sideDistY - deltaDistY);
-		my_mlx_pixel_put(mlx, mapX * SCALE_MAP, mapY * SCALE_MAP, 0xB22222);
+
 		
-		// //h == screen height
-		// int lineHeight = (int)(h / perpWallDist);
+		// mapX++;
+		// mapY++;
+	
+		double xdbl = mapX;
+		double ydbl = mapY;
+		double i = -1;
+		while (++i < 3)
+		{
+			double j = -2;
+			while (j++ < 1)
+			{
+				my_mlx_pixel_put(mlx, xdbl * SCALE_MAP - 1.0 + i, ydbl * SCALE_MAP + j, 0x60f542);
+			}
+		}
+		
+		// my_mlx_pixel_put(mlx, ((double)(mapX-1.0)) * SCALE_MAP, mapY * SCALE_MAP, 0xB222FF);
+		// my_mlx_pixel_put(mlx, mapX * SCALE_MAP, mapY * SCALE_MAP, 0xB222FF);
+		// my_mlx_pixel_put(mlx, ((double)(mapX+1.0)) * SCALE_MAP, mapY * SCALE_MAP, 0xB222FF);
+		// my_mlx_pixel_put(mlx, mapX * SCALE_MAP, ((double)(mapY-1.0)) * SCALE_MAP, 0xB222FF);
+		// my_mlx_pixel_put(mlx, mapX * SCALE_MAP, ((double)(mapY+1.0)) * SCALE_MAP, 0xB222FF);
+		
+		int h = WIN_H;
+		int lineHeight = (int)(h / perpWallDist);
 
 		// //calculate lowest and highest pixel to fill in current stripe
-		// int drawStart = -lineHeight / 2 + h / 2;
-		// if (drawStart < 0)
-		// 	drawStart = 0;
-		// int drawEnd = lineHeight / 2 + h / 2;
-		// if (drawEnd >= h)
-		// 	drawEnd = h - 1;
+		int drawStart = -lineHeight / 2 + h / 2;
+		if (drawStart < 0)
+			drawStart = 0;
+		int drawEnd = lineHeight / 2 + h / 2;
+		if (drawEnd >= h)
+			drawEnd = h - 1;
 
 		// NOT USEFUL, SIDE VAR NEITHER 	
 		//    //choose wall color
@@ -118,6 +143,25 @@ void	raytracing(t_player *player, t_file *file, t_mlx *mlx)
 		// if (side == 1) {color = color / 2;}
 
 		// //draw the pixels of the stripe as a vertical line
+		int k = drawStart;
+		int l = 0;
+
+		while (l < WIN_W)
+		{
+			k = drawStart;
+			while (k < drawEnd)
+			{
+				if (side == 0)
+					my_mlx_pixel_put(mlx, l, k, 0xFF22FF);
+				else
+					my_mlx_pixel_put(mlx, l, k, 0xB222FF);
+				k++;
+			}
+			l++;
+		}
+
+
+		
 		// verLine(x, drawStart, drawEnd, color);
 
 

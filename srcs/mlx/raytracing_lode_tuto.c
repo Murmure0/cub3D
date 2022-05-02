@@ -101,17 +101,17 @@ void	raytracing(t_player *player, t_file *file, t_mlx *mlx)
 		// mapX++;
 		// mapY--;
 	
-		double xdbl = mapX;
-		double ydbl = mapY;
-		double i = -1;
-		while (++i < 3)
-		{
-			double j = -2;
-			while (j++ < 1)
-			{
-				my_mlx_pixel_put(mlx, xdbl * SCALE_MAP - 1.0 + i, ydbl * SCALE_MAP + j, 0x60f542);
-			}
-		}
+		// double xdbl = mapX;
+		// double ydbl = mapY;
+		// double i = -1;
+		// while (++i < 3)
+		// {
+		// 	double j = -2;
+		// 	while (j++ < 1)
+		// 	{
+		// 		my_mlx_pixel_put(mlx, xdbl * SCALE_MAP - 1.0 + i, ydbl * SCALE_MAP + j, 0x60f542);
+		// 	}
+		// }
 
 		int h = WIN_H;
 		int lineHeight = (int)(h / perpWallDist);

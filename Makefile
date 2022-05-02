@@ -33,6 +33,7 @@ SOURCES =	srcs/main.c	\
 			srcs/parsing/join_split_params.c \
 			srcs/parsing/parse_file.c	\
 			srcs/parsing/parse_utils.c	\
+			srcs/parsing/trim_map_into_shape.c \
 			srcs/mlx/init.c	\
 			srcs/mlx/put_img.c	\
 			srcs/mlx/move.c	\

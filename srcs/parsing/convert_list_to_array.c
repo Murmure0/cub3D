@@ -15,16 +15,16 @@
 static int	spacedstrlen(char *str)
 {
 	int	i;
+	int	tab;
 
-	i = 0;
-	while (str[i])
+	i = -1;
+	tab = 0;
+	while (str[++i])
 	{
 		if (str[i] == '\t')
-			i += 4;
-		else
-			i++;
+			tab++;
 	}
-	return (i); //+ nb of \t *3
+	return (i + tab * 4 - tab);
 }
 
 static int	fill_str_with_spaces(t_file *file, int i, int j)
@@ -50,13 +50,16 @@ static int	fill_scene(t_file *file, t_list *tmp, int i)
 	file->scene[i] = malloc(sizeof(char) * (spacedstrlen(str) + 1));
 	if (!file->scene[i])
 		return (write(2, "Error\nMalloc failed.\n", 20), 1);
-	j = -1;
-	while (str[++j])
+	j = 0;
+	while (str[j])
 	{
 		if (str[j] == '\t')
 			j += fill_str_with_spaces(file, i, j);
 		else
+		{
 			file->scene[i][j] = str[j];
+			j++;
+		}
 	}
 	file->scene[i][j] = 0;
 	return (0);
@@ -90,6 +93,9 @@ int	convert_list_to_array(t_file *file)
 		return (write(2, "Error\nEmpty line in map\n", 23), 1);
 	i = 0;
 	tmp = file->map;
+	file->scene = malloc(sizeof(char *) * (ft_lstsize(file->map) + 1));
+	if (!file->scene)
+		return (write(2, "Error\nMalloc failed.\n", 20), 1);
 	while (tmp)
 	{
 		if (fill_scene(file, tmp, i))

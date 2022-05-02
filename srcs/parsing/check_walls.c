@@ -85,6 +85,7 @@ static int	check_middle_lines(char **wall, int max_size)
 static int	check_last_line(char **wall, int i)
 {
 	int	j;
+	int	k;
 	int	len;
 
 	j = -1;
@@ -106,13 +107,14 @@ static int	check_last_line(char **wall, int i)
 		}
 		else if (wall[i][j] != '1')
 			return (1);
-		else if (len > j)
+		k = j;
+		else if (len > k)
 		{
-			while (wall[i][j])
+			while (wall[i][k])
 			{
-				if (wall[i - i][j] != '1')
+				if (wall[i - i][k] != '1')
 					return (1);
-				j++;
+				k++;
 			}
 		}
 	}

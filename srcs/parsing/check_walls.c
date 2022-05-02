@@ -108,7 +108,7 @@ static int	check_last_line(char **wall, int i)
 		else if (wall[i][j] != '1')
 			return (1);
 		k = j;
-		else if (len > k)
+		if (len > k)
 		{
 			while (wall[i - 1][k])
 			{

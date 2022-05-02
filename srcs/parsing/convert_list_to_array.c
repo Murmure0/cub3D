@@ -27,18 +27,18 @@ static int	spacedstrlen(char *str)
 	return (i + tab * 4 - tab);
 }
 
-static int	fill_str_with_spaces(t_file *file, int i, int j)
+static int	fill_str_with_spaces(t_file *file, int i, int k)
 {
-	int	k;
+	int	j;
 
-	k = 0;
-	while (k < 4)
+	j = 0;
+	while (j < 4)
 	{
-		file->scene[i][j] = ' ';
+		file->scene[i][k] = ' ';
 		j++;
 		k++;
 	}
-	return (k);
+	return (j);
 }
 
 static int	fill_scene(t_file *file, t_list *tmp, int i)
@@ -56,7 +56,7 @@ static int	fill_scene(t_file *file, t_list *tmp, int i)
 	while (str[++j])
 	{
 		if (str[j] == '\t')
-			k += fill_str_with_spaces(file, i, j);
+			k += fill_str_with_spaces(file, i, k);
 		else
 		{
 			file->scene[i][k] = str[j];

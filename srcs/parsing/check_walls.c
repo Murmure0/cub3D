@@ -92,7 +92,6 @@ static int	check_last_line(char **wall, int i)
 	len = ft_strlen(wall[i - 1]);
 	while (wall[i][++j])
 	{
-		printf("i: %d j: %d\n", i, j);
 		if (is_space(wall[i][j]))
 		{
 			if (wall[i][j + 1] != '1' && !is_space(wall[i][j + 1])
@@ -110,6 +109,7 @@ static int	check_last_line(char **wall, int i)
 		k = j;
 		if (len > k)
 		{
+			printf("INSIDE\n");
 			while (wall[i - 1][k])
 			{
 				if (wall[i - i][k] != '1')

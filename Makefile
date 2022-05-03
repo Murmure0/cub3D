@@ -6,7 +6,7 @@
 #    By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 11:55:53 by mberthet          #+#    #+#              #
-#    Updated: 2022/05/02 11:03:01 by mberthet         ###   ########.fr        #
+#    Updated: 2022/05/03 10:39:36 by mberthet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,8 +38,8 @@ SOURCES =	srcs/main.c	\
 			srcs/mlx/put_img.c	\
 			srcs/mlx/move.c	\
 			gnl/get_next_line.c	\
-			srcs/mlx/raytracing.c	\
 			srcs/mlx/raytracing_lode_tuto.c	\
+			#srcs/mlx/raytracing.c	\
 
 OBJ_DIR =	obj
 OBJECTS =	$(addprefix $(OBJ_DIR)/,$(SOURCES:.c=.o))

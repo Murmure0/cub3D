@@ -109,7 +109,7 @@ int	trim_end_spaces(t_file *file)
 			x++;
 		tmp = ft_strdup(file->scene[y]);
 		free(file->scene[y]);
-		file->scene[y] = ft_substr(tmp, 0, len - x);
+		file->scene[y] = ft_substr(tmp, 0, ft_strlen(tmp) - x);
 		free(tmp);
 		if (!file->scene[y])
 			return (write(2, "Error\nMalloc failed.\n", 21), 1);

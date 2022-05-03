@@ -6,19 +6,30 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 15:58:45 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/02 18:49:20 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/03 12:53:20 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "cub.h"
 
+int	check_tab_height(t_file *file)
+{
+	int	j;
+
+	j = 0;
+	while (file->scene[j])
+		j++;
+	return (j);
+}
 
 void	raytracing(t_player *player, t_file *file, t_mlx *mlx)
 {
 	int x = -1;
 	int array_x_len = WIN_W;
+	int	height_tab;
 	//int array_x_len = 10;
 
+	height_tab = check_tab_height(file);
 	while (++x < array_x_len) //map width = len of longest string in map
 	{
 		double posX = player->dx_pos;
@@ -32,6 +43,9 @@ void	raytracing(t_player *player, t_file *file, t_mlx *mlx)
 
 		int mapX = (int)posX;
 		int mapY = (int)posY;
+		int distance;
+		int distanceMax;
+
 
 		double sideDistX;
 		double sideDistY;
@@ -67,27 +81,33 @@ void	raytracing(t_player *player, t_file *file, t_mlx *mlx)
 			sideDistY = (posY - mapY) * deltaDistY;
 		}
 		
-
+		distanceMax = 4;
 		while (hit == 0)
+		// while (hit == 0 && distance < distanceMax) //clignote
 		{
-			
 			if (sideDistX < sideDistY)
 			{
 				sideDistX += deltaDistX;
+				distance = sideDistX;
 				mapX += stepX;
 				side = 0;
 			}
 			else
 			{
 				sideDistY += deltaDistY;
+				distance = sideDistY;
 				mapY += stepY;
 				side = 1;
 			}
-			//check 
-			if (file->scene[mapY][mapX] == '1')
-			{
-				hit = 1;
-			}
+			if (mapY >= 0 && mapY < distanceMax
+				&& mapX >= 0
+				&& mapX < distanceMax )
+				{
+					if (file->scene[mapY][mapX] == '1')
+					{
+						hit = 1;
+					}
+				}
 		}
 				//printf("MAP COORDS x %c\n, x%d, y%d\n", file->scene[mapY][mapX], mapX, mapY);
 
@@ -96,7 +116,9 @@ void	raytracing(t_player *player, t_file *file, t_mlx *mlx)
       	else
 			perpWallDist = (sideDistY - deltaDistY);
 
-		
+
+		/*impression point intersection ray/mur : */
+
 		// mapX++;
 		// mapY--;
 	
@@ -129,6 +151,16 @@ void	raytracing(t_player *player, t_file *file, t_mlx *mlx)
 		double l = -1;
 		while (++l < wall_pixel_size)
 		{
+			// if (drawStart != 0)
+			// {
+			// 	k = 0;
+			// 	while (k < drawStart)
+			// 	{
+			// 		// my_mlx_pixel_put(mlx, l + (wall_pixel_size * x ), k, file->param->ceiling);
+			// 		my_mlx_pixel_put(mlx, l + (wall_pixel_size * x ), k, 0xFF00FF);
+			// 		k++;
+			// 	}
+			// }
 			k = drawStart;
 			//put_ceiling(mlx, file, k, l);
 			while (k < drawEnd)
@@ -143,6 +175,16 @@ void	raytracing(t_player *player, t_file *file, t_mlx *mlx)
 					my_mlx_pixel_put(mlx, l + (wall_pixel_size * x ), k, 0x4ff0c0);
 				k++;
 			}
+			// if (drawEnd != h - 1)
+			// {
+			// 	while (k < WIN_H - 1)
+			// 	{
+			// 		// my_mlx_pixel_put(mlx, l + (wall_pixel_size * x ), k, file->param->floor);
+			// 		my_mlx_pixel_put(mlx, l + (wall_pixel_size * x ), k, 0x00FF00);
+			// 		k++;
+			// 	}
+			// }
+
 			//put_floor(mlx, file, k, l);
 		}
 	}

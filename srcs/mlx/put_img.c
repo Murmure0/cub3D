@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 18:44:30 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/02 18:26:15 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/03 12:52:38 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,6 @@ void	creat_minimap(t_mlx *mlx, t_file *file)
 	
 	// put_first_ray(file, mlx, mlx->player, mlx->ray);
 	gen_mini_player(mlx, mlx->player);
-	
 }
 
 /*Fonctions importantes :
@@ -172,7 +171,6 @@ void creat_image(t_mlx *mlx, t_file *file, t_img *img_xpm)
 	mlx->addr_img = mlx_get_data_addr(mlx->img, &mlx->bits_per_pixel, &mlx->line_length, &mlx->endian);
 
 	put_floor_ceiling(mlx, file); //wip : affichage du sol et du ciel
-	//raytracing(mlx->player, file, mlx);
 	creat_minimap(mlx, file); //wip : affichage de la minimap + player
 	mlx_put_image_to_window(mlx->init_ptr, mlx->win, mlx->img, 0, 0);
 }
@@ -187,6 +185,7 @@ int	render_next_frame(void *mlxb)
 	mlx = (t_mlx *)mlxb;
 	//mettre l'actualisation de la position du joueur ici plutot que dans la minimap
 	put_floor_ceiling(mlx, mlx->file); //wip : affichage des murs en plus du sol et du ciel
+	
 	creat_minimap(mlx, mlx->file); //wip : afficher les ray issus du player
 	mlx_put_image_to_window(mlx->init_ptr, mlx->win, mlx->img, 0, 0);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 15:58:45 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/02 10:37:58 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/03 10:39:12 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,27 +39,15 @@ void	init_ray(t_ray *ray, t_player *player)
 	ray->r_dist_y = 0;
 }
 
-int	check_tab_height(t_file *file)
-{
-	int tab_height; //height ? Hauteur ?
-	int i;
-	int j;
+// int	check_tab_height(t_file *file)
+// {
+// 	int j;
 
-	tab_height = 0;
-	j = 0;
-	while (file->scene[j])
-	{
-		i = 0;
-		while (file->scene[j][i])
-		{
-			i++;
-		}
-			tab_height++;
-		j++;
-	}
-	//printf("valeur de high tab : %d\n", tab_height);
-	return (tab_height);
-}
+// 	j = 0;
+// 	while (file->scene[j])
+// 		j++;
+// 	return (j);
+// }
 
 // void	print_ray(t_ray *ray, t_player *player, t_mlx *mlx) //WIP : savoir tracer les rayons venant du joueur au point final, voir : algo de tracé de segment de Bresenham
 // {

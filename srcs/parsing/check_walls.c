@@ -12,9 +12,6 @@
 
 #include "cub.h"
 
-// 212  Only checking 1 pos at the moment around spaces.
-// 1 1  Might need to check 2 pos aswell ?
-// 212
 static int	check_around_space(char **wall, int i, int j)
 {
 	int	len;
@@ -51,7 +48,6 @@ static int	check_middle_lines(char **wall, int max_size)
 		j = -1;
 		len_up = ft_strlen(wall[i - 1]);
 		len_down = ft_strlen(wall[i + 1]);
-		//NEED TO CHECK HERE WHEN LEN OF UPPER AND LOWER STR IS LONGER
 		while (wall[i][++j])
 		{
 			if (wall[i][j] == ' ')
@@ -145,9 +141,6 @@ static int	check_first_line(char **wall)
 
 int	check_walls(t_file *file)
 {
-	file->scene = malloc(sizeof(char *) * (ft_lstsize(file->map) + 1));
-	if (!file->scene)
-		return (write(2, "Error\nMalloc failed.\n", 22), 1);
 	if (convert_list_to_array(file))
 		return (1);
 	if (check_first_line(file->scene)

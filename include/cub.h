@@ -28,10 +28,11 @@
 # define WIN_H 1080
 # define WIN_W 1920
 # define SCALE_MAP 16 //coté en pixel des carrés de la minimap
-# define SPEED 0.05 //deplacement sur la minimop
+# define SPEED 0.05 //deplacement sur la minimap
 # define FOV 66 //field of view : angle sur lequel on capte les infos en jeu
 
 
+/* --- PARSING STRUCTURES --- */
 typedef struct param_nb
 {
 	int		no;
@@ -56,12 +57,18 @@ typedef struct s_params
 typedef struct s_file
 {
 	t_list		*map;
-	char		**scene;
 	t_params	param[1];
+	
+	char		**scene;
+	int			map_h;
+	int			map_w;
 }				t_file;
 
+/* -------------------------- */
+
 /*Textures initialisées par/pour la mlx : voir init.c*/
-typedef struct s_img {
+typedef struct s_img 
+{
 	void		*no;
 	void		*so;
 	void		*we;
@@ -141,11 +148,12 @@ typedef struct s_mlx
 /* --- PARSING --- */
 
 int		parse_file(t_file *file, int ac, char **av);
-void	join_split_params(t_file *file);
+int		join_split_params(t_file *file);
 int		check_params(t_file *file);
 int		convert_list_to_array(t_file *file);
 int		check_walls(t_file *file);
 int		trim_map_into_shape(t_file *file);
+int		fill_map(char **scene);
 
 /* --- PARSING UTILS --- */
 

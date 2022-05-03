@@ -86,6 +86,13 @@ static int	check_for_newline(t_list *map)
 	return (0);
 }
 
+void	free_scene(t_file *file, int i)
+{
+	while (file->scene[--i])
+		free(file->scene[i]);
+	free(file->scene);
+}
+
 int	convert_list_to_array(t_file *file)
 {
 	int		i;
@@ -97,11 +104,11 @@ int	convert_list_to_array(t_file *file)
 	tmp = file->map;
 	file->scene = malloc(sizeof(char *) * (ft_lstsize(file->map) + 1));
 	if (!file->scene)
-		return (write(2, "Error\nMalloc failed.\n", 20), 1);
+		return (write(2, "Error\nMalloc failed.\n", 21), 1);
 	while (tmp)
 	{
 		if (fill_scene(file, tmp, i))
-			return (1);
+			return (free_scene(file, i), 1);
 		tmp = tmp->next;
 		i++;
 	}

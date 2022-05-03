@@ -47,9 +47,13 @@ static int	check_for_colors(t_list *head)
 	i = 0;
 	ret = 0;
 	str = trim(head->content);
+	if (!str)
+		return (-1);
 	if (str[i] == 'C' || str[i] == 'F')
 	{
 		tmp = ft_split(str, ',');
+		if (!tmp)
+			return (free(str), -1);
 		i = 0;
 		while (tmp[i])
 			i++;
@@ -65,11 +69,18 @@ static int	map_id_found(t_list **head, int i, t_list *tmp)
 {
 	int		ret;
 	char	*str;
+	int		colors;
 
 	str = tmp->content;
 	ret = 0;
-	if ((str[i] == '0' || str[i] == '1') && !check_for_colors(*head))
-		ret = 1;
+	if ((str[i] == '0' || str[i] == '1'))
+	{
+		colors = check_for_colors(*head);
+		if (colors == -1)
+			return (-1);
+		if (!colors)
+			ret = 1;
+	}
 	else if (str[i] == 'N' && str[i + 1] != 'O')
 		ret = 1;
 	else if (str[i] == 'S' && str[i + 1] != 'O')
@@ -105,26 +116,35 @@ static int	param_id_found(t_list **head, int i, t_list *tmp)
 	return (ret);
 }
 
-void	join_split_params(t_file *file)
+int	join_split_params(t_file *file)
 {
 	t_list	*tmp;
 	t_list	*head;
 	char	*cpy;
 	char	*str;
+	int		ret;
 
 	tmp = file->map;
 	while (tmp)
 	{
 		str = tmp->content;
+		ret = map_id_found(&head, parse_spaces(str), tmp);
 		if (str[parse_spaces(str)] == '\n')
 			tmp = tmp->next;
-		else if (map_id_found(&head, parse_spaces(str), tmp))
-			tmp = tmp->next;
+		else if (ret)
+		{
+			if (ret == -1)
+				return (write(2, "Error\nMalloc failed.\n", 22), 1);
+			else
+				tmp = tmp->next;
+		}
 		else if (param_id_found(&head, parse_spaces(str), tmp))
 			tmp = tmp->next;
 		else
 		{
 			cpy = ft_strjoin(head->content, tmp->content);
+			if (!cpy)
+				return (write(2, "Error\nMalloc failed.\n", 22), 1);
 			free(head->content);
 			head->content = cpy;
 			head->next = tmp->next;
@@ -132,4 +152,5 @@ void	join_split_params(t_file *file)
 			tmp = head->next;
 		}
 	}
+	return (0);
 }

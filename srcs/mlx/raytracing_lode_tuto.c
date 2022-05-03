@@ -84,7 +84,7 @@ void	raytracing(t_player *player, t_file *file, t_mlx *mlx)
 				side = 1;
 			}
 			//check 
-			if (file->scene[mapY][mapX] == '1')
+			if (file->scene[mapY][mapX +stepX] == '1' ||file->scene[mapY + stepY][mapX] == '1')
 			{
 				hit = 1;
 			}

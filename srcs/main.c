@@ -29,10 +29,11 @@ int	main (int ac, char **av)
 	return (0);
 }
 
-//TODO
+
+
+//TO DO
 
 //FINIR PARSING
-
 //POINT COLLISION AVEC MUR
 //AFFICHER 1 RAY COMPLET
 //AFFICHER 2 FAISEAUX, 1X -30 DEGR  1X +30DEGR POUR PT OF VIEW

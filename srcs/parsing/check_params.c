@@ -12,6 +12,16 @@
 
 #include "cub.h"
 
+void	free_tab(char **tab)
+{
+	int i;
+
+	i = -1;
+	while (tab[++i])
+		free(tab[i]);
+	free(tab);
+}
+
 static int	fill_color(char *str, int *color)
 {
 	int		i;
@@ -26,19 +36,19 @@ static int	fill_color(char *str, int *color)
 		return (1);
 	i = arraylen(tmp);
 	if (i != 3)
-		return (write(2, "Error\nWrong nb of colors\n", 25), 1);
+		return (free_tab(tmp), write(2, "Error\nWrong nb of colors\n", 25), 1);
 	i = -1;
 	while (tmp[++i])
 	{
 		j = -1;
 		while (tmp[i][++j])
 			if (!ft_isdigit(tmp[i][j]))
-				return (printf("char: %c, i: %d, j: %d\n", tmp[i][j], i, j), write(2, "Error\nForbidden char detected\n", 30), 1);
+				return (free_tab(tmp), write(2, "Error\nForbidden char detected\n", 30), 1);
 		if (ft_atoi(tmp[i]) < 0 || ft_atoi(tmp[i]) > 255)
-			return (write(2, "Error\nWrong color value\n", 24), 1);
+			return (free_tab(tmp), write(2, "Error\nWrong color value\n", 24), 1);
 	}
 	*color = create_trgb(0, ft_atoi(tmp[0]), ft_atoi(tmp[1]), ft_atoi(tmp[2]));
-	//free *tmp etc...
+	free_tab(tmp);
 	return (0);
 }
 
@@ -48,7 +58,11 @@ static int	fill_texture(char *str, char **texture)
 
 	i = 2;
 	i += parse_spaces(str + 2);
+	if (*texture)
+		free(*texture);
 	*texture = ft_substr(str, i, ft_strlen(str));
+	if (!(*texture))
+		return (write(2, "Error\nMalloc failed.\n", 22), 1);
 	if (ft_strncmp(".xpm", &texture[0][ft_strlen(texture[0]) - 4], 4))
 		return (write(2, "Error\nWrong texture extension.\n", 31), 1);
 	return (0);

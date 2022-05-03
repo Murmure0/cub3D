@@ -200,5 +200,7 @@ void	put_first_ray(t_file *file, t_mlx *mlx, t_player *player, t_ray *ray);
 
 //TESTING FCT
 void	raytracing(t_player *player, t_file *file, t_mlx *mlx);
+//TODEL
+void	print_map(char **map);
 
 # endif

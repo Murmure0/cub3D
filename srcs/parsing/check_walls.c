@@ -143,6 +143,7 @@ int	check_walls(t_file *file)
 {
 	if (convert_list_to_array(file))
 		return (1);
+	print_map(file->scene);
 	if (check_first_line(file->scene)
 		|| check_last_line(file->scene, ft_lstsize(file->map) - 1))
 		return (write(2, "Error\nMap not walled in\n", 25), 1);

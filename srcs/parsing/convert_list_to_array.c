@@ -93,6 +93,30 @@ void	free_scene(t_file *file, int i)
 	free(file->scene);
 }
 
+int	trim_end_spaces(t_file *file)
+{
+	int		y;
+	int		x;
+	int		len;
+	char	*tmp;
+
+	y = -1;
+	while (file->scene[++y])
+	{
+		x = 0;
+		len = ft_strlen(file->scene[y]);
+		while (is_space(file->scene[y][--len]))
+			x++;
+		tmp = ft_strdup(file->scene[y]);
+		free(file->scene[y]);
+		file->scene[y] = ft_substr(tmp, 0, len - x);
+		free(tmp);
+		if (!file->scene[y])
+			return (write(2, "Error\nMalloc failed.\n", 21), 1);
+	}
+	return (0);
+}
+
 int	convert_list_to_array(t_file *file)
 {
 	int		i;
@@ -113,5 +137,7 @@ int	convert_list_to_array(t_file *file)
 		i++;
 	}
 	file->scene[i] = 0;
+	// if (trim_end_spaces(file)) trims too much
+	// 	return (1);
 	return (0);
 }

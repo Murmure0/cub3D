@@ -71,7 +71,7 @@ static int	read_file(int fd, t_file *file)
 		return (write(2, "Error\nEmpty file.\n", 18), 1);
 	file->map = ft_lstnew(line);
 	if (!file->map)
-		return (write(2, "Error\nMalloc failed.\n", 22), 1);
+		return (free(line), write(2, "Error\nMalloc failed.\n", 21), 1);
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -98,6 +98,30 @@ void	print_map(char **map)
 		printf("%s\n", map[i]);
 }
 
+void	free_params(t_file *file)
+{
+	ft_lstclear(&file->map, free);
+	if (file->param->no)
+		free(file->param->no);
+	if (file->param->so)
+		free(file->param->so);
+	if (file->param->we)
+		free(file->param->we);
+	if (file->param->ea)
+		free(file->param->ea);
+}
+
+void	fill_map_dimensions(t_file *file)
+{
+	int	i;
+
+	i = 0;
+	while (file->scene[i])
+		i++;
+	file->map_h = i;
+	file->map_w = ft_strlen(file->scene[0]);
+}
+
 int	parse_file(t_file *file, int ac, char **av)
 {
 	int	fd;
@@ -107,14 +131,18 @@ int	parse_file(t_file *file, int ac, char **av)
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0)
 		return (perror("Error\nOpen"), 1);
-	if (read_file(fd, file))
+	if (read_file(fd, file)) //file->map malloc
 		return (1);
-	join_split_params(file);
-	if (check_params(file))
-		return (1);
-	if (check_map(file))
-		return (1);
+	if (join_split_params(file))
+		return (free_params(file), 1);
+	if (check_params(file)) //texture malloc
+		return (free_params(file), 1);
+	if (check_map(file)) //file->scene malloc
+		return (free_params(file), 1);
 	convert_space_to_wall(file->scene);
+	if (fill_map(file->scene))
+		return (free_params(file), 1);
+	fill_map_dimensions(file);
 	//trim_map_into_shape(file); PROBLEM, NOT CONSIDERING SMALLER OR LONGER LINES
 	print_map(file->scene); //to Delete
 	return (0);

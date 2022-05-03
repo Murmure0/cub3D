@@ -99,6 +99,7 @@ void	raytracing(t_player *player, t_file *file, t_mlx *mlx)
 				mapY += stepY;
 				side = 1;
 			}
+<<<<<<< HEAD
 			if (mapY >= 0 && mapY < distanceMax
 				&& mapX >= 0
 				&& mapX < distanceMax )
@@ -108,6 +109,13 @@ void	raytracing(t_player *player, t_file *file, t_mlx *mlx)
 						hit = 1;
 					}
 				}
+=======
+			//check 
+			if (file->scene[mapY][mapX +stepX] == '1' ||file->scene[mapY + stepY][mapX] == '1')
+			{
+				hit = 1;
+			}
+>>>>>>> 658afae44a718cb0e65d50b29b43b0a2e60e7008
 		}
 				//printf("MAP COORDS x %c\n, x%d, y%d\n", file->scene[mapY][mapX], mapX, mapY);
 

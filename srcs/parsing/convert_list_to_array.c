@@ -27,38 +27,40 @@ static int	spacedstrlen(char *str)
 	return (i + tab * 4 - tab);
 }
 
-static int	fill_str_with_spaces(t_file *file, int i, int j)
+static int	fill_str_with_spaces(t_file *file, int i, int k)
 {
-	int	k;
+	int	j;
 
-	k = 0;
-	while (k < 4)
+	j = 0;
+	while (j < 4)
 	{
-		file->scene[i][j] = ' ';
+		file->scene[i][k] = ' ';
 		j++;
 		k++;
 	}
-	return (k);
+	return (j);
 }
 
 static int	fill_scene(t_file *file, t_list *tmp, int i)
 {
 	int		j;
+	int		k;
 	char	*str;
 
 	str = tmp->content;
 	file->scene[i] = malloc(sizeof(char) * (spacedstrlen(str) + 1));
 	if (!file->scene[i])
 		return (write(2, "Error\nMalloc failed.\n", 20), 1);
-	j = 0;
-	while (str[j])
+	j = -1;
+	k = 0;
+	while (str[++j])
 	{
 		if (str[j] == '\t')
-			j += fill_str_with_spaces(file, i, j);
+			k += fill_str_with_spaces(file, i, k);
 		else
 		{
-			file->scene[i][j] = str[j];
-			j++;
+			file->scene[i][k] = str[j];
+			k++;
 		}
 	}
 	file->scene[i][j] = 0;
@@ -84,6 +86,13 @@ static int	check_for_newline(t_list *map)
 	return (0);
 }
 
+void	free_scene(t_file *file, int i)
+{
+	while (file->scene[--i])
+		free(file->scene[i]);
+	free(file->scene);
+}
+
 int	convert_list_to_array(t_file *file)
 {
 	int		i;
@@ -95,11 +104,11 @@ int	convert_list_to_array(t_file *file)
 	tmp = file->map;
 	file->scene = malloc(sizeof(char *) * (ft_lstsize(file->map) + 1));
 	if (!file->scene)
-		return (write(2, "Error\nMalloc failed.\n", 20), 1);
+		return (write(2, "Error\nMalloc failed.\n", 21), 1);
 	while (tmp)
 	{
 		if (fill_scene(file, tmp, i))
-			return (1);
+			return (free_scene(file, i), 1);
 		tmp = tmp->next;
 		i++;
 	}

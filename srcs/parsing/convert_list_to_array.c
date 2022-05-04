@@ -137,7 +137,7 @@ int	convert_list_to_array(t_file *file)
 		i++;
 	}
 	file->scene[i] = 0;
-	// if (trim_end_spaces(file)) trims too much
-	// 	return (1);
+	if (trim_end_spaces(file)) trims too much
+		return (1);
 	return (0);
 }

@@ -105,7 +105,7 @@ int	trim_end_spaces(t_file *file)
 	{
 		x = 0;
 		len = ft_strlen(file->scene[y]);
-		while (is_space(file->scene[y][--len]))
+		while (is_space(file->scene[y][len--]))
 			x++;
 		tmp = ft_strdup(file->scene[y]);
 		free(file->scene[y]);
@@ -137,7 +137,9 @@ int	convert_list_to_array(t_file *file)
 		i++;
 	}
 	file->scene[i] = 0;
+	print_map(file->scene);
 	if (trim_end_spaces(file))
 		return (1);
+	print_map(file->scene);
 	return (0);
 }

@@ -41,8 +41,7 @@ static int	check_middle_lines(char **wall, int max_size)
 {
 	int	i;
 	int	j;
-	int	len_up;
-	int	len_down;
+	int	len;
 
 	i = 0;
 	while (wall[++i] && i < max_size)
@@ -59,7 +58,7 @@ static int	check_middle_lines(char **wall, int max_size)
 					if (wall[i][j + 1] != '1' && !is_space(wall[i][j + 1]))
 						return (1);
 					len = ft_strlen(wall[i - 1]);
-					if (len >= x)
+					if (len >= j)
 					{
 						if (wall[i - 1][j] != '1' && !is_space(wall[i - 1][j]))
 							return (1);
@@ -67,7 +66,7 @@ static int	check_middle_lines(char **wall, int max_size)
 					else
 						return (1);
 					len = ft_strlen(wall[i + 1]);
-					if (len >= x)
+					if (len >= j)
 					{
 						if (wall[i + 1][j] != '1' && !is_space(wall[i + 1][j]))
 							return (1);
@@ -76,7 +75,7 @@ static int	check_middle_lines(char **wall, int max_size)
 						return (1);
 				}
 				else
-					if (strlen(wall[i + 1][j] < j || strlen(wall[i - 1][j] < j))
+					if (ft_strlen(wall[i + 1] < j) || ft_strlen(wall[i - 1] < j))
 						return (1);
 			}
 		}

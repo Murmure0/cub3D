@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:20:00 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/05 15:14:10 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/05 18:21:34 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,11 +199,7 @@ void	put_first_ray(t_file *file, t_mlx *mlx, t_player *player, t_ray *ray);
 
 //TESTING FCT
 void	raytracing(t_player *player, t_file *file, t_mlx *mlx);
-<<<<<<< HEAD
-void new_ratracing(t_ray *ray, t_player *player, t_mlx * mlx, t_file *file);
-=======
 //TODEL
 void	print_map(char **map);
->>>>>>> c16b28da50d8e9c7803db8e3f75509f32f35bbff
 
 # endif

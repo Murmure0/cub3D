@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 15:58:45 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/03 15:22:19 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/05 18:21:52 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,23 +99,11 @@ void	raytracing(t_player *player, t_file *file, t_mlx *mlx)
 				mapY += stepY;
 				side = 1;
 			}
-<<<<<<< HEAD
-			if (mapY >= 0 && mapY < distanceMax
-				&& mapX >= 0
-				&& mapX < distanceMax )
-				{
-					if (file->scene[mapY][mapX] == '1')
-					{
-						hit = 1;
-					}
-				}
-=======
 			//check 
 			if (file->scene[mapY][mapX +stepX] == '1' ||file->scene[mapY + stepY][mapX] == '1')
 			{
 				hit = 1;
 			}
->>>>>>> c16b28da50d8e9c7803db8e3f75509f32f35bbff
 		}
 				//printf("MAP COORDS x %c\n, x%d, y%d\n", file->scene[mapY][mapX], mapX, mapY);
 

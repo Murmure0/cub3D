@@ -79,7 +79,8 @@ static int	check_middle_lines(char **wall, int max_size)
 						return (1);
 			}
 		}
-		return (0);
+	}
+	return (0);
 }
 
 static int	check_last_line(char **wall, int i)

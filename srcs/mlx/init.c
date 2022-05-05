@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 17:37:44 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/02 16:47:29 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/05 18:15:58 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,27 +57,27 @@ void	init_img(t_mlx *mlx, t_file *file, t_img *img_xpm)
 			&img_width, &img_height);
 }
 
-//MOST LIKELY UNUSED
-void init_dir(t_mlx *mlx, int x, int y, double player_dir)
-{
-	mlx->player->dirX = x;
-	mlx->player->dirY = y;
-	mlx->player->player_dir = player_dir;
-	mlx->player->planeX = 0;
-	mlx->player->planeY = 0.66;
-}
-
 /*Initialise la direction du player en fontion de la lettre N/S/E/W*/
 void	init_dir_player(t_mlx *mlx, t_file *file, int x, int y)
 {
 	if (file->scene[y][x] == 'N')
-		init_dir(mlx, 0, -1, (M_PI/2));
+		mlx->player->player_dir = M_PI/2;
 	else if(file->scene[y][x] == 'E')
-		init_dir(mlx, 1, 0, 0);
+		mlx->player->player_dir = 0;
 	else if(file->scene[y][x] == 'W')
-		init_dir(mlx, -1, 0, M_PI);
+		mlx->player->player_dir = M_PI;
 	else if(file->scene[y][x] == 'S')
-		init_dir(mlx, 0, 1, (3 * M_PI/2));
+		mlx->player->player_dir = 3 * M_PI/2;
+}
+
+void	init_push_button(t_mlx *mlx)
+{
+	mlx->player->up_press = 0;
+	mlx->player->down_press = 0;
+	mlx->player->right_press = 0;
+	mlx->player->left_press = 0;
+	mlx->player->rot_l_press = 0;
+	mlx->player->rot_r_press = 0;
 }
 
 /*Initialise la position du player dans sa structure*/
@@ -96,14 +96,15 @@ void	init_player(t_mlx *mlx, t_file *file)
 			if (file->scene[y][x] == 'N' || file->scene[y][x] == 'E' ||
 			file->scene[y][x] == 'W' || file->scene[y][x] == 'S')
 			{
-				mlx->player->x_pos = x;
-				mlx->player->dx_pos = (double)x;
+				mlx->player->x_pos = x ;
+				mlx->player->dx_pos = (double)x + 0.5;
 				mlx->player->y_pos = y;
-				mlx->player->dy_pos = (double)y;
+				mlx->player->dy_pos = (double)y + 0.5;
 				init_dir_player(mlx, file, x, y);
 			}
 		}
 	}
+	init_push_button(mlx);
 }
 
 /*
@@ -164,8 +165,3 @@ int launch_mlx(t_mlx *mlx, t_file *file, t_img *img_xpm)
 	mlx_loop_hook(mlx->init_ptr, render_next_frame, mlx);
 	return (0);
 }
-
-/*WIP :
-- creer un fuseau de vecteur qui vont evaluer tout ce qui est afficher dans notre ecran, FOV = 60 degré
-- calcul de la distance des murs avec DDA or "Digital Differential Analysis" => leur hauteur
-*/

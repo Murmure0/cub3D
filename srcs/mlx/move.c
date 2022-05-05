@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:32:20 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/02 18:25:10 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/05 18:15:37 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	press_move_up(t_mlx *mlx)
 	dirX = cos(mlx->player->player_dir);
 	dirY = sin(mlx->player->player_dir);
 	new_dx_pos = mlx->player->dx_pos + dirX * SPEED;
-	new_dy_pos = mlx->player->dy_pos - dirY * SPEED;
-	if (mlx->file->scene[(int)(new_dy_pos - SPEED)][(int)(new_dx_pos + SPEED)] != '1')
+	new_dy_pos = mlx->player->dy_pos + dirY * SPEED;
+	if (mlx->file->scene[(int)(new_dy_pos - 2*SPEED)][(int)(new_dx_pos + 2*SPEED)] != '1')
 	{
 		mlx->player->dx_pos = new_dx_pos;
 		mlx->player->dy_pos = new_dy_pos;
@@ -56,8 +56,8 @@ void	press_move_down(t_mlx *mlx)
 	dirX = cos(mlx->player->player_dir);
 	dirY = sin(mlx->player->player_dir);
 	new_dx_pos = mlx->player->dx_pos - dirX * SPEED;
-	new_dy_pos = mlx->player->dy_pos + dirY * SPEED;
-	if (mlx->file->scene[(int)(new_dy_pos + SPEED)][(int)(new_dx_pos + SPEED)] != '1')
+	new_dy_pos = mlx->player->dy_pos - dirY * SPEED;
+	if (mlx->file->scene[(int)(new_dy_pos + 2*SPEED)][(int)(new_dx_pos + 2*SPEED)] != '1')
 	{
 		mlx->player->dx_pos = new_dx_pos;
 		mlx->player->dy_pos = new_dy_pos;
@@ -75,7 +75,7 @@ void	press_move_left(t_mlx *mlx)
 	dirY = sin(mlx->player->player_dir - (M_PI/2));
 	new_dx_pos = mlx->player->dx_pos + dirX * SPEED;
 	new_dy_pos = mlx->player->dy_pos + dirY * SPEED;
-	if (mlx->file->scene[(int)(new_dy_pos + SPEED)][(int)(new_dx_pos - SPEED)] != '1')
+	if (mlx->file->scene[(int)(new_dy_pos + 2*SPEED)][(int)(new_dx_pos - 2*SPEED)] != '1')
 	{
 		mlx->player->dx_pos = new_dx_pos;
 		mlx->player->dy_pos = new_dy_pos;
@@ -93,7 +93,7 @@ void	press_move_right(t_mlx *mlx)
 	dirY = sin(mlx->player->player_dir + (M_PI/2)) ;
 	new_dx_pos = mlx->player->dx_pos + dirX * SPEED;
 	new_dy_pos = mlx->player->dy_pos + dirY * SPEED;
-	if (mlx->file->scene[(int)(new_dy_pos + SPEED)][(int)(new_dx_pos + SPEED)] != '1')
+	if (mlx->file->scene[(int)(new_dy_pos + 2*SPEED)][(int)(new_dx_pos + 2*SPEED)] != '1')
 	{
 		mlx->player->dx_pos = new_dx_pos;
 		mlx->player->dy_pos = new_dy_pos;
@@ -102,30 +102,16 @@ void	press_move_right(t_mlx *mlx)
 
 void	press_turn_left(t_mlx *mlx)
 {
-	mlx->player->player_dir += SPEED;
+	mlx->player->player_dir -= SPEED;
 	if (mlx->player->player_dir < 0) // on reinitialise la position apres un tour complet
 		mlx->player->player_dir += 2 * M_PI;
-
-	double oldDirX = mlx->player->dirX;
-	mlx->player->dirX = mlx->player->dirX * cos(SPEED) - mlx->player->dirY * sin(SPEED);
-	mlx->player->dirY = oldDirX * sin(SPEED) + mlx->player->dirY * cos(SPEED);
-	double oldPlaneX = mlx->player->planeX;
-	mlx->player->planeX = mlx->player->planeX * cos(SPEED) - mlx->player->planeY * sin(SPEED);
-	mlx->player->planeY = oldPlaneX * sin(SPEED) + mlx->player->planeY * cos(SPEED);
 }
 
 void	press_turn_right(t_mlx *mlx)
 {
-	mlx->player->player_dir -= SPEED;
+	mlx->player->player_dir += SPEED;
 	if (mlx->player->player_dir > 2 * M_PI) //idem
 		mlx->player->player_dir -= 2 * M_PI;
-
-	double oldDirX = mlx->player->dirX;
-	mlx->player->dirX = mlx->player->dirX * cos(-SPEED) - mlx->player->dirY * sin(-SPEED);
-	mlx->player->dirY = oldDirX * sin(-SPEED) + mlx->player->dirY * cos(-SPEED);
-	double oldPlaneX = mlx->player->planeX;
-	mlx->player->planeX = mlx->player->planeX * cos(-SPEED) - mlx->player->planeY * sin(-SPEED);
-	mlx->player->planeY = oldPlaneX * sin(-SPEED) + mlx->player->planeY * cos(-SPEED);
 }
 
 /*WIP : trouver comment prendre en compte l'appuyage de la touche pour que ce soit plus smooth dans les deplacements*/
@@ -139,25 +125,20 @@ int	deal_press_key(int keycode, t_mlx *mlx)
 		exit(0);
 	}
 	else if (keycode == 13)
-		press_move_up(mlx);
+		mlx->player->up_press = 1;
 	else if (keycode == 0)
-		press_move_left(mlx);
+		mlx->player->left_press = 1;
 	else if (keycode == 1)
-		press_move_down(mlx);
+		mlx->player->down_press = 1;
 	else if (keycode == 2)
-		press_move_right(mlx);
+		mlx->player->right_press = 1;
 	else if (keycode == 123)
-		press_turn_left(mlx);
+		mlx->player->rot_l_press = 1;
 	else if (keycode == 124)
-		press_turn_right(mlx);
+		mlx->player->rot_r_press = 1;
 	return (0);
 }
 
-/*
-WIP : Actualise la variable mlx->player->(direction)_press, qui indique si on est en train de presser une touche : 
-au moment de relacher la touche la variable est remise a 0,
-elle passe à 1 dans la fonction deal_press_key lorsque la touche est pressée
-*/
 int	deal_release_key(int keycode, t_mlx *mlx)
 {
 	(void)mlx;
@@ -170,9 +151,9 @@ int	deal_release_key(int keycode, t_mlx *mlx)
 		mlx->player->down_press = 0;
 	else if (keycode == 2)
 		mlx->player->right_press = 0;
-	// else if (keycode == 123)
-	// 	release_turn_left(mlx, file);
-	// else if (keycode == 124)
-	// 	release_turn_right(mlx, file);
+	else if (keycode == 123)
+		mlx->player->rot_l_press = 0;
+	else if (keycode == 124)
+		mlx->player->rot_r_press = 0;
 	return (0);
 }

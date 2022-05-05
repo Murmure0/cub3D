@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:20:00 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/02 18:21:47 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/05 15:14:10 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct s_player{
 	double		dx_pos; //dx_pos & dy_pos : the position vector of the player
 	double		dy_pos;
 	double		player_dir;
+	double		cam_dir;
 	double		dirX; //dirX(cos(player_dir)) & dirY(sin(player_dir)) : the direction of the player
 	double		dirY;
 	double		planeX;
@@ -90,6 +91,8 @@ typedef struct s_player{
 	int			down_press;
 	int			left_press;
 	int			right_press;
+	int			rot_l_press;
+	int			rot_r_press;
 }				t_player;
 
 /*DDA/raytracing :
@@ -97,34 +100,24 @@ reprends une partie des var de t_player pour pouvoir eventuellement
 les modifier lors des calculs du raytracing*/
 typedef struct s_ray
 {
-	int			r_x_pos; //vPlayer : position du player au debut en int (tab de la map)
-	int			r_y_pos; //vPlayer : position du player au debut en int (tab de la map)
-
-	double		r_dx_pos; //vRaystart : position du player au debut en double (map)
-	double		r_dy_pos; //vRaystart : position du player au debut en double (map)
-
-	double		r_player_dir; //vRaydir  : dir dans laquelle le joueur regarde, en radian
-
-	double		r_dirX; //dirX(cos(player_dir)) : the direction of the player on x axe
-	double		r_dirY; // dirY(sin(player_dir)) : the direction of the player on y axe
-
-	double		r_ray_unit_step_size_x; //position du rayon sur x durant le calcul
-	double		r_ray_unit_step_size_y; //position du rayon sur y durant le calcul
-
-	int			r_map_check_x; // reprend la pos du player/rayon initiale en int sur x (tab de la map)
-	int			r_map_check_y; // reprend la pos du player/rayon initiale en int sur y (tab de la map)
-
-	double		r_raylength_x; //stock la position actulle temporaire du rayon sur x (map)
-	double		r_raylength_y; //stock la position actulle temporaire du rayon sur y (map)
-	
-	int			r_step_x; //stock la position actulle temporaire du rayon sur x en int (tab de la map)
-	int			r_step_y; //stock la position actulle temporaire du rayon sur y en int (tab de la map)
-
-	double		r_dist_x;
-	double		r_dist_y;
-
+	double		p_dx_pos; //vRaystart : position du player au debut en double (map)
+	double		p_dy_pos; //vRaystart : position du player au debut en double (map)
+	int			p_map_check_x; // reprend la pos du player/rayon initiale en int sur x (tab de la map)
+	int			p_map_check_y; // reprend la pos du player/rayon initiale en int sur y (tab de la map)
+	double		r_dir_x; //dirX(cos(player_dir)) : the direction of the player on x axe
+	double		r_dir_y; // dirY(sin(player_dir)) : the direction of the player on y axe
+	double		r_step_size_x; //position du rayon sur x durant le calcul
+	double		r_step_size_y; //position du rayon sur y durant le calcul
+	double		r_dist;
+	int			hit;
 	double		hit_x;
 	double		hit_y;
+	int			side;
+	double		r_len_x; // longueur de l'hyp sur l'axe sur lequel on bosse
+	double		r_len_y;
+	int			r_step_x; // 1 / -1 : on avance avec cette dir sur X/Y
+	int			r_step_y;
+	double		line_len;
 }	t_ray;
 
 /*Dans de nb fonctions de la mlx on ne peut passer qu'une variable en parametre : 
@@ -192,6 +185,12 @@ int put_ceiling(t_mlx *mlx, t_file *file, int k, double l);
 /* -- move.c -- */
 int		deal_press_key(int keycode, t_mlx *mlx);
 int		deal_release_key(int keycode, t_mlx *mlx);
+void	press_move_up(t_mlx *mlx);
+void	press_move_down(t_mlx *mlx);
+void	press_move_left(t_mlx *mlx);
+void	press_move_right(t_mlx *mlx);
+void	press_turn_left(t_mlx *mlx);
+void	press_turn_right(t_mlx *mlx);
 
 /* -- raytracing.c -- */
 int		put_ray(t_file *file, t_mlx *mlx, t_player *player);
@@ -200,5 +199,6 @@ void	put_first_ray(t_file *file, t_mlx *mlx, t_player *player, t_ray *ray);
 
 //TESTING FCT
 void	raytracing(t_player *player, t_file *file, t_mlx *mlx);
+void new_ratracing(t_ray *ray, t_player *player, t_mlx * mlx, t_file *file);
 
 # endif

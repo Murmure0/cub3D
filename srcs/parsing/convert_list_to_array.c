@@ -63,7 +63,7 @@ static int	fill_scene(t_file *file, t_list *tmp, int i)
 			k++;
 		}
 	}
-	file->scene[i][j] = 0;
+	file->scene[i][k] = 0;
 	return (0);
 }
 

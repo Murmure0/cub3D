@@ -75,7 +75,7 @@ static int	check_middle_lines(char **wall, int max_size)
 						return (1);
 				}
 				else
-					if (ft_strlen(wall[i + 1] < j) || ft_strlen(wall[i - 1] < j))
+					if (ft_strlen(wall[i + 1]) < j || ft_strlen(wall[i - 1]) < j)
 						return (1);
 			}
 		}

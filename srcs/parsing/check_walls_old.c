@@ -12,8 +12,6 @@
 
 #include "cub.h"
 
-
-//obsolete fct
 static int	check_around_space(char **wall, int i, int j)
 {
 	int	len;
@@ -47,40 +45,54 @@ static int	check_middle_lines(char **wall, int max_size)
 	i = 0;
 	while (wall[++i] && i < max_size)
 	{
-		if (check_left_wall(wall[i]) || check_right_wall(wall[i]))
-			return (1);
 		j = -1;
+		len_up = ft_strlen(wall[i - 1]);
+		len_down = ft_strlen(wall[i + 1]);
 		while (wall[i][++j])
 		{
-			if (wall[i][j] != '1')
+			if (wall[i][j] == ' ')
+				if (check_around_space(wall, i, j))
+					return (1);
+		}
+		if (len_up > j)
+		{
+			while (wall[i - 1][j])
 			{
-				if (is_space(wall[i][j]))
-				{
-					if (wall[i][j + 1] != '1' && !is_space(wall[i][j + 1]))
-						return (1);
-					len = ft_strlen(wall[i - 1]);
-					if (len >= x)
-					{
-						if (wall[i - 1][j] != '1' && !is_space(wall[i - 1][j]))
-							return (1);
-					}
-					else
-						return (1);
-					len = ft_strlen(wall[i + 1]);
-					if (len >= x)
-					{
-						if (wall[i + 1][j] != '1' && !is_space(wall[i + 1][j]))
-							return (1);
-					}
-					else
-						return (1);
-				}
-				else
-					if (strlen(wall[i + 1][j] < j || strlen(wall[i - 1][j] < j))
-						return (1);
+				if (wall[i - 1][j] != '1')
+					return (1);
+				j++;
 			}
 		}
-		return (0);
+		if (len_down > j)
+		{
+			while (wall[i + 1][j])
+			{
+				if (wall[i + 1][j] != '1')
+					return (1);
+				j++;
+			}
+		}
+
+		//---
+		if (check_left_wall(wall[i]) || check_right_wall(wall[i]))
+			return (1);
+		//if (curr iter != '1')
+			//check in all directions that a 1 is touched
+			//left:
+			//while (curr iter > 0)
+			//	if == '1'
+			//right (while != 0)
+			// ...
+			//up && down
+			//while strlen > curr_iter
+			//	lf '1'
+			//	if strlen < curr_iter && no '1'
+			//		error;
+
+			 //if strlen of up/down < curr iter, ERROR 
+
+	}
+	return (0);
 }
 
 static int	check_last_line(char **wall, int i)
@@ -98,15 +110,23 @@ static int	check_last_line(char **wall, int i)
 				&& wall[i][j + 1] != 0 && wall[i][j + 1] != EOF)
 				return (1);
 			if (len >= j)
-			{
-				if (wall[i - 1][j] != '1' && !is_space(wall[i - 1][j]))
+				if (wall[i - 1][j] != '1' && !is_space(wall[i - 1][j])
+					&& wall[i - 1][j] != 0 && wall[i - 1][j] != EOF)
 					return (1);
-			}
-			else
+			if (len < j && wall[i][j] == '0')
 				return (1);
 		}
 		else if (wall[i][j] != '1')
 			return (1);
+	}
+	if (len > j)
+	{
+		while (wall[i - 1][j])
+		{
+			if (wall[i - i][j] != '1')
+				return (1);
+			j++;
+		}
 	}
 	return (0);
 }
@@ -122,15 +142,14 @@ static int	check_first_line(char **wall)
 	{
 		if (is_space(wall[0][x]))
 		{
-			if (wall[0][x + 1] != '1' && !is_space(wall[0][x + 1]))
+			//check up down left right until i hit a '1' + if up/down strlen < current x, error
+			if (wall[0][x + 1] != '1' && !is_space(wall[0][x + 1])
+				&& wall[0][x + 1] != 0 && wall[0][x + 1] != EOF)
 				return (1);
 			if (len >= x)
-			{
-				if (wall[1][x] != '1' && !is_space(wall[1][x]))
+				if (wall[1][x] != '1' && !is_space(wall[1][x])
+					&& wall[1][x] != 0 && wall[1][x] != EOF)
 					return (1);
-			}
-			else
-				return (1);
 		}
 		else if (wall[0][x] != '1')
 			return (1);
@@ -140,7 +159,8 @@ static int	check_first_line(char **wall)
 
 int	check_walls(t_file *file)
 {
-//	print_map(file->scene);
+	
+	print_map(file->scene);
 	if (check_first_line(file->scene)
 		|| check_last_line(file->scene, ft_lstsize(file->map) - 1))
 		return (write(2, "Error\nMap not walled in\n", 25), 1);

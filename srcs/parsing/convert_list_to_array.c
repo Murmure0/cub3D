@@ -79,7 +79,7 @@ static int	check_for_newline(t_list *map)
 	{
 		str = tmp->content;
 		i = parse_spaces(str);
-		if (str[i] == 0 || str[0] == '\n')
+		if (str[i] == 0 || str[0] == '\n' || str[i] == EOF)
 			return (1);
 		tmp = tmp->next;
 	}

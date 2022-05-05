@@ -137,9 +137,11 @@ int	convert_list_to_array(t_file *file)
 		i++;
 	}
 	file->scene[i] = 0;
+	printf("BEFORE\n");
 	print_map(file->scene);
 	if (trim_end_spaces(file))
 		return (1);
+	printf("AFTER\n");
 	print_map(file->scene);
 	return (0);
 }

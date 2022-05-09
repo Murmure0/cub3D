@@ -63,7 +63,7 @@ static int	fill_scene(t_file *file, t_list *tmp, int i)
 			k++;
 		}
 	}
-	file->scene[i][j] = 0;
+	file->scene[i][k] = 0;
 	return (0);
 }
 
@@ -79,7 +79,7 @@ static int	check_for_newline(t_list *map)
 	{
 		str = tmp->content;
 		i = parse_spaces(str);
-		if (str[i] == 0 || str[0] == '\n')
+		if (str[i] == 0 || str[0] == '\n' || str[i] == EOF)
 			return (1);
 		tmp = tmp->next;
 	}
@@ -137,7 +137,11 @@ int	convert_list_to_array(t_file *file)
 		i++;
 	}
 	file->scene[i] = 0;
+	printf("BEFORE\n");
+	print_map(file->scene);
 	if (trim_end_spaces(file))
 		return (1);
+	printf("AFTER\n");
+	print_map(file->scene);
 	return (0);
 }

@@ -47,6 +47,8 @@ static int	check_map(t_file *file)
 		return (write(2, "Error\nMap too small\n", 20), 1);
 	if (check_chars_used(file->map))
 		return (1);
+	if (convert_list_to_array(file))
+		return (1);
 	if (check_walls(file))
 		return (1);
 	return (0);
@@ -85,6 +87,7 @@ static int	read_file(int fd, t_file *file)
 		}
 		ft_lstadd_back(&file->map, chain);
 	}
+	close(fd);
 	return (0);
 }
 
@@ -132,19 +135,21 @@ int	parse_file(t_file *file, int ac, char **av)
 	if (fd < 0)
 		return (perror("Error\nOpen"), 1);
 	if (read_file(fd, file)) //file->map malloc
-		return (1);
+		return (close(fd), 1);
 	if (join_split_params(file))
 		return (free_params(file), 1);
 	if (check_params(file)) //texture malloc
 		return (free_params(file), 1);
 	if (check_map(file)) //file->scene malloc
 		return (free_params(file), 1);
+
+	
 	convert_space_to_wall(file->scene);
 	if (fill_map(file->scene))
 		return (free_params(file), 1);
-	fill_map_dimensions(file);
+//	fill_map_dimensions(file);
 	//trim_map_into_shape(file); PROBLEM, NOT CONSIDERING SMALLER OR LONGER LINES
-	print_map(file->scene); //to Delete
+	//print_map(file->scene); //to Delete
 	return (0);
 }
 

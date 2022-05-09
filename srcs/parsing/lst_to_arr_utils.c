@@ -1,4 +1,3 @@
-
 #include "cub.h"
 
 void	free_scene(t_file *file, int i)

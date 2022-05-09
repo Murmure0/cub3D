@@ -183,6 +183,7 @@ int		arraylen(char **array);
 void	free_tab(char **tab);
 int		fill_line(char	**str, int max_len);
 int		fill_map(char **scene);
+char	*trim(char *str);
 
 /* --- MLX --- */
 /* -- init.c -- */

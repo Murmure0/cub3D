@@ -107,5 +107,3 @@ int	parse_file(t_file *file, int ac, char **av)
 	init_map_size(file);
 	return (0);
 }
-
-

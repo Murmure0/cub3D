@@ -12,7 +12,7 @@ int	arraylen(char **array)
 
 void	free_tab(char **tab)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (tab[++i])
@@ -72,4 +72,29 @@ int	fill_map(char **scene)
 		}
 	}
 	return (0);
+}
+
+static char	*trim(char *str)
+{
+	char	*cpy;
+	size_t	len;
+	size_t	i;
+	size_t	j;
+
+	if (str == NULL)
+		return (NULL);
+	j = 0;
+	while (str[j] && is_space(str[j]))
+		j++;
+	len = ft_strlen(str);
+	while (is_space(str[len - 1]) && len > j)
+		len--;
+	cpy = malloc(sizeof(*str) * (len - j + 1));
+	if (!cpy)
+		return (cpy);
+	i = 0;
+	while (j < len)
+		cpy[i++] = str[j++];
+	cpy[i] = 0;
+	return (cpy);
 }

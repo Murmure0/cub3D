@@ -42,8 +42,7 @@ static int	middle_lines(char **wall, int max_size)
 		{
 			if (wall[i][j] == '0' || is_player(wall[i][j]))
 			{
-				if (j > 0)
-				if (is_space(wall[i][j - 1]) || is_space(wall[i][j + 1]) || j == 0)
+				if (is_space(wall[i][j - 1]) || is_space(wall[i][j + 1]))
 					return (1);
 				if (adj_line(wall[i - 1], j) || adj_line(wall[i + 1], j))
 					return (1);
@@ -61,7 +60,7 @@ static int	last_line(char **wall, int i)
 	while (wall[i][++j])
 	{
 		if (wall[i][j] != '1' && is_space(wall[i][j]))
-		 	return (1);
+			return (1);
 	}
 	return (0);
 }

@@ -12,31 +12,6 @@
 
 #include "cub.h"
 
-static char	*trim(char *str)
-{
-	char	*cpy;
-	size_t	len;
-	size_t	i;
-	size_t	j;
-
-	if (str == NULL)
-		return (NULL);
-	j = 0;
-	while (str[j] && is_space(str[j]))
-		j++;
-	len = ft_strlen(str);
-	while (is_space(str[len - 1]) && len > j)
-		len--;
-	cpy = malloc(sizeof(*str) * (len - j + 1));
-	if (!cpy)
-		return (cpy);
-	i = 0;
-	while (j < len)
-		cpy[i++] = str[j++];
-	cpy[i] = 0;
-	return (cpy);
-}
-
 static int	check_for_colors(t_list *head)
 {
 	int		i;
@@ -116,13 +91,27 @@ static int	param_id_found(t_list **head, int i, t_list *tmp)
 	return (ret);
 }
 
+static int	join_lines(t_list *tmp, t_list *head)
+{
+	char	*cpy;
+
+	cpy = ft_strjoin(head->content, tmp->content);
+	if (!cpy)
+		return (write(2, "Error\nMalloc failed\n", 20), 1);
+	free(head->content);
+	head->content = cpy;
+	head->next = tmp->next;
+	ft_lstdelone(tmp, free);
+	tmp = head->next;
+	return (0);
+}
+
 int	join_split_params(t_file *file)
 {
 	t_list	*tmp;
 	t_list	*head;
-	char	*cpy;
 	char	*str;
-	int		ret;
+	int		ret;	
 
 	tmp = file->map;
 	while (tmp)
@@ -134,23 +123,14 @@ int	join_split_params(t_file *file)
 		else if (ret)
 		{
 			if (ret == -1)
-				return (write(2, "Error\nMalloc failed.\n", 22), 1);
-			else
-				tmp = tmp->next;
+				return (write(2, "Error\nMalloc failed\n", 20), 1);
+			tmp = tmp->next;
 		}
 		else if (param_id_found(&head, parse_spaces(str), tmp))
 			tmp = tmp->next;
 		else
-		{
-			cpy = ft_strjoin(head->content, tmp->content);
-			if (!cpy)
-				return (write(2, "Error\nMalloc failed.\n", 22), 1);
-			free(head->content);
-			head->content = cpy;
-			head->next = tmp->next;
-			ft_lstdelone(tmp, free);
-			tmp = head->next;
-		}
+			if (join_lines(tmp, head))
+				return (1);
 	}
 	return (0);
 }

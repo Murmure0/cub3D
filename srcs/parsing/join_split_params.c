@@ -114,7 +114,7 @@ int	join_split_params(t_file *file)
 	tmp = file->map;
 	while (tmp)
 	{
-		if ((char)(tmp->content[parse_spaces(tmp->content)]) == '\n')
+		if (((char)(tmp->content)[parse_spaces(tmp->content)]) == '\n')
 			tmp = tmp->next;
 		ret = map_id_found(&head, parse_spaces(tmp->content), tmp);
 		if (ret)

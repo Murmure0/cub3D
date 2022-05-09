@@ -81,7 +81,6 @@ static int	first_line(char **wall)
 
 int	check_walls(t_file *file)
 {
-	print_map(file->scene);
 	if (first_line(file->scene)
 		|| last_line(file->scene, ft_lstsize(file->map) - 1))
 		return (write(2, "Error\nMap not walled in\n", 25), 1);

@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:32:20 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/05 18:15:37 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/06 09:55:40 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	press_move_up(t_mlx *mlx)
 	dirY = sin(mlx->player->player_dir);
 	new_dx_pos = mlx->player->dx_pos + dirX * SPEED;
 	new_dy_pos = mlx->player->dy_pos + dirY * SPEED;
+
 	if (mlx->file->scene[(int)(new_dy_pos - 2*SPEED)][(int)(new_dx_pos + 2*SPEED)] != '1')
 	{
 		mlx->player->dx_pos = new_dx_pos;

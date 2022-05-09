@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 17:37:44 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/05 18:15:58 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/09 10:14:30 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,26 +35,6 @@ int	close_win(t_mlx *mlx, t_file *file)
 	free_all(file, mlx);
 	//system("leaks cub3d");
 	exit(0);
-}
-
-
-//CHECK MXL_XPM FOR ERROR. ON ERROR, FCT RETURNS NULL
-void	init_img(t_mlx *mlx, t_file *file, t_img *img_xpm)
-{
-	int img_width;
-	int img_height;
-
-	img_height = 32;
-	img_width = 32;
-
-	img_xpm->ea = mlx_xpm_file_to_image(mlx->init_ptr, file->param->ea,
-			&img_width, &img_height);
-	img_xpm->we = mlx_xpm_file_to_image(mlx->init_ptr, file->param->we,
-			&img_width, &img_height);
-	img_xpm->so = mlx_xpm_file_to_image(mlx->init_ptr, file->param->so,
-			&img_width, &img_height);
-	img_xpm->no = mlx_xpm_file_to_image(mlx->init_ptr, file->param->no,
-			&img_width, &img_height);
 }
 
 /*Initialise la direction du player en fontion de la lettre N/S/E/W*/
@@ -107,11 +87,34 @@ void	init_player(t_mlx *mlx, t_file *file)
 	init_push_button(mlx);
 }
 
+/*initialise les textures dans le tab de textures*/
+int	init_texture_ptr_adr(t_mlx *mlx, char *filename, int orientation)
+{
+	mlx->txt[orientation].txt_ptr = mlx_xpm_file_to_image(mlx->init_ptr, filename, &mlx->txt[orientation].w, &mlx->txt[orientation].h);
+	if(!mlx->txt[orientation].txt_ptr)
+		return(1);
+	mlx->txt[orientation].txt_adr = mlx_get_data_addr(&mlx->init_ptr, &mlx->txt[orientation].bpp, &mlx->txt[orientation].len, &mlx->txt[orientation].endian);
+	return (0);
+}
+
+int	init_texture(t_mlx *mlx, t_file *file)
+{
+	if (init_texture_ptr_adr(mlx, file->param->ea, EST))
+		return(1);
+	if (init_texture_ptr_adr(mlx, file->param->no, NORTH))
+		return(1);
+	if (init_texture_ptr_adr(mlx, file->param->so, SOUTH))
+		return(1);
+	if (init_texture_ptr_adr(mlx, file->param->we, WEST))
+		return(1);
+	return (0);
+}
+
 /*
 Initialisation du pointeur mlx, de la fenetre, des xpm, de la position du player
 et des param de la camera (voir camera.c)
 */
-int init_mlx(t_mlx *mlx, t_file *file, t_img *img_xpm)
+int init_mlx(t_mlx *mlx, t_file *file)
 {
 	mlx->player = malloc(sizeof(t_player));
 	if (!mlx->player)
@@ -137,9 +140,16 @@ int init_mlx(t_mlx *mlx, t_file *file, t_img *img_xpm)
 		free_all(file, mlx);
 		return (write(2, "Error\nInit. ray failed.\n", 36), 1);
 	}
-	init_img(mlx, file, img_xpm);
-	mlx->img = img_xpm;
-	init_player(mlx, file);
+	mlx->txt = malloc(sizeof(t_txt) * 4);
+	if (!mlx->txt)
+	{
+		free_all(file, mlx);
+		return(1);
+	}
+
+	init_player(mlx, file); //verif les retours
+	if (init_texture(mlx, file))
+		return (1);
 	mlx->file = file;
 	return (0);
 }
@@ -154,12 +164,12 @@ mlx_hook permet de reperer lorsqu'un event arrive :
 
 mlx_loop_hook permet d'actualiser l'image en temps reel en fonction des events qui ont eu lieu
 */
-int launch_mlx(t_mlx *mlx, t_file *file, t_img *img_xpm)
+int launch_mlx(t_mlx *mlx, t_file *file)
 {
-	if(init_mlx(mlx, file, img_xpm))
+	if(init_mlx(mlx, file))
 		return (1);
-	creat_image(mlx, file, img_xpm); //wip : voir put_img.c
-	mlx_hook(mlx->win, 2, 1L << 0, deal_press_key, mlx); //wip : pivotage du perso sur la minimap
+	creat_image(mlx, file);
+	mlx_hook(mlx->win, 2, 1L << 0, deal_press_key, mlx);
 	mlx_hook(mlx->win, 3, 1L << 1, deal_release_key, mlx);
 	mlx_hook(mlx->win, 17, 1L << 17, close_win, mlx);
 	mlx_loop_hook(mlx->init_ptr, render_next_frame, mlx);

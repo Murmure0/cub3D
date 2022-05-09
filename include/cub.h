@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:20:00 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/05 18:21:34 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/09 10:30:17 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@
 # define SCALE_MAP 16 //coté en pixel des carrés de la minimap
 # define SPEED 0.05 //deplacement sur la minimap
 # define FOV 66 //field of view : angle sur lequel on capte les infos en jeu
-
+# define EST 0 //Pour les structures de chaque texture t_img en fonction de leur orientation
+# define NORTH 1
+# define WEST 2
+# define SOUTH 3
 
 /* --- PARSING STRUCTURES --- */
 typedef struct param_nb
@@ -66,14 +69,17 @@ typedef struct s_file
 
 /* -------------------------- */
 
-/*Textures initialisées par/pour la mlx : voir init.c*/
-typedef struct s_img 
+/*Quatre structure img : une pour chqaue texture, variables initialisees par la minilibx*/
+typedef struct s_txt 
 {
-	void		*no;
-	void		*so;
-	void		*we;
-	void		*ea;
-}				t_img;
+	void *txt_ptr;
+	char *txt_adr;
+	int	w;
+	int	h;
+	int	bpp;
+	int	len;
+	int	endian;
+}				t_txt;
 
 /*Coordonnées du joueur & etat pressé/relaché des touches (1/0) : voir move.c*/
 typedef struct s_player{
@@ -131,7 +137,7 @@ typedef struct s_mlx
 	int			bits_per_pixel; //init par la mlx par mlx_get_data_addr
 	int			line_length; //idem
 	int			endian; // = 0, idem (+info : voir big-endian et little-endian)
-	t_img		*img_xpm;
+	t_txt		*txt;
 	t_file		*file;
 	t_player	*player;
 	t_ray		*ray;
@@ -170,17 +176,17 @@ int		check_right_wall(char *str);
 /* --- MLX --- */
 /* -- init.c -- */
 void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
-int		launch_mlx(t_mlx *mlx, t_file *file, t_img *img);
-int		init_mlx(t_mlx *mlx, t_file *file, t_img *img_xpm);
+int		launch_mlx(t_mlx *mlx, t_file *file);
+int		init_mlx(t_mlx *mlx, t_file *file);
 int		close_win(t_mlx *mlx, t_file *file);
 void	free_all(t_file *file, t_mlx *mlx);
 
 /* -- put_img.c -- */
-void	creat_image(t_mlx *mlx, t_file *file, t_img *img_xpm);
+void	creat_image(t_mlx *mlx, t_file *file);
 void	creat_minimap(t_mlx *mlx, t_file *file);
 int		render_next_frame(void *mlx);
-int put_floor(t_mlx *mlx, t_file *file, int k, double l);
-int put_ceiling(t_mlx *mlx, t_file *file, int k, double l);
+int		put_floor(t_mlx *mlx, t_file *file, int k, double l);
+int		put_ceiling(t_mlx *mlx, t_file *file, int k, double l);
 
 /* -- move.c -- */
 int		deal_press_key(int keycode, t_mlx *mlx);

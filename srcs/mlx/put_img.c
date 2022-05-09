@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 18:44:30 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/05 18:17:37 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/09 10:30:52 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,11 @@ void	creat_minimap(t_mlx *mlx, t_file *file)
 	gen_mini_player(mlx, mlx->player);
 }
 
-void creat_image(t_mlx *mlx, t_file *file, t_img *img_xpm)
+void creat_image(t_mlx *mlx, t_file *file)
 {
 	(void)mlx;
 	(void)file;
-	(void)img_xpm;
+
 	mlx->img = mlx_new_image(mlx->init_ptr, WIN_W, WIN_H);
 	mlx->addr_img = mlx_get_data_addr(mlx->img, &mlx->bits_per_pixel, &mlx->line_length, &mlx->endian);
 	creat_minimap(mlx, file);

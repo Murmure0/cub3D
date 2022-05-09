@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 15:58:45 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/05 18:03:42 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/09 10:35:47 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	init_ray(t_ray *ray, t_player *player, double ray_angle)
 	ray->side = 0;
 }
 
-/*initialise la direction du rayon en cours*/
+/*identifie sur quel direction de chaque axe on va commencer a chercher un mur*/
 void init_dir_ray(t_ray *ray)
 {
 	if (ray->r_dir_x < 0)
@@ -117,15 +117,17 @@ int	draw_wall(int h, t_mlx *mlx, t_ray *ray, int x)
 	}
 	return (h);
 }
+
 /*Print ciel/mur/sol*/
-// void	draw_col(t_mlx *mlx, t_ray *ray, int x, double ray_angle)
-void	draw_col(t_mlx *mlx, t_ray *ray, int x, double line_len)
+// void	draw_col(t_mlx *mlx, t_ray *ray, int x, double line_len)
+void	draw_col(t_mlx *mlx, t_ray *ray, int x, double ray_angle)
 {
+	(void)ray_angle;
 	int h;
 	int i;
 
 	i = 0;
-	h = (int)((WIN_H / 2.0) - (line_len / 2.0));
+	h = (int)((WIN_H / 2.0) - (ray->line_len / 2.0));
 
 	while (i < h)
 	{
@@ -133,8 +135,9 @@ void	draw_col(t_mlx *mlx, t_ray *ray, int x, double line_len)
 			my_mlx_pixel_put(mlx, x, i, mlx->file->param->ceiling);
 		i++;
 	}
+//ICI
 	i = draw_wall(h, mlx, ray, x);
-	// i = h;
+	
 	while (i < WIN_H - 1)
 	{
 		if (i >= h && i < WIN_H - 1)
@@ -152,8 +155,6 @@ void	put_first_ray(t_file *file, t_mlx *mlx, t_player *player, t_ray *ray) //tra
 	int dist_max;
 	double wall_len;
 	double len;
-
-
 	ray_angle = player->player_dir - (M_PI/6); //on retranche 30deg a l'angle du player pour commencer le cone a G
 	if (ray_angle < 0)
 		ray_angle += 2 * M_PI;
@@ -178,12 +179,13 @@ void	put_first_ray(t_file *file, t_mlx *mlx, t_player *player, t_ray *ray) //tra
 		wall_len = len * cos(ray_angle - player->player_dir); //correction fisheyes
 		ray->line_len = (WIN_H / wall_len); //hauteur perçue du mur : hauteur de la ligne a imprimer
 
-		draw_col(mlx, ray, x + WIN_W/2, ray->line_len); //impression ciel/mur/sol
+	//ICI : 
+		draw_col(mlx, ray, x + WIN_W/2, ray_angle); //impression ciel/mur/sol
 		
 		// WIP : draw_col(mlx, ray, x + WIN_W/2, ray_angle); AFFICHER LES TEXTURES
 
-
-		ray_angle += (60 /(double)WIN_W) * M_PI / 180; //faire varier l'angle pour passer a la colonne d'a coté
+		//ray_angle += (60/(double)WIN_W) * M_PI / 180; //faire varier l'angle pour passer a la colonne d'a coté
+		ray_angle += (M_PI/3)/(double)WIN_W; //faire varier l'angle pour passer a la colonne d'a coté
 		x++; //on ++ pour indiquer a quel endroit de la fenetre on devra imprimer le prochain ray
 	}
 }

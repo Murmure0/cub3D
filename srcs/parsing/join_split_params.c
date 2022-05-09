@@ -102,7 +102,6 @@ static int	join_lines(t_list *tmp, t_list *head)
 	head->content = cpy;
 	head->next = tmp->next;
 	ft_lstdelone(tmp, free);
-	tmp = head->next;
 	return (0);
 }
 
@@ -110,27 +109,26 @@ int	join_split_params(t_file *file)
 {
 	t_list	*tmp;
 	t_list	*head;
-	char	*str;
 	int		ret;	
 
 	tmp = file->map;
 	while (tmp)
 	{
-		str = tmp->content;
-		ret = map_id_found(&head, parse_spaces(str), tmp);
-		if (str[parse_spaces(str)] == '\n')
+		if (tmp->content[parse_spaces(tmp->content)] == '\n')
 			tmp = tmp->next;
+		ret = map_id_found(&head, parse_spaces(tmp->content), tmp);
 		else if (ret)
 		{
 			if (ret == -1)
 				return (write(2, "Error\nMalloc failed\n", 20), 1);
 			tmp = tmp->next;
 		}
-		else if (param_id_found(&head, parse_spaces(str), tmp))
+		else if (param_id_found(&head, parse_spaces(tmp->content), tmp))
 			tmp = tmp->next;
 		else
 			if (join_lines(tmp, head))
 				return (1);
+		tmp = head->next;
 	}
 	return (0);
 }

@@ -37,6 +37,59 @@
 // 	return (0);
 // }
 
+// static int	check_middle_lines(char **wall, int max_size)
+// {
+// 	int	i;
+// 	int	j;
+// 	int	len;
+
+// 	i = 0;
+// 	while (wall[++i] && i < max_size)
+// 	{
+// 		if (check_left_wall(wall[i]) || check_right_wall(wall[i]))
+// 			return (1);
+// 		j = -1;
+// 		while (wall[i][++j])
+// 		{
+// 			if (wall[i][j] != '1')
+// 			{
+// 				if (is_space(wall[i][j]))
+// 				{
+// 					if (wall[i][j + 1] != '1' && !is_space(wall[i][j + 1]))
+// 						return (1);
+// 					len = ft_strlen(wall[i - 1]);
+// 					if (len >= j)
+// 					{
+// 						if (wall[i - 1][j] != '1' && !is_space(wall[i - 1][j]))
+// 							return (1);
+// 					}
+// 					else
+// 						return (1);
+// 					len = ft_strlen(wall[i + 1]);
+// 					if (len >= j)
+// 					{
+// 						if (wall[i + 1][j] != '1' && !is_space(wall[i + 1][j]))
+// 							return (1);
+// 					}
+// 					else
+// 						return (1);
+// 				}
+// 				else
+// 					if (((int)ft_strlen(wall[i + 1])) < j || ((int)ft_strlen(wall[i - 1])) < j)
+// 						return (1);
+// 			}
+// 		}
+// 	}
+// 	return (0);
+// }
+
+static int	is_player(char c)
+{
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (1);
+	return (0);
+}
+
 static int	check_middle_lines(char **wall, int max_size)
 {
 	int	i;
@@ -51,32 +104,27 @@ static int	check_middle_lines(char **wall, int max_size)
 		j = -1;
 		while (wall[i][++j])
 		{
-			if (wall[i][j] != '1')
+			if (wall[i][j] == '0' || is_player(wall[i][j]))
 			{
-				if (is_space(wall[i][j]))
+				if (j > 0)
+				if (is_space(wall[i][j - 1]) || is_space(wall[i][j + 1]) || j == 0)
+					return (1);
+				len = ft_strlen(wall[i - 1]);
+				if (len >= j)
 				{
-					if (wall[i][j + 1] != '1' && !is_space(wall[i][j + 1]))
-						return (1);
-					len = ft_strlen(wall[i - 1]);
-					if (len >= j)
-					{
-						if (wall[i - 1][j] != '1' && !is_space(wall[i - 1][j]))
-							return (1);
-					}
-					else
-						return (1);
-					len = ft_strlen(wall[i + 1]);
-					if (len >= j)
-					{
-						if (wall[i + 1][j] != '1' && !is_space(wall[i + 1][j]))
-							return (1);
-					}
-					else
+					if (is_space(wall[i - 1][j]))
 						return (1);
 				}
 				else
-					if (((int)ft_strlen(wall[i + 1])) < j || ((int)ft_strlen(wall[i - 1])) < j)
+					return (1);
+				len = ft_strlen(wall[i + 1]);
+				if (len >= j)
+				{
+					if (is_space(wall[i + 1][j]))
 						return (1);
+				}
+				else
+					return (1);
 			}
 		}
 	}
@@ -86,27 +134,29 @@ static int	check_middle_lines(char **wall, int max_size)
 static int	check_last_line(char **wall, int i)
 {
 	int	j;
-	int	len;
+	// int	len;
 
 	j = -1;
-	len = ft_strlen(wall[i - 1]);
+	// len = ft_strlen(wall[i - 1]);
 	while (wall[i][++j])
 	{
-		if (is_space(wall[i][j]))
-		{
-			if (wall[i][j + 1] != '1' && !is_space(wall[i][j + 1])
-				&& wall[i][j + 1] != 0 && wall[i][j + 1] != EOF)
-				return (1);
-			if (len >= j)
-			{
-				if (wall[i - 1][j] != '1' && !is_space(wall[i - 1][j]))
-					return (1);
-			}
-			else
-				return (1);
-		}
-		else if (wall[i][j] != '1')
-			return (1);
+		// if (is_space(wall[i][j]))
+		// {
+		// 	if (wall[i][j + 1] != '1' && !is_space(wall[i][j + 1])
+		// 		&& wall[i][j + 1] != 0 && wall[i][j + 1] != EOF)
+		// 		return (1);
+		// 	if (len >= j)
+		// 	{
+		// 		if (wall[i - 1][j] != '1' && !is_space(wall[i - 1][j]))
+		// 			return (1);
+		// 	}
+		// 	else
+		// 		return (1);
+		// }
+		// else if (wall[i][j] != '1')
+		// 	return (1);
+		if (wall[i][j] != '1' && is_space(wall[i][j]))
+		 	return (1);
 	}
 	return (0);
 }
@@ -114,25 +164,27 @@ static int	check_last_line(char **wall, int i)
 static int	check_first_line(char **wall)
 {
 	int	x;
-	int	len;
+	// int	len;
 
 	x = -1;
-	len = ft_strlen(wall[1]);
+	// len = ft_strlen(wall[1]);
 	while (wall[0][++x])
 	{
-		if (is_space(wall[0][x]))
-		{
-			if (wall[0][x + 1] != '1' && !is_space(wall[0][x + 1]))
-				return (1);
-			if (len >= x)
-			{
-				if (wall[1][x] != '1' && !is_space(wall[1][x]))
-					return (1);
-			}
-			else
-				return (1);
-		}
-		else if (wall[0][x] != '1')
+		// if (is_space(wall[0][x]))
+		// {
+		// 	if (wall[0][x + 1] != '1' && !is_space(wall[0][x + 1]))
+		// 		return (1);
+		// 	if (len >= x)
+		// 	{
+		// 		if (wall[1][x] != '1' && !is_space(wall[1][x]))
+		// 			return (1);
+		// 	}
+		// 	else
+		// 		return (1);
+		// }
+		// else if (wall[0][x] != '1')
+		// 	return (1);
+		if (wall[0][x] != '1' && !is_space(wall[0][x]))
 			return (1);
 	}
 	return (0);

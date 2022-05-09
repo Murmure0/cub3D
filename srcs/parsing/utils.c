@@ -74,7 +74,7 @@ int	fill_map(char **scene)
 	return (0);
 }
 
-static char	*trim(char *str)
+char	*trim(char *str)
 {
 	char	*cpy;
 	size_t	len;

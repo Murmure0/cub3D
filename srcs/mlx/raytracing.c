@@ -38,7 +38,7 @@ void init_dir_ray(t_ray *ray)
 	if (ray->r_dir_x < 0)
 	{
 		ray->r_step_x = -1;
-		ray->r_len_x = (ray->p_dx_pos - (double)ray->p_map_check_x) * ray->r_step_size_x; //longueur entre deux segments
+		ray->r_len_x = (ray->p_dx_pos - ((double)ray->p_map_check_x)) * ray->r_step_size_x; //longueur entre deux segments
 	}
 	else
 	{

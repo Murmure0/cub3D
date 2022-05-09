@@ -27,6 +27,97 @@ Rappel :
 Axe x /cos : droite (est): + valeur // gauche (ouest): - valeur
 Axe y /sin: descendre (sud): + valeur // monter (nord): - valeur 
 */
+
+int	dir_of_mvmt_up(t_mlx *mlx, double new_dx_pos, double new_dy_pos, double dirX, double dirY)
+{
+
+	(void)mlx;
+	(void)new_dx_pos;
+	(void)new_dy_pos;
+	//Les coins ne sont pas repris dans cette decoupe
+	printf("X: %f Y: %f\n", dirX, dirY);
+	if (dirX >= -0.5 && dirX < 0.5 && dirY <= 1.0 && dirY >= 0.5)
+		printf("NORTH\n");
+	else if (dirX >= -0.5 && dirX < 0.5 && dirY >= -1.0 && dirY <= -0.5)
+		printf("SOUTH\n");
+	else if (dirX >= -1.0 && dirX <= -0.5 && dirY >= -0.5 && dirY <= 0.5)
+		printf("WEST\n");
+	else if (dirX <= 1.0 && dirX >= 0.5 && dirY >= -0.5 && dirY <= 0.5)
+		printf("EAST\n");
+	else if (dirX > 0.5 && dirY > 0.5 && dirY < 0.75)
+		printf("Left (EAST)\n");
+	else if ((dirX > 0.5 && dirY > 0.75) || (dirX < -0.5 && dirX > -0.75 && dirY > 0.5))
+		printf("UP - north\n");
+	else if (dirX < -0.75 && dirY > 0.5)
+		printf("east\n"); // to work on condition
+	else if (dirX < -0.5 && dirY < -0.5)
+		printf("West \n"); // to work on condition
+	else if (dirX > 0.5 && dirY < -0.5)
+		printf("SOUTH\n")
+	return (0);
+}
+
+//invert north and south, east and west
+int	dir_of_mvmt_down(t_mlx *mlx, double new_dx_pos, double new_dy_pos, double dirX, double dirY)
+{
+
+	(void)mlx;
+	(void)new_dx_pos;
+	(void)new_dy_pos;
+	//Les coins ne sont pas repris dans cette decoupe
+	printf("X: %f Y: %f\n", dirX, dirY);
+	if (dirX >= -0.5 && dirX < 0.5 && dirY <= 1.0 && dirY >= 0.5)
+		printf("SOUTH\n");
+	else if (dirX >= -0.5 && dirX < 0.5 && dirY >= -1.0 && dirY <= -0.5)
+		printf("NORTH\n");
+	else if (dirX >= -1.0 && dirX <= -0.5 && dirY >= -0.5 && dirY <= 0.5)
+		printf("EAST\n");
+	else if (dirX <= 1.0 && dirX >= 0.5 && dirY >= -0.5 && dirY <= 0.5)
+		printf("WEST\n");
+	return (0);
+}
+
+
+//Orientation decale un quart de tour dans le sens contraire des aiguilles d'une horloge
+int	dir_of_mvmt_left(t_mlx *mlx, double new_dx_pos, double new_dy_pos, double dirX, double dirY)
+{
+
+	(void)mlx;
+	(void)new_dx_pos;
+	(void)new_dy_pos;
+	//Les coins ne sont pas repris dans cette decoupe
+	printf("X: %f Y: %f\n", dirX, dirY);
+	if (dirX >= -0.5 && dirX < 0.5 && dirY <= 1.0 && dirY >= 0.5)
+		printf("WEST\n");
+	else if (dirX >= -0.5 && dirX < 0.5 && dirY >= -1.0 && dirY <= -0.5)
+		printf("EAST\n");
+	else if (dirX >= -1.0 && dirX <= -0.5 && dirY >= -0.5 && dirY <= 0.5)
+		printf("SOUTH\n");
+	else if (dirX <= 1.0 && dirX >= 0.5 && dirY >= -0.5 && dirY <= 0.5)
+		printf("NORTH\n");
+	return (0);
+}
+
+//Orientation decale un quart de tour dans le sens des aiguilles d'une horloge
+int	dir_of_mvmt_right(t_mlx *mlx, double new_dx_pos, double new_dy_pos, double dirX, double dirY)
+{
+
+	(void)mlx;
+	(void)new_dx_pos;
+	(void)new_dy_pos;
+	//Les coins ne sont pas repris dans cette decoupe
+	printf("X: %f Y: %f\n", dirX, dirY);
+	if (dirX >= -0.5 && dirX < 0.5 && dirY <= 1.0 && dirY >= 0.5)
+		printf("EAST\n");
+	else if (dirX >= -0.5 && dirX < 0.5 && dirY >= -1.0 && dirY <= -0.5)
+		printf("WEST\n");
+	else if (dirX >= -1.0 && dirX <= -0.5 && dirY >= -0.5 && dirY <= 0.5)
+		printf("NORTH\n");
+	else if (dirX <= 1.0 && dirX >= 0.5 && dirY >= -0.5 && dirY <= 0.5)
+		printf("SOUTH\n");
+	return (0);
+}
+
 void	press_move_up(t_mlx *mlx)
 {
 
@@ -35,12 +126,17 @@ void	press_move_up(t_mlx *mlx)
 	double	new_dx_pos;
 	double	new_dy_pos;
 
+	// double dmap_h = mlx->file->map_h - 1.0;
+	// double dmap_w = mlx->file->map_w - 1.0; 
+
 	dirX = cos(mlx->player->player_dir);
 	dirY = sin(mlx->player->player_dir);
 	new_dx_pos = mlx->player->dx_pos + dirX * SPEED;
 	new_dy_pos = mlx->player->dy_pos + dirY * SPEED;
 
-	if (mlx->file->scene[(int)(new_dy_pos - 2*SPEED)][(int)(new_dx_pos + 2*SPEED)] != '1')
+	dir_of_mvmt_up(mlx, new_dx_pos, new_dy_pos, dirX, dirY);
+
+	if (mlx->file->scene[(int)(new_dy_pos - 2*SPEED)][(int)(new_dx_pos + 2*SPEED)] != '1') //&& (int)(new_dy_pos - 2*SPEED) < dmap_h && (int)(new_dx_pos + 2*SPEED) < dmap_w && (int)(new_dy_pos - 2*SPEED) > 0 && (int)(new_dx_pos + 2*SPEED) > 0
 	{
 		mlx->player->dx_pos = new_dx_pos;
 		mlx->player->dy_pos = new_dy_pos;
@@ -54,10 +150,15 @@ void	press_move_down(t_mlx *mlx)
 	double	new_dx_pos;
 	double	new_dy_pos;
 
+ 	
+
 	dirX = cos(mlx->player->player_dir);
 	dirY = sin(mlx->player->player_dir);
 	new_dx_pos = mlx->player->dx_pos - dirX * SPEED;
 	new_dy_pos = mlx->player->dy_pos - dirY * SPEED;
+
+	dir_of_mvmt_down(mlx, new_dx_pos, new_dy_pos, dirX, dirY);
+
 	if (mlx->file->scene[(int)(new_dy_pos + 2*SPEED)][(int)(new_dx_pos + 2*SPEED)] != '1')
 	{
 		mlx->player->dx_pos = new_dx_pos;
@@ -72,10 +173,14 @@ void	press_move_left(t_mlx *mlx)
 	double	new_dx_pos;
 	double	new_dy_pos;
 
+	
+
 	dirX = cos(mlx->player->player_dir + (M_PI/2));
 	dirY = sin(mlx->player->player_dir - (M_PI/2));
 	new_dx_pos = mlx->player->dx_pos + dirX * SPEED;
 	new_dy_pos = mlx->player->dy_pos + dirY * SPEED;
+
+	dir_of_mvmt_left(mlx, new_dx_pos, new_dy_pos, cos(mlx->player->player_dir), sin(mlx->player->player_dir));
 	if (mlx->file->scene[(int)(new_dy_pos + 2*SPEED)][(int)(new_dx_pos - 2*SPEED)] != '1')
 	{
 		mlx->player->dx_pos = new_dx_pos;
@@ -90,10 +195,14 @@ void	press_move_right(t_mlx *mlx)
 	double	new_dx_pos;
 	double	new_dy_pos;
 
+	
+
 	dirX = cos(mlx->player->player_dir - (M_PI/2)) ;
 	dirY = sin(mlx->player->player_dir + (M_PI/2)) ;
 	new_dx_pos = mlx->player->dx_pos + dirX * SPEED;
 	new_dy_pos = mlx->player->dy_pos + dirY * SPEED;
+
+	dir_of_mvmt_right(mlx, new_dx_pos, new_dy_pos, cos(mlx->player->player_dir), sin(mlx->player->player_dir));
 	if (mlx->file->scene[(int)(new_dy_pos + 2*SPEED)][(int)(new_dx_pos + 2*SPEED)] != '1')
 	{
 		mlx->player->dx_pos = new_dx_pos;

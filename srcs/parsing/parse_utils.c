@@ -51,28 +51,26 @@ void	convert_space_to_wall(char **map)
 	}
 }
 
-// void	trim_map_into_shape(t_file *file)
-// {
-// 	int		i;
-// 	int		j;
-// 	int		start;
-// 	int		end;
-// 	int		new_len;
-// 	char	**new_scene;
+void	free_params(t_file *file)
+{
+	ft_lstclear(&file->map, free);
+	if (file->param->no)
+		free(file->param->no);
+	if (file->param->so)
+		free(file->param->so);
+	if (file->param->we)
+		free(file->param->we);
+	if (file->param->ea)
+		free(file->param->ea);
+}
 
-// 	//start = trim_start();
-// 	//end = trim_end();
+void	init_map_size(t_file *file)
+{
+	int	i;
 
-// 	i = -1;
-// 	while (file->scene[++i])
-// 	{
-// 		j = 0;
-// 		new_len = ft_strlen(file->scene[i] - start - end);
-// 		new_scene[i] = malloc(sizeof(char) * (new_len + 1));
-// 		while (j < new_len)
-// 			new_scene[i][j] = file->scene[i][j + start];
-// 		new_scene[i][j] = 0;
-// 		free(file->scene[i]);
-// 	}
-// 	file->scene = new_scene;
-// }
+	i = 0;
+	while (file->scene[i])
+		i++;
+	file->map_h = i;
+	file->map_w = ft_strlen(file->scene[0]);
+}

@@ -55,3 +55,10 @@ int	check_right_wall(char *str)
 	}
 	return (0);
 }
+
+int	is_player(char c)
+{
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (1);
+	return (0);
+}

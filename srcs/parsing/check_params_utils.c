@@ -66,13 +66,3 @@ int	trim_spaces(char **str)
 	}
 	return (0);
 }
-
-int	arraylen(char **array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i])
-		i++;
-	return (i);
-}

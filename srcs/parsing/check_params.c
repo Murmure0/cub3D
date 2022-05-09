@@ -12,16 +12,6 @@
 
 #include "cub.h"
 
-void	free_tab(char **tab)
-{
-	int i;
-
-	i = -1;
-	while (tab[++i])
-		free(tab[i]);
-	free(tab);
-}
-
 static int	fill_color(char *str, int *color)
 {
 	int		i;

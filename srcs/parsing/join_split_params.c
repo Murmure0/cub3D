@@ -114,10 +114,10 @@ int	join_split_params(t_file *file)
 	tmp = file->map;
 	while (tmp)
 	{
-		if (tmp->content[parse_spaces(tmp->content)] == '\n')
+		if ((char)(tmp->content)[parse_spaces(tmp->content)] == '\n')
 			tmp = tmp->next;
 		ret = map_id_found(&head, parse_spaces(tmp->content), tmp);
-		else if (ret)
+		if (ret)
 		{
 			if (ret == -1)
 				return (write(2, "Error\nMalloc failed\n", 20), 1);

@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 15:15:53 by cwastche          #+#    #+#             */
-/*   Updated: 2022/04/30 14:47:26 by cwastche         ###   ########.fr       */
+/*   Updated: 2022/05/09 11:15:18 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ int	parse_file(t_file *file, int ac, char **av)
 	convert_space_to_wall(file->scene);
 	if (fill_map(file->scene))
 		return (free_params(file), 1);
-//	fill_map_dimensions(file);
+	fill_map_dimensions(file);
 	//trim_map_into_shape(file); PROBLEM, NOT CONSIDERING SMALLER OR LONGER LINES
 	//print_map(file->scene); //to Delete
 	return (0);

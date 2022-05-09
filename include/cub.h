@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:20:00 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/09 10:30:17 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/09 15:10:28 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ typedef struct s_ray
 	int			r_step_x; // 1 / -1 : on avance avec cette dir sur X/Y
 	int			r_step_y;
 	double		line_len;
+	int			h_wall;
 }	t_ray;
 
 /*Dans de nb fonctions de la mlx on ne peut passer qu'une variable en parametre : 
@@ -201,6 +202,9 @@ void	press_turn_right(t_mlx *mlx);
 /* -- raytracing.c -- */
 int		put_ray(t_file *file, t_mlx *mlx, t_player *player);
 void	put_first_ray(t_file *file, t_mlx *mlx, t_player *player, t_ray *ray);
+
+/* -- Textures -- */
+int	get_texel_color(t_txt *txt, int x, int y, int dir);
 
 
 //TESTING FCT

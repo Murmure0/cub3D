@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 17:37:44 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/09 10:14:30 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/09 13:43:59 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,9 @@ int	init_texture(t_mlx *mlx, t_file *file)
 		return(1);
 	if (init_texture_ptr_adr(mlx, file->param->no, NORTH))
 		return(1);
-	if (init_texture_ptr_adr(mlx, file->param->so, SOUTH))
-		return(1);
 	if (init_texture_ptr_adr(mlx, file->param->we, WEST))
+		return(1);
+	if (init_texture_ptr_adr(mlx, file->param->so, SOUTH))
 		return(1);
 	return (0);
 }
@@ -146,7 +146,6 @@ int init_mlx(t_mlx *mlx, t_file *file)
 		free_all(file, mlx);
 		return(1);
 	}
-
 	init_player(mlx, file); //verif les retours
 	if (init_texture(mlx, file))
 		return (1);

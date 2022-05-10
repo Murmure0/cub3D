@@ -31,9 +31,10 @@ SOURCES =	srcs/main.c	\
 			srcs/parsing/check_walls.c \
 			srcs/parsing/convert_list_to_array.c \
 			srcs/parsing/join_split_params.c \
+			srcs/parsing/lst_to_arr_utils.c \
 			srcs/parsing/parse_file.c	\
 			srcs/parsing/parse_utils.c	\
-			srcs/parsing/trim_map_into_shape.c \
+			srcs/parsing/utils.c \
 			srcs/mlx/init.c	\
 			srcs/mlx/put_img.c	\
 			srcs/mlx/move.c	\

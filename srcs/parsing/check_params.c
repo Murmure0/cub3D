@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 11:57:09 by cwastche          #+#    #+#             */
-/*   Updated: 2022/05/10 23:24:41 by cwastche         ###   ########.fr       */
+/*   Updated: 2022/05/10 23:27:37 by cwastche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	fill_color(char *str, int *color)
 			return (free_tab(tmp), write(2, "Error\nWrong color value\n", 24), 1);
 	}
 	*color = create_trgb(0, ft_atoi(tmp[0]), ft_atoi(tmp[1]), ft_atoi(tmp[2]));
-	return (free_tab(tmp), 	0);
+	return (free_tab(tmp), 0);
 }
 
 static int	fill_texture(char *str, char **texture)

@@ -6,7 +6,7 @@
 /*   By: cwastche </var/mail/cwastche>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 14:48:02 by cwastche          #+#    #+#             */
-/*   Updated: 2022/04/30 14:48:07 by cwastche         ###   ########.fr       */
+/*   Updated: 2022/05/10 23:32:45 by cwastche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	join_split_params(t_file *file)
 	tmp = file->map;
 	while (tmp)
 	{
-		if (((char*)(tmp->content))[parse_spaces((char*)tmp->content)] == '\n')
+		if (((char *)tmp->content)[parse_spaces((char *)tmp->content)] == '\n')
 			tmp = tmp->next;
 		ret = map_id_found(&head, parse_spaces(tmp->content), tmp);
 		if (ret)

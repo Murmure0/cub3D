@@ -28,6 +28,16 @@ Axe x /cos : droite (est): + valeur // gauche (ouest): - valeur
 Axe y /sin: descendre (sud): + valeur // monter (nord): - valeur 
 */
 
+
+
+
+
+//Fuck les if conditions ci-dessous, use player_dir qui donne, en radians (entre 0 et 2pi) l'angle exact de la direction du joueur...
+//DONC,
+//NORTH if player_dir > M_PI/4 && <= 3M_PI/4
+//WEST if player_dir > 3M_PI/4 && <= 5M_PI/4
+//SOUTH if player_dir > 5M_PI/4 && <= 7M_PI/4
+//EAST if player_dir > 7M_PI/4 && <= M_PI/4
 int	dir_of_mvmt_up(t_mlx *mlx, double new_dx_pos, double new_dy_pos, double dirX, double dirY)
 {
 

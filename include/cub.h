@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:20:00 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/09 15:10:28 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/10 14:06:46 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,7 +204,8 @@ int		put_ray(t_file *file, t_mlx *mlx, t_player *player);
 void	put_first_ray(t_file *file, t_mlx *mlx, t_player *player, t_ray *ray);
 
 /* -- Textures -- */
-int	get_texel_color(t_txt *txt, int x, int y, int dir);
+int	get_texel_color(t_txt *txt, int x, int y);
+// int	get_texel_color(t_txt *txt, int x, int y, int dir);
 
 
 //TESTING FCT

@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 17:37:44 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/09 13:43:59 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/10 14:43:33 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,12 @@ int	init_texture_ptr_adr(t_mlx *mlx, char *filename, int orientation)
 	mlx->txt[orientation].txt_ptr = mlx_xpm_file_to_image(mlx->init_ptr, filename, &mlx->txt[orientation].w, &mlx->txt[orientation].h);
 	if(!mlx->txt[orientation].txt_ptr)
 		return(1);
-	mlx->txt[orientation].txt_adr = mlx_get_data_addr(&mlx->init_ptr, &mlx->txt[orientation].bpp, &mlx->txt[orientation].len, &mlx->txt[orientation].endian);
+	mlx->txt[orientation].txt_adr = mlx_get_data_addr(mlx->txt[orientation].txt_ptr, &mlx->txt[orientation].bpp, &mlx->txt[orientation].len, &mlx->txt[orientation].endian);
+	if (!mlx->txt[orientation].txt_adr)
+	{
+		return (1);
+	}
+		printf("ADDR : %s\n", mlx->txt[orientation].txt_adr);
 	return (0);
 }
 

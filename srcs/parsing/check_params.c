@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 11:57:09 by cwastche          #+#    #+#             */
-/*   Updated: 2022/05/02 10:57:57 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/10 23:24:41 by cwastche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ static int	fill_color(char *str, int *color)
 	{
 		j = -1;
 		while (tmp[i][++j])
-			if (!ft_isdigit(tmp[i][j]))
-				return (free_tab(tmp), write(2, "Error\nDigits only\n", 18),printf("NOT DIGIT: %c\n",tmp[i][j]), 1);
+	
+			if (!ft_isdigit(tmp[i][j]) && tmp[i][j] != '\n')
+				return (free_tab(tmp), write(2, "Error\nDigits only\n", 18), 1);
 		if (ft_atoi(tmp[i]) < 0 || ft_atoi(tmp[i]) > 255)
 			return (free_tab(tmp), write(2, "Error\nWrong color value\n", 24), 1);
 	}

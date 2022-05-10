@@ -33,7 +33,7 @@ static int	fill_color(char *str, int *color)
 		j = -1;
 		while (tmp[i][++j])
 			if (!ft_isdigit(tmp[i][j]))
-				return (free_tab(tmp), write(2, "Error\nDigits only\n", 18), 1);
+				return (free_tab(tmp), write(2, "Error\nDigits only\n", 18),printf("NOT DIGIT: %c\n",tmp[i][j]), 1);
 		if (ft_atoi(tmp[i]) < 0 || ft_atoi(tmp[i]) > 255)
 			return (free_tab(tmp), write(2, "Error\nWrong color value\n", 24), 1);
 	}

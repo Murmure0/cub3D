@@ -15,8 +15,8 @@
 /*Initialise la struct dediee aux rayons*/
 void	init_ray(t_ray *ray, t_player *player, double ray_angle)
 {
-	ray->p_dx_pos = player->dx_pos; //position player X
-	ray->p_dy_pos = player->dy_pos; // Y
+	ray->p_dy_pos = player->dy_pos; ray->p_dx_pos = player->dx_pos; //position player X
+	// Y
 	ray->p_map_check_x = (int)ray->p_dx_pos; //player sur map
 	ray->p_map_check_y = (int)ray->p_dy_pos;
 	ray->r_dir_x = cos(ray_angle); //dir de l'angle
@@ -38,7 +38,7 @@ void init_dir_ray(t_ray *ray)
 	if (ray->r_dir_x < 0)
 	{
 		ray->r_step_x = -1;
-		ray->r_len_x = (ray->p_dx_pos - (double)ray->p_map_check_x) * ray->r_step_size_x; //longueur entre deux segments
+		ray->r_len_x = (ray->p_dx_pos - ((double)ray->p_map_check_x)) * ray->r_step_size_x; //longueur entre deux segments
 	}
 	else
 	{

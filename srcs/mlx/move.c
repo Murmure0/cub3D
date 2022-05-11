@@ -27,6 +27,22 @@ Rappel :
 Axe x /cos : droite (est): + valeur // gauche (ouest): - valeur
 Axe y /sin: descendre (sud): + valeur // monter (nord): - valeur 
 */
+
+int	wall_collision(t_mlx *mlx, double px, double py)
+{
+	char	**map = mlx->file->scene;
+	
+	if (map[(int)(py + 4*SPEED)][(int)px] == '1')
+		return (1);
+	if (map[(int)py][(int)(px - 4*SPEED)] == '1')
+		return (1);
+	if (map[(int)(py - 4*SPEED)][(int)px] == '1')
+		return (1);
+	if (map[(int)py][(int)(px + 4*SPEED)] == '1')
+		return (1);
+	return (0);
+}
+
 void	press_move_up(t_mlx *mlx)
 {
 
@@ -37,10 +53,9 @@ void	press_move_up(t_mlx *mlx)
 
 	dirX = cos(mlx->player->player_dir);
 	dirY = sin(mlx->player->player_dir);
-	new_dx_pos = mlx->player->dx_pos + dirX * SPEED;
-	new_dy_pos = mlx->player->dy_pos + dirY * SPEED;
-
-	if (mlx->file->scene[(int)(new_dy_pos - 2*SPEED)][(int)(new_dx_pos + 2*SPEED)] != '1')
+	new_dx_pos = mlx->player->dx_pos + dirX * (float)SPEED;
+	new_dy_pos = mlx->player->dy_pos + dirY * (float)SPEED;
+	if (!wall_collision(mlx, new_dx_pos, new_dy_pos)) //mlx->file->scene[(int)(new_dy_pos - 2*SPEED)][(int)(new_dx_pos + 2*SPEED)] != '1' && 
 	{
 		mlx->player->dx_pos = new_dx_pos;
 		mlx->player->dy_pos = new_dy_pos;
@@ -58,7 +73,7 @@ void	press_move_down(t_mlx *mlx)
 	dirY = sin(mlx->player->player_dir);
 	new_dx_pos = mlx->player->dx_pos - dirX * SPEED;
 	new_dy_pos = mlx->player->dy_pos - dirY * SPEED;
-	if (mlx->file->scene[(int)(new_dy_pos + 2*SPEED)][(int)(new_dx_pos + 2*SPEED)] != '1')
+	if (!wall_collision(mlx, new_dx_pos, new_dy_pos)) //mlx->file->scene[(int)(new_dy_pos + 2*SPEED)][(int)(new_dx_pos + 2*SPEED)] != '1' && 
 	{
 		mlx->player->dx_pos = new_dx_pos;
 		mlx->player->dy_pos = new_dy_pos;
@@ -76,7 +91,7 @@ void	press_move_left(t_mlx *mlx)
 	dirY = sin(mlx->player->player_dir - (M_PI/2));
 	new_dx_pos = mlx->player->dx_pos + dirX * SPEED;
 	new_dy_pos = mlx->player->dy_pos + dirY * SPEED;
-	if (mlx->file->scene[(int)(new_dy_pos + 2*SPEED)][(int)(new_dx_pos - 2*SPEED)] != '1')
+	if (!wall_collision(mlx, new_dx_pos, new_dy_pos)) //mlx->file->scene[(int)(new_dy_pos + 2*SPEED)][(int)(new_dx_pos - 2*SPEED)] != '1' && 
 	{
 		mlx->player->dx_pos = new_dx_pos;
 		mlx->player->dy_pos = new_dy_pos;
@@ -94,7 +109,7 @@ void	press_move_right(t_mlx *mlx)
 	dirY = sin(mlx->player->player_dir + (M_PI/2)) ;
 	new_dx_pos = mlx->player->dx_pos + dirX * SPEED;
 	new_dy_pos = mlx->player->dy_pos + dirY * SPEED;
-	if (mlx->file->scene[(int)(new_dy_pos + 2*SPEED)][(int)(new_dx_pos + 2*SPEED)] != '1')
+	if (!wall_collision(mlx, new_dx_pos, new_dy_pos)) //mlx->file->scene[(int)(new_dy_pos + 2*SPEED)][(int)(new_dx_pos + 2*SPEED)] != '1' && 
 	{
 		mlx->player->dx_pos = new_dx_pos;
 		mlx->player->dy_pos = new_dy_pos;

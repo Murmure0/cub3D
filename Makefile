@@ -6,7 +6,7 @@
 #    By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 11:55:53 by mberthet          #+#    #+#              #
-#    Updated: 2022/05/05 18:03:54 by mberthet         ###   ########.fr        #
+#    Updated: 2022/05/09 13:31:05 by mberthet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,15 +31,17 @@ SOURCES =	srcs/main.c	\
 			srcs/parsing/check_walls.c \
 			srcs/parsing/convert_list_to_array.c \
 			srcs/parsing/join_split_params.c \
+			srcs/parsing/lst_to_arr_utils.c \
 			srcs/parsing/parse_file.c	\
 			srcs/parsing/parse_utils.c	\
-			srcs/parsing/trim_map_into_shape.c \
+			srcs/parsing/utils.c \
 			srcs/mlx/init.c	\
 			srcs/mlx/put_img.c	\
 			srcs/mlx/move.c	\
 			gnl/get_next_line.c	\
 			srcs/mlx/raytracing_lode_tuto.c	\
 			srcs/mlx/raytracing.c	\
+			srcs/mlx/texture.c	\
 
 
 OBJ_DIR =	obj

@@ -6,21 +6,11 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 11:57:09 by cwastche          #+#    #+#             */
-/*   Updated: 2022/05/02 10:57:57 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/10 23:27:37 by cwastche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
-
-void	free_tab(char **tab)
-{
-	int i;
-
-	i = -1;
-	while (tab[++i])
-		free(tab[i]);
-	free(tab);
-}
 
 static int	fill_color(char *str, int *color)
 {
@@ -42,14 +32,13 @@ static int	fill_color(char *str, int *color)
 	{
 		j = -1;
 		while (tmp[i][++j])
-			if (!ft_isdigit(tmp[i][j]))
-				return (free_tab(tmp), write(2, "Error\nForbidden char detected\n", 30), 1);
+			if (!ft_isdigit(tmp[i][j]) && tmp[i][j] != '\n')
+				return (free_tab(tmp), write(2, "Error\nDigits only\n", 18), 1);
 		if (ft_atoi(tmp[i]) < 0 || ft_atoi(tmp[i]) > 255)
 			return (free_tab(tmp), write(2, "Error\nWrong color value\n", 24), 1);
 	}
 	*color = create_trgb(0, ft_atoi(tmp[0]), ft_atoi(tmp[1]), ft_atoi(tmp[2]));
-	free_tab(tmp);
-	return (0);
+	return (free_tab(tmp), 0);
 }
 
 static int	fill_texture(char *str, char **texture)

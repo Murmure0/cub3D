@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:20:00 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/09 10:30:17 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/10 14:06:46 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ typedef struct s_ray
 	int			r_step_x; // 1 / -1 : on avance avec cette dir sur X/Y
 	int			r_step_y;
 	double		line_len;
+	int			h_wall;
 }	t_ray;
 
 /*Dans de nb fonctions de la mlx on ne peut passer qu'une variable en parametre : 
@@ -151,27 +152,38 @@ int		join_split_params(t_file *file);
 int		check_params(t_file *file);
 int		convert_list_to_array(t_file *file);
 int		check_walls(t_file *file);
-int		trim_map_into_shape(t_file *file);
-int		fill_map(char **scene);
 
 /* --- PARSING UTILS --- */
 
-// Check_Params
+// Parse_utils
+int		parse_spaces(char *str);
+int		missing_param(t_p_nb p_nb);
+void	convert_space_to_wall(char **map);
+void	free_params(t_file *file);
+void	init_map_size(t_file *file);
+
+// Check_params_utils
 void	free_param_chains(t_file *f, t_list *head);
 void	param_count_init(t_p_nb *p_nb);
 int		create_trgb(int t, int r, int g, int b);
 int		trim_spaces(char **str);
-int		arraylen(char **array);
 
-// Parsing
-int		parse_spaces(char *str);
-int		missing_param(t_p_nb p_nb);
-void	convert_space_to_wall(char **map);
+// Lst_to_arr_utils
+void	free_scene(t_file *file, int i);
+int		trim_end_spaces(t_file *file);
 
-// Check_walls
+// Check_walls_utils
 int		is_space(char c);
 int		check_left_wall(char *str);
 int		check_right_wall(char *str);
+int		is_player(char c);
+
+// Utils
+int		arraylen(char **array);
+void	free_tab(char **tab);
+int		fill_line(char	**str, int max_len);
+int		fill_map(char **scene);
+char	*trim(char *str);
 
 /* --- MLX --- */
 /* -- init.c -- */
@@ -201,6 +213,10 @@ void	press_turn_right(t_mlx *mlx);
 /* -- raytracing.c -- */
 int		put_ray(t_file *file, t_mlx *mlx, t_player *player);
 void	put_first_ray(t_file *file, t_mlx *mlx, t_player *player, t_ray *ray);
+
+/* -- Textures -- */
+int	get_texel_color(t_txt *txt, int x, int y);
+// int	get_texel_color(t_txt *txt, int x, int y, int dir);
 
 
 //TESTING FCT

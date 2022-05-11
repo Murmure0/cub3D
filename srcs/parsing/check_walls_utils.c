@@ -6,7 +6,7 @@
 /*   By: cwastche </var/mail/cwastche>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 14:46:13 by cwastche          #+#    #+#             */
-/*   Updated: 2022/04/30 14:46:15 by cwastche         ###   ########.fr       */
+/*   Updated: 2022/05/10 23:27:08 by cwastche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,12 @@ int	check_right_wall(char *str)
 		else
 			wall = 1;
 	}
+	return (0);
+}
+
+int	is_player(char c)
+{
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (1);
 	return (0);
 }

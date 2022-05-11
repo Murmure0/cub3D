@@ -39,7 +39,6 @@ SOURCES =	srcs/main.c	\
 			srcs/mlx/put_img.c	\
 			srcs/mlx/move.c	\
 			gnl/get_next_line.c	\
-			srcs/mlx/raytracing_lode_tuto.c	\
 			srcs/mlx/raytracing.c	\
 			srcs/mlx/texture.c	\
 

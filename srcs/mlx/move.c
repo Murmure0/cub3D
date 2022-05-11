@@ -89,6 +89,20 @@ void	press_move_left(t_mlx *mlx)
 
 	dirX = cos(mlx->player->player_dir + (M_PI/2));
 	dirY = sin(mlx->player->player_dir - (M_PI/2));
+
+
+	/* ---- Condition a ameliorer, mais l'idee marche. ----*/
+	// if ((mlx->player->player_dir >= M_PI/4 && mlx->player->player_dir <= 3*M_PI/4) ||
+	// 	(mlx->player->player_dir >= 5*M_PI/4 && mlx->player->player_dir <= 7*M_PI/4))
+	// {
+	// 	new_dx_pos = mlx->player->dx_pos - dirX * SPEED;
+	// 	new_dy_pos = mlx->player->dy_pos - dirY * SPEED;
+	// }
+	// else
+	// {
+	// 	new_dx_pos = mlx->player->dx_pos + dirX * SPEED;
+	// 	new_dy_pos = mlx->player->dy_pos + dirY * SPEED;
+	// }
 	new_dx_pos = mlx->player->dx_pos + dirX * SPEED;
 	new_dy_pos = mlx->player->dy_pos + dirY * SPEED;
 	if (!wall_collision(mlx, new_dx_pos, new_dy_pos)) //mlx->file->scene[(int)(new_dy_pos + 2*SPEED)][(int)(new_dx_pos - 2*SPEED)] != '1' && 
@@ -107,6 +121,18 @@ void	press_move_right(t_mlx *mlx)
 
 	dirX = cos(mlx->player->player_dir - (M_PI/2)) ;
 	dirY = sin(mlx->player->player_dir + (M_PI/2)) ;
+
+	// if ((mlx->player->player_dir > M_PI/4 && mlx->player->player_dir <= 3*M_PI/4) ||
+	// 	(mlx->player->player_dir > 5*M_PI/4 && mlx->player->player_dir <= 7*M_PI/4))
+	// {
+	// 	new_dx_pos = mlx->player->dx_pos - dirX * SPEED;
+	// 	new_dy_pos = mlx->player->dy_pos - dirY * SPEED;
+	// }
+	// else
+	// {
+	// 	new_dx_pos = mlx->player->dx_pos + dirX * SPEED;
+	// 	new_dy_pos = mlx->player->dy_pos + dirY * SPEED;
+	// }
 	new_dx_pos = mlx->player->dx_pos + dirX * SPEED;
 	new_dy_pos = mlx->player->dy_pos + dirY * SPEED;
 	if (!wall_collision(mlx, new_dx_pos, new_dy_pos)) //mlx->file->scene[(int)(new_dy_pos + 2*SPEED)][(int)(new_dx_pos + 2*SPEED)] != '1' && 

@@ -15,8 +15,8 @@
 /*Initialise la struct dediee aux rayons*/
 void	init_ray(t_ray *ray, t_player *player, double ray_angle)
 {
-	ray->p_dx_pos = player->dx_pos; //position player X
-	ray->p_dy_pos = player->dy_pos; // Y
+	ray->p_dy_pos = player->dy_pos; ray->p_dx_pos = player->dx_pos; //position player X
+	// Y
 	ray->p_map_check_x = (int)ray->p_dx_pos; //player sur map
 	ray->p_map_check_y = (int)ray->p_dy_pos;
 	ray->r_dir_x = cos(ray_angle); //dir de l'angle

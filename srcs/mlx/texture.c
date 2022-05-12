@@ -25,11 +25,10 @@
 
 int	get_texel_color(t_txt *txt, int x, int y)
 {
-	int	color;
-	char *dst;
+	int		color;
+	char	*dst;
 
-	dst = txt->txt_adr + (y * txt->len + x * (txt->bpp/8));
+	dst = txt->txt_adr + (y * txt->len + x * (txt->bpp / 8));
 	color = *(unsigned int *)dst;
 	return (color);
 }
-

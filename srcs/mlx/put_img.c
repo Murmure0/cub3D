@@ -21,11 +21,12 @@ void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = mlx->addr_img + (y * mlx->line_length + x * (mlx->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	dst = mlx->addr_img + (y * mlx->line_length
+			+ x * (mlx->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
 }
 
-void	gen_mini_player(t_mlx *mlx,t_player *player)
+void	gen_mini_player(t_mlx *mlx, t_player *player)
 {
 	int	i;
 	int	j;
@@ -36,7 +37,8 @@ void	gen_mini_player(t_mlx *mlx,t_player *player)
 		j = -2;
 		while (j++ < 1)
 		{
-			my_mlx_pixel_put(mlx, (player->dx_pos) * SCALE_MAP - 1 + i, (player->dy_pos ) * SCALE_MAP + j, 0xB22222);
+			my_mlx_pixel_put(mlx, (player->dx_pos) * SCALE_MAP - 1 + i,
+				(player->dy_pos) * SCALE_MAP + j, 0xB22222);
 		}
 	}
 }
@@ -55,7 +57,7 @@ void	print_minimap_square(t_mlx *mlx, int x, int y, int color)
 		j = y * SCALE_MAP;
 		while (j < (y + 1) * SCALE_MAP)
 		{
-			if ( i % SCALE_MAP == 0 || j % SCALE_MAP == 0)
+			if (i % SCALE_MAP == 0 || j % SCALE_MAP == 0)
 				my_mlx_pixel_put(mlx, i, j, 0xAACCCCCC);
 			else
 				my_mlx_pixel_put(mlx, i, j, color);
@@ -90,18 +92,16 @@ void	creat_minimap(t_mlx *mlx, t_file *file)
 	gen_mini_player(mlx, mlx->player);
 }
 
-void creat_image(t_mlx *mlx, t_file *file)
+void	creat_image(t_mlx *mlx, t_file *file)
 {
-	(void)mlx;
-	(void)file;
-
 	mlx->img = mlx_new_image(mlx->init_ptr, WIN_W, WIN_H);
-	mlx->addr_img = mlx_get_data_addr(mlx->img, &mlx->bits_per_pixel, &mlx->line_length, &mlx->endian);
+	mlx->addr_img = mlx_get_data_addr(mlx->img, &mlx->bits_per_pixel,
+			&mlx->line_length, &mlx->endian);
 	creat_minimap(mlx, file);
 	mlx_put_image_to_window(mlx->init_ptr, mlx->win, mlx->img, 0, 0);
 }
 
-void update_player_pos(t_mlx * mlx)
+void update_player_pos(t_mlx *mlx)
 {
 	if (mlx->player->up_press == 1)
 		press_move_up(mlx);
@@ -116,12 +116,11 @@ void update_player_pos(t_mlx * mlx)
 	if (mlx->player->rot_r_press == 1)
 		press_turn_right(mlx);
 }
-/*
-Lors d'un event : va calculer et push la nouvelle image dans la fenetre
-*/
+
+//Lors d'un event : va calculer et push la nouvelle image dans la fenetre
 int	render_next_frame(void *mlxb)
 {
-	t_mlx *mlx;
+	t_mlx	*mlx;
 
 	mlx = (t_mlx *)mlxb;
 	update_player_pos(mlx);

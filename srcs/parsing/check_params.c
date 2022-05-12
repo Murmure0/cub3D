@@ -47,8 +47,6 @@ static int	fill_texture(char *str, char **texture)
 
 	i = 2;
 	i += parse_spaces(str + 2);
-	if (*texture)
-		free(*texture);
 	*texture = ft_substr(str, i, ft_strlen(str));
 	if (!(*texture))
 		return (write(2, "Error\nMalloc failed.\n", 22), 1);

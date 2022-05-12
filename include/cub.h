@@ -190,8 +190,8 @@ char	*trim(char *str);
 void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
 int		launch_mlx(t_mlx *mlx, t_file *file);
 int		init_mlx(t_mlx *mlx, t_file *file);
-int		close_win(t_mlx *mlx, t_file *file);
-void	free_all(t_file *file, t_mlx *mlx);
+int		close_win(t_mlx *mlx);
+void	free_all(t_mlx *mlx);
 
 /* -- put_img.c -- */
 void	creat_image(t_mlx *mlx, t_file *file);

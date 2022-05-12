@@ -6,7 +6,7 @@
 /*   By: cwastche </var/mail/cwastche>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 14:46:53 by cwastche          #+#    #+#             */
-/*   Updated: 2022/04/30 14:46:54 by cwastche         ###   ########.fr       */
+/*   Updated: 2022/05/10 23:28:40 by cwastche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,4 @@ int	trim_spaces(char **str)
 		str[i] = tmp;
 	}
 	return (0);
-}
-
-int	arraylen(char **array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i])
-		i++;
-	return (i);
 }

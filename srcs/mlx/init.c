@@ -76,7 +76,7 @@ void	init_player(t_mlx *mlx, t_file *file)
 			if (file->scene[y][x] == 'N' || file->scene[y][x] == 'E' ||
 			file->scene[y][x] == 'W' || file->scene[y][x] == 'S')
 			{
-				mlx->player->x_pos = x ;
+				mlx->player->x_pos = x;
 				mlx->player->dx_pos = (double)x + 0.5;
 				mlx->player->y_pos = y;
 				mlx->player->dy_pos = (double)y + 0.5;

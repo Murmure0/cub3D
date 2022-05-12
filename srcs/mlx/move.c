@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 16:32:20 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/12 09:28:40 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/12 11:26:09 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,14 +96,14 @@ void	press_move_left(t_mlx *mlx)
 	// 	(mlx->player->player_dir >= 5*M_PI/4 && mlx->player->player_dir <= 7*M_PI/4))
 	// {
 	// 	new_dx_pos = mlx->player->dx_pos - dirX * SPEED;
-	// 	new_dy_pos = mlx->player->dy_pos - dirY * SPEED;
+	// 	new_dy_pos = mlx->player->dy_pos + dirY * SPEED;
 	// }
 	// else
 	// {
-	// 	new_dx_pos = mlx->player->dx_pos + dirX * SPEED;
+	// 	new_dx_pos = mlx->player->dx_pos - dirX * SPEED;
 	// 	new_dy_pos = mlx->player->dy_pos + dirY * SPEED;
 	// }
-	new_dx_pos = mlx->player->dx_pos + dirX * SPEED;
+	new_dx_pos = mlx->player->dx_pos - dirX * SPEED;
 	new_dy_pos = mlx->player->dy_pos + dirY * SPEED;
 	if (!wall_collision(mlx, new_dx_pos, new_dy_pos)) //mlx->file->scene[(int)(new_dy_pos + 2*SPEED)][(int)(new_dx_pos - 2*SPEED)] != '1' && 
 	{
@@ -126,6 +126,25 @@ void	press_move_right(t_mlx *mlx)
 	// 	(mlx->player->player_dir > 5*M_PI/4 && mlx->player->player_dir <= 7*M_PI/4))
 	// {
 	// 	new_dx_pos = mlx->player->dx_pos - dirX * SPEED;
+	// 	new_dy_pos = mlx->player->dy_pos + dirY * SPEED;
+	// }
+	// else
+	// {
+	// 	new_dx_pos = mlx->player->dx_pos - dirX * SPEED;
+	// 	new_dy_pos = mlx->player->dy_pos + dirY * SPEED;
+	// }
+	new_dx_pos = mlx->player->dx_pos - dirX * SPEED;
+	new_dy_pos = mlx->player->dy_pos + dirY * SPEED;
+	if (!wall_collision(mlx, new_dx_pos, new_dy_pos)) //mlx->file->scene[(int)(new_dy_pos + 2*SPEED)][(int)(new_dx_pos + 2*SPEED)] != '1' && 
+	{
+		mlx->player->dx_pos = new_dx_pos;
+		mlx->player->dy_pos = new_dy_pos;
+	}
+
+	// if ((mlx->player->player_dir > M_PI/4 && mlx->player->player_dir <= 3*M_PI/4) ||
+	// 	(mlx->player->player_dir > 5*M_PI/4 && mlx->player->player_dir <= 7*M_PI/4))
+	// {
+	// 	new_dx_pos = mlx->player->dx_pos - dirX * SPEED;
 	// 	new_dy_pos = mlx->player->dy_pos - dirY * SPEED;
 	// }
 	// else
@@ -133,13 +152,13 @@ void	press_move_right(t_mlx *mlx)
 	// 	new_dx_pos = mlx->player->dx_pos + dirX * SPEED;
 	// 	new_dy_pos = mlx->player->dy_pos + dirY * SPEED;
 	// }
-	new_dx_pos = mlx->player->dx_pos + dirX * SPEED;
-	new_dy_pos = mlx->player->dy_pos + dirY * SPEED;
-	if (!wall_collision(mlx, new_dx_pos, new_dy_pos)) //mlx->file->scene[(int)(new_dy_pos + 2*SPEED)][(int)(new_dx_pos + 2*SPEED)] != '1' && 
-	{
-		mlx->player->dx_pos = new_dx_pos;
-		mlx->player->dy_pos = new_dy_pos;
-	}
+	// new_dx_pos = mlx->player->dx_pos + dirX * SPEED;
+	// new_dy_pos = mlx->player->dy_pos + dirY * SPEED;
+	// if (!wall_collision(mlx, new_dx_pos, new_dy_pos)) //mlx->file->scene[(int)(new_dy_pos + 2*SPEED)][(int)(new_dx_pos + 2*SPEED)] != '1' && 
+	// {
+	// 	mlx->player->dx_pos = new_dx_pos;
+	// 	mlx->player->dy_pos = new_dy_pos;
+	// }
 }
 
 void	press_turn_left(t_mlx *mlx)

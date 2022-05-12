@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 15:58:45 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/10 14:40:33 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/12 11:26:07 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,44 +145,18 @@ int	draw_wall(t_mlx *mlx, t_ray *ray, int x, double ray_angle)
 
 	d_wall = (int)((WIN_H / 2.0) + (ray->line_len / 2.0));
 
-	dir = dir_wall(ray); //todo
-	col = find_col(mlx, ray, dir); //todo
+	dir = dir_wall(ray);
+	col = find_col(mlx, ray, dir);
 
 	text_x = 0.00; // premiere texel
-	text_x_step = (mlx->txt[dir].h - 1) / ray->line_len; // ratio pour savoir quel texel imprimer 
-	// printf("len : %d\n", mlx->txt[dir].len);
-	// printf("adr : %s\n", mlx->txt[dir].txt_adr);
+	text_x_step = (mlx->txt[dir].h - 1) / ray->line_len; // ratio pour savoir quel texel imprimer
 	while(ray->h_wall < d_wall)
 	{
 		if (ray->h_wall >= 0 && ray->h_wall <= WIN_H -1)
-		{
-			// my_mlx_pixel_put(mlx, x, ray->h_wall, get_texel_color(mlx->txt, text_x, col, dir));
 			my_mlx_pixel_put(mlx, x, ray->h_wall, get_texel_color(&mlx->txt[dir], col, text_x));
-		}
 		ray->h_wall++;
 		text_x += text_x_step;
 	}
-	
-	
-	// while (i < (int)((WIN_H / 2.0) + (ray->line_len / 2.0)))
-	// {
-	// 	if (i >=0 && i < WIN_H - 1)
-	// 	{
-	// 		if (ray->side == 0 && ray->r_dir_x < 0) //rouge ouest
-	// 			my_mlx_pixel_put(mlx, x, i, get_texel_color(mlx->txt, x, i, WEST));
-	// 			// my_mlx_pixel_put(mlx, x, i, 0xe04136);
-	// 		else if (ray->side == 0 && ray->r_dir_x > 0) //vert est
-	// 			my_mlx_pixel_put(mlx, x, i, get_texel_color(mlx->txt, x, i, EST));
-	// 			// my_mlx_pixel_put(mlx, x, i, 0xe0fa93);
-	// 		else if (ray->side == 1 && ray->r_dir_y < 0) // bleu sud
-	// 			my_mlx_pixel_put(mlx, x, i, get_texel_color(mlx->txt, x, i, SOUTH));
-	// 			// my_mlx_pixel_put(mlx, x, i, 0x93b2fa);
-	// 		else if (ray->side == 1 && ray->r_dir_y > 0) // rose nord
-	// 			my_mlx_pixel_put(mlx, x, i, get_texel_color(mlx->txt, x, i, NORTH));
-	// 			// my_mlx_pixel_put(mlx, x, i, 0xfa93fa);
-	// 	}
-	//	i++;
-	//}
 	return(0);
 }
 
@@ -222,11 +196,15 @@ void	put_first_ray(t_file *file, t_mlx *mlx, t_player *player, t_ray *ray) //tra
 	int dist_max;
 	double wall_len;
 	double len;
+
+	//ray_angle = player->player_dir - (M_PI/6); //on retranche 30deg a l'angle du player pour commencer le cone a G
+
 	ray_angle = player->player_dir - (M_PI/6); //on retranche 30deg a l'angle du player pour commencer le cone a G
 	if (ray_angle < 0)
 		ray_angle += 2 * M_PI;
 	if (ray_angle > 2 * M_PI) //si on est passé au dela de 1 tour complet on reajuste
 		ray_angle -= 2 * M_PI;
+
 
 	int x = (0 - WIN_W / 2); //on divise l'ecran en 2, x commence tout a gauche
 

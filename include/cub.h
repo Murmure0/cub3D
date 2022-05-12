@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:20:00 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/10 14:06:46 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/10 15:52:35 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <limits.h>
 
 # define WIN_H 1080
-# define WIN_W 1920
+# define WIN_W 1080
 # define SCALE_MAP 16 //coté en pixel des carrés de la minimap
 # define SPEED 0.05 //deplacement sur la minimap
 # define FOV 66 //field of view : angle sur lequel on capte les infos en jeu

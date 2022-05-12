@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:20:00 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/12 11:26:10 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/12 14:05:11 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@
 # define SCALE_MAP 16 //coté en pixel des carrés de la minimap
 # define SPEED 0.05 //deplacement sur la minimap
 # define FOV 66 //field of view : angle sur lequel on capte les infos en jeu
-# define EST 0 //Pour les structures de chaque texture t_img en fonction de leur orientation
+# define WEST 2 //Pour les structures de chaque texture t_img en fonction de leur orientation
 # define NORTH 1
-# define WEST 2
+# define EST 0
 # define SOUTH 3
 
 /* --- PARSING STRUCTURES --- */

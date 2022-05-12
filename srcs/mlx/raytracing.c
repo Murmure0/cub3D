@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 15:58:45 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/12 11:26:07 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/12 14:10:21 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ void	find_wall(int dist_max, t_ray *ray, t_file * file)
 int	dir_wall(t_ray *ray)
 {
 	if (ray->side == 0 && ray->r_dir_x < 0) //rouge ouest
-		return(WEST);
-	else if (ray->side == 0 && ray->r_dir_x > 0) //vert est
 		return(EST);
+	else if (ray->side == 0 && ray->r_dir_x > 0) //vert est
+		return(WEST);
 	else if (ray->side == 1 && ray->r_dir_y < 0) // bleu sud
 		return(SOUTH);
 	else // rose nord
@@ -199,7 +199,8 @@ void	put_first_ray(t_file *file, t_mlx *mlx, t_player *player, t_ray *ray) //tra
 
 	//ray_angle = player->player_dir - (M_PI/6); //on retranche 30deg a l'angle du player pour commencer le cone a G
 
-	ray_angle = player->player_dir - (M_PI/6); //on retranche 30deg a l'angle du player pour commencer le cone a G
+	//ray_angle = player->player_dir - (M_PI/6); //on retranche 30deg a l'angle du player pour commencer le cone a G
+	ray_angle = player->player_dir - (33 * M_PI/180); //on retranche 30deg a l'angle du player pour commencer le cone a G
 	if (ray_angle < 0)
 		ray_angle += 2 * M_PI;
 	if (ray_angle > 2 * M_PI) //si on est passé au dela de 1 tour complet on reajuste
@@ -220,7 +221,7 @@ void	put_first_ray(t_file *file, t_mlx *mlx, t_player *player, t_ray *ray) //tra
 			ray->hit_x = ray->p_dx_pos + ray->r_dir_x * ray->r_dist;
 			ray->hit_y = ray->p_dy_pos + ray->r_dir_y * ray->r_dist;
 		}
-		my_mlx_pixel_put(mlx, ray->hit_x *SCALE_MAP, ray->hit_y *SCALE_MAP, 0x00FF00FF); //print le point d'intersection entre le ray et le mur
+		//my_mlx_pixel_put(mlx, ray->hit_x *SCALE_MAP, ray->hit_y *SCALE_MAP, 0x00FF00FF); //print le point d'intersection entre le ray et le mur
 		len = sqrt(pow((ray->hit_x - ray->p_dx_pos), 2) + pow((ray->hit_y - ray->p_dy_pos), 2)); //pythagore pour connaitre la hauteur du mur
 		wall_len = len * cos(ray_angle - player->player_dir); //correction fisheyes
 
@@ -231,7 +232,8 @@ void	put_first_ray(t_file *file, t_mlx *mlx, t_player *player, t_ray *ray) //tra
 		draw_col(mlx, ray, x + WIN_W/2, ray_angle); //impression ciel/mur/sol
 
 		//ray_angle += (60/(double)WIN_W) * M_PI / 180; //faire varier l'angle pour passer a la colonne d'a coté
-		ray_angle += (M_PI/3)/(double)WIN_W; //faire varier l'angle pour passer a la colonne d'a coté
+		ray_angle += (66 * M_PI/180)/(double)WIN_W; //faire varier l'angle pour passer a la colonne d'a coté
+		// ray_angle += (M_PI/3)/(double)WIN_W; //faire varier l'angle pour passer a la colonne d'a coté
 		x++; //on ++ pour indiquer a quel endroit de la fenetre on devra imprimer le prochain ray
 	}
 }

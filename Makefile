@@ -18,7 +18,7 @@ RM = rm -rf
 
 CFLAGS =	-Wall -Wextra -Werror -g -I mlx
 
-CFLAGS += -fsanitize=address -static-libsan -g
+#CFLAGS += -fsanitize=address -static-libsan -g
 
 INC		= 	-I./include/
 

@@ -6,34 +6,29 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 17:37:44 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/12 14:06:01 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/12 17:00:50 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
 /*WIP : ajouter ici tout ce qui doit etre free avant de quitter le programme*/
-void free_all(t_file *file, t_mlx *mlx)
+void	free_all(t_mlx *mlx)
 {
-	(void)file;
-
 	if (mlx->init_ptr)
 		free(mlx->init_ptr);
 	if (mlx->player)
 		free(mlx->player);
-	// if(mlx->win)
-	// 	free(mlx->win); //NE PAS FREE : double free avec mlx_destroy_window
 	if (mlx->ray)
 		free(mlx->ray);
+	if (mlx->txt)
+		free(mlx->txt);
 }
 
-int	close_win(t_mlx *mlx, t_file *file)
+int	close_win(t_mlx *mlx)
 {
-	(void)file;
-
 	mlx_destroy_window(mlx->init_ptr, mlx->win);
-	free_all(file, mlx);
-	//system("leaks cub3d");
+	free_all(mlx);
 	exit(0);
 }
 
@@ -41,13 +36,13 @@ int	close_win(t_mlx *mlx, t_file *file)
 void	init_dir_player(t_mlx *mlx, t_file *file, int x, int y)
 {
 	if (file->scene[y][x] == 'N')
-		mlx->player->player_dir = M_PI/2;
-	else if(file->scene[y][x] == 'E')
+		mlx->player->player_dir = M_PI_2;
+	else if (file->scene[y][x] == 'E')
 		mlx->player->player_dir = 0;
-	else if(file->scene[y][x] == 'W')
+	else if (file->scene[y][x] == 'W')
 		mlx->player->player_dir = M_PI;
-	else if(file->scene[y][x] == 'S')
-		mlx->player->player_dir = 3 * M_PI/2;
+	else if (file->scene[y][x] == 'S')
+		mlx->player->player_dir = 3 * M_PI_2;
 }
 
 void	init_push_button(t_mlx *mlx)
@@ -65,7 +60,6 @@ void	init_player(t_mlx *mlx, t_file *file)
 {
 	int	x;
 	int	y;
-
 
 	y = -1;
 	while (file->scene[++y])
@@ -90,12 +84,15 @@ void	init_player(t_mlx *mlx, t_file *file)
 /*initialise les textures dans le tab de textures*/
 int	init_texture_ptr_adr(t_mlx *mlx, char *filename, int orientation)
 {
-	mlx->txt[orientation].txt_ptr = mlx_xpm_file_to_image(mlx->init_ptr, filename, &mlx->txt[orientation].w, &mlx->txt[orientation].h);
-	if(!mlx->txt[orientation].txt_ptr)
-		return(1);
-	mlx->txt[orientation].txt_adr = mlx_get_data_addr(mlx->txt[orientation].txt_ptr, &mlx->txt[orientation].bpp, &mlx->txt[orientation].len, &mlx->txt[orientation].endian);
+	mlx->txt[orientation].txt_ptr = mlx_xpm_file_to_image(mlx->init_ptr,
+			filename, &mlx->txt[orientation].w, &mlx->txt[orientation].h);
+	if (!mlx->txt[orientation].txt_ptr)
+		return (write(2, "Error\nWrong texture path\n", 25), 1);
+	mlx->txt[orientation].txt_adr = mlx_get_data_addr(
+			mlx->txt[orientation].txt_ptr, &mlx->txt[orientation].bpp,
+			&mlx->txt[orientation].len, &mlx->txt[orientation].endian);
 	if (!mlx->txt[orientation].txt_adr)
-		return (1);
+		return (write(2, "Error\nmlx_get_data_addr failed\n", 31), 1);
 	return (0);
 }
 
@@ -116,42 +113,32 @@ int	init_texture(t_mlx *mlx, t_file *file)
 Initialisation du pointeur mlx, de la fenetre, des xpm, de la position du player
 et des param de la camera (voir camera.c)
 */
-int init_mlx(t_mlx *mlx, t_file *file)
+int	init_mlx(t_mlx *mlx, t_file *file)
 {
 	mlx->player = malloc(sizeof(t_player));
 	if (!mlx->player)
-	{
-		free_all(file, mlx);
-		return (1);
-	}
+		return (free_all(mlx), write(2, "Error\nMalloc failed\n", 20), 1);
 	mlx->init_ptr = mlx_init();
-	if(!mlx->init_ptr)
+	if (!mlx->init_ptr)
 	{
-		free_all(file, mlx);
-		return (write(2, "Error\nMlx: initialisation failed.\n", 33), 1);
+		free_all(mlx);
+		return (write(2, "Error\nMlx: initialisation failed\n", 33), 1);
 	}
 	mlx->win = mlx_new_window(mlx->init_ptr, WIN_W, WIN_H, "Cub3D");
 	if (mlx->win == NULL)
 	{
-		free_all(file, mlx);
+		free_all(mlx);
 		return (write(2, "Error\nMlx: new window init. failed.\n", 36), 1);
 	}
 	mlx->ray = malloc(sizeof(t_ray));
 	if (!mlx->ray)
-	{
-		free_all(file, mlx);
-		return (write(2, "Error\nInit. ray failed.\n", 36), 1);
-	}
+		return (free_all(mlx), write(2, "Error\nMalloc failed\n", 20), 1);
 	mlx->txt = malloc(sizeof(t_txt) * 4);
 	if (!mlx->txt)
-	{
-		free_all(file, mlx);
-		return(1);
-	}
-	init_player(mlx, file); //verif les retours
+		return (free_all(mlx), write(2, "Error\nMalloc failed\n", 20), 1);
+	init_player(mlx, file);
 	if (init_texture(mlx, file))
-		return (1);
-	mlx->file = file;
+		return (free_all(mlx), 1);
 	return (0);
 }
 
@@ -165,9 +152,9 @@ mlx_hook permet de reperer lorsqu'un event arrive :
 
 mlx_loop_hook permet d'actualiser l'image en temps reel en fonction des events qui ont eu lieu
 */
-int launch_mlx(t_mlx *mlx, t_file *file)
+int	launch_mlx(t_mlx *mlx, t_file *file)
 {
-	if(init_mlx(mlx, file))
+	if (init_mlx(mlx, file))
 		return (1);
 	creat_image(mlx, file);
 	mlx_hook(mlx->win, 2, 1L << 0, deal_press_key, mlx);

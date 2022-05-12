@@ -37,6 +37,7 @@ static int	check_for_colors(t_list *head)
 		while (*tmp)
 			free(*tmp++);
 	}
+	free(str);
 	return (ret);
 }
 

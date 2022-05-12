@@ -93,13 +93,13 @@ int	parse_file(t_file *file, int ac, char **av)
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0)
 		return (perror("Error\nOpen"), 1);
-	if (read_file_to_lst(fd, file)) //file->map malloc'd
+	if (read_file_to_lst(fd, file))
 		return (close(fd), 1);
 	if (join_split_params(file))
 		return (free_params(file), 1);
-	if (check_params(file)) //texture malloc'd
+	if (check_params(file))
 		return (free_params(file), 1);
-	if (check_map(file)) //file->scene malloc'd
+	if (check_map(file))
 		return (free_params(file), 1);
 	convert_space_to_wall(file->scene);
 	if (fill_map(file->scene))

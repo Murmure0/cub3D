@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 17:37:44 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/12 17:00:50 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/13 10:00:26 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ et des param de la camera (voir camera.c)
 */
 int	init_mlx(t_mlx *mlx, t_file *file)
 {
+	mlx->file = file;
 	mlx->player = malloc(sizeof(t_player));
 	if (!mlx->player)
 		return (free_all(mlx), write(2, "Error\nMalloc failed\n", 20), 1);
@@ -154,6 +155,8 @@ mlx_loop_hook permet d'actualiser l'image en temps reel en fonction des events q
 */
 int	launch_mlx(t_mlx *mlx, t_file *file)
 {
+	printf("valeur w, h : %d, %d\n", file->map_h,file->map_w);
+	printf("couleur C/S : %d, %d\n", file->param->ceiling, file->param->floor);
 	if (init_mlx(mlx, file))
 		return (1);
 	creat_image(mlx, file);

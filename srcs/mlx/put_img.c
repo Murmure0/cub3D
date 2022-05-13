@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 18:44:30 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/09 12:00:36 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/13 09:51:23 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,10 @@ int	render_next_frame(void *mlxb)
 	t_mlx	*mlx;
 
 	mlx = (t_mlx *)mlxb;
+
 	update_player_pos(mlx);
 	creat_minimap(mlx, mlx->file);
+
 	mlx_put_image_to_window(mlx->init_ptr, mlx->win, mlx->img, 0, 0);
 	return (0);
 }

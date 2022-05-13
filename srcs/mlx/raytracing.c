@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 15:58:45 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/12 17:02:06 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/13 11:11:24 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,25 +110,33 @@ int	dir_wall(t_ray *ray)
 		return (NORTH);
 }
 
-int	find_col(t_mlx *mlx, t_ray *ray, int dir)
-{
-	int	col;
+// int	find_col(t_mlx *mlx, t_ray *ray, int dir)
+// {
+// 	int	col;
 
-	col = 0;
-	if (dir == WEST)
-		col = (int)((1.0 - (ray->hit_y - (int)ray->hit_y)) * (float)mlx->txt[dir].w);
-	else if (dir == EST)
-		col = (int)(((ray->hit_y - (int)ray->hit_y)) * (float)mlx->txt[dir].w);
-	else if (dir == SOUTH)
-		col = (int)(((ray->hit_x - (int)ray->hit_x)) * (float)mlx->txt[dir].w);
-	else if (dir == NORTH)
-		col = (int)((1.0 - (ray->hit_x - (int)ray->hit_x)) * (float)mlx->txt[dir].w);
-	if (col >= mlx->txt[dir].w)
-	{
-		col = mlx->txt[dir].w - 1;
-	}
-	return (col);
-}
+// 	col = 0;
+// 	// if (dir == WEST)
+// 	// 	col = (int)((1.0 - (ray->hit_y - (int)ray->hit_y)) * (double)mlx->txt[dir].w);
+// 	// else if (dir == EST)
+// 	// 	col = (int)(((ray->hit_y - (int)ray->hit_y)) * (double)mlx->txt[dir].w);
+// 	// else if (dir == NORTH)
+// 	// 	col = (int)(((ray->hit_x - (int)ray->hit_x)) * (double)mlx->txt[dir].w);
+// 	// else if (dir == SOUTH)
+// 	// 	col = (int)((1.0 - (ray->hit_x - (int)ray->hit_x)) * (double)mlx->txt[dir].w);
+// 	if (dir == WEST)
+// 		col = (int)((ray->hit_x + ray->hit_y) * mlx->txt[dir].w) % mlx->txt[dir].w;
+// 	else if (dir == EST)
+// 		col = (int)((ray->hit_x + ray->hit_y) * mlx->txt[dir].w) % mlx->txt[dir].w;
+// 	else if (dir == NORTH)
+// 		col = (int)((ray->hit_x + ray->hit_y) * mlx->txt[dir].w) % mlx->txt[dir].w;
+// 	else if (dir == SOUTH)
+ //		col = (int)((ray->hit_x + ray->hit_y) * mlx->txt[dir].w) % mlx->txt[dir].w;
+// 	// if (col >= mlx->txt[dir].w)
+// 	// {
+// 	// 	col = mlx->txt[dir].w - 1;
+// 	// }
+// 	return (col);
+// }
 
 int	draw_wall(t_mlx *mlx, t_ray *ray, int x)
 {
@@ -138,17 +146,16 @@ int	draw_wall(t_mlx *mlx, t_ray *ray, int x)
 	double	text_x;
 	double	text_x_step;
 
-	// int i = 0;
-	// int j = 0;
-	d_wall = (int)((WIN_H / 2.0) + (ray->line_len / 2.0));
+	d_wall = (int)((WIN_H + ray->line_len) * 0.5);
 	dir = dir_wall(ray);
-	col = find_col(mlx, ray, dir);
+	//col = find_col(mlx, ray, dir);
+	col = (int)((ray->hit_x + ray->hit_y) * mlx->txt[dir].w) % mlx->txt[dir].w;
 	text_x = 0.00; // premiere texel
 	text_x_step = (mlx->txt[dir].h - 1) / ray->line_len; // ratio pour savoir quel texel imprimer
 	while (ray->h_wall < d_wall)
 	{
 		if (ray->h_wall >= 0 && ray->h_wall <= WIN_H -1)
-			my_mlx_pixel_put(mlx, x, ray->h_wall, get_texel_color(&mlx->txt[dir], col, text_x));
+			my_mlx_pixel_put(mlx, x, ray->h_wall, get_texel_color(&mlx->txt[dir], col, (int)text_x));
 		ray->h_wall++;
 		text_x += text_x_step;
 	}
@@ -162,7 +169,7 @@ void	draw_col(t_mlx *mlx, t_ray *ray, int x)
 	int	i;
 
 	i = 0;
-	ray->h_wall = (int)((WIN_H / 2.0) - (ray->line_len / 2.0));
+	ray->h_wall = (int)((WIN_H  - ray->line_len) * 0.5);
 	while (i < ray->h_wall)
 	{
 		if (i >= 0 && i < ray->h_wall)
@@ -207,8 +214,11 @@ void	put_first_ray(t_file *file, t_mlx *mlx, t_player *player, t_ray *ray) //tra
 			ray->hit_y = ray->p_dy_pos + ray->r_dir_y * ray->r_dist;
 		}
 		//my_mlx_pixel_put(mlx, ray->hit_x *SCALE_MAP, ray->hit_y *SCALE_MAP, 0x00FF00FF); //print le point d'intersection entre le ray et le mur
+		
 		len = sqrt(pow((ray->hit_x - ray->p_dx_pos), 2) + pow((ray->hit_y - ray->p_dy_pos), 2)); //pythagore pour connaitre la hauteur du mur
+		//wall_len = len; //correction fisheyes
 		wall_len = len * cos(ray_angle - player->player_dir); //correction fisheyes
+		
 		ray->line_len = (WIN_H / wall_len); //hauteur perçue du mur : hauteur de la ligne a imprimer
 	//ICI : 
 		draw_col(mlx, ray, x + WIN_W / 2); //impression ciel/mur/sol

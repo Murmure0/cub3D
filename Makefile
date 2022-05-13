@@ -6,7 +6,7 @@
 #    By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 11:55:53 by mberthet          #+#    #+#              #
-#    Updated: 2022/05/09 13:31:05 by mberthet         ###   ########.fr        #
+#    Updated: 2022/05/13 09:44:20 by mberthet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ RM = rm -rf
 
 CFLAGS =	-Wall -Wextra -Werror -g -I mlx
 
-#CFLAGS += -fsanitize=address -static-libsan -g
+CFLAGS += -fsanitize=address -static-libsan -g
 
 INC		= 	-I./include/
 

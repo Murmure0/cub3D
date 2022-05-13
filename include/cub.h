@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:20:00 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/12 14:05:11 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/13 16:54:36 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,42 +186,60 @@ int		fill_map(char **scene);
 char	*trim(char *str);
 
 /* --- MLX --- */
-/* -- init.c -- */
-void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
-int		launch_mlx(t_mlx *mlx, t_file *file);
-int		init_mlx(t_mlx *mlx, t_file *file);
-int		close_win(t_mlx *mlx);
+/* -- mlx_init_structs.c -- */
+void	init_player(t_mlx *mlx, t_file *file);
+int		init_texture(t_mlx *mlx, t_file *file);
+
+/* -- mlx_launch.c -- */
 void	free_all(t_mlx *mlx);
+int		close_win(t_mlx *mlx);
+int		init_mlx(t_mlx *mlx, t_file *file);
+int		launch_mlx(t_mlx *mlx, t_file *file);
 
-/* -- put_img.c -- */
-void	creat_image(t_mlx *mlx, t_file *file);
-void	creat_minimap(t_mlx *mlx, t_file *file);
-int		render_next_frame(void *mlx);
-int		put_floor(t_mlx *mlx, t_file *file, int k, double l);
-int		put_ceiling(t_mlx *mlx, t_file *file, int k, double l);
-
-/* -- move.c -- */
-int		deal_press_key(int keycode, t_mlx *mlx);
-int		deal_release_key(int keycode, t_mlx *mlx);
+/* -- move_dir.c -- */
+int		wall_collision(t_mlx *mlx, double px, double py);
 void	press_move_up(t_mlx *mlx);
 void	press_move_down(t_mlx *mlx);
 void	press_move_left(t_mlx *mlx);
 void	press_move_right(t_mlx *mlx);
+
+/* -- move_rotate.c -- */
 void	press_turn_left(t_mlx *mlx);
 void	press_turn_right(t_mlx *mlx);
+int		deal_press_key(int keycode, t_mlx *mlx);
+int		deal_release_key(int keycode, t_mlx *mlx);
 
-/* -- raytracing.c -- */
-int		put_ray(t_file *file, t_mlx *mlx, t_player *player);
+/* -- raytracing_dda.c -- */
 void	put_first_ray(t_file *file, t_mlx *mlx, t_player *player, t_ray *ray);
 
-/* -- Textures -- */
-int	get_texel_color(t_txt *txt, int x, int y);
-// int	get_texel_color(t_txt *txt, int x, int y, int dir);
+/* -- raytracing_wall.c -- */
+void	draw_col(t_mlx *mlx, t_ray *ray, int x);
+void	wall_line_len(t_ray *ray, double cam_angle);
+
+/* -- render_new_img.c -- */
+void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
+void	creat_game_image(t_mlx *mlx, t_file *file);
+void	creat_image(t_mlx *mlx, t_file *file);
+
+/* -- render_nxt_img.c -- */
+void update_player_pos(t_mlx *mlx);
+int		render_next_frame(void *mlx);
+
+// /* -- put_img.c -- */
+
+// int		put_floor(t_mlx *mlx, t_file *file, int k, double l);
+// int		put_ceiling(t_mlx *mlx, t_file *file, int k, double l);
 
 
-//TESTING FCT
-void	raytracing(t_player *player, t_file *file, t_mlx *mlx);
-//TODEL
-void	print_map(char **map);
+
+
+
+// int		put_ray(t_file *file, t_mlx *mlx, t_player *player);
+
+
+// //TESTING FCT
+// void	raytracing(t_player *player, t_file *file, t_mlx *mlx);
+// //TODEL
+// void	print_map(char **map);
 
 # endif

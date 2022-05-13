@@ -6,7 +6,7 @@
 #    By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 11:55:53 by mberthet          #+#    #+#              #
-#    Updated: 2022/05/13 09:44:20 by mberthet         ###   ########.fr        #
+#    Updated: 2022/05/13 16:55:24 by mberthet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,12 +35,15 @@ SOURCES =	srcs/main.c	\
 			srcs/parsing/parse_file.c	\
 			srcs/parsing/parse_utils.c	\
 			srcs/parsing/utils.c \
-			srcs/mlx/init.c	\
-			srcs/mlx/put_img.c	\
-			srcs/mlx/move.c	\
+			srcs/mlx/mlx_init_structs.c	\
+			srcs/mlx/mlx_launch.c	\
+			srcs/mlx/move_dir.c	\
+			srcs/mlx/move_rotate.c	\
 			gnl/get_next_line.c	\
-			srcs/mlx/raytracing.c	\
-			srcs/mlx/texture.c	\
+			srcs/mlx/raytracing_dda.c	\
+			srcs/mlx/raytracing_wall.c	\
+			srcs/mlx/render_new_img.c	\
+			srcs/mlx/render_nxt_img.c	\
 
 
 OBJ_DIR =	obj

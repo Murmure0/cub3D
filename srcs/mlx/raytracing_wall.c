@@ -34,7 +34,7 @@ static int	dir_wall(t_ray *ray)
 		return (NORTH);
 }
 
-/*Imprime texel par texel sur la bonne colonne pour creer le mur*/
+/* print the right column of texture pixels to create the walls */
 static int	draw_wall(t_mlx *mlx, t_ray *ray, int x)
 {
 	int		dir;
@@ -59,7 +59,7 @@ static int	draw_wall(t_mlx *mlx, t_ray *ray, int x)
 	return (ray->h_wall);
 }
 
-/*Print ciel/mur/sol*/
+/* Print roof/walls/floors */
 void	draw_col(t_mlx *mlx, t_ray *ray, int x)
 {
 	int	i;
@@ -79,7 +79,7 @@ void	draw_col(t_mlx *mlx, t_ray *ray, int x)
 	}
 }
 
-/*Calcul la hauteur du mur en pixel a imprimer a l'ecran*/
+// Calculate height of wall to be printed
 void	wall_line_len(t_ray *ray, double cam_angle)
 {	
 	double	len;

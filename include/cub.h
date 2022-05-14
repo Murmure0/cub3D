@@ -27,10 +27,10 @@
 
 # define WIN_H 1080
 # define WIN_W 1080
-# define SCALE_MAP 16 //coté en pixel des carrés de la minimap
-# define SPEED 0.05 //deplacement sur la minimap
-# define FOV 66 //field of view : angle sur lequel on capte les infos en jeu
-# define WEST 2 //Pour les structures de chaque texture t_img en fonction de leur orientation
+# define SCALE_MAP 16 // Size of side in pixels of squares of the minimap
+# define SPEED 0.05 // Movement speed on minimap
+# define FOV 66 // Field of view
+# define WEST 2
 # define NORTH 1
 # define EST 0
 # define SOUTH 3
@@ -69,7 +69,7 @@ typedef struct s_file
 
 /* -------------------------- */
 
-/*Quatre structure img : une pour chqaue texture, variables initialisees par la minilibx*/
+// One struct per texture type. Initialized by Minilibx
 typedef struct s_txt 
 {
 	void *txt_ptr;
@@ -81,7 +81,7 @@ typedef struct s_txt
 	int	endian;
 }				t_txt;
 
-/*Coordonnées du joueur & etat pressé/relaché des touches (1/0) : voir move.c*/
+// Players coordinate + key press bool variable. See move.c
 typedef struct s_player{
 	int			x_pos;
 	int			y_pos;
@@ -101,43 +101,42 @@ typedef struct s_player{
 	int			rot_r_press;
 }				t_player;
 
-/*DDA/raytracing :
-reprends une partie des var de t_player pour pouvoir eventuellement 
-les modifier lors des calculs du raytracing*/
+/* DDA/raytracing :
+copies part of t_player variables to be able to change
+them up during the raytracing caluculations */
 typedef struct s_ray
 {
-	double		p_dx_pos; //vRaystart : position du player au debut en double (map)
-	double		p_dy_pos; //vRaystart : position du player au debut en double (map)
-	int			p_map_check_x; // reprend la pos du player/rayon initiale en int sur x (tab de la map)
-	int			p_map_check_y; // reprend la pos du player/rayon initiale en int sur y (tab de la map)
+	double		p_dx_pos; //vRaystart : player's position as double (map)
+	double		p_dy_pos; //vRaystart : player's position as double (map)
+	int			p_map_check_x; // copies player's position as int
+	int			p_map_check_y; // copies player's position as int
 	double		r_dir_x; //dirX(cos(player_dir)) : the direction of the player on x axe
 	double		r_dir_y; // dirY(sin(player_dir)) : the direction of the player on y axe
-	double		r_step_size_x; //position du rayon sur x durant le calcul
-	double		r_step_size_y; //position du rayon sur y durant le calcul
+	double		r_step_size_x; // ray's position on x axis during calculation
+	double		r_step_size_y; // ray's position on y axis during calculation
 	double		r_dist;
 	int			hit;
 	double		hit_x;
 	double		hit_y;
 	int			side;
-	double		r_len_x; // longueur de l'hyp sur l'axe sur lequel on bosse
+	double		r_len_x; // lenght of hypotenuse of axis we're working on
 	double		r_len_y;
-	int			r_step_x; // 1 / -1 : on avance avec cette dir sur X/Y
+	int			r_step_x; // Either 1 or -1 : advancing or retreating on x axis
 	int			r_step_y;
 	double		line_len;
 	int			h_wall;
 }	t_ray;
 
-/*Dans de nb fonctions de la mlx on ne peut passer qu'une variable en parametre : 
-je passe donc t_mlx *mlx avec ses nombreux liens vers d'autres structures*/
+/* MLX functions only accept one argument. Thus, t_mlx stores all needed structs to work */
 typedef struct s_mlx
 {
-	void		*init_ptr; //pointeur d'initialisation de la mlx
-	void		*win; //pointeur identifiant la fenetre dans laquelle on bosse
-	void		*img; //pointeur sur l'image sur laquelle on a/va bosser
-	char		*addr_img; // + utile : l'adresse de l'image, permet des modifications en temps reel
-	int			bits_per_pixel; //init par la mlx par mlx_get_data_addr
-	int			line_length; //idem
-	int			endian; // = 0, idem (+info : voir big-endian et little-endian)
+	void		*init_ptr; // MLX init pointer
+	void		*win; // pointer to window we're working on
+	void		*img; // pointer to img we're working on before pushing it to the window
+	char		*addr_img; // address of the above var. Lets us do modifications
+	int			bits_per_pixel; // initialized by mlx_get_data_addr
+	int			line_length; // same as above
+	int			endian; // equals 0, same as above
 	t_txt		*txt;
 	t_file		*file;
 	t_player	*player;

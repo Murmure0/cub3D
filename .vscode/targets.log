@@ -1,0 +1,501 @@
+make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 4.3
+# Built for Windows32
+# Copyright (C) 1988-2020 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+ 
+
+# Make data base, printed on Sat May 14 19:38:41 2022
+
+# Variables
+
+# environment
+FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
+# environment
+SYSTEMDRIVE = C:
+# environment
+JAVA_HOME = C:\Program Files\Java\jdk1.8.0_211
+# environment
+LC_ALL = C
+# environment
+USERPROFILE = C:\Users\Cyril Wastchenko
+# environment
+VBOX_MSI_INSTALL_PATH = D:\Oracle\VirtualBox\
+# environment
+LOCALAPPDATA = C:\Users\Cyril Wastchenko\AppData\Local
+# environment
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-bdcfb684-23b9-4634-bbe0-b4ce35f760ac-sock
+# environment
+VSCODE_CWD = C:\Users\Cyril Wastchenko\AppData\Local\Programs\Microsoft VS Code
+# environment
+CHOCOLATEYINSTALL = C:\ProgramData\chocolatey
+# environment
+SYSTEMROOT = C:\WINDOWS
+# environment
+PROCESSOR_LEVEL = 6
+# environment
+PSMODULEPATH = C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
+# default
+MAKE_COMMAND := C:/ProgramData/chocolatey/lib/make/tools/install/bin/make.exe
+# automatic
+@D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
+# environment
+DOKANLIBRARY1_LIBRARYPATH_X64 = C:\Program Files\Dokan\Dokan Library-1.4.1\lib\
+# makefile (from 'Makefile', line 49)
+OBJ_DIR = obj
+# environment
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_11624_AGHYMMNTCBDANYPU
+# environment
+FPS_BROWSER_USER_PROFILE_STRING = Default
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# default
+.VARIABLES := 
+# automatic
+%D = $(patsubst %/,%,$(patsubst %\,%,$(dir $%)))
+# automatic
+^D = $(patsubst %/,%,$(patsubst %\,%,$(dir $^)))
+# environment
+VSCODE_LOG_STACK = false
+# automatic
+%F = $(notdir $%)
+# environment
+VSCODE_CODE_CACHE_PATH = C:\Users\Cyril Wastchenko\AppData\Roaming\Code\CachedData\da15b6fd3ef856477bf6f4fb29ba1b7af717770d
+# environment
+LANG = C
+# default
+.LOADED := 
+# environment
+TMP = C:\Users\CYRILW~1\AppData\Local\Temp
+# default
+.INCLUDE_DIRS = .
+# environment
+PROCESSOR_ARCHITEW6432 = AMD64
+# makefile
+MAKEFLAGS = pqrR
+# environment
+ONEDRIVE = C:\Users\Cyril Wastchenko\OneDrive
+# makefile
+CURDIR := d:/vsc_42cursus/cub3D
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+DOKANLIBRARY1_LIBRARYPATH_X86 = C:\Program Files\Dokan\Dokan Library-1.4.1\x86\lib\
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+# automatic
+*D = $(patsubst %/,%,$(patsubst %\,%,$(dir $*)))
+# environment
+PROGRAMFILES = C:\Program Files (x86)
+# environment
+MFLAGS = -pqrR
+# default
+.SHELLFLAGS := -c
+# environment
+COMMONPROGRAMW6432 = C:\Program Files\Common Files
+# automatic
++D = $(patsubst %/,%,$(patsubst %\,%,$(dir $+)))
+# makefile (from 'Makefile', line 1)
+MAKEFILE_LIST := Makefile
+# automatic
+@F = $(notdir $@)
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# environment
+VSCODE_PID = 11624
+# automatic
+?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
+# environment
+ONLINESERVICES = Online Services
+# automatic
+*F = $(notdir $*)
+# automatic
+<D = $(patsubst %/,%,$(patsubst %\,%,$(dir $<)))
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+# makefile (from 'Makefile', line 25)
+INCLUDE = -L. -lmlx -framework OpenGL -framework AppKit
+# default
+MAKE_HOST := Windows32
+# environment
+ANDROID_HOME = C:\Users\Cyril Wastchenko\AppData\Local\Android\Sdk
+# environment
+PROGRAMDATA = C:\ProgramData
+# default
+SHELL := sh.exe
+# environment
+CLASSPATH = .;
+# environment
+HOMEPATH = \Users\Cyril Wastchenko
+# default
+MAKECMDGOALS := all
+# environment
+DRIVERDATA = C:\Windows\System32\Drivers\DriverData
+# environment
+COMSPEC = C:\WINDOWS\system32\cmd.exe
+# environment
+WINDIR = C:\WINDOWS
+# environment
+MAKELEVEL := 0
+# default
+MAKE = $(MAKE_COMMAND)
+# environment
+PATH = C:\Python38\Scripts\;C:\Python38\;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\ProgramData\chocolatey\bin;C:\Program Files\Java\jdk1.8.0_211\bin;D:\nodejs\;C:\msys64\mingw64\bin;C:\Program Files\Git\cmd;C:\Users\Cyril Wastchenko\AppData\Local\Microsoft\WindowsApps;c:\Users\YOUR_USERNAME\AppData\Local\Android\Sdk\platform-tools;C:\Users\Cyril Wastchenko\AppData\Local\GitHubDesktop\bin;C:\Users\Cyril Wastchenko\AppData\Local\Microsoft\WindowsApps;C:\Users\Cyril Wastchenko\AppData\Roaming\npm;C:\Users\Cyril Wastchenko\AppData\Local\Programs\Microsoft VS Code\bin
+# environment
+COMPUTERNAME = LAPTOP-5J89K4R6
+# default
+MAKEFILES := 
+# automatic
+^F = $(notdir $^)
+# environment
+PROMPT = $P$G
+# environment
+CHOCOLATEYLASTPATHUPDATE = 132407843223538680
+# environment
+LOGONSERVER = \\LAPTOP-5J89K4R6
+# environment
+VSCODE_LOG_NATIVE = false
+# environment
+USERNAME = Cyril Wastchenko
+# environment
+COMMONPROGRAMFILES = C:\Program Files (x86)\Common Files
+# automatic
+?F = $(notdir $?)
+# makefile (from 'Makefile', line 23)
+INC = -I./include/
+# environment
+PROGRAMW6432 = C:\Program Files
+# makefile (from 'Makefile', line 13)
+NAME = cub3d
+# environment
+PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+# automatic
++F = $(notdir $+)
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# makefile (from 'Makefile', line 50)
+OBJECTS = $(addprefix $(OBJ_DIR)/,$(SOURCES:.c=.o))
+# environment
+USERDOMAIN = LAPTOP-5J89K4R6
+# 'override' directive
+GNUMAKEFLAGS := 
+# environment
+OS = Windows_NT
+# environment
+DOKANLIBRARY1 = C:\Program Files\Dokan\Dokan Library-1.4.1\
+# makefile
+.DEFAULT_GOAL := all
+# makefile (from 'Makefile', line 17)
+RM = rm -rf
+# default
+MAKE_VERSION := 4.3
+# environment
+PLATFORMCODE = KV
+# environment
+PROGRAMFILES(X86) = C:\Program Files (x86)
+# environment
+USERDOMAIN_ROAMINGPROFILE = LAPTOP-5J89K4R6
+# enviro 
+nment
+NUMBER_OF_PROCESSORS = 4
+# environment
+PUBLIC = C:\Users\Public
+# environment
+APPDATA = C:\Users\Cyril Wastchenko\AppData\Roaming
+# makefile (from 'Makefile', line 21)
+CFLAGS = -Wall -Wextra -Werror -g -I mlx -fsanitize=address -static-libsan -g
+# environment
+HOMEDRIVE = C:
+# environment
+PROCESSOR_ARCHITECTURE = x86
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+COMMONPROGRAMFILES(X86) = C:\Program Files (x86)\Common Files
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# environment
+TEMP = C:\Users\CYRILW~1\AppData\Local\Temp
+# environment
+VSCODE_IPC_HOOK = \\.\pipe\a76266384f72284c200a7e89412d430e-1.67.1-main-sock
+# default
+.RECIPEPREFIX := 
+# automatic
+<F = $(notdir $<)
+# default
+SUFFIXES := 
+# environment
+ALLUSERSPROFILE = C:\ProgramData
+# environment
+SESSIONNAME = Console
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync load
+# environment
+REGIONCODE = EMEA
+# environment
+PROCESSOR_REVISION = 9e09
+# makefile (from 'Makefile', line 15)
+CC = gcc
+# makefile (from 'Makefile', line 27)
+SOURCES = srcs/main.c srcs/parsing/check_params_utils.c srcs/parsing/check_params.c srcs/parsing/check_walls_utils.c srcs/parsing/check_walls.c srcs/parsing/convert_list_to_array.c srcs/parsing/join_split_params.c srcs/parsing/lst_to_arr_utils.c srcs/parsing/parse_file.c srcs/parsing/parse_utils.c srcs/parsing/utils.c srcs/mlx/mlx_init_structs.c srcs/mlx/mlx_launch.c srcs/mlx/move_dir.c srcs/mlx/move_rotate.c gnl/get_next_line.c srcs/mlx/raytracing_dda.c srcs/mlx/raytracing_wall.c srcs/mlx/render_new_img.c srcs/mlx/render_nxt_img.c 
+# environment
+PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 158 Stepping 9, GenuineIntel
+# variable set hash-table stats:
+# Load=115/1024=11%, Rehash=0, Collisions=22/162=14%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# . (key d:/vsc_42cursus/cub3D, mtime 1652466467): 15 files, no impossibilities.
+# srcs (key d:/vsc_42cursus/cub3D/srcs, mtime 1652466467): 3 files, no impossibilities so far.
+
+# 18 files, no impossibilities in 2 directories.
+
+# Implicit Rules
+
+obj/%.o: %.c
+#  recipe to execute (from 'Makefile', line 61):
+	mkdir -p $(OBJ_DIR) $(OBJ_DIR)/srcs $(OBJ_DIR)/srcs/utils $(OBJ_DIR)/srcs/parsing $(OBJ_DIR)/gnl $(OBJ_DIR)/srcs/mlx
+	$(CC) $(CFLAGS) -c $(INC) $< -o $@
+
+# 1 implicit rules, 0 (0.0%) terminal.
+# Files
+
+# Not a target:
+obj/srcs/parsing/parse_file.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+obj/srcs/mlx/move_rotate.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+obj/srcs/parsing/utils.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+obj/srcs/parsing/join_split_params.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+obj/srcs/mlx/raytracing_wall.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 20:27:47
+#  File has been updated.
+#  Successfully updated.
+
+clean:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 65):
+	$(MAKE) -C ./libft fclean
+	@$(RM) $(OBJECTS) $(OBJ_DIR)
+	
+
+# Not a target:
+obj/srcs/mlx/render_nxt_img.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+cub3d: obj/srcs/main.o obj/srcs/parsing/check_params_utils.o obj/srcs/parsing/check_params.o obj/srcs/parsing/check_walls_utils.o obj/srcs/parsing/check_walls.o obj/srcs/parsing/convert_list_to_array.o obj/srcs/parsing/join_split_params.o obj/srcs/parsing/lst_to_arr_utils.o obj/srcs/parsing/parse_file.o obj/srcs/parsing/parse_utils.o obj/srcs/parsing/utils.o obj/srcs/mlx/mlx_init_structs.o obj/srcs/mlx/mlx_launch.o obj/srcs/mlx/move_dir.o obj/srcs/mlx/move_rotate.o obj/gnl/get_next_line.o obj/srcs/mlx/raytracing_dda.o obj/srcs/mlx/raytracing_wall.o obj/srcs/mlx/render_new_img.o obj/srcs/mlx/render_nxt_img.o
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table 
+ stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/12=0%
+#  recipe to execute (from 'Makefile', line 55):
+		@$(MAKE) -C ./libft
+		@$(CC) $(INCLUDE) $(CFLAGS) $(OBJECTS) ./libft/libft.a -o $(NAME)
+		@echo "[\033[32m$(NAME) ready to use\033[0m]"
+
+re: fclean all
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+# Not a target:
+obj/srcs/parsing/lst_to_arr_utils.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+obj/srcs/parsing/check_params_utils.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+obj/srcs/main.o: srcs/main.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'srcs/main'
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := obj/srcs/main.o
+# automatic
+# * := srcs/main
+# automatic
+# < := srcs/main.c
+# automatic
+# + := srcs/main.c
+# automatic
+# % := 
+# automatic
+# ^ := srcs/main.c
+# automatic
+# ? := srcs/main.c
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=3/22=14%
+#  recipe to execute (from 'Makefile', line 61):
+	mkdir -p $(OBJ_DIR) $(OBJ_DIR)/srcs $(OBJ_DIR)/srcs/utils $(OBJ_DIR)/srcs/parsing $(OBJ_DIR)/gnl $(OBJ_DIR)/srcs/mlx
+	$(CC) $(CFLAGS) -c $(INC) $< -o $@
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+all: cub3d
+#  Phony target (prerequisite of .PHONY).
+#  Command line target.
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/12=0%
+
+fclean: clean
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 69):
+	@$(RM) $(NAME)
+	
+
+# Not a target:
+obj/srcs/parsing/convert_list_to_array.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+obj/srcs/parsing/check_params.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+obj/srcs/mlx/render_new_img.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+obj/srcs/mlx/move_dir.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+obj/srcs/parsing/check_walls_utils.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+obj/srcs/parsing/parse_utils.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+obj/srcs/mlx/mlx_launch.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+obj/srcs/mlx/raytracing_dda.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+obj/gnl/get_next_line.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+.PHONY: clean fclean re all
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+obj/srcs/mlx/mlx_init_structs.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+srcs/main.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-13 20:27:47
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+obj/srcs/parsing/check_walls.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been 
+ updated.
+
+# files hash-table stats:
+# Load=30/1024=3%, Rehash=0, Collisions=2/73=3%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 1 (0) / strings = 48 / storage = 809 B / avg = 16 B
+# current buf: size = 8174 B / used = 809 B / count = 48 / avg = 16 B
+
+# strcache performance: lookups = 71 / hit rate = 32%
+# hash-table stats:
+# Load=48/8192=1%, Rehash=0, Collisions=0/71=0%
+# Finished Make data base on Sat May 14 19:38:41 2022
+
+ 

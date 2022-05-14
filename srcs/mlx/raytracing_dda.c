@@ -12,7 +12,7 @@
 
 #include "cub.h"
 
-/*Initialise la struct dediee aux rayons*/
+/*Initialize ray struct */
 static void	init_ray(t_ray *ray, t_player *player, double ray_angle)
 {
 	ray->p_dy_pos = player->dy_pos;
@@ -32,7 +32,7 @@ static void	init_ray(t_ray *ray, t_player *player, double ray_angle)
 	ray->side = 0;
 }
 
-/*Identifie sur quel direction de chaque axe on va commencer a chercher un mur*/
+/* Identify which axis the wall will be searched on */
 static void	init_dir_ray(t_ray *ray)
 {
 	if (ray->r_dir_x < 0)
@@ -61,7 +61,7 @@ static void	init_dir_ray(t_ray *ray)
 	}
 }
 
-/*On avance sur x & y until wall*/
+/* Increment x && y until a wall is found */
 static void	find_wall(int dist_max, t_ray *ray, t_file *file)
 {
 	while (ray->hit != 1 && ray->r_dist < dist_max)

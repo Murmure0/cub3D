@@ -19,7 +19,6 @@ void	press_turn_left(t_mlx *mlx)
 		mlx->player->player_dir += 2 * M_PI;
 }
 
-//Idem
 void	press_turn_right(t_mlx *mlx)
 {
 	mlx->player->player_dir += SPEED;

@@ -21,7 +21,7 @@ void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-/*Imprime le point du joueur sur la minimap*/
+// Print player on minimap
 static void	gen_mini_player(t_mlx *mlx, t_player *player)
 {
 	int	i;
@@ -39,7 +39,7 @@ static void	gen_mini_player(t_mlx *mlx, t_player *player)
 	}
 }
 
-/*Imprime la Minimap*/
+// Print minimap
 static void	print_minimap_square(t_mlx *mlx, int x, int y, int color)
 {
 	int	i;
@@ -61,7 +61,6 @@ static void	print_minimap_square(t_mlx *mlx, int x, int y, int color)
 	}
 }
 
-/*Parcourt la map parsée dans scene, imprime la minimap en fct des 1 et des 0*/
 void	creat_game_image(t_mlx *mlx, t_file *file)
 {
 	int	x;

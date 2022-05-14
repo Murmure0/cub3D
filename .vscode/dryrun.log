@@ -1,0 +1,203 @@
+make.exe --dry-run --always-make --keep-going --print-directory
+make: Entering directory 'd:/vsc_42cursus/cub3D'
+mkdir -p obj obj/srcs obj/srcs/utils obj/srcs/parsing obj/gnl obj/srcs/mlx
+gcc -Wall -Wextra -Werror -g -I mlx -fsanitize=address -static-libsan -g -c -I./include/ srcs/main.c -o obj/srcs/main.o
+ 
+mkdir -p obj obj/srcs obj/srcs/utils obj/srcs/parsing obj/gnl obj/srcs/mlx
+gcc -Wall -Wextra -Werror -g -I mlx -fsanitize=address -static-libsan -g -c -I./include/ srcs/parsing/check_params_utils.c -o obj/srcs/parsing/check_params_utils.o
+ 
+mkdir -p obj obj/srcs obj/srcs/utils obj/srcs/parsing obj/gnl obj/srcs/mlx
+gcc -Wall -Wextra -Werror -g -I mlx -fsanitize=address -static-libsan -g -c -I./include/ srcs/parsing/check_params.c -o obj/srcs/parsing/check_params.o
+ 
+mkdir -p obj obj/srcs obj/srcs/utils obj/srcs/parsing obj/gnl obj/srcs/mlx
+gcc -Wall -Wextra -Werror -g -I mlx -fsanitize=address -static-libsan -g -c -I./include/ srcs/parsing/check_walls_utils.c -o obj/srcs/parsing/check_walls_utils.o
+ 
+mkdir -p obj obj/srcs obj/srcs/utils obj/srcs/parsing obj/gnl obj/srcs/mlx
+gcc -Wall -Wextra -Werror -g -I mlx -fsanitize=address -static-libsan -g -c -I./include/ srcs/parsing/check_walls.c -o obj/srcs/parsing/check_walls.o
+ 
+mkdir -p obj obj/srcs obj/srcs/utils obj/srcs/parsing obj/gnl obj/srcs/mlx
+gcc -Wall -Wextra -Werror -g -I mlx -fsanitize=address -static-libsan -g -c -I./include/ srcs/parsing/convert_list_to_array.c -o obj/srcs/parsing/convert_list_to_array.o
+ 
+mkdir -p obj obj/srcs obj/srcs/utils obj/srcs/parsing obj/gnl obj/srcs/mlx
+gcc -Wall -Wextra -Werror -g -I mlx -fsanitize=address -static-libsan -g -c -I./include/ srcs/parsing/join_split_params.c -o obj/srcs/parsing/join_split_params.o
+ 
+mkdir -p obj obj/srcs obj/srcs/utils obj/srcs/parsing obj/gnl obj/srcs/mlx
+gcc -Wall -Wextra -Werror -g -I mlx -fsanitize=address -static-libsan -g -c -I./include/ srcs/parsing/lst_to_arr_utils.c -o obj/srcs/parsing/lst_to_arr_utils.o
+ 
+mkdir -p obj obj/srcs obj/srcs/utils obj/srcs/parsing obj/gnl obj/srcs/mlx
+gcc -Wall -Wextra -Werror -g -I mlx -fsanitize=address -static-libsan -g -c -I./include/ srcs/parsing/parse_file.c -o obj/srcs/parsing/parse_file.o
+ 
+mkdir -p obj obj/srcs obj/srcs/utils obj/srcs/parsing obj/gnl obj/srcs/mlx
+gcc -Wall -Wextra -Werror -g -I mlx -fsanitize=address -static-libsan -g -c -I./include/ srcs/parsing/parse_utils.c -o obj/srcs/parsing/parse_utils.o
+ 
+mkdir -p obj obj/srcs obj/srcs/utils obj/srcs/parsing obj/gnl obj/srcs/mlx
+gcc -Wall -Wextra -Werror -g -I mlx -fsanitize=address -static-libsan -g -c -I./include/ srcs/parsing/utils.c -o obj/srcs/parsing/utils.o
+ 
+mkdir -p obj obj/srcs obj/srcs/utils obj/srcs/parsing obj/gnl obj/srcs/mlx
+gcc -Wall -Wextra -Werror -g -I mlx -fsanitize=address -static-libsan -g -c -I./include/ srcs/mlx/mlx_init_structs.c -o obj/srcs/mlx/mlx_init_structs.o
+ 
+mkdir -p obj obj/srcs obj/srcs/utils obj/srcs/parsing obj/gnl obj/srcs/mlx
+gcc -Wall -Wextra -Werror -g -I mlx -fsanitize=address -static-libsan -g -c -I./include/ srcs/mlx/mlx_launch.c -o obj/srcs/mlx/mlx_launch.o
+ 
+mkdir -p obj obj/srcs obj/srcs/utils obj/srcs/parsing obj/gnl obj/srcs/mlx
+ 
+gcc -Wall -Wextra -Werror -g -I mlx -fsanitize=address -static-libsan -g -c -I./include/ srcs/mlx/move_dir.c -o obj/srcs/mlx/move_dir.o
+ 
+mkdir -p obj obj/srcs obj/srcs/utils obj/srcs/parsing obj/gnl obj/srcs/mlx
+gcc -Wall -Wextra -Werror -g -I mlx -fsanitize=address -static-libsan -g -c -I./include/ srcs/mlx/move_rotate.c -o obj/srcs/mlx/move_rotate.o
+ 
+mkdir -p obj obj/srcs obj/srcs/utils obj/srcs/parsing obj/gnl obj/srcs/mlx
+gcc -Wall -Wextra -Werror -g -I mlx -fsanitize=address -static-libsan -g -c -I./include/ gnl/get_next_line.c -o obj/gnl/get_next_line.o
+ 
+mkdir -p obj obj/srcs obj/srcs/utils obj/srcs/parsing obj/gnl obj/srcs/mlx
+gcc -Wall -Wextra -Werror -g -I mlx -fsanitize=address -static-libsan -g -c -I./include/ srcs/mlx/raytracing_dda.c -o obj/srcs/mlx/raytracing_dda.o
+ 
+mkdir -p obj obj/srcs obj/srcs/utils obj/srcs/parsing obj/gnl obj/srcs/mlx
+gcc -Wall -Wextra -Werror -g -I mlx -fsanitize=address -static-libsan -g -c -I./include/ srcs/mlx/raytracing_wall.c -o obj/srcs/mlx/raytracing_wall.o
+ 
+mkdir -p obj obj/srcs obj/srcs/utils obj/srcs/parsing obj/gnl obj/srcs/mlx
+gcc -Wall -Wextra -Werror -g -I mlx -fsanitize=address -static-libsan -g -c -I./include/ srcs/mlx/render_new_img.c -o obj/srcs/mlx/render_new_img.o
+ 
+mkdir -p obj obj/srcs obj/srcs/utils obj/srcs/parsing obj/gnl obj/srcs/mlx
+gcc -Wall -Wextra -Werror -g -I mlx -fsanitize=address -static-libsan -g -c -I./include/ srcs/mlx/render_nxt_img.c -o obj/srcs/mlx/render_nxt_img.o
+ 
+C:/ProgramData/chocolatey/lib/make/tools/install/bin/make.exe -C ./libft
+ 
+make[1]: Entering directory 'd:/vsc_42cursus/cub3D/libft'
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_atoi.c -o obj/ft_atoi.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_bzero.c -o obj/ft_bzero.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_calloc.c -o obj/ft_calloc.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_isalnum.c -o obj/ft_isalnum.o
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_isalpha.c -o obj/ft_isalpha.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_isascii.c -o obj/ft_isascii.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_isdigit.c -o obj/ft_isdigit.o
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_isprint.c -o obj/ft_isprint.o
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_itoa.c -o obj/ft_itoa.o
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_memchr.c -o obj/ft_memchr.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_memcmp.c -o obj/ft_memcmp.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_memcpy.c -o obj/ft_memcpy.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_memmove.c -o obj/ft_memmove.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_memset.c -o obj/ft_memset.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_putchar_fd.c -o obj/ft_putchar_fd.o
+ 
+mkdir -p obj
+ 
+gcc -Wall -Wextra -Werror -c ft_putendl_fd.c -o obj/ft_putendl_fd.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_putnbr_fd.c -o obj/ft_putnbr_fd.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_putstr_fd.c -o obj/ft_putstr_fd.o
+ 
+mkdir -p obj
+ 
+gcc -Wall -Wextra -Werror -c ft_split.c -o obj/ft_split.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_strchr.c -o obj/ft_strchr.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_strdup.c -o obj/ft_strdup.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_striteri.c -o obj/ft_striteri.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_strjoin.c -o obj/ft_strjoin.o
+ 
+mkdir -p obj
+ 
+gcc -Wall -Wextra -Werror -c ft_strlcat.c -o obj/ft_strlcat.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_strlcpy.c -o obj/ft_strlcpy.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_strlen.c -o obj/ft_strlen.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_strmapi.c -o obj/ft_strmapi.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_strncmp.c -o obj/ft_strncmp.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_strnstr.c -o obj/ft_strnstr.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_strrchr.c -o obj/ft_strrchr.o
+ 
+mkdir -p obj
+ 
+gcc -Wall -Wextra -Werror -c ft_strtrim.c -o obj/ft_strtrim.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_substr.c -o obj/ft_substr.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_tolower.c -o obj/ft_tolower.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_toupper.c -o obj/ft_toupper.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_lstadd_back.c -o obj/ft_lstadd_back.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_lstadd_front.c -o obj/ft_lstadd_front.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_lstclear.c -o obj/ft_lstclear.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_lstdelone.c -o obj/ft_lstdelone.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_lstiter.c -o obj/ft_lstiter.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_lstlast.c -o obj/ft_lstlast.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_lstmap.c -o obj/ft_lstmap.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_lstnew.c -o obj/ft_lstnew.o
+ 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -c ft_lstsize.c -o obj/ft_lstsize.o
+ 
+ar rc libft.a obj/ft_atoi.o obj/ft_bzero.o obj/ft_calloc.o obj/ft_isalnum.o obj/ft_isalpha.o obj/ft_isascii.o obj/ft_isdigit.o obj/ft_isprint.o obj/ft_itoa.o obj/ft_memchr.o obj/ft_memcmp.o obj/ft_memcpy.o obj/ft_memmove.o obj/ft_memset.o obj/ft_putchar_fd.o obj/ft_putendl_fd.o obj/ft_putnbr_fd.o obj/ft_putstr_fd.o obj/ft_split.o obj/ft_strchr.o obj/ft_strdup.o obj/ft_striteri.o obj/ft_strjoin.o obj/ft_strlcat.o obj/ft_strlcpy.o obj/ft_strlen.o obj/ft_strmapi.o obj/ft_strncmp.o obj/ft_strnstr.o obj/ft_strrchr.o obj/ft_strtrim.o obj/ft_substr.o obj/ft_tolower.o obj/ft_toupper.o obj/ft_lstadd_back.o obj/ft_lstadd_front.o obj/ft_lstclear.o obj/ft_lstdelone.o obj/ft_lstiter.o obj/ft_lstlast.o obj/ft_lstmap.o obj/ft_lstnew.o obj/ft_lstsize.o
+make[1]: Leaving directory 'd:/vsc_42cursus/cub3D/libft'
+ 
+gcc -L. -lmlx -framework OpenGL -framework AppKit -Wall -Wextra -Werror -g -I mlx -fsanitize=address -static-libsan -g obj/srcs/main.o obj/srcs/parsing/check_params_utils.o obj/srcs/parsing/check_params.o obj/srcs/parsing/check_walls_utils.o obj/srcs/parsing/check_walls.o obj/srcs/parsing/convert_list_to_array.o obj/srcs/parsing/join_split_params.o obj/srcs/parsing/lst_to_arr_utils.o obj/srcs/parsing/parse_file.o obj/srcs/parsing/parse_utils.o obj/srcs/parsing/utils.o obj/srcs/mlx/mlx_init_structs.o obj/srcs/mlx/mlx_launch.o obj/srcs/mlx/move_dir.o obj/srcs/mlx/move_rotate.o obj/gnl/get_next_line.o obj/srcs/mlx/raytracing_dda.o obj/srcs/mlx/raytracing_wall.o obj/srcs/mlx/render_new_img.o obj/srcs/mlx/render_nxt_img.o ./libft/libft.a -o cub3d
+ 
+echo "[\033[32mcub3d ready to use\033[0m]"
+make: Leaving directory 'd:/vsc_42cursus/cub3D'
+ 

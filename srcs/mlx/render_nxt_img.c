@@ -28,7 +28,7 @@ void	update_player_pos(t_mlx *mlx)
 		press_turn_right(mlx);
 }
 
-//Lors d'un event : va calculer et push la nouvelle image dans la fenetre
+// When specific event occurs: calculate && put to window new img
 int	render_next_frame(void *mlxb)
 {
 	t_mlx	*mlx;

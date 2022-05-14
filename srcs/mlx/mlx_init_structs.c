@@ -12,7 +12,7 @@
 
 #include "cub.h"
 
-/*Initialise la direction du player en fontion de la lettre N/S/E/W*/
+/* Initialize player direction en depending on starting letter */
 static void	init_dir_player(t_mlx *mlx, t_file *file, int x, int y)
 {
 	if (file->scene[y][x] == 'N')
@@ -35,7 +35,6 @@ static void	init_push_button(t_mlx *mlx)
 	mlx->player->rot_r_press = 0;
 }
 
-/*Initialise la position du player dans sa structure*/
 void	init_player(t_mlx *mlx, t_file *file)
 {
 	int	x;
@@ -61,7 +60,7 @@ void	init_player(t_mlx *mlx, t_file *file)
 	init_push_button(mlx);
 }
 
-/*initialise les textures dans le tab de textures*/
+/* Initialize textures */
 static int	init_texture_ptr_adr(t_mlx *mlx, char *filename, int orientation)
 {
 	mlx->txt[orientation].txt_ptr = mlx_xpm_file_to_image(mlx->init_ptr,

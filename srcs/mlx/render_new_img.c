@@ -22,19 +22,24 @@ void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
 }
 
 // Print player on minimap
-static void	gen_mini_player(t_mlx *mlx, t_player *player)
+static void	gen_mini_player(t_mlx *mlx, t_player *player, double x_offset, double y_offset)
 {
 	int	i;
 	int	j;
 
+	(void)y_offset;
+	(void)x_offset;
+	
+
+	printf("%f\n",(player->dx_pos - x_offset));
 	i = -1;
 	while (++i < 3)
 	{
 		j = -2;
 		while (j++ < 1)
 		{
-			my_mlx_pixel_put(mlx, (player->dx_pos) * SCALE_MAP - 1 + i,
-				(player->dy_pos) * SCALE_MAP + j, 0xB22222);
+			my_mlx_pixel_put(mlx, ((player->dx_pos - x_offset) * SCALE_MAP - 1 + i),
+				((player->dy_pos - y_offset) * SCALE_MAP + j), 0xB22222);
 		}
 	}
 }
@@ -61,27 +66,43 @@ static void	print_minimap_square(t_mlx *mlx, int x, int y, int color)
 	}
 }
 
+double	minimap_offset(double player_axis_coord, int window)
+{
+	double	ret;
+
+	ret = 0;
+	while ((player_axis_coord + 1.0 - ret) >= (window / 3 / 16))
+		ret += 0.05;
+	return (ret);
+}
+
 void	creat_game_image(t_mlx *mlx, t_file *file)
 {
 	int	x;
 	int	y;
+	double	width_offset;
+	double	height_offset;
 
 	put_first_ray(file, mlx, mlx->player, mlx->ray);
-	y = -1;
-	while (file->scene[++y])
+	width_offset = minimap_offset(mlx->player->dx_pos, WIN_W);
+	height_offset = minimap_offset(mlx->player->dy_pos, WIN_H);
+	y = height_offset;
+	while (file->scene[y] && y < (WIN_H / 3 / 16) + height_offset)
 	{
-		x = -1;
-		while (file->scene[y][++x])
+		x = width_offset;
+		while (file->scene[y][x] && x < (WIN_W / 3 / 16) + width_offset)
 		{
 			if (file->scene[y][x] == '1')
-				print_minimap_square(mlx, x, y, 0x00000000);
+				print_minimap_square(mlx, x - width_offset, y - height_offset, 0x00000000);
 			else if (file->scene[y][x] == '0' || file->scene[y][x] == 'N' ||
 					file->scene[y][x] == 'E' || file->scene[y][x] == 'W' ||
 					file->scene[y][x] == 'S')
-				print_minimap_square(mlx, x, y, 0x00FFFFFF);
+				print_minimap_square(mlx, x - width_offset, y - height_offset, 0x00FFFFFF);
+			x++;
 		}
+		y++;
 	}
-	gen_mini_player(mlx, mlx->player);
+	gen_mini_player(mlx, mlx->player, width_offset, height_offset);
 }
 
 void	creat_image(t_mlx *mlx, t_file *file)

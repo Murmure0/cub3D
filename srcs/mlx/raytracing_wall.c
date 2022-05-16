@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 16:50:31 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/16 13:28:04 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/16 15:42:44 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	dir_wall(t_ray *ray)
 		return (NORTH);
 }
 
-/* print the right column of texture pixels to create the walls */
+/* Print the good column of texture pixels to create the walls */
 static int	draw_wall(t_mlx *mlx, t_ray *ray, int x)
 {
 	int		dir;
@@ -79,7 +79,7 @@ void	draw_col(t_mlx *mlx, t_ray *ray, int x)
 	}
 }
 
-// Calculate height of wall to be printed
+/* Calculate height of wall to be printed */
 void	wall_line_len(t_ray *ray, double cam_angle)
 {	
 	double	len;

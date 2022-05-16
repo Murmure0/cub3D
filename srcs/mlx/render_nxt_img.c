@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 16:27:16 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/16 15:18:15 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/16 15:49:27 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	update_player_pos(t_mlx *mlx)
 		press_turn_right(mlx);
 }
 
-// When specific event occurs: calculate && put to window new img
 int	render_next_frame(void *mlxb)
 {
 	t_mlx	*mlx;
@@ -37,7 +36,7 @@ int	render_next_frame(void *mlxb)
 	update_player_pos(mlx);
 	creat_game_image(mlx, mlx->file);
 	mlx_put_image_to_window(mlx->init_ptr, mlx->win, mlx->img, 0, 0);
-	//mlx_destroy_img(mlx_ptr, mlx_img)
+	//mlx_destroy_image(mlx->init_ptr, mlx->img);
 	return (0);
 }
 

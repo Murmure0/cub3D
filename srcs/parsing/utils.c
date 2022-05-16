@@ -43,15 +43,12 @@ int	fill_line(char	**str, int max_len)
 	fill = malloc(sizeof(char) * (max_len - len + 1));
 	if (!fill)
 		return (write(2, "Error\nMalloc failed.\n", 21), 1);
-	tmp = ft_strdup(*str); //not necessary
-	if (!tmp)
-		return (free(fill), write(2, "Error\nMalloc failed.\n", 21), 1);
+	tmp = *str;
 	i = -1;
 	while (++i < max_len - len)
 		fill[i] = '1';
 	fill[i] = 0;
-	free(*str);
-	*str = ft_strjoin(tmp, fill);
+	*str = ft_strjoin(*str, fill);
 	free(tmp);
 	free(fill);
 	if (!(*str))
@@ -65,6 +62,7 @@ int	fill_map(char **scene)
 	int	len;
 	int	max_len;
 
+	convert_space_to_wall(scene);
 	max_len = 0;
 	i = -1;
 	while (scene[++i])

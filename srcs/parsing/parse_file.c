@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 15:15:53 by cwastche          #+#    #+#             */
-/*   Updated: 2022/05/10 23:28:53 by cwastche         ###   ########.fr       */
+/*   Updated: 2022/05/16 14:44:45 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	check_chars_used(t_list *map)
 	return (0);
 }
 
-static int	check_map(t_file *file)
+static int	check_map(t_file *file) //put everything under the same 'if'
 {
 	if (ft_lstsize(file->map) < 3)
 		return (write(2, "Error\nMap too small\n", 20), 1);
@@ -82,6 +82,7 @@ static int	read_file_to_lst(int fd, t_file *file)
 	return (0);
 }
 
+//free file->map if everything is okay
 int	parse_file(t_file *file, int ac, char **av)
 {
 	int	fd;

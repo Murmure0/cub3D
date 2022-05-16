@@ -6,12 +6,13 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 17:37:44 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/16 13:57:17 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/16 15:09:34 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
+//free file->scene, file->scene[i] et texture
 void	free_all(t_mlx *mlx)
 {
 	if (mlx->init_ptr)
@@ -54,6 +55,21 @@ static int	malloc_struct(t_mlx *mlx)
 	return (0);
 }
 
+/*
+static int	malloc_struct(t_mlx *mlx)
+{
+	mlx->player = malloc(sizeof(t_player));
+	mlx->ray = malloc(sizeof(t_ray));
+	mlx->txt = malloc(sizeof(t_txt) * 4);
+	if (!mlx->player || !mlx->ray || !mlx->txt)
+	{
+		write(2, "Error\nMalloc failed\n", 20);
+		return (free_all(mlx), 1);
+	}
+	return (0);
+}
+*/
+
 int	init_mlx(t_mlx *mlx, t_file *file)
 {
 	mlx->init_ptr = mlx_init();
@@ -66,12 +82,12 @@ int	init_mlx(t_mlx *mlx, t_file *file)
 	if (malloc_struct(mlx))
 		return (1);
 	init_player(mlx, file);
-	if (init_texture(mlx, file))
+	if (init_texture(mlx, file)) //aussi free file->scene, file->scene[i] et file->texture
 		return (free_all(mlx), 1);
 	mlx->win = mlx_new_window(mlx->init_ptr, WIN_W, WIN_H, "Cub3D");
 	if (mlx->win == NULL)
 	{
-		free_all(mlx);
+		free_all(mlx); //pareil
 		return (write(2, "Error\nMlx: new window init. failed.\n", 36), 1);
 	}
 	return (0);

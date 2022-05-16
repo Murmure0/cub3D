@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cwastche </var/mail/cwastche>              +#+  +:+       +#+         #
+#    By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/28 13:37:15 by cwastche          #+#    #+#              #
-#    Updated: 2021/08/01 14:25:39 by cwastche         ###   ########.fr        #
+#    Updated: 2022/05/16 15:18:14 by mberthet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,20 +35,20 @@ AR = ar rc
 all : $(NAME)
 
 $(NAME) : $(OBJS) $(BOBJS)
-	$(AR) $@ $^
+	@$(AR) $@ $^
 
 bonus : $(BOBJS)
-	$(AR) $(NAME) $^
+	@$(AR) $(NAME) $^
 
 $(DIR_OBJ)/%.o : %.c $(HEAD)
 	@mkdir -p $(DIR_OBJ)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean :
-	rm -rf $(OBJS) $(BOBJS) $(DIR_OBJ)
+	@rm -rf $(OBJS) $(BOBJS) $(DIR_OBJ)
 
 fclean : clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
 
 re : fclean all
 

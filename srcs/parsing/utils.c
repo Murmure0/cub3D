@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwastche </var/mail/cwastche>              +#+  +:+       +#+        */
+/*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:28:22 by cwastche          #+#    #+#             */
-/*   Updated: 2022/05/10 23:28:27 by cwastche         ###   ########.fr       */
+/*   Updated: 2022/05/16 14:39:23 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	fill_line(char	**str, int max_len)
 	fill = malloc(sizeof(char) * (max_len - len + 1));
 	if (!fill)
 		return (write(2, "Error\nMalloc failed.\n", 21), 1);
-	tmp = ft_strdup(*str);
+	tmp = ft_strdup(*str); //not necessary
 	if (!tmp)
 		return (free(fill), write(2, "Error\nMalloc failed.\n", 21), 1);
 	i = -1;

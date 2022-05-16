@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 14:46:36 by cwastche          #+#    #+#             */
-/*   Updated: 2022/05/02 12:02:11 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/16 14:35:43 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,6 @@ int	convert_list_to_array(t_file *file)
 	}
 	file->scene[i] = 0;
 	if (trim_end_spaces(file))
-		return (1);
+		return (1); //free scene && scene[i]
 	return (0);
 }

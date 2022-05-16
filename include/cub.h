@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:20:00 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/16 13:33:24 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/16 15:38:17 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,7 +224,7 @@ void	wall_line_len(t_ray *ray, double cam_angle);
 /* -- render_new_img.c -- */
 void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
 void	creat_game_image(t_mlx *mlx, t_file *file);
-void	creat_image(t_mlx *mlx, t_file *file);
+int		creat_image(t_mlx *mlx, t_file *file);
 
 /* -- render_nxt_img.c -- */
 void	update_player_pos(t_mlx *mlx);

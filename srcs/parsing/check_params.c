@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 11:57:09 by cwastche          #+#    #+#             */
-/*   Updated: 2022/05/10 23:27:37 by cwastche         ###   ########.fr       */
+/*   Updated: 2022/05/16 15:55:30 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	fill_texture(char *str, char **texture)
 	i += parse_spaces(str + 2);
 	*texture = ft_substr(str, i, ft_strlen(str));
 	if (!(*texture))
-		return (write(2, "Error\nMalloc failed.\n", 22), 1);
+		return (write(2, "Error\nMalloc failed.\n", 21), 1);
 	if (ft_strncmp(".xpm", &texture[0][ft_strlen(texture[0]) - 4], 4))
 		return (write(2, "Error\nWrong texture extension.\n", 31), 1);
 	return (0);

@@ -6,13 +6,12 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 16:36:30 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/16 13:05:21 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/16 16:13:26 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-/* Initialize player direction en depending on starting letter */
 static void	init_dir_player(t_mlx *mlx, t_file *file, int x, int y)
 {
 	if (file->scene[y][x] == 'N')

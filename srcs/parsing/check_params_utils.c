@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_params_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwastche </var/mail/cwastche>              +#+  +:+       +#+        */
+/*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 14:46:53 by cwastche          #+#    #+#             */
-/*   Updated: 2022/05/10 23:28:40 by cwastche         ###   ########.fr       */
+/*   Updated: 2022/05/16 15:55:15 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	trim_spaces(char **str)
 			len--;
 		tmp = malloc(sizeof(char) * (len - j + 1));
 		if (!tmp)
-			return (write(2, "Error\nMalloc failed\n", 19), 1);
+			return (write(2, "Error\nMalloc failed\n", 20), 1);
 		k = 0;
 		while (j < len)
 			tmp[k++] = str[i][j++];

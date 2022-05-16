@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 15:15:53 by cwastche          #+#    #+#             */
-/*   Updated: 2022/05/16 14:44:45 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/16 15:56:49 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	check_chars_used(t_list *map)
 		tmp = tmp->next;
 	}
 	if (player_count != 1)
-		return (write(2, "Error\nWrong nb of player\n", 24), 1);
+		return (write(2, "Error\nWrong nb of player\n", 25), 1);
 	return (0);
 }
 
@@ -70,7 +70,7 @@ static int	read_file_to_lst(int fd, t_file *file)
 		lst = ft_lstnew(line);
 		if (!lst)
 		{
-			write(2, "Error\nMalloc failed", 20);
+			write(2, "Error\nMalloc failed\n", 20);
 			return (ft_lstclear(&file->map, free), 1);
 		}
 		ft_lstadd_back(&file->map, lst);

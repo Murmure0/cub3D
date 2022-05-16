@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_walls.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwastche <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 11:43:36 by cwastche          #+#    #+#             */
-/*   Updated: 2022/04/20 11:43:38 by cwastche         ###   ########.fr       */
+/*   Updated: 2022/05/16 15:55:53 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ int	check_walls(t_file *file)
 {
 	if (first_line(file->scene)
 		|| last_line(file->scene, ft_lstsize(file->map) - 1))
-		return (write(2, "Error\nMap not walled in\n", 25), 1);
+		return (write(2, "Error\nMap not walled in\n", 24), 1);
 	if (middle_lines(file->scene, ft_lstsize(file->map) - 1))
-		return (write(2, "Error\nMap not walled in\n", 25), 1);
+		return (write(2, "Error\nMap not walled in\n", 24), 1);
 	return (0);
 }

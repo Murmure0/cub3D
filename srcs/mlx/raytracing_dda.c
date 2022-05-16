@@ -6,13 +6,12 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 15:58:45 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/16 13:28:06 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/16 16:13:27 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-/*Initialize ray struct */
 static void	init_ray(t_ray *ray, t_player *player, double ray_angle)
 {
 	ray->p_dy_pos = player->dy_pos;

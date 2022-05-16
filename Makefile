@@ -6,7 +6,7 @@
 #    By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 11:55:53 by mberthet          #+#    #+#              #
-#    Updated: 2022/05/16 15:17:22 by mberthet         ###   ########.fr        #
+#    Updated: 2022/05/16 16:13:28 by mberthet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ RM = rm -rf
 
 CFLAGS =	-Wall -Wextra -Werror -g -I mlx
 
-#CFLAGS += -fsanitize=address -static-libsan -g
+CFLAGS += -fsanitize=address -static-libsan -g
 
 INC		= 	-I./include/
 
@@ -52,6 +52,7 @@ OBJECTS =	$(addprefix $(OBJ_DIR)/,$(SOURCES:.c=.o))
 all :		$(NAME)
 
 $(NAME):	$(OBJECTS)
+		@echo "[\033[32m$(NAME) compiling ...\033[0m]"
 		@$(MAKE) -C ./libft
 		@$(CC) $(INCLUDE) $(CFLAGS) $(OBJECTS) ./libft/libft.a -o $(NAME)
 
@@ -64,9 +65,11 @@ $(OBJ_DIR)/%.o : %.c
 clean:
 	@$(MAKE) -C ./libft fclean
 	@$(RM) $(OBJECTS) $(OBJ_DIR)
+	@echo "[\033[32m$(NAME) files cleaned !\033[0m]"
 	
 fclean: clean
 	@$(RM) $(NAME)
+	@echo "[\033[32m$(NAME) files fcleaned !\033[0m]"
 	
 re: fclean all
 

@@ -6,13 +6,12 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 18:44:30 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/16 15:43:26 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/16 16:13:27 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-// Print player on minimap
 static void	gen_mini_player(t_mlx *mlx, t_player *player,
 		double x_offset, double y_offset)
 {
@@ -32,7 +31,6 @@ static void	gen_mini_player(t_mlx *mlx, t_player *player,
 	}
 }
 
-// Print minimap
 static void	print_minimap_square(t_mlx *mlx, int x, int y, int color)
 {
 	int	i;
@@ -97,11 +95,10 @@ int	creat_image(t_mlx *mlx, t_file *file)
 {
 	mlx->img = mlx_new_image(mlx->init_ptr, WIN_W, WIN_H);
 	if (!mlx->img)
-		return(free_all(mlx), 1);
+		return (free_all(mlx), 1);
 	mlx->addr_img = mlx_get_data_addr(mlx->img, &mlx->bits_per_pixel,
 			&mlx->line_length, &mlx->endian);
 	creat_game_image(mlx, file);
 	mlx_put_image_to_window(mlx->init_ptr, mlx->win, mlx->img, 0, 0);
-	//mlx_destroy_image(mlx->init_ptr, mlx->img);
 	return (0);
 }

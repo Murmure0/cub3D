@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 16:50:31 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/16 13:05:20 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/16 13:28:04 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,5 @@ void	wall_line_len(t_ray *ray, double cam_angle)
 			+ pow((ray->hit_y - ray->p_dy_pos), 2));
 	wall_len = len * cos(cam_angle);
 	ray->line_len = (int)(atan2(0.5, wall_len)
-			* (180 / M_PI) / ((double)66 / WIN_W) * 2.0);
+			* (180 / M_PI) / ((double)FOV / WIN_W) * 2.0);
 }

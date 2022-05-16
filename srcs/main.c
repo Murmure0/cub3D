@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:18:49 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/13 17:04:56 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/16 13:52:31 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ int	main(int ac, char **av)
 	if (launch_mlx(&mlx, &file))
 		return (1);
 	mlx_loop(mlx.init_ptr);
+	system("Leak cub3d");
 	return (0);
 }

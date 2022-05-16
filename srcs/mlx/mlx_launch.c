@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 17:37:44 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/13 17:04:19 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/16 13:57:17 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	free_all(t_mlx *mlx)
 
 int	close_win(t_mlx *mlx)
 {
-	mlx_destroy_window(mlx->init_ptr, mlx->win);
+	mlx_destroy_window(mlx->init_ptr, mlx->win);	
 	free_all(mlx);
 	exit(0);
 }

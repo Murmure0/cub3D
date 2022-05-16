@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 15:58:45 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/13 16:49:50 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/16 13:28:06 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,8 @@ void	put_first_ray(t_file *file, t_mlx *mlx, t_player *player, t_ray *ray)
 	while (x < WIN_W * 0.5)
 	{
 		ray_angle = around_circle(player->player_dir + (double)x
-				* ((double)66 / WIN_W) * (M_PI / 180));
-		cam_angle = around_circle((double)x *((double)66 / WIN_W)
+				* ((double)FOV / WIN_W) * (M_PI / 180));
+		cam_angle = around_circle((double)x *((double)FOV / WIN_W)
 				* (M_PI / 180));
 		init_ray(ray, player, ray_angle);
 		init_dir_ray(ray);

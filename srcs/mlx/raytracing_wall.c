@@ -93,6 +93,5 @@ void	wall_line_len(t_ray *ray, double cam_angle)
 	len = sqrt(pow((ray->hit_x - ray->p_dx_pos), 2)
 			+ pow((ray->hit_y - ray->p_dy_pos), 2));
 	wall_len = len * cos(cam_angle);
-	ray->line_len = (int)(atan2(0.5, wall_len)
-			* (180 / M_PI) / ((double)FOV / WIN_W) * 2.0);
+	ray->line_len = (int)(WIN_H / wall_len);
 }

@@ -27,7 +27,7 @@ int	missing_param(t_p_nb p_nb)
 	int	param_count;
 
 	param_count = p_nb.c + p_nb.f + p_nb.ea + p_nb.no + p_nb.so + p_nb.we;
-	if (param_count < 6)
+	if (!p_nb.c || !p_nb.f || !p_nb.ea || !p_nb.no || !p_nb.so || !p_nb.we)
 		return (write(2, "Error\nMissing parameter\n", 23), 1);
 	else if (param_count > 6)
 		return (write(2, "Error\nExcess parameters given\n", 29), 1);

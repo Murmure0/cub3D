@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#LISTE NON EXHAUSTIVE DE MAPS NON VALIDE
 echo --- MAP ERROR TESTER ---
 echo 1. maps/Not_valid/empty_file.cub
 ./cub3d maps/Not_valid/empty_file.cub
@@ -31,9 +31,9 @@ echo ---
 echo 10. maps/Not_valid/wrong_extension.ber
 ./cub3d maps/Not_valid/wrong_extension.ber
 echo ---
-# echo 11 maps/Not_valid/wrong_texture.cub //Kinda broken
-# ./cub3d maps/Not_valid/wrong_texture.cub
-# echo ---
+echo 11 maps/Not_valid/wrong_texture.cub
+./cub3d maps/Not_valid/wrong_texture.cub
+echo ---
 echo 	-- WALL TESTS --
 echo 12. maps/Not_valid/1st_line.cub
 ./cub3d maps/Not_valid/1st_line.cub

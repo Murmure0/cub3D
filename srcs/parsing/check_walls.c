@@ -59,7 +59,7 @@ static int	last_line(char **wall, int i)
 	j = -1;
 	while (wall[i][++j])
 	{
-		if (wall[i][j] != '1' && is_space(wall[i][j]))
+		if (wall[i][j] != '1' && !is_space(wall[i][j]))
 			return (1);
 	}
 	return (0);

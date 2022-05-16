@@ -41,15 +41,12 @@ static int	check_chars_used(t_list *map)
 	return (0);
 }
 
-static int	check_map(t_file *file) //put everything under the same 'if'
+static int	check_map(t_file *file)
 {
 	if (ft_lstsize(file->map) < 3)
 		return (write(2, "Error\nMap too small\n", 20), 1);
-	if (check_chars_used(file->map))
-		return (1);
-	if (convert_list_to_array(file))
-		return (1);
-	if (check_walls(file))
+	else if (check_chars_used(file->map) || convert_list_to_array(file)
+		|| check_walls(file))
 		return (1);
 	return (0);
 }
@@ -82,11 +79,19 @@ static int	read_file_to_lst(int fd, t_file *file)
 	return (0);
 }
 
-//free file->map if everything is okay
+static void	dir_params_to_null(t_file *file)
+{
+	file->param->no = NULL;
+	file->param->so = NULL;
+	file->param->we = NULL;
+	file->param->ea = NULL;
+}
+
 int	parse_file(t_file *file, int ac, char **av)
 {
 	int	fd;
 
+	dir_params_to_null(file);
 	if (ac != 2)
 		return (write(2, "Error\nArgument invalid\n", 23), 1);
 	if (ft_strncmp(".cub", &av[1][ft_strlen(av[1]) - 4], 4))
@@ -96,15 +101,10 @@ int	parse_file(t_file *file, int ac, char **av)
 		return (perror("Error\nOpen"), 1);
 	if (read_file_to_lst(fd, file))
 		return (close(fd), 1);
-	if (join_split_params(file))
-		return (free_params(file), 1);
-	if (check_params(file))
-		return (free_params(file), 1);
-	if (check_map(file))
-		return (free_params(file), 1);
-	convert_space_to_wall(file->scene);
-	if (fill_map(file->scene))
+	if (join_split_params(file) || check_params(file)
+		|| check_map(file) || fill_map(file->scene))
 		return (free_params(file), 1);
 	init_map_size(file);
+	ft_lstclear(&file->map, free);
 	return (0);
 }

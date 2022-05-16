@@ -54,14 +54,10 @@ void	convert_space_to_wall(char **map)
 void	free_params(t_file *file)
 {
 	ft_lstclear(&file->map, free);
-	if (file->param->no)
-		free(file->param->no);
-	if (file->param->so)
-		free(file->param->so);
-	if (file->param->we)
-		free(file->param->we);
-	if (file->param->ea)
-		free(file->param->ea);
+	free(file->param->no);
+	free(file->param->so);
+	free(file->param->we);
+	free(file->param->ea);
 }
 
 void	init_map_size(t_file *file)

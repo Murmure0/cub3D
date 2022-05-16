@@ -1,4 +1,5 @@
 #!/bin/bash
+
 echo --- MAP ERROR TESTER ---
 echo 1. maps/Not_valid/empty_file.cub
 ./cub3d maps/Not_valid/empty_file.cub

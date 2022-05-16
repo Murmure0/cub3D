@@ -39,3 +39,12 @@ int	render_next_frame(void *mlxb)
 	mlx_put_image_to_window(mlx->init_ptr, mlx->win, mlx->img, 0, 0);
 	return (0);
 }
+
+void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = mlx->addr_img + (y * mlx->line_length
+			+ x * (mlx->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
+}

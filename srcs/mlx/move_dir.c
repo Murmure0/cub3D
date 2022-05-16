@@ -17,13 +17,13 @@ int	wall_collision(t_mlx *mlx, double px, double py)
 	char	**map;
 
 	map = mlx->file->scene;
-	if (map[(int)(py + 4 * SPEED)][(int)px] == '1')
+	if (map[(int)(py + 8 * SPEED)][(int)px] == '1')
 		return (1);
-	if (map[(int)py][(int)(px - 4 * SPEED)] == '1')
+	if (map[(int)py][(int)(px - 8 * SPEED)] == '1')
 		return (1);
-	if (map[(int)(py - 4 * SPEED)][(int)px] == '1')
+	if (map[(int)(py - 8 * SPEED)][(int)px] == '1')
 		return (1);
-	if (map[(int)py][(int)(px + 4 * SPEED)] == '1')
+	if (map[(int)py][(int)(px + 8 * SPEED)] == '1')
 		return (1);
 	return (0);
 }

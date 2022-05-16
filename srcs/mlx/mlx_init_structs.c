@@ -60,7 +60,6 @@ void	init_player(t_mlx *mlx, t_file *file)
 	init_push_button(mlx);
 }
 
-/* Initialize textures */
 static int	init_texture_ptr_adr(t_mlx *mlx, char *filename, int orientation)
 {
 	mlx->txt[orientation].txt_ptr = mlx_xpm_file_to_image(mlx->init_ptr,

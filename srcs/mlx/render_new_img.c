@@ -12,34 +12,22 @@
 
 #include "cub.h"
 
-void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = mlx->addr_img + (y * mlx->line_length
-			+ x * (mlx->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
-
 // Print player on minimap
-static void	gen_mini_player(t_mlx *mlx, t_player *player, double x_offset, double y_offset)
+static void	gen_mini_player(t_mlx *mlx, t_player *player,
+		double x_offset, double y_offset)
 {
 	int	i;
 	int	j;
 
-	(void)y_offset;
-	(void)x_offset;
-	
-
-	printf("%f\n",(player->dx_pos - x_offset));
 	i = -1;
 	while (++i < 3)
 	{
 		j = -2;
 		while (j++ < 1)
 		{
-			my_mlx_pixel_put(mlx, ((player->dx_pos - x_offset) * SCALE_MAP - 1 + i),
-				((player->dy_pos - y_offset) * SCALE_MAP + j), 0xB22222);
+			my_mlx_pixel_put(mlx, ((player->dx_pos - x_offset)
+					* SCALE_MAP - 1 + i), ((player->dy_pos - y_offset)
+					* SCALE_MAP + j), 0xB22222);
 		}
 	}
 }
@@ -71,38 +59,38 @@ double	minimap_offset(double player_axis_coord, int window)
 	double	ret;
 
 	ret = 0;
-	while ((player_axis_coord + 1.0 - ret) >= (window / 3 / 16))
+	while ((player_axis_coord + 2.0 - ret) >= (window / 3 / SCALE_MAP))
 		ret += 0.05;
 	return (ret);
 }
 
 void	creat_game_image(t_mlx *mlx, t_file *file)
 {
-	int	x;
-	int	y;
-	double	width_offset;
-	double	height_offset;
+	int		x;
+	int		y;
+	double	w_offset;
+	double	h_offset;
 
 	put_first_ray(file, mlx, mlx->player, mlx->ray);
-	width_offset = minimap_offset(mlx->player->dx_pos, WIN_W);
-	height_offset = minimap_offset(mlx->player->dy_pos, WIN_H);
-	y = height_offset;
-	while (file->scene[y] && y < (WIN_H / 3 / 16) + height_offset)
+	w_offset = minimap_offset(mlx->player->dx_pos, WIN_W);
+	h_offset = minimap_offset(mlx->player->dy_pos, WIN_H);
+	y = h_offset;
+	while (file->scene[y] && y < (WIN_H / 3 / SCALE_MAP) + h_offset)
 	{
-		x = width_offset;
-		while (file->scene[y][x] && x < (WIN_W / 3 / 16) + width_offset)
+		x = w_offset;
+		while (file->scene[y][x] && x < (WIN_W / 3 / SCALE_MAP) + w_offset)
 		{
 			if (file->scene[y][x] == '1')
-				print_minimap_square(mlx, x - width_offset, y - height_offset, 0x00000000);
+				print_minimap_square(mlx, x - w_offset, y - h_offset, BLACK);
 			else if (file->scene[y][x] == '0' || file->scene[y][x] == 'N' ||
 					file->scene[y][x] == 'E' || file->scene[y][x] == 'W' ||
 					file->scene[y][x] == 'S')
-				print_minimap_square(mlx, x - width_offset, y - height_offset, 0x00FFFFFF);
+				print_minimap_square(mlx, x - w_offset, y - h_offset, WHITE);
 			x++;
 		}
 		y++;
 	}
-	gen_mini_player(mlx, mlx->player, width_offset, height_offset);
+	gen_mini_player(mlx, mlx->player, w_offset, h_offset);
 }
 
 void	creat_image(t_mlx *mlx, t_file *file)

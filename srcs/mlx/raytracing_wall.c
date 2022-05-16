@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 16:50:31 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/13 17:03:24 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/16 13:05:20 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	get_texel_color(t_txt *txt, int x, int y)
 static int	dir_wall(t_ray *ray)
 {
 	if (ray->side == 0 && ray->r_dir_x < 0)
-		return (EST);
+		return (EAST);
 	else if (ray->side == 0 && ray->r_dir_x > 0)
 		return (WEST);
 	else if (ray->side == 1 && ray->r_dir_y < 0)

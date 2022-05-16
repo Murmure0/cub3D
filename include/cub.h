@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:20:00 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/13 16:54:36 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/16 13:05:22 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define FOV 66 // Field of view
 # define WEST 2
 # define NORTH 1
-# define EST 0
+# define EAST 0
 # define SOUTH 3
 
 /* --- PARSING STRUCTURES --- */

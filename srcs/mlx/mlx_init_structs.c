@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 16:36:30 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/13 16:45:39 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/16 13:05:21 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	init_texture(t_mlx *mlx, t_file *file)
 		return (1);
 	else if (init_texture_ptr_adr(mlx, file->param->no, NORTH))
 		return (1);
-	else if (init_texture_ptr_adr(mlx, file->param->ea, EST))
+	else if (init_texture_ptr_adr(mlx, file->param->ea, EAST))
 		return (1);
 	else if (init_texture_ptr_adr(mlx, file->param->so, SOUTH))
 		return (1);

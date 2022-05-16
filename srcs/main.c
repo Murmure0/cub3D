@@ -22,6 +22,5 @@ int	main(int ac, char **av)
 	if (launch_mlx(&mlx, &file))
 		return (1);
 	mlx_loop(mlx.init_ptr);
-	//system("leaks cub3d");
 	return (0);
 }

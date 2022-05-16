@@ -35,13 +35,22 @@ static int	malloc_struct(t_mlx *mlx)
 {
 	mlx->player = malloc(sizeof(t_player));
 	if (!mlx->player)
-		return (free_all(mlx), write(2, "Error\nMalloc failed\n", 20), 1);
+	{
+		write(2, "Error\nMalloc failed\n", 20);
+		return (free_all(mlx), 1);
+	}
 	mlx->ray = malloc(sizeof(t_ray));
 	if (!mlx->ray)
-		return (free_all(mlx), write(2, "Error\nMalloc failed\n", 20), 1);
+	{
+		write(2, "Error\nMalloc failed\n", 20);
+		return (free_all(mlx), 1);
+	}
 	mlx->txt = malloc(sizeof(t_txt) * 4);
 	if (!mlx->txt)
-		return (free_all(mlx), write(2, "Error\nMalloc failed\n", 20), 1);
+	{
+		write(2, "Error\nMalloc failed\n", 20);
+		return (free_all(mlx), 1);
+	}
 	return (0);
 }
 
@@ -53,18 +62,18 @@ int	init_mlx(t_mlx *mlx, t_file *file)
 		free_all(mlx);
 		return (write(2, "Error\nMlx: initialisation failed\n", 33), 1);
 	}
-	mlx->win = mlx_new_window(mlx->init_ptr, WIN_W, WIN_H, "Cub3D");
-	if (mlx->win == NULL)
-	{
-		free_all(mlx);
-		return (write(2, "Error\nMlx: new window init. failed.\n", 36), 1);
-	}
 	mlx->file = file;
 	if (malloc_struct(mlx))
 		return (1);
 	init_player(mlx, file);
 	if (init_texture(mlx, file))
 		return (free_all(mlx), 1);
+	mlx->win = mlx_new_window(mlx->init_ptr, WIN_W, WIN_H, "Cub3D");
+	if (mlx->win == NULL)
+	{
+		free_all(mlx);
+		return (write(2, "Error\nMlx: new window init. failed.\n", 36), 1);
+	}
 	return (0);
 }
 

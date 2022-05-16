@@ -15,14 +15,15 @@
 
 # include "../libft/libft.h"
 # include "../gnl/get_next_line.h"
+# include "mlx.h"
+
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdio.h>
-# include <stdlib.h>
+# include <stdlib.h> 
 # include <errno.h>
 # include <string.h>
 # include <math.h>
-# include "mlx.h"
 # include <limits.h>
 
 # define WIN_H 1080
@@ -30,12 +31,17 @@
 # define SCALE_MAP 16 // Size of side in pixels of squares of the minimap
 # define SPEED 0.05 // Movement speed on minimap
 # define FOV 66 // Field of view
+
 # define WEST 2
 # define NORTH 1
 # define EAST 0
 # define SOUTH 3
 
+# define BLACK 0x00000000
+# define WHITE 0x00FFFFFF
+
 /* --- PARSING STRUCTURES --- */
+
 typedef struct param_nb
 {
 	int		no;
@@ -44,7 +50,6 @@ typedef struct param_nb
 	int		ea;
 	int		c;
 	int		f;
-	
 }				t_p_nb;
 
 typedef struct s_params
@@ -61,7 +66,6 @@ typedef struct s_file
 {
 	t_list		*map;
 	t_params	param[1];
-	
 	char		**scene;
 	int			map_h;
 	int			map_w;
@@ -70,29 +74,26 @@ typedef struct s_file
 /* -------------------------- */
 
 // One struct per texture type. Initialized by Minilibx
-typedef struct s_txt 
+typedef struct s_txt
 {
-	void *txt_ptr;
-	char *txt_adr;
-	int	w;
-	int	h;
-	int	bpp;
-	int	len;
-	int	endian;
+	void	*txt_ptr;
+	char	*txt_adr;
+	int		w;
+	int		h;
+	int		bpp;
+	int		len;
+	int		endian;
 }				t_txt;
 
-// Players coordinate + key press bool variable. See move.c
-typedef struct s_player{
+/* --- Players coordinate + key press bool variable. See move.c --- */
+typedef struct s_player
+{
 	int			x_pos;
 	int			y_pos;
-	double		dx_pos; //dx_pos & dy_pos : the position vector of the player
+	double		dx_pos;
 	double		dy_pos;
 	double		player_dir;
 	double		cam_dir;
-	double		dirX; //dirX(cos(player_dir)) & dirY(sin(player_dir)) : the direction of the player
-	double		dirY;
-	double		planeX;
-	double		planeY;
 	int			up_press;
 	int			down_press;
 	int			left_press;
@@ -106,45 +107,47 @@ copies part of t_player variables to be able to change
 them up during the raytracing caluculations */
 typedef struct s_ray
 {
-	double		p_dx_pos; //vRaystart : player's position as double (map)
-	double		p_dy_pos; //vRaystart : player's position as double (map)
-	int			p_map_check_x; // copies player's position as int
-	int			p_map_check_y; // copies player's position as int
-	double		r_dir_x; //dirX(cos(player_dir)) : the direction of the player on x axe
-	double		r_dir_y; // dirY(sin(player_dir)) : the direction of the player on y axe
-	double		r_step_size_x; // ray's position on x axis during calculation
-	double		r_step_size_y; // ray's position on y axis during calculation
+	double		p_dx_pos;
+	double		p_dy_pos;
+	int			p_map_check_x;
+	int			p_map_check_y;
+	double		r_dir_x;
+	double		r_dir_y;
+	double		r_step_size_x;
+	double		r_step_size_y;
 	double		r_dist;
 	int			hit;
 	double		hit_x;
 	double		hit_y;
 	int			side;
-	double		r_len_x; // lenght of hypotenuse of axis we're working on
+	double		r_len_x;
 	double		r_len_y;
-	int			r_step_x; // Either 1 or -1 : advancing or retreating on x axis
+	int			r_step_x;
 	int			r_step_y;
 	double		line_len;
 	int			h_wall;
 }	t_ray;
 
-/* MLX functions only accept one argument. Thus, t_mlx stores all needed structs to work */
+/* MLX functions only accept one argument.
+Thus, t_mlx stores all needed structs to work */
 typedef struct s_mlx
 {
-	void		*init_ptr; // MLX init pointer
-	void		*win; // pointer to window we're working on
-	void		*img; // pointer to img we're working on before pushing it to the window
-	char		*addr_img; // address of the above var. Lets us do modifications
-	int			bits_per_pixel; // initialized by mlx_get_data_addr
-	int			line_length; // same as above
-	int			endian; // equals 0, same as above
+	void		*init_ptr;
+	void		*win;
+	void		*img;
+	char		*addr_img;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
 	t_txt		*txt;
 	t_file		*file;
 	t_player	*player;
 	t_ray		*ray;
 }				t_mlx;
 
-
+/*******************/
 /* --- PARSING --- */
+/*******************/
 
 int		parse_file(t_file *file, int ac, char **av);
 int		join_split_params(t_file *file);
@@ -154,37 +157,40 @@ int		check_walls(t_file *file);
 
 /* --- PARSING UTILS --- */
 
-// Parse_utils
+/* -- parse_utils.c -- */
 int		parse_spaces(char *str);
 int		missing_param(t_p_nb p_nb);
 void	convert_space_to_wall(char **map);
 void	free_params(t_file *file);
 void	init_map_size(t_file *file);
 
-// Check_params_utils
+/* -- check_params_utils.c -- */
 void	free_param_chains(t_file *f, t_list *head);
 void	param_count_init(t_p_nb *p_nb);
 int		create_trgb(int t, int r, int g, int b);
 int		trim_spaces(char **str);
 
-// Lst_to_arr_utils
+/* -- lst_to_arr_utils.c -- */
 void	free_scene(t_file *file, int i);
 int		trim_end_spaces(t_file *file);
 
-// Check_walls_utils
+/* -- check_walls_utils.c -- */
 int		is_space(char c);
 int		check_left_wall(char *str);
 int		check_right_wall(char *str);
 int		is_player(char c);
 
-// Utils
+/* -- Utils.c -- */
 int		arraylen(char **array);
 void	free_tab(char **tab);
 int		fill_line(char	**str, int max_len);
 int		fill_map(char **scene);
 char	*trim(char *str);
 
+/***************/
 /* --- MLX --- */
+/***************/
+
 /* -- mlx_init_structs.c -- */
 void	init_player(t_mlx *mlx, t_file *file);
 int		init_texture(t_mlx *mlx, t_file *file);
@@ -221,24 +227,7 @@ void	creat_game_image(t_mlx *mlx, t_file *file);
 void	creat_image(t_mlx *mlx, t_file *file);
 
 /* -- render_nxt_img.c -- */
-void update_player_pos(t_mlx *mlx);
+void	update_player_pos(t_mlx *mlx);
 int		render_next_frame(void *mlx);
 
-// /* -- put_img.c -- */
-
-// int		put_floor(t_mlx *mlx, t_file *file, int k, double l);
-// int		put_ceiling(t_mlx *mlx, t_file *file, int k, double l);
-
-
-
-
-
-// int		put_ray(t_file *file, t_mlx *mlx, t_player *player);
-
-
-// //TESTING FCT
-// void	raytracing(t_player *player, t_file *file, t_mlx *mlx);
-// //TODEL
-// void	print_map(char **map);
-
-# endif
+#endif

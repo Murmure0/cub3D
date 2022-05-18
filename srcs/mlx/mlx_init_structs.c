@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 16:36:30 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/16 16:13:26 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/18 09:32:01 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ static void	init_dir_player(t_mlx *mlx, t_file *file, int x, int y)
 {
 	if (file->scene[y][x] == 'N')
 		mlx->player->player_dir = M_PI_2;
-	else if (file->scene[y][x] == 'E')
-		mlx->player->player_dir = 0;
 	else if (file->scene[y][x] == 'W')
+		mlx->player->player_dir = 0;
+	else if (file->scene[y][x] == 'E')
 		mlx->player->player_dir = M_PI;
 	else if (file->scene[y][x] == 'S')
 		mlx->player->player_dir = 3 * M_PI_2;

@@ -80,6 +80,8 @@ int	trim_spaces(char **str)
 		len = ft_strlen(str[i]);
 		while (len && is_space(str[i][len - 1]))
 			len--;
+		if (len == 0)
+			return (printf("TRIM_SPACES 84\n"), 1);
 		tmp = malloc(sizeof(char) * (len - j + 1) + 1);
 		if (!tmp)
 			return (write_ret("Error\nMalloc failed\n"));

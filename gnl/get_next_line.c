@@ -60,6 +60,19 @@ static char	*return_line(int fd, char **s)
 	return (line);
 }
 
+static int	is_ascii(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] > 127)
+			return (0)
+	}
+	return (1);
+}
+
 char	*get_next_line(int fd)
 {
 	static char	*s[FD_MAX];
@@ -73,6 +86,8 @@ char	*get_next_line(int fd)
 	while (read_ret > 0)
 	{
 		buff[read_ret] = 0;
+		if (!is_ascii(buff))
+			return (free_all(read_ret, s, fd));
 		if (!s[fd])
 			s[fd] = ft_strdup("");
 		tmp = ft_strdup(s[fd]);

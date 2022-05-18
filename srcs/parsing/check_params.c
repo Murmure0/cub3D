@@ -17,6 +17,7 @@ static int	fill_color(char *str, int *color)
 	int		i;
 	char	**tmp;
 
+	tmp = NULL;
 	i = parse_spaces(str);
 	tmp = ft_split(str + i, ',');
 	if (!tmp)

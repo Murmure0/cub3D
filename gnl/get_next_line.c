@@ -67,7 +67,7 @@ static int	is_ascii(char *str)
 	i = -1;
 	while (str[++i])
 	{
-		if (str[i] > 127)
+		if (str[i] > 127 || str[i] < 0)
 			return (0);
 	}
 	return (1);

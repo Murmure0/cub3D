@@ -51,25 +51,6 @@ static int	check_map(t_file *file)
 	return (0);
 }
 
-static int	creat_lst(char *line, t_list *lst, int fd, t_file *file)
-{
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		lst = ft_lstnew(line);
-		if (!lst)
-		{
-			ft_lstclear(&file->map, free);
-			return (write_ret("Error\nMalloc failed\n"));
-		}
-		ft_lstadd_back(&file->map, lst);
-	}
-	return (0);
-}
-
-
 static int	is_ascii(char *str)
 {
 	int	i;
@@ -82,6 +63,29 @@ static int	is_ascii(char *str)
 	}
 	return (1);
 }
+
+static int	creat_lst(char *line, t_list *lst, int fd, t_file *file)
+{
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		if (!is_ascii(line))
+			return (write_ret("Error\nNon ascii char found\n"));
+		lst = ft_lstnew(line);
+		if (!lst)
+		{
+			ft_lstclear(&file->map, free);
+			return (write_ret("Error\nMalloc failed\n"));
+		}
+		ft_lstadd_back(&file->map, lst);
+	}
+	return (0);
+}
+
+
+
 
 static int	read_file_to_lst(int fd, t_file *file)
 {

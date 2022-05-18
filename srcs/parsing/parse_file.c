@@ -78,6 +78,8 @@ static int	read_file_to_lst(int fd, t_file *file)
 	line = get_next_line(fd);
 	if (!line)
 		return (write_ret("Error\nEmpty file\n"));
+	if (line == NULL)
+		return (write_ret("Error\nWrong ascii chars used\n"));
 	file->map = ft_lstnew(line);
 	if (!file->map)
 	{

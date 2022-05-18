@@ -6,7 +6,7 @@
 #    By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 11:55:53 by mberthet          #+#    #+#              #
-#    Updated: 2022/05/16 16:13:28 by mberthet         ###   ########.fr        #
+#    Updated: 2022/05/18 10:25:42 by mberthet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SOURCES =	srcs/main.c	\
 			srcs/parsing/join_split_params.c \
 			srcs/parsing/lst_to_arr_utils.c \
 			srcs/parsing/parse_file.c	\
+			srcs/parsing/parse_file_init.c	\
 			srcs/parsing/parse_utils.c	\
 			srcs/parsing/utils.c \
 			srcs/mlx/mlx_init_structs.c	\

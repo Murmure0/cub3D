@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 14:46:36 by cwastche          #+#    #+#             */
-/*   Updated: 2022/05/16 15:56:06 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/18 10:00:41 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	fill_scene(t_file *file, t_list *tmp, int i)
 	str = tmp->content;
 	file->scene[i] = malloc(sizeof(char) * (spacedstrlen(str) + 1));
 	if (!file->scene[i])
-		return (write(2, "Error\nMalloc failed.\n", 21), 1);
+		return (write_ret("Error\nMalloc failed.\n"));
 	j = -1;
 	k = 0;
 	while (str[++j])
@@ -92,12 +92,12 @@ int	convert_list_to_array(t_file *file)
 	t_list	*tmp;
 
 	if (check_for_newline(file->map))
-		return (write(2, "Error\nEmpty line in map\n", 24), 1);
+		return (write_ret("Error\nEmpty line in map\n"));
 	i = 0;
 	tmp = file->map;
 	file->scene = malloc(sizeof(char *) * (ft_lstsize(file->map) + 1));
 	if (!file->scene)
-		return (write(2, "Error\nMalloc failed.\n", 21), 1);
+		return (write_ret("Error\nMalloc failed.\n"));
 	while (tmp)
 	{
 		if (fill_scene(file, tmp, i))

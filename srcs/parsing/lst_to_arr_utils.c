@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:28:01 by cwastche          #+#    #+#             */
-/*   Updated: 2022/05/16 14:33:49 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/18 11:22:08 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	trim_end_spaces(t_file *file)
 		file->scene[y] = ft_substr(tmp, 0, ft_strlen(tmp) - x);
 		free(tmp);
 		if (!file->scene[y])
-			return (write(2, "Error\nMalloc failed.\n", 21), 1);
+			return (write_ret("Error\nMalloc failed.\n"));
 	}
 	return (0);
 }

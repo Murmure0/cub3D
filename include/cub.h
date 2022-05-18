@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:20:00 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/16 16:13:26 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/18 11:40:09 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,9 @@ int		check_walls(t_file *file);
 
 /* --- PARSING UTILS --- */
 
+/* -- parse_file_init.c -- */
+void	dir_params_to_null(t_file *file);
+
 /* -- parse_utils.c -- */
 int		parse_spaces(char *str);
 int		missing_param(t_p_nb p_nb);
@@ -165,6 +168,7 @@ void	free_params(t_file *file);
 void	init_map_size(t_file *file);
 
 /* -- check_params_utils.c -- */
+int		check_color(char **tmp);
 void	free_param_chains(t_file *f, t_list *head);
 void	param_count_init(t_p_nb *p_nb);
 int		create_trgb(int t, int r, int g, int b);
@@ -229,5 +233,6 @@ int		creat_image(t_mlx *mlx, t_file *file);
 /* -- render_nxt_img.c -- */
 void	update_player_pos(t_mlx *mlx);
 int		render_next_frame(void *mlx);
+int		write_ret(char *str);
 
 #endif

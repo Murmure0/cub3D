@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 17:37:44 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/16 15:49:40 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/18 09:54:14 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ static int	malloc_struct(t_mlx *mlx)
 	mlx->txt = malloc(sizeof(t_txt) * 4);
 	if (!mlx->player || !mlx->ray || !mlx->txt)
 	{
-		write(2, "Error\nMalloc failed\n", 20);
-		return (free_all(mlx), 1);
+		free_all(mlx);
+		return (write_ret("Error\nMalloc failed\n"));
 	}
 	return (0);
 }
@@ -57,7 +57,7 @@ int	init_mlx(t_mlx *mlx, t_file *file)
 	if (!mlx->init_ptr)
 	{
 		free_all(mlx);
-		return (write(2, "Error\nMlx: initialisation failed\n", 33), 1);
+		return (write_ret("Error\nMlx: initialisation failed\n"));
 	}
 	if (malloc_struct(mlx))
 		return (1);
@@ -68,7 +68,7 @@ int	init_mlx(t_mlx *mlx, t_file *file)
 	if (mlx->win == NULL)
 	{
 		free_all(mlx);
-		return (write(2, "Error\nMlx: new window init. failed.\n", 36), 1);
+		return (write_ret("Error\nMlx: new window init. failed.\n"));
 	}
 	return (0);
 }

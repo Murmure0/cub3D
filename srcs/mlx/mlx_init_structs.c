@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 16:36:30 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/18 09:32:01 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/18 09:51:03 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,12 @@ static int	init_texture_ptr_adr(t_mlx *mlx, char *filename, int orientation)
 	mlx->txt[orientation].txt_ptr = mlx_xpm_file_to_image(mlx->init_ptr,
 			filename, &mlx->txt[orientation].w, &mlx->txt[orientation].h);
 	if (!mlx->txt[orientation].txt_ptr)
-		return (write(2, "Error\nWrong texture path\n", 25), 1);
+		return (write_ret("Error\nWrong texture path\n"));
 	mlx->txt[orientation].txt_adr = mlx_get_data_addr(
 			mlx->txt[orientation].txt_ptr, &mlx->txt[orientation].bpp,
 			&mlx->txt[orientation].len, &mlx->txt[orientation].endian);
 	if (!mlx->txt[orientation].txt_adr)
-		return (write(2, "Error\nmlx_get_data_addr failed\n", 31), 1);
+		return (write_ret("Error\nmlx_get_data_addr failed\n"));
 	return (0);
 }
 

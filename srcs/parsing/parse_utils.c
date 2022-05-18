@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 11:52:10 by cwastche          #+#    #+#             */
-/*   Updated: 2022/05/16 17:11:39 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/18 10:14:52 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int	missing_param(t_p_nb p_nb)
 
 	param_count = p_nb.c + p_nb.f + p_nb.ea + p_nb.no + p_nb.so + p_nb.we;
 	if (!p_nb.c || !p_nb.f || !p_nb.ea || !p_nb.no || !p_nb.so || !p_nb.we)
-		return (write(2, "Error\nMissing parameter\n", 24), 1);
+		return (write_ret("Error\nMissing parameter\n"));
 	else if (param_count > 6)
-		return (write(2, "Error\nExcess parameters given\n", 30), 1);
+		return (write_ret("Error\nExcess parameters given\n"));
 	return (0);
 }
 

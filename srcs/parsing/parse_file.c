@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 15:15:53 by cwastche          #+#    #+#             */
-/*   Updated: 2022/05/16 15:56:49 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/18 10:30:44 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,36 +32,27 @@ static int	check_chars_used(t_list *map)
 			if (s[i] != '0' && s[i] != '1' && s[i] != 'N' && s[i] != 'S'
 				&& s[i] != 'E' && s[i] != 'W'
 				&& !is_space(s[i]) && s[i] != '\n')
-				return (write(2, "Error\nForbidden char in map\n", 28), 1);
+				return (write_ret("Error\nForbidden char in map\n"));
 		}
 		tmp = tmp->next;
 	}
 	if (player_count != 1)
-		return (write(2, "Error\nWrong nb of player\n", 25), 1);
+		return (write_ret("Error\nWrong nb of player\n"));
 	return (0);
 }
 
 static int	check_map(t_file *file)
 {
 	if (ft_lstsize(file->map) < 3)
-		return (write(2, "Error\nMap too small\n", 20), 1);
+		return (write_ret("Error\nMap too small\n"));
 	else if (check_chars_used(file->map) || convert_list_to_array(file)
 		|| check_walls(file))
 		return (1);
 	return (0);
 }
 
-static int	read_file_to_lst(int fd, t_file *file)
+static int	creat_lst(char *line, t_list *lst, int fd, t_file *file)
 {
-	t_list	*lst;
-	char	*line;
-
-	line = get_next_line(fd);
-	if (!line)
-		return (write(2, "Error\nEmpty file\n", 17), 1);
-	file->map = ft_lstnew(line);
-	if (!file->map)
-		return (free(line), write(2, "Error\nMalloc failed\n", 20), 1);
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -70,21 +61,33 @@ static int	read_file_to_lst(int fd, t_file *file)
 		lst = ft_lstnew(line);
 		if (!lst)
 		{
-			write(2, "Error\nMalloc failed\n", 20);
-			return (ft_lstclear(&file->map, free), 1);
+			ft_lstclear(&file->map, free);
+			return (write_ret("Error\nMalloc failed\n"));
 		}
 		ft_lstadd_back(&file->map, lst);
 	}
-	close(fd);
 	return (0);
 }
 
-static void	dir_params_to_null(t_file *file)
+static int	read_file_to_lst(int fd, t_file *file)
 {
-	file->param->no = NULL;
-	file->param->so = NULL;
-	file->param->we = NULL;
-	file->param->ea = NULL;
+	t_list	*lst;
+	char	*line;
+
+	lst = NULL;
+	line = get_next_line(fd);
+	if (!line)
+		return (write_ret("Error\nEmpty file\n"));
+	file->map = ft_lstnew(line);
+	if (!file->map)
+	{
+		free(line);
+		return (write_ret("Error\nMalloc failed\n"));
+	}
+	if (creat_lst(line, lst, fd, file))
+		return (1);
+	close(fd);
+	return (0);
 }
 
 int	parse_file(t_file *file, int ac, char **av)
@@ -93,9 +96,9 @@ int	parse_file(t_file *file, int ac, char **av)
 
 	dir_params_to_null(file);
 	if (ac != 2)
-		return (write(2, "Error\nArgument invalid\n", 23), 1);
+		return (write_ret("Error\nArgument invalid\n"));
 	if (ft_strncmp(".cub", &av[1][ft_strlen(av[1]) - 4], 4))
-		return (write(2, "Error\nWrong extension file\n", 27), 1);
+		return (write_ret("Error\nWrong extension file\n"));
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0)
 		return (perror("Error\nOpen"), 1);

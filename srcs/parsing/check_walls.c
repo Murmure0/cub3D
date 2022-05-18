@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 11:43:36 by cwastche          #+#    #+#             */
-/*   Updated: 2022/05/16 15:55:53 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/18 10:00:00 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ int	check_walls(t_file *file)
 {
 	if (first_line(file->scene)
 		|| last_line(file->scene, ft_lstsize(file->map) - 1))
-		return (write(2, "Error\nMap not walled in\n", 24), 1);
+		return (write_ret("Error\nMap not walled in\n"));
 	if (middle_lines(file->scene, ft_lstsize(file->map) - 1))
-		return (write(2, "Error\nMap not walled in\n", 24), 1);
+		return (write_ret("Error\nMap not walled in\n"));
 	return (0);
 }

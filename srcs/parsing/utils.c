@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 23:28:22 by cwastche          #+#    #+#             */
-/*   Updated: 2022/05/16 15:57:12 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/18 10:14:49 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	fill_line(char	**str, int max_len)
 	len = ft_strlen(*str);
 	fill = malloc(sizeof(char) * (max_len - len + 1));
 	if (!fill)
-		return (write(2, "Error\nMalloc failed.\n", 21), 1);
+		return (write_ret("Error\nMalloc failed.\n"));
 	tmp = *str;
 	i = -1;
 	while (++i < max_len - len)
@@ -52,7 +52,7 @@ int	fill_line(char	**str, int max_len)
 	free(tmp);
 	free(fill);
 	if (!(*str))
-		return (write(2, "Error\nMalloc failed.\n", 21), 1);
+		return (write_ret("Error\nMalloc failed.\n"));
 	return (0);
 }
 

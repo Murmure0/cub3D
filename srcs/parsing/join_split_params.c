@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   join_split_params.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwastche </var/mail/cwastche>              +#+  +:+       +#+        */
+/*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 14:48:02 by cwastche          #+#    #+#             */
-/*   Updated: 2022/05/10 23:32:45 by cwastche         ###   ########.fr       */
+/*   Updated: 2022/05/18 10:01:13 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ static int	join_lines(t_list *tmp, t_list *head)
 
 	cpy = ft_strjoin(head->content, tmp->content);
 	if (!cpy)
-		return (write(2, "Error\nMalloc failed\n", 20), 1);
+		return (write_ret("Error\nMalloc failed\n"));
 	free(head->content);
 	head->content = cpy;
 	head->next = tmp->next;
@@ -121,7 +121,7 @@ int	join_split_params(t_file *file)
 		if (ret)
 		{
 			if (ret == -1)
-				return (write(2, "Error\nMalloc failed\n", 20), 1);
+				return (write_ret("Error\nMalloc failed\n"));
 			tmp = tmp->next;
 		}
 		else if (param_id_found(&head, parse_spaces(tmp->content), tmp))

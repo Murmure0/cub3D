@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 16:50:31 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/16 16:54:52 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/18 11:44:20 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	draw_col(t_mlx *mlx, t_ray *ray, int x)
 		i++;
 	}
 	i = draw_wall(mlx, ray, x);
-	while (i < WIN_H - 1)
+	while (i < WIN_H)
 	{
 		my_mlx_pixel_put(mlx, x, i, mlx->file->param->floor);
 		i++;

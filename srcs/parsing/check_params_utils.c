@@ -6,11 +6,37 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 14:46:53 by cwastche          #+#    #+#             */
-/*   Updated: 2022/05/16 15:55:15 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/18 10:19:53 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+
+int	check_color(char **tmp)
+{
+	int		i;
+	int		j;
+
+	i = -1;
+	while (tmp[++i])
+	{
+		j = -1;
+		while (tmp[i][++j])
+		{
+			if (!ft_isdigit(tmp[i][j]) && tmp[i][j] != '\n')
+			{
+				free_tab(tmp);
+				return (write_ret("Error\nDigits only\n"));
+			}
+		}
+		if (ft_atoi(tmp[i]) < 0 || ft_atoi(tmp[i]) > 255)
+		{
+			free_tab(tmp);
+			return (write_ret("Error\nWrong color value\n"));
+		}
+	}
+	return (0);
+}
 
 void	free_param_chains(t_file *f, t_list *head)
 {
@@ -56,7 +82,7 @@ int	trim_spaces(char **str)
 			len--;
 		tmp = malloc(sizeof(char) * (len - j + 1));
 		if (!tmp)
-			return (write(2, "Error\nMalloc failed\n", 20), 1);
+			return (write_ret("Error\nMalloc failed\n"));
 		k = 0;
 		while (j < len)
 			tmp[k++] = str[i][j++];

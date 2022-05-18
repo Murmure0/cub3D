@@ -87,7 +87,7 @@ char	*get_next_line(int fd)
 	{
 		buff[read_ret] = 0;
 		if (!is_ascii(buff))
-			return (free_all(read_ret, s, fd));
+			return (printf("GNL 90\n"), free_all(read_ret, s, fd));
 		if (!s[fd])
 			s[fd] = ft_strdup("");
 		tmp = ft_strdup(s[fd]);

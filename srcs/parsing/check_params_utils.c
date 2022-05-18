@@ -80,9 +80,12 @@ int	trim_spaces(char **str)
 		len = ft_strlen(str[i]);
 		while (len && is_space(str[i][len - 1]))
 			len--;
-		tmp = malloc(sizeof(char) * (len - j + 1));
-		if (!tmp)
-			return (write_ret("Error\nMalloc failed\n"));
+		if (len)
+		{
+			tmp = malloc(sizeof(char) * (len - j + 1));
+			if (!tmp)
+				return (write_ret("Error\nMalloc failed\n"));
+		}
 		k = 0;
 		while (j < len)
 			tmp[k++] = str[i][j++];

@@ -81,7 +81,7 @@ int	trim_spaces(char **str)
 		while (len && is_space(str[i][len - 1]))
 			len--;
 		if (len == 0)
-			return (printf("TRIM_SPACES 84\n"), 1);
+			return (write_ret("Error\nColor is empty\n"));
 		tmp = malloc(sizeof(char) * (len - j + 1) + 1);
 		if (!tmp)
 			return (write_ret("Error\nMalloc failed\n"));

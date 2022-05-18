@@ -107,6 +107,6 @@ int	convert_list_to_array(t_file *file)
 	}
 	file->scene[i] = 0;
 	if (trim_end_spaces(file))
-		return (free_tab(file->scene), 1);
+		return (free_tab(file->scene));
 	return (0);
 }

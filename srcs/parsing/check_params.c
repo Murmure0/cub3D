@@ -23,7 +23,7 @@ static int	fill_color(char *str, int *color)
 	if (!tmp)
 		return (write_ret("Error\nMalloc failed\n"));
 	if (trim_spaces(tmp))
-		return (1);
+		return (free_tab(tmp));
 	i = arraylen(tmp);
 	if (i != 3)
 	{
@@ -33,7 +33,8 @@ static int	fill_color(char *str, int *color)
 	if (check_color(tmp))
 		return (1);
 	*color = create_trgb(0, ft_atoi(tmp[0]), ft_atoi(tmp[1]), ft_atoi(tmp[2]));
-	return (free_tab(tmp), 0);
+	free_tab(tmp);
+	return (0);
 }
 
 static int	fill_texture(char *str, char **texture)

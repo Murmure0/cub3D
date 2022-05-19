@@ -95,7 +95,7 @@ static int	read_file_to_lst(int fd, t_file *file)
 	lst = NULL;
 	line = get_next_line(fd);
 	if (!line)
-		return (write_ret("Error\nEmpty file\n"));
+		return (printf("Read file to lst 98\n"), write_ret("Error\nEmpty file\n"));
 	if (!is_ascii(line))
 		return (write_ret("Error\nNon ascii char found\n"));
 	file->map = ft_lstnew(line);

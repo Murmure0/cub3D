@@ -69,10 +69,10 @@ static int	creat_lst(char *line, t_list *lst, int fd, t_file *file)
 	while (1)
 	{
 		line = get_next_line(fd);
-		if (!line)
-			break ;
 		if (!is_ascii(line))
 			return (write_ret("Error\nNon ascii char found\n"));
+		if (!line)
+			break ;
 		lst = ft_lstnew(line);
 		if (!lst)
 		{

@@ -61,6 +61,7 @@ static char	*return_line(int fd, char **s)
 	return (line);
 }
 
+/*
 static int	is_ascii(char *str)
 {
 	int	i;
@@ -73,7 +74,7 @@ static int	is_ascii(char *str)
 	}
 	return (1);
 }
-
+*/
 char	*get_next_line(int fd)
 {
 	static char	*s[FD_MAX];

@@ -19,25 +19,28 @@ static int	check_for_colors(t_list *head)
 	char	*str;
 	char	**tmp;
 
-	i = 0;
 	ret = 0;
-	str = trim(head->content);
-	if (!str)
-		return (-1);
-	if (str[i] == 'C' || str[i] == 'F')
+	if (head)
 	{
-		tmp = ft_split(str, ',');
-		if (!tmp)
-			return (free(str), -1);
 		i = 0;
-		while (tmp[i])
-			i++;
-		if (i < 3)
-			ret = 1;
-		while (*tmp)
-			free(*tmp++);
+		str = trim(head->content);
+		if (!str)
+			return (-1);
+		if (str[i] == 'C' || str[i] == 'F')
+		{
+			tmp = ft_split(str, ',');
+			if (!tmp)
+				return (free(str), -1);
+			i = 0;
+			while (tmp[i])
+				i++;
+			if (i < 3)
+				ret = 1;
+			while (*tmp)
+				free(*tmp++);
+		}
+		free(str);
 	}
-	free(str);
 	return (ret);
 }
 

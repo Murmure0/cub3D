@@ -78,12 +78,34 @@ static int	first_line(char **wall)
 	return (0);
 }
 
+static void	trim_nl_map_end(char **map)
+{
+	int		i;
+	char	**tmp;
+
+	tmp = map;
+	i = arraylen(tmp);
+	i--;
+	while (i >= 0 && tmp[i])
+	{
+		if (tmp[i][0] == '\n')
+		{
+			tmp[i] = 0;
+			free(tmp[i]);
+		}
+		else
+			break ;
+		i--;
+	}
+}
+
 int	check_walls(t_file *file)
 {
+	trim_nl_map_end(file->scene);
 	if (first_line(file->scene)
-		|| last_line(file->scene, ft_lstsize(file->map) - 1))
+		|| last_line(file->scene, arraylen(file->scene) - 1))
 		return (write_ret("Error\nMap not walled in\n"));
-	if (middle_lines(file->scene, ft_lstsize(file->map) - 1))
+	if (middle_lines(file->scene, arraylen(file->scene) - 1))
 		return (write_ret("Error\nMap not walled in\n"));
 	return (0);
 }

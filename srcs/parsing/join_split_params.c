@@ -96,6 +96,8 @@ static int	join_lines(t_list *tmp, t_list *head)
 {
 	char	*cpy;
 
+	if (!head)
+		return (write_ret("Error\nRandom line found\n"));
 	cpy = ft_strjoin(head->content, tmp->content);
 	if (!cpy)
 		return (write_ret("Error\nMalloc failed\n"));
@@ -112,11 +114,15 @@ int	join_split_params(t_file *file)
 	t_list	*head;
 	int		ret;	
 
+	head = NULL;
 	tmp = file->map;
 	while (tmp)
 	{
 		if (((char *)tmp->content)[parse_spaces((char *)tmp->content)] == '\n')
+		{
 			tmp = tmp->next;
+			continue ;
+		}
 		ret = map_id_found(&head, parse_spaces(tmp->content), tmp);
 		if (ret)
 		{

@@ -69,7 +69,7 @@ static int	creat_lst(char *line, t_list *lst, int fd, t_file *file)
 	while (1)
 	{
 		line = get_next_line(fd);
-		if (!is_ascii(line))
+		if (line && !is_ascii(line))
 			return (write_ret("Error\nNon ascii char found\n"));
 		if (!line)
 			break ;
@@ -95,7 +95,7 @@ static int	read_file_to_lst(int fd, t_file *file)
 	lst = NULL;
 	line = get_next_line(fd);
 	if (!line)
-		return (printf("Read file to lst 98\n"), write_ret("Error\nEmpty file\n"));
+		return (write_ret("Error\nEmpty file\n"));
 	if (!is_ascii(line))
 		return (write_ret("Error\nNon ascii char found\n"));
 	file->map = ft_lstnew(line);

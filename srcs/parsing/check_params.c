@@ -22,7 +22,7 @@ static int	fill_color(char *str, int *color)
 	tmp = ft_split(str + i, ',');
 	if (!tmp)
 		return (write_ret("Error\nMalloc failed\n"));
-	if (trim_spaces(tmp))
+	if (trim_spaces(tmp, -1))
 		return (free_tab(tmp));
 	i = arraylen(tmp);
 	if (i != 3)

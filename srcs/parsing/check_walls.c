@@ -78,27 +78,6 @@ static int	first_line(char **wall)
 	return (0);
 }
 
-static void	trim_nl_map_end(char **map)
-{
-	int		i;
-	char	**tmp;
-
-	tmp = map;
-	i = arraylen(tmp);
-	i--;
-	while (i >= 0 && tmp[i])
-	{
-		if (tmp[i][0] == '\n')
-		{
-			tmp[i] = 0;
-			free(tmp[i]);
-		}
-		else
-			break ;
-		i--;
-	}
-}
-
 int	check_walls(t_file *file)
 {
 	trim_nl_map_end(file->scene);

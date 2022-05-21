@@ -172,7 +172,7 @@ int		check_color(char **tmp);
 void	free_param_chains(t_file *f, t_list *head);
 void	param_count_init(t_p_nb *p_nb);
 int		create_trgb(int t, int r, int g, int b);
-int		trim_spaces(char **str);
+int		trim_spaces(char **str, int i);
 
 /* -- lst_to_arr_utils.c -- */
 void	free_scene(t_file *file, int i);

@@ -19,3 +19,16 @@ void	dir_params_to_null(t_file *file)
 	file->param->we = NULL;
 	file->param->ea = NULL;
 }
+
+static int	is_ascii(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] > 127 || str[i] < 0)
+			return (0);
+	}
+	return (1);
+}

@@ -20,27 +20,24 @@ static int	check_for_colors(t_list *head)
 	char	**tmp;
 
 	ret = 0;
-	if (head)
+	i = 0;
+	str = trim(head->content);
+	if (!str)
+		return (-1);
+	if (str[i] == 'C' || str[i] == 'F')
 	{
+		tmp = ft_split(str, ',');
+		if (!tmp)
+			return (free(str), -1);
 		i = 0;
-		str = trim(head->content);
-		if (!str)
-			return (-1);
-		if (str[i] == 'C' || str[i] == 'F')
-		{
-			tmp = ft_split(str, ',');
-			if (!tmp)
-				return (free(str), -1);
-			i = 0;
-			while (tmp[i])
-				i++;
-			if (i < 3)
-				ret = 1;
-			while (*tmp)
-				free(*tmp++);
-		}
-		free(str);
+		while (tmp[i])
+			i++;
+		if (i < 3)
+			ret = 1;
+		while (*tmp)
+			free(*tmp++);
 	}
+	free(str);
 	return (ret);
 }
 
@@ -52,7 +49,7 @@ static int	map_id_found(t_list **head, int i, t_list *tmp)
 
 	str = tmp->content;
 	ret = 0;
-	if ((str[i] == '0' || str[i] == '1'))
+	if ((str[i] == '0' || str[i] == '1') && head)
 	{
 		colors = check_for_colors(*head);
 		if (colors == -1)
@@ -60,13 +57,10 @@ static int	map_id_found(t_list **head, int i, t_list *tmp)
 		if (!colors)
 			ret = 1;
 	}
-	else if (str[i] == 'N' && str[i + 1] != 'O')
-		ret = 1;
-	else if (str[i] == 'S' && str[i + 1] != 'O')
-		ret = 1;
-	else if (str[i] == 'E' && str[i + 1] != 'A')
-		ret = 1;
-	else if (str[i] == 'W' && str[i + 1] != 'E')
+	else if (str[i] == 'N' && str[i + 1] != 'O'
+		|| str[i] == 'S' && str[i + 1] != 'O'
+		|| str[i] == 'E' && str[i + 1] != 'A'
+		|| str[i] == 'W' && str[i + 1] != 'E')
 		ret = 1;
 	if (ret)
 		*head = tmp;
@@ -115,9 +109,8 @@ int	join_split_params(t_file *file)
 {
 	t_list	*tmp;
 	t_list	*head;
-	int		ret;	
+	int		ret;
 
-	head = NULL;
 	tmp = file->map;
 	while (tmp)
 	{
@@ -127,12 +120,10 @@ int	join_split_params(t_file *file)
 			continue ;
 		}
 		ret = map_id_found(&head, parse_spaces(tmp->content), tmp);
-		if (ret)
-		{
-			if (ret == -1)
+		if (ret == -1)
 				return (write_ret("Error\nMalloc failed\n"));
+		if (ret)
 			tmp = tmp->next;
-		}
 		else if (param_id_found(&head, parse_spaces(tmp->content), tmp))
 			tmp = tmp->next;
 		else

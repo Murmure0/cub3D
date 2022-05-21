@@ -65,15 +65,13 @@ int	create_trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-int	trim_spaces(char **str)
+int	trim_spaces(char **str, int i)
 {
-	int		i;
 	int		j;
 	int		k;
 	int		len;
 	char	*tmp;
 
-	i = -1;
 	while (str[++i])
 	{
 		j = parse_spaces(str[i]);

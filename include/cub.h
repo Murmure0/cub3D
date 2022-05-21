@@ -159,6 +159,7 @@ int		check_walls(t_file *file);
 
 /* -- parse_file_init.c -- */
 void	dir_params_to_null(t_file *file);
+int	is_ascii(char *str);
 
 /* -- parse_utils.c -- */
 int		parse_spaces(char *str);
@@ -183,6 +184,7 @@ int		is_space(char c);
 int		check_left_wall(char *str);
 int		check_right_wall(char *str);
 int		is_player(char c);
+void	trim_nl_map_end(char **map);
 
 /* -- Utils.c -- */
 int		arraylen(char **array);

@@ -51,14 +51,13 @@ static int	map_id_found(t_list **head, int i, t_list *tmp)
 	ret = 0;
 	if ((str[i] == '0' || str[i] == '1'))
 	{
-		if (head)
-		{
+		if (!head)
+			return (0);
 			colors = check_for_colors(*head);
 			if (colors == -1)
 				return (-1);
 			if (!colors)
 				ret = 1;
-		}
 	}
 	else if ((str[i] == 'N' && str[i + 1] != 'O')
 		|| (str[i] == 'S' && str[i + 1] != 'O')

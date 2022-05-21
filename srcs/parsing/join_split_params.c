@@ -123,10 +123,12 @@ int	join_split_params(t_file *file)
 			continue ;
 		}
 		ret = map_id_found(&head, parse_spaces(tmp->content), tmp);
-		if (ret == -1)
-			return (write_ret("Error\nMalloc failedhnggnghn\n"));
 		if (ret)
+		{
+			if (ret == -1)
+				return (write_ret("Error\nMalloc failed\n"));
 			tmp = tmp->next;
+		}
 		else if (param_id_found(&head, parse_spaces(tmp->content), tmp))
 			tmp = tmp->next;
 		else

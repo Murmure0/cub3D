@@ -57,10 +57,10 @@ static int	map_id_found(t_list **head, int i, t_list *tmp)
 		if (!colors)
 			ret = 1;
 	}
-	else if (str[i] == 'N' && str[i + 1] != 'O'
-		|| str[i] == 'S' && str[i + 1] != 'O'
-		|| str[i] == 'E' && str[i + 1] != 'A'
-		|| str[i] == 'W' && str[i + 1] != 'E')
+	else if ((str[i] == 'N' && str[i + 1] != 'O')
+		|| (str[i] == 'S' && str[i + 1] != 'O')
+		|| (str[i] == 'E' && str[i + 1] != 'A')
+		|| (str[i] == 'W' && str[i + 1] != 'E'))
 		ret = 1;
 	if (ret)
 		*head = tmp;

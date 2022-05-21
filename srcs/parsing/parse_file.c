@@ -84,9 +84,6 @@ static int	creat_lst(char *line, t_list *lst, int fd, t_file *file)
 	return (0);
 }
 
-
-
-
 static int	read_file_to_lst(int fd, t_file *file)
 {
 	t_list	*lst;

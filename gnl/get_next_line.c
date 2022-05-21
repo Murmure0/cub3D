@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h> // TO DELETE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 static char	*free_all(int read_ret, char **s, int fd)
 {
@@ -61,20 +60,6 @@ static char	*return_line(int fd, char **s)
 	return (line);
 }
 
-/*
-static int	is_ascii(char *str)
-{
-	int	i;
-
-	i = -1;
-	while (str[++i])
-	{
-		if (str[i] > 127 || str[i] < 0)
-			return (0);
-	}
-	return (1);
-}
-*/
 char	*get_next_line(int fd)
 {
 	static char	*s[FD_MAX];

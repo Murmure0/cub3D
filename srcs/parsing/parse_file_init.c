@@ -20,7 +20,7 @@ void	dir_params_to_null(t_file *file)
 	file->param->ea = NULL;
 }
 
-static int	is_ascii(char *str)
+int	is_ascii(char *str)
 {
 	int	i;
 

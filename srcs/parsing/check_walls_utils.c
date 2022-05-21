@@ -63,7 +63,7 @@ int	is_player(char c)
 	return (0);
 }
 
-static void	trim_nl_map_end(char **map)
+void	trim_nl_map_end(char **map)
 {
 	int		i;
 	char	**tmp;

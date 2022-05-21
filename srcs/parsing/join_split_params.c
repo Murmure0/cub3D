@@ -52,7 +52,7 @@ static int	map_id_found(t_list **head, int i, t_list *tmp)
 	if ((str[i] == '0' || str[i] == '1'))
 	{
 		if (!head)
-			return (0);
+			return (1);
 			colors = check_for_colors(*head);
 			if (colors == -1)
 				return (-1);

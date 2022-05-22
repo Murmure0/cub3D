@@ -22,11 +22,10 @@ static int	check_for_colors(t_list *head)
 	if (!head)
 		return (0);
 	ret = 0;
-	i = 0;
 	str = trim(head->content);
 	if (!str)
 		return (-1);
-	if (str[i] == 'C' || str[i] == 'F')
+	if (str[0] == 'C' || str[0] == 'F')
 	{
 		tmp = ft_split(str, ',');
 		if (!tmp)
@@ -36,8 +35,7 @@ static int	check_for_colors(t_list *head)
 			i++;
 		if (i < 3)
 			ret = 1;
-		while (*tmp)
-			free(*tmp++);
+		free_tab(tmp);
 	}
 	free(str);
 	return (ret);
@@ -107,10 +105,9 @@ static int	join_lines(t_list *tmp, t_list *head)
 	return (0);
 }
 
-int	join_split_params(t_file *file)
+int	join_split_params(t_file *file, t_list *head)
 {
 	t_list	*tmp;
-	t_list	*head;
 	int		ret;
 
 	tmp = file->map;
@@ -122,12 +119,10 @@ int	join_split_params(t_file *file)
 			continue ;
 		}
 		ret = map_id_found(&head, parse_spaces(tmp->content), tmp);
+		if (ret == -1)
+			return (write_ret("Error\nMalloc failedfesfsefsefesf\n"));
 		if (ret)
-		{
-			if (ret == -1)
-				return (write_ret("Error\nMalloc failed\n"));
-			tmp = tmp->next;
-		}
+			return (0);
 		else if (param_id_found(&head, parse_spaces(tmp->content), tmp))
 			tmp = tmp->next;
 		else

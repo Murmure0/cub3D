@@ -150,7 +150,7 @@ typedef struct s_mlx
 /*******************/
 
 int		parse_file(t_file *file, int ac, char **av);
-int		join_split_params(t_file *file);
+int		join_split_params(t_file *file, t_list *head);
 int		check_params(t_file *file);
 int		convert_list_to_array(t_file *file);
 int		check_walls(t_file *file);
@@ -159,7 +159,7 @@ int		check_walls(t_file *file);
 
 /* -- parse_file_init.c -- */
 void	dir_params_to_null(t_file *file);
-int	is_ascii(char *str);
+int		is_ascii(char *str);
 
 /* -- parse_utils.c -- */
 int		parse_spaces(char *str);

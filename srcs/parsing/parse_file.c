@@ -108,7 +108,7 @@ int	parse_file(t_file *file, int ac, char **av)
 		return (perror("Error\nOpen"), 1);
 	if (read_file_to_lst(fd, file))
 		return (close(fd), 1);
-	if (join_split_params(file) || check_params(file)
+	if (join_split_params(file, NULL) || check_params(file)
 		|| check_map(file) || fill_map(file->scene))
 		return (free_params(file), 1);
 	init_map_size(file);

@@ -19,12 +19,13 @@ static int	check_for_colors(t_list *head)
 	char	*str;
 	char	**tmp;
 
-	i = 0;
+	if (!head)
+		return (0);
 	ret = 0;
 	str = trim(head->content);
 	if (!str)
 		return (-1);
-	if (str[i] == 'C' || str[i] == 'F')
+	if (str[0] == 'C' || str[0] == 'F')
 	{
 		tmp = ft_split(str, ',');
 		if (!tmp)
@@ -34,8 +35,7 @@ static int	check_for_colors(t_list *head)
 			i++;
 		if (i < 3)
 			ret = 1;
-		while (*tmp)
-			free(*tmp++);
+		free_tab(tmp);
 	}
 	free(str);
 	return (ret);
@@ -57,13 +57,10 @@ static int	map_id_found(t_list **head, int i, t_list *tmp)
 		if (!colors)
 			ret = 1;
 	}
-	else if (str[i] == 'N' && str[i + 1] != 'O')
-		ret = 1;
-	else if (str[i] == 'S' && str[i + 1] != 'O')
-		ret = 1;
-	else if (str[i] == 'E' && str[i + 1] != 'A')
-		ret = 1;
-	else if (str[i] == 'W' && str[i + 1] != 'E')
+	else if ((str[i] == 'N' && str[i + 1] != 'O')
+		|| (str[i] == 'S' && str[i + 1] != 'O')
+		|| (str[i] == 'E' && str[i + 1] != 'A')
+		|| (str[i] == 'W' && str[i + 1] != 'E'))
 		ret = 1;
 	if (ret)
 		*head = tmp;
@@ -96,6 +93,8 @@ static int	join_lines(t_list *tmp, t_list *head)
 {
 	char	*cpy;
 
+	if (!head)
+		return (write_ret("Error\nRandom line found\n"));
 	cpy = ft_strjoin(head->content, tmp->content);
 	if (!cpy)
 		return (write_ret("Error\nMalloc failed\n"));
@@ -106,24 +105,24 @@ static int	join_lines(t_list *tmp, t_list *head)
 	return (0);
 }
 
-int	join_split_params(t_file *file)
+int	join_split_params(t_file *file, t_list *head)
 {
 	t_list	*tmp;
-	t_list	*head;
-	int		ret;	
+	int		ret;
 
 	tmp = file->map;
 	while (tmp)
 	{
 		if (((char *)tmp->content)[parse_spaces((char *)tmp->content)] == '\n')
-			tmp = tmp->next;
-		ret = map_id_found(&head, parse_spaces(tmp->content), tmp);
-		if (ret)
 		{
-			if (ret == -1)
-				return (write_ret("Error\nMalloc failed\n"));
 			tmp = tmp->next;
+			continue ;
 		}
+		ret = map_id_found(&head, parse_spaces(tmp->content), tmp);
+		if (ret == -1)
+			return (write_ret("Error\nMalloc failedfesfsefsefesf\n"));
+		if (ret)
+			return (0);
 		else if (param_id_found(&head, parse_spaces(tmp->content), tmp))
 			tmp = tmp->next;
 		else

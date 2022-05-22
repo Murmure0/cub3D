@@ -51,6 +51,16 @@ static void	*ft_free_split(char **tab, int i)
 	return (NULL);
 }
 
+static void	init_to_null(char **tab, int i)
+{
+	while (i)
+	{
+		tab[i] = NULL;
+		i--;
+	}
+	tab = NULL;
+}
+
 char	**ft_split(char const *s, char c)
 {
 	char	**tab;
@@ -61,6 +71,7 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	words = ft_wordcount(s, c);
 	tab = malloc(sizeof(char *) * (words + 1));
+	init_to_null(tab, words);
 	i = 0;
 	if (!tab)
 		return (NULL);

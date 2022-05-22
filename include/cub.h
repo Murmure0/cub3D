@@ -150,7 +150,7 @@ typedef struct s_mlx
 /*******************/
 
 int		parse_file(t_file *file, int ac, char **av);
-int		join_split_params(t_file *file);
+int		join_split_params(t_file *file, t_list *head);
 int		check_params(t_file *file);
 int		convert_list_to_array(t_file *file);
 int		check_walls(t_file *file);
@@ -159,6 +159,7 @@ int		check_walls(t_file *file);
 
 /* -- parse_file_init.c -- */
 void	dir_params_to_null(t_file *file);
+int		is_ascii(char *str);
 
 /* -- parse_utils.c -- */
 int		parse_spaces(char *str);
@@ -172,7 +173,7 @@ int		check_color(char **tmp);
 void	free_param_chains(t_file *f, t_list *head);
 void	param_count_init(t_p_nb *p_nb);
 int		create_trgb(int t, int r, int g, int b);
-int		trim_spaces(char **str);
+int		trim_spaces(char **str, int i);
 
 /* -- lst_to_arr_utils.c -- */
 void	free_scene(t_file *file, int i);
@@ -183,10 +184,11 @@ int		is_space(char c);
 int		check_left_wall(char *str);
 int		check_right_wall(char *str);
 int		is_player(char c);
+void	trim_nl_map_end(char **map);
 
 /* -- Utils.c -- */
 int		arraylen(char **array);
-void	free_tab(char **tab);
+int		free_tab(char **tab);
 int		fill_line(char	**str, int max_len);
 int		fill_map(char **scene);
 char	*trim(char *str);

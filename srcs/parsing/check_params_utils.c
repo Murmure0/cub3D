@@ -65,22 +65,22 @@ int	create_trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-int	trim_spaces(char **str)
+int	trim_spaces(char **str, int i)
 {
-	int		i;
 	int		j;
 	int		k;
 	int		len;
 	char	*tmp;
 
-	i = -1;
 	while (str[++i])
 	{
 		j = parse_spaces(str[i]);
 		len = ft_strlen(str[i]);
 		while (len && is_space(str[i][len - 1]))
 			len--;
-		tmp = malloc(sizeof(char) * (len - j + 1));
+		if (len == 0)
+			return (write_ret("Error\nColor is empty\n"));
+		tmp = malloc(sizeof(char) * (len - j + 1) + 1);
 		if (!tmp)
 			return (write_ret("Error\nMalloc failed\n"));
 		k = 0;

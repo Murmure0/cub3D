@@ -56,6 +56,8 @@ static int	creat_lst(char *line, t_list *lst, int fd, t_file *file)
 	while (1)
 	{
 		line = get_next_line(fd);
+		if (line && !is_ascii(line))
+			return (write_ret("Error\nNon ascii char found\n"));
 		if (!line)
 			break ;
 		lst = ft_lstnew(line);
@@ -78,6 +80,8 @@ static int	read_file_to_lst(int fd, t_file *file)
 	line = get_next_line(fd);
 	if (!line)
 		return (write_ret("Error\nEmpty file\n"));
+	if (!is_ascii(line))
+		return (write_ret("Error\nNon ascii char found\n"));
 	file->map = ft_lstnew(line);
 	if (!file->map)
 	{
@@ -104,7 +108,7 @@ int	parse_file(t_file *file, int ac, char **av)
 		return (perror("Error\nOpen"), 1);
 	if (read_file_to_lst(fd, file))
 		return (close(fd), 1);
-	if (join_split_params(file) || check_params(file)
+	if (join_split_params(file, NULL) || check_params(file)
 		|| check_map(file) || fill_map(file->scene))
 		return (free_params(file), 1);
 	init_map_size(file);

@@ -67,32 +67,11 @@ static int	fill_scene(t_file *file, t_list *tmp, int i)
 	return (0);
 }
 
-static int	check_for_newline(t_list *map)
-{
-	t_list	*tmp;
-	char	*str;
-	int		i;
-
-	tmp = map;
-	i = 0;
-	while (tmp)
-	{
-		str = tmp->content;
-		i = parse_spaces(str);
-		if (str[i] == 0 || str[0] == '\n' || str[i] == EOF)
-			return (1);
-		tmp = tmp->next;
-	}
-	return (0);
-}
-
 int	convert_list_to_array(t_file *file)
 {
 	int		i;
 	t_list	*tmp;
 
-	if (check_for_newline(file->map))
-		return (write_ret("Error\nEmpty line in map\n"));
 	i = 0;
 	tmp = file->map;
 	file->scene = malloc(sizeof(char *) * (ft_lstsize(file->map) + 1));
@@ -107,6 +86,6 @@ int	convert_list_to_array(t_file *file)
 	}
 	file->scene[i] = 0;
 	if (trim_end_spaces(file))
-		return (free_tab(file->scene), 1);
+		return (free_tab(file->scene));
 	return (0);
 }

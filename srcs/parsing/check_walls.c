@@ -80,10 +80,11 @@ static int	first_line(char **wall)
 
 int	check_walls(t_file *file)
 {
+	trim_nl_map_end(file->scene);
 	if (first_line(file->scene)
-		|| last_line(file->scene, ft_lstsize(file->map) - 1))
+		|| last_line(file->scene, arraylen(file->scene) - 1))
 		return (write_ret("Error\nMap not walled in\n"));
-	if (middle_lines(file->scene, ft_lstsize(file->map) - 1))
+	if (middle_lines(file->scene, arraylen(file->scene) - 1))
 		return (write_ret("Error\nMap not walled in\n"));
 	return (0);
 }

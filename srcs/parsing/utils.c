@@ -22,7 +22,7 @@ int	arraylen(char **array)
 	return (i);
 }
 
-void	free_tab(char **tab)
+int	free_tab(char **tab)
 {
 	int	i;
 
@@ -30,6 +30,7 @@ void	free_tab(char **tab)
 	while (tab[++i])
 		free(tab[i]);
 	free(tab);
+	return (1);
 }
 
 int	fill_line(char	**str, int max_len)

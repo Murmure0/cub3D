@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwastche </var/mail/cwastche>              +#+  +:+       +#+        */
+/*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 12:52:28 by cwastche          #+#    #+#             */
-/*   Updated: 2021/08/28 22:42:04 by cwastche         ###   ########.fr       */
+/*   Updated: 2022/05/24 11:02:03 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static char	*save_line(int fd, char **s, int i)
 	char	*tmp;
 	char	*line;
 
+	tmp = NULL;
 	if (s[fd][i] != '\n' || s[fd][0] == '\n')
 		i++;
 	line = ft_substr(s[fd], 0, i);
@@ -67,6 +68,8 @@ char	*get_next_line(int fd)
 	char		*tmp;
 	ssize_t		read_ret;
 
+	buff[0] = 0;
+	buff[1] = 0;
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd > FD_MAX)
 		return (NULL);
 	read_ret = read(fd, buff, BUFFER_SIZE);

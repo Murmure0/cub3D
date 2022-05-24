@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 10:24:21 by mberthet          #+#    #+#             */
-/*   Updated: 2022/05/18 10:25:45 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/24 10:32:05 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ int	is_ascii(char *str)
 	while (str[++i])
 	{
 		if (str[i] > 127 || str[i] < 0)
+		{
+			printf("%c %d\n", str[i], (int)(str[i]));
 			return (0);
+		}
 	}
 	return (1);
 }

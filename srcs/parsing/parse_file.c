@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 15:15:53 by cwastche          #+#    #+#             */
-/*   Updated: 2022/05/18 10:30:44 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/24 10:52:38 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,17 @@ static int	check_map(t_file *file)
 
 static int	creat_lst(char *line, t_list *lst, int fd, t_file *file)
 {
+	int i = 0;
+
 	while (1)
 	{
+		i++;
 		line = get_next_line(fd);
 		if (line && !is_ascii(line))
-			return (write_ret("Error\nNon ascii char found\n"));
+		{
+			printf("%s\n", line);
+			return (printf("%d\n", i), write_ret("Error\nNon ascii char found\n"));
+		}
 		if (!line)
 			break ;
 		lst = ft_lstnew(line);
@@ -96,8 +102,10 @@ static int	read_file_to_lst(int fd, t_file *file)
 
 int	parse_file(t_file *file, int ac, char **av)
 {
-	int	fd;
+	int		fd;
+	t_list	*head;
 
+	head = NULL;
 	dir_params_to_null(file);
 	if (ac != 2)
 		return (write_ret("Error\nArgument invalid\n"));
@@ -108,7 +116,9 @@ int	parse_file(t_file *file, int ac, char **av)
 		return (perror("Error\nOpen"), 1);
 	if (read_file_to_lst(fd, file))
 		return (close(fd), 1);
-	if (join_split_params(file, NULL) || check_params(file)
+	if (join_split_params(file, head))
+		return (free_params(file), 1);
+	if (check_params(file)
 		|| check_map(file) || fill_map(file->scene))
 		return (free_params(file), 1);
 	init_map_size(file);

@@ -6,7 +6,7 @@
 /*   By: mberthet <mberthet@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 14:48:02 by cwastche          #+#    #+#             */
-/*   Updated: 2022/05/18 10:01:13 by mberthet         ###   ########.fr       */
+/*   Updated: 2022/05/24 10:12:00 by mberthet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int	join_split_params(t_file *file, t_list *head)
 		}
 		ret = map_id_found(&head, parse_spaces(tmp->content), tmp);
 		if (ret == -1)
-			return (write_ret("Error\nMalloc failedfesfsefsefesf\n"));
+			return (write_ret("Error\nMalloc failed\n"));
 		if (ret)
 			return (0);
 		else if (param_id_found(&head, parse_spaces(tmp->content), tmp))
